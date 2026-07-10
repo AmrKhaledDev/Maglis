@@ -36,7 +36,7 @@ function OAuthWithGoogleBtn({
       className="flex w-full disabled:bg-gray-200 mytransition not-disabled:hover:bg-gray-200 items-center gap-3 font-medium bg-white py-1 text-slate-600 justify-center not-disabled:cursor-pointer text-sm"
     >
       {loading ? (
-        <div className="border size-4 animate-[spin_0.5s_linear_infinite] group-disabled:border-gray-400 group-disabled:border-t-transparent rounded-full border-t-transparent" />
+        <div className="border border-gray-400 size-4 animate-[spin_0.5s_linear_infinite] group-disabled:border-gray-400 group-disabled:border-t-transparent rounded-full border-t-transparent" />
       ) : (
         <FcGoogle className="text-xl" />
       )}

@@ -14,7 +14,7 @@ import LoginFormBtnSub from "./_components/LoginFormBtnSub";
 import AuthBlur from "@/components/AuthBlur/AuthBlur";
 import z from "zod";
 // =========================================================================
-function LoginForm() {
+function LoginForm({ errorAuthWithGoogle }: { errorAuthWithGoogle?: string }) {
   const {
     register,
     handleSubmit,
@@ -25,7 +25,9 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showBlur, setShowBlur] = useState(false);
-  const [serverError, setServerError] = useState("");
+  const [serverError, setServerError] = useState(
+    errorAuthWithGoogle ? "برجاء تسجيل الدخول بالإيميل وكلمة المرور" : "",
+  );
   const [serverSuccess, setServerSuccess] = useState("");
   const router = useRouter();
   const fields = LoginFields(loading, showPassword, setShowPassword, errors);
