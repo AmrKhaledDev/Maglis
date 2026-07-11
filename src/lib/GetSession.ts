@@ -1,7 +1,7 @@
 import { auth } from "./auth";
 import { prisma } from "./prisma";
 // =====================================
-export const userSession = async () => {
+ const GetSession = async () => {
   try {
     const session = await auth();
     if (!session || !session.user) return null;
@@ -18,3 +18,4 @@ export const userSession = async () => {
     return null;
   }
 };
+export default GetSession

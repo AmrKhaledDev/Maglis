@@ -5,7 +5,7 @@ import { UseFieldArrayRemove } from "react-hook-form";
 import ShowMediaUploaded from "./ShowMediaUploaded";
 import { useState } from "react";
 // ========================================================
-function CreatePostModal_Media({
+function CreatePost_Modal_Media({
   media,
   remove,
 }: {
@@ -78,4 +78,4 @@ function CreatePostModal_Media({
   );
 }
 
-export default CreatePostModal_Media;
+export default CreatePost_Modal_Media;

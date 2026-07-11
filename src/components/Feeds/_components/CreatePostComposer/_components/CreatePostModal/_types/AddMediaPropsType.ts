@@ -1,5 +1,5 @@
 import { UseFieldArrayAppend } from "react-hook-form";
-import { PostModalFormType } from "../../../_types/PostModalFormType";
+import { PostModalFormType } from "./CreatePost_ModalFormType";
 // ======================================================
 export type AddMediaPropsType = {
   append: UseFieldArrayAppend<PostModalFormType, "media">;

@@ -7,6 +7,29 @@ datasource db {
 }
 
 // ======================================================================
+enum Privacy {
+  PUBLIC
+  FRIENDS
+  PRIVATE
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNSPECIFIED
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")
@@ -28,20 +51,69 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String
-  email         String    @unique
-  password      String?
-  emailVerified Boolean?
-  image         String?
-  accounts      Account[]
+  id                  String     @id @default(cuid())
+  name                String
+  email               String     @unique
+  password            String?
+  emailVerified       Boolean?
+  image               String?
+  accounts            Account[]
+  posts               Post[]
+  savedPosts          SavePost[]
+  cover               String?
+  bio                 String?
+  username            String?    @unique
+  gender              Gender?
+  isPermanentlyBanned Boolean    @default(false)
+  banExpiresAt        DateTime?
+  banReason           String?
+  lastSeenAt          DateTime?
+  postsCount          Int        @default(0)
+  followersCount      Int        @default(0)
+  followingCount      Int        @default(0)
+  role                Role       @default(USER)
 
   @@map("users")
 }
 
+model Post {
+  id                String     @id @default(cuid())
+  content           String?
+  privacy           Privacy    @default(PUBLIC)
+  commentsDisabled  Boolean    @default(false)
+  isPinnedToProfile Boolean    @default(false)
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  authorId          String
+  author            User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  medias            Media[]
+  savedPosts        SavePost[]
+
+  @@index([authorId])
+}
+
+model Media {
+  id     String    @id @default(cuid())
+  url    String
+  type   MediaType
+  postId String
+  post   Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model SavePost {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
 model VerificationToken {
   identifier String
-  token      String @unique
+  token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])

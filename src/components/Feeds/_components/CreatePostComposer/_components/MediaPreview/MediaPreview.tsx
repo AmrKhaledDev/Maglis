@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { MediaPreviewPropsType } from "../../_types/MediaPreviewPropsType";
+import { MediaPreviewPropsType } from "./_types/MediaPreviewPropsType";
 import MediaPreview_Actions from "./_components/MediaPreview_Actions";
 // ==================================================================================
 function MediaPreview({

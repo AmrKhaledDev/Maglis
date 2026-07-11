@@ -12,8 +12,7 @@ import { navLinks } from "@/data/Menu/NavLinks";
 function Menu() {
   const pathname = usePathname();
   return (
-    <nav className="fixed bottom-3 z-10 right-3 flex justify-between gap-2 bg-black/10 ring ring-gray-50/5 shadow backdrop-blur-2xl p-2 w-95 rounded-full">
-      <TooltipProvider>
+    <nav className="fixed bottom-1/2 translate-y-1/2 z-10 right-3 flex-col flex justify-between gap-2 bg-white/10 ring ring-gray-50/20 shadow backdrop-blur-2xl p-2 w-fit rounded-lg">
         {navLinks.map((link) => (
           <Tooltip key={link.id}>
             <TooltipTrigger>
@@ -30,12 +29,11 @@ function Menu() {
                 <link.icon className="size-5.5" />
               </Link>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent side="left">
               <p>{link.title}</p>
             </TooltipContent>
           </Tooltip>
         ))}
-      </TooltipProvider>
     </nav>
   );
 }

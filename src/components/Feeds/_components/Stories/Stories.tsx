@@ -10,32 +10,43 @@ function Stories() {
   const [modal, setModal] = useState(false);
   return (
     <div>
-      <Swiper
-        onClick={() => setModal(true)}
-        slidesPerView={"auto"}
-        className="w-full h-30 "
-      >
+      <Swiper slidesPerView={"auto"} spaceBetween={10} className="w-full h-30 ">
         <SwiperSlide className="flex! buttonShowModal flex-col items-center gap-2 h-full! w-25! justify-center">
-          <span className="size-15 flex items-center cursor-pointer justify-center hover:scale-105 active:scale-95 mytransition ring ring-gray-50/50 bg-[#c5ab77] rounded-full shadow-[0_0_10px_#c5ab77]">
-            <Plus className="size-6 " />
-          </span>
-          <p className="font-bold text-gray-300 text-sm">قصتك</p>
+          <button
+            onClick={() => setModal(true)}
+            className="relative cursor-pointer"
+          >
+            <Image
+              src={"/my_photo.jpeg"}
+              alt="صورتك"
+              width={100}
+              height={100}
+              className="rounded-full shrink-0 size-20 object-cover"
+            />
+            <Plus className="absolute bottom-0 left-0 text-white bg-[#c5ab77] rounded-full p-1 size-6" />
+          </button>
+          <p className=" text-gray-300 text-xs">قصتك</p>
         </SwiperSlide>
         {Array(10)
           .fill(0)
           .map((_, i) => (
-            <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-25! justify-center">
-              <div className="relative size-15 rounded-full hover:scale-105 mytransition">
-                <Image
-                  src="/my_photo.jpeg"
-                  alt="user image"
-                  fill
-                  priority
-                  className="object-cover rounded-full cursor-pointer border-2 border-pink-700 hover:border-pink-500 mytransition"
-                />
+            <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-25! justify-center shrink-0">
+              <div className="p-[2.5px]  size-20 shrink-0 rounded-full bg-linear-to-r from-[#c5ab77] to-purple-600 hover:scale-103 mytransition">
+                <div className="relative size-full rounded-full ">
+                  <Image
+                    src="/my_photo.jpeg"
+                    alt="user image"
+                    fill
+                    priority
+                    className="object-cover rounded-full cursor-pointer"
+                  />
+                </div>
               </div>
-              <p className="text-xs text-slate-300 font-semibold line-clamp-1 [word-break:break-word]">
-                عمرو غفر الله له
+              <p
+                dir="auto"
+                className="text-xs text-slate-300 font-semibold line-clamp-1 [word-break:break-word]"
+              >
+                Amr Khaled
               </p>
             </SwiperSlide>
           ))}

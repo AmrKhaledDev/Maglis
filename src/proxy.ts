@@ -1,10 +1,10 @@
 import { auth as proxy } from "@/lib/auth";
-import { userSession } from "./lib/userSession";
 import { NextResponse } from "next/server";
+import GetSession from "./lib/GetSession";
 // ===========================================
 const authPages = ["/login", "/register", "/credential-login"];
 export default proxy(async (req) => {
-  const session = await userSession();
+  const session = await GetSession();
   console.log(session);
   const pathname = req.nextUrl.pathname;
   if (authPages.includes(pathname) && session)

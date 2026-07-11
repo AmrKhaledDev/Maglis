@@ -2,7 +2,7 @@ import Feeds from "@/components/Feeds/Feeds";
 // ==============================================
 function page() {
   return (
-    <main>
+    <main className="mt-3">
       <div className="mycontainer">
         <Feeds />
       </div>

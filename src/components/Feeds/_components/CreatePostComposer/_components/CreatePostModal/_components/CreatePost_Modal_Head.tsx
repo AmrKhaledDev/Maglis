@@ -1,13 +1,7 @@
 "use client";
-import { X } from "lucide-react";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 // ================================================
-function CreatePostModal_Head({
-  setIsOpen,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) {
+function CreatePost_Modal_Head() {
   return (
     <div className="flex justify-between">
       <div className="flex items-center gap-2">
@@ -23,14 +17,9 @@ function CreatePostModal_Head({
           <p className="text-xs text-gray-100">منشور جديد</p>
         </div>
       </div>
-      <button
-        onClick={() => setIsOpen(false)}
-        className="cursor-pointer text-gray-300 hover:text-white mytransition"
-      >
-        <X className="size-5" />
-      </button>
+      
     </div>
   );
 }
 
-export default CreatePostModal_Head;
+export default CreatePost_Modal_Head;

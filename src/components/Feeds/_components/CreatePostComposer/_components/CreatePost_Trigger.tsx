@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 // ================================================================
-function CreatePostTrigger({setIsOpen}:{setIsOpen:Dispatch<SetStateAction<boolean>>}) {
+function CreatePost_Trigger({setIsOpen}:{setIsOpen:Dispatch<SetStateAction<boolean>>}) {
   return (
     <div className="flex items-center gap-2 w-full">
       <Image
@@ -23,4 +23,4 @@ function CreatePostTrigger({setIsOpen}:{setIsOpen:Dispatch<SetStateAction<boolea
   );
 }
 
-export default CreatePostTrigger;
+export default CreatePost_Trigger;
