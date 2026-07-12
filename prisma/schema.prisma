@@ -72,7 +72,8 @@ model User {
   followersCount      Int        @default(0)
   followingCount      Int        @default(0)
   role                Role       @default(USER)
-  professionalMode    Boolean @default(false)
+  professionalMode    Boolean    @default(false)
+  likes               Like[]
 
   @@map("users")
 }
@@ -89,6 +90,7 @@ model Post {
   author            User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
   medias            Media[]
   savedPosts        SavePost[]
+  likes             Like[]
 
   @@index([authorId])
 }
@@ -110,6 +112,17 @@ model SavePost {
   createdAt DateTime @default(now())
 
   @@unique([postId, userId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  user      User     @relation(fields: [userId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
 }
 
 model VerificationToken {

@@ -13,10 +13,12 @@ async function Feeds() {
   if (!session) return redirect("/login");
   return (
     <UserProvider user={session}>
-      <div className="flex flex-col max-w-200 mx-auto mb-5">
-        <Stories />
-        <div className="flex flex-col gap-5">
+      <div className="flex flex-col max-w-200 gap-7 mx-auto mb-5">
+        <div className="w-full flex flex-col gap-1">
+          <Stories />
           <span className="w-full h-px bg-white/3 rounded-full" />
+        </div>
+        <div className="flex flex-col gap-2">
           <CreatePostComposer />
           <Posts posts={posts} />
         </div>

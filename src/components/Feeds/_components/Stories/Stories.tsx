@@ -10,8 +10,8 @@ function Stories() {
   const [modal, setModal] = useState(false);
   return (
     <div>
-      <Swiper slidesPerView={"auto"} spaceBetween={10} className="w-full h-30 ">
-        <SwiperSlide className="flex! buttonShowModal flex-col items-center gap-2 h-full! w-25! justify-center">
+      <Swiper slidesPerView={"auto"} spaceBetween={6} className="w-full h-30 ">
+        <SwiperSlide className="flex! buttonShowModal flex-col items-center gap-2 h-full! w-20! justify-center">
           <button
             onClick={() => setModal(true)}
             className="relative cursor-pointer"
@@ -21,9 +21,9 @@ function Stories() {
               alt="صورتك"
               width={100}
               height={100}
-              className="rounded-full shrink-0 size-20 object-cover"
+              className="rounded-full shrink-0 size-16 object-cover"
             />
-            <Plus className="absolute bottom-0 left-0 text-white bg-[#c5ab77] rounded-full p-1 size-6" />
+            <Plus className="absolute bottom-0 left-0 text-white bg-slate-800 rounded-full p-1 size-5" />
           </button>
           <p className=" text-gray-300 text-xs">قصتك</p>
         </SwiperSlide>
@@ -31,7 +31,7 @@ function Stories() {
           .fill(0)
           .map((_, i) => (
             <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-25! justify-center shrink-0">
-              <div className="p-[2.5px]  size-20 shrink-0 rounded-full bg-linear-to-r from-[#c5ab77] to-purple-600 hover:scale-103 mytransition">
+              <div className="p-px  size-17 shrink-0 rounded-full bg-linear-to-r from-[#c5ab77] to-purple-600 hover:scale-103 mytransition">
                 <div className="relative size-full rounded-full ">
                   <Image
                     src="/my_photo.jpeg"

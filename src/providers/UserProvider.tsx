@@ -1,17 +1,16 @@
 "use client";
 
-import { SessionWIthoutPasswordType } from "@/types/SessionWIthoutPasswordType";
+import { SessionWithoutPasswordType } from "@/types/SessionWithoutPasswordType";
 import React, { createContext, useContext } from "react";
 // ================================================
 
-
-const UserContext = createContext<null | SessionWIthoutPasswordType>(null);
+const UserContext = createContext<null | SessionWithoutPasswordType>(null);
 
 export function UserProvider({
   user,
   children,
 }: {
-  user: SessionWIthoutPasswordType;
+  user: SessionWithoutPasswordType;
   children: React.ReactNode;
 }) {
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;

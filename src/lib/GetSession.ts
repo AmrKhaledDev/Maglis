@@ -1,13 +1,24 @@
 import { auth } from "./auth";
 import { prisma } from "./prisma";
 // =====================================
- const GetSession = async () => {
+const GetSession = async () => {
   try {
     const session = await auth();
     if (!session || !session.user) return null;
     const existingUser = await prisma.user.findUnique({
       where: {
         id: session.user.id,
+      },
+      include: {
+        savedPosts: {
+          include: {
+            user: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        },
       },
     });
     if (!existingUser) return null;
@@ -18,4 +29,4 @@ import { prisma } from "./prisma";
     return null;
   }
 };
-export default GetSession
+export default GetSession;

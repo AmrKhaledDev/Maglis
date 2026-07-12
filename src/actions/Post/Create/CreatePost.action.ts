@@ -26,23 +26,17 @@ export const CreatePostAction = async (
         success: false,
         message: "لا يمكنك إنشاء منشور برجاء تسجيل الدخول",
       };
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        id: session.id,
-      },
-      select: { isPermanentlyBanned: true, banExpiresAt: true },
-    });
-    if (!existingUser)
+    if (!session)
       return { success: false, message: "عذراً لم نستطع التعرف على حسابك." };
-    if (existingUser.isPermanentlyBanned)
+    if (session.isPermanentlyBanned)
       return {
         success: false,
         message: "تم إيقاف حسابك بشكل دائم، لذلك لا يمكنك إنشاء منشورات.",
       };
-    if (existingUser.banExpiresAt && existingUser.banExpiresAt > new Date())
+    if (session.banExpiresAt && session.banExpiresAt > new Date())
       return {
         success: false,
-        message: `تم إيقاف حسابك مؤقتاً حتى ${dayjs(existingUser.banExpiresAt).format("D MMMM YYYY - h:mm A")}`,
+        message: `تم إيقاف حسابك مؤقتاً حتى ${dayjs(session.banExpiresAt).format("D MMMM YYYY - h:mm A")}`,
       };
     const validation = CreatePostSchema.safeParse({ content, media, privacy });
     if (!validation.success)

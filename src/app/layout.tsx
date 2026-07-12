@@ -3,6 +3,7 @@ import { Cairo, Figtree } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ToastProvider } from "@/providers/ToastProvider";
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 // ========================================
 const cairo = Cairo({
@@ -35,7 +36,7 @@ export default function RootLayout({
     >
       <TooltipProvider>
         <body className="min-h-full flex flex-col bg-linear-to-r from-slate-900 to-slate-800 text-white">
-          {children}
+          <ToastProvider> {children}</ToastProvider>
         </body>
       </TooltipProvider>
     </html>
