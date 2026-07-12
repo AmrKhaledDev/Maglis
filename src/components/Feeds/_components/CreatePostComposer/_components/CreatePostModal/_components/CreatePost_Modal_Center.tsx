@@ -1,30 +1,23 @@
 import TextareaAutosize from "react-textarea-autosize";
 import SelectPrivacy from "./SelectPrivacy";
-import {
-  Control,
-  UseFormRegister,
-  UseFormSetValue,
-  useWatch,
-} from "react-hook-form";
-import { CreatePost_ModalFormType } from "../_types/CreatePost_ModalFormType";
+import { useWatch } from "react-hook-form";
+import { CreatePost_Modal_CenterPropsType } from "../_types/CreatePost_Modal_CenterPropsType";
 // ==========================================================
 function CreatePost_Modal_Center({
   register,
   setValue,
   control,
-}: {
-  register: UseFormRegister<CreatePost_ModalFormType>;
-  setValue: UseFormSetValue<CreatePost_ModalFormType>;
-  control: Control<CreatePost_ModalFormType, any, CreatePost_ModalFormType>;
-}) {
+  disabled,
+}: CreatePost_Modal_CenterPropsType) {
   const content = useWatch({
     control,
     name: "content",
-    defaultValue:""
+    defaultValue: "",
   });
   return (
     <div className="space-y-1">
       <TextareaAutosize
+        disabled={disabled}
         {...register("content")}
         minRows={7}
         maxRows={15}
@@ -37,7 +30,7 @@ function CreatePost_Modal_Center({
         >
           2000 / {content.length}
         </p>
-        <SelectPrivacy setValue={setValue} control={control} />
+        <SelectPrivacy disabled={disabled} setValue={setValue} control={control} />
       </div>
     </div>
   );

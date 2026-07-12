@@ -34,6 +34,7 @@ function MediaPreview({
           <MediaPreview_Actions
             setMedia={setMedia}
             setMediaFile={setMediaFile}
+            mediaFile={mediaFile}
           />
         </div>
       )}

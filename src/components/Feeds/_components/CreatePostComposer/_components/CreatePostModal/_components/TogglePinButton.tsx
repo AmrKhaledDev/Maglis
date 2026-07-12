@@ -3,16 +3,18 @@ import {
   Tooltip,
   TooltipContent,
 } from "@/components/ui/tooltip";
-import { Pin } from "lucide-react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 import { CreatePost_ModalFormType } from "../_types/CreatePost_ModalFormType";
+import { TiPin } from "react-icons/ti";
 // ==================================================
 function TogglePinButton({
   control,
   setValue,
+  disabled,
 }: {
   control: Control<CreatePost_ModalFormType, any, CreatePost_ModalFormType>;
   setValue: UseFormSetValue<CreatePost_ModalFormType>;
+  disabled: boolean;
 }) {
   const isPinnedToProfile = useWatch({
     control,
@@ -22,16 +24,19 @@ function TogglePinButton({
     <Tooltip>
       <TooltipTrigger asChild>
         <button
+          disabled={disabled}
           type="button"
           onClick={() => setValue("isPinnedToProfile", !isPinnedToProfile)}
-          className={`cursor-pointer mytransition 
-            ${isPinnedToProfile ? "rotate-45 text-green-500" : "text-gray-500 hover:text-white "}`}
+          className={`not-disabled:cursor-pointer mytransition  text-2xl
+            ${isPinnedToProfile ? "text-emerald-500" : "text-gray-500 not-disabled:hover:text-white -rotate-45 "}`}
         >
-          <Pin className="size-5" />
+          <TiPin />
         </button>
       </TooltipTrigger>
       <TooltipContent>
-        {isPinnedToProfile ? "إلغاء التثبيت من الملف الشخصي" : "تثبيت في الملف الشخصي"}
+        {isPinnedToProfile
+          ? "إلغاء التثبيت من الملف الشخصي"
+          : "تثبيت في الملف الشخصي"}
       </TooltipContent>
     </Tooltip>
   );

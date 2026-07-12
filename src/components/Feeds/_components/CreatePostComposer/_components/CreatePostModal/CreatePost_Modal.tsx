@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import { useFieldArray, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 import { CircleAlert, Globe, X } from "lucide-react";
 import CreatePost_Modal_Media from "./_components/CreatePost_Modal_Media";
-import CreatePost_Modal_Head from "./_components/CreatePost_Modal_Head";
+import CreatePost_Modal_Head from "./_components/CreatePost_Modal_Author";
 import CreatePost_Modal_Footer from "./_components/CreatePost_Modal_Footer";
 import { CreatePost_ModalFormType } from "./_types/CreatePost_ModalFormType";
 import TogglePinButton from "./_components/TogglePinButton";
@@ -13,6 +13,7 @@ import CommentsDisabled from "./_components/CommentsDisabled";
 import axios from "axios";
 import { CreatePostAction } from "@/actions/Post/Create/CreatePost.action";
 import { Privacy } from "@prisma/client";
+import CreatePost_Modal_Author from "./_components/CreatePost_Modal_Author";
 // ===========================================================
 function CreatePost_Modal({
   setIsOpen,
@@ -80,7 +81,7 @@ function CreatePost_Modal({
         return setError(
           result.message || "حدث خطأ غير متوقع أثناء إنشاء منشورك.",
         );
-      setIsOpen(false)
+      setIsOpen(false);
     } catch (error) {
       console.log(error);
       setError("حدث خطأ أثناء إنشاء منشورك حاول مرة أخرى");
@@ -100,9 +101,17 @@ function CreatePost_Modal({
         className="bg-slate-800 ring ring-gray-50/5 text-white shadow-2xl p-3 rounded-xl w-200 max-h-170 overflow-y-auto"
       >
         <div className="flex items-center justify-between">
-          <div className="mb-5 flex items-center gap-3">
-            <TogglePinButton control={control} setValue={setValue} />
-            <CommentsDisabled control={control} setValue={setValue} />
+          <div className="mb-5 flex items-center gap-2">
+            <TogglePinButton
+              disabled={loading}
+              control={control}
+              setValue={setValue}
+            />
+            <CommentsDisabled
+              control={control}
+              setValue={setValue}
+              disabled={loading}
+            />
           </div>
           <button
             onClick={() => setIsOpen(false)}
@@ -117,14 +126,19 @@ function CreatePost_Modal({
             {error}
           </p>
         )}
-        <CreatePost_Modal_Head />
+        <CreatePost_Modal_Author />
         <span className="w-full bg-white opacity-2 h-px rounded-full block mt-2 mb-5" />
         <CreatePost_Modal_Center
           control={control}
           setValue={setValue}
           register={register}
+          disabled={loading}
         />
-        <CreatePost_Modal_Media media={fields} remove={remove} />
+        <CreatePost_Modal_Media
+          disabled={loading}
+          media={fields}
+          remove={remove}
+        />
         <CreatePost_Modal_Footer
           content={content}
           fields={fields}

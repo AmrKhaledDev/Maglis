@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       resource_type: "auto",
     });
     return NextResponse.json(
-      { url: uploader.secure_url, type: fileType },
+      { url: uploader.secure_url, type: fileType.toUpperCase() },
       { status: 200 },
     );
   } catch (error) {

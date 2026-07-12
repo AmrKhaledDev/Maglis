@@ -10,9 +10,11 @@ import { CreatePost_ModalFormType } from "../_types/CreatePost_ModalFormType";
 function CommentsDisabled({
   control,
   setValue,
+  disabled,
 }: {
   control: Control<CreatePost_ModalFormType, any, CreatePost_ModalFormType>;
   setValue: UseFormSetValue<CreatePost_ModalFormType>;
+  disabled: boolean;
 }) {
   const isCommentsDisabled = useWatch({
     control,
@@ -22,10 +24,11 @@ function CommentsDisabled({
     <Tooltip>
       <TooltipTrigger asChild>
         <button
-        type="button"
+        disabled={disabled}
+          type="button"
           onClick={() => setValue("commentsDisabled", !isCommentsDisabled)}
-          className={`cursor-pointer mytransition
-            ${isCommentsDisabled ? "text-red-500" : "text-gray-500 hover:text-white "}
+          className={`not-disabled:cursor-pointer mytransition
+            ${isCommentsDisabled ? "text-red-500" : "text-gray-500 not-disabled:hover:text-white "}
             `}
         >
           <MessageSquareOff className="size-4.5" />

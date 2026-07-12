@@ -2,16 +2,19 @@
 import { FaRegImages } from "react-icons/fa6";
 import { AddMediaPropsType } from "../_types/AddMediaPropsType";
 // ======================================================================================
-function AddImages({ append, fields }: AddMediaPropsType) {
+function AddImages({ append, fields, disabled }: AddMediaPropsType) {
   return (
     <div>
       <label
         htmlFor="upload_image"
-        className="text-2xl text-gray-400 hover:text-white block mytransition active:scale-90 cursor-pointer"
+        className={`text-2xl text-gray-400 block mytransition 
+          ${disabled?"" :"hover:text-white cursor-pointer active:scale-90 "}
+          `}
       >
         <FaRegImages />
       </label>
       <input
+        disabled={disabled}
         onChange={(e) => {
           if (fields.length >= 4) return;
           const file = e.target.files?.[0];

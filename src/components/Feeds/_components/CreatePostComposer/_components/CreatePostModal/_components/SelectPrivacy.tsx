@@ -15,9 +15,11 @@ import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
 function SelectPrivacy({
   control,
   setValue,
+  disabled,
 }: {
   control: Control<CreatePost_ModalFormType, any, CreatePost_ModalFormType>;
   setValue: UseFormSetValue<CreatePost_ModalFormType>;
+  disabled: boolean;
 }) {
   const selectPrivacy = useWatch({
     control,
@@ -25,7 +27,10 @@ function SelectPrivacy({
   });
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center w-fit space-x-2.5 justify-between cursor-pointer bg-gray-600/30 ring ring-gray-50/15 p-1.5 shadow rounded">
+      <DropdownMenuTrigger
+        disabled={disabled}
+        className="flex items-center w-fit space-x-2.5 justify-between not-disabled:cursor-pointer bg-gray-600/30 ring ring-gray-50/15 p-1.5 shadow rounded"
+      >
         <div className="flex items-center gap-1 text-xs">
           <selectPrivacy.icon className="size-4" /> {selectPrivacy.label}
         </div>

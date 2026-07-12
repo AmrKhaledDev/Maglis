@@ -38,7 +38,7 @@ function PostOptions({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="p-3 shadow-2xl flex boxOptions flex-col gap-2 absolute bg-gray-200 text-slate-900 rounded-2xl w-fit whitespace-nowrap z-5 left-0 font-semibold"
+          className="p-3 shadow-2xl flex boxOptions flex-col gap-2 absolute bg-gray-200 text-slate-900 rounded-2xl w-fit whitespace-nowrap z-9 left-0 font-semibold"
         >
           <button className="flex items-center gap-2 text-sm cursor-pointer hover:bg-white mytransition">
             <Pencil className="size-4.5" /> تعديل

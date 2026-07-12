@@ -12,8 +12,8 @@ function CreatePost_Modal_Footer({
   return (
     <div className="flex items-center justify-between mt-5">
       <div className="flex items-center gap-2">
-        <AddImages fields={fields} append={append} />
-        <AddVideos fields={fields} append={append} />
+        <AddImages disabled={loading} fields={fields} append={append} />
+        <AddVideos disabled={loading} fields={fields} append={append} />
       </div>
       <button
         disabled={disabled || loading}

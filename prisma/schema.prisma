@@ -72,6 +72,7 @@ model User {
   followersCount      Int        @default(0)
   followingCount      Int        @default(0)
   role                Role       @default(USER)
+  professionalMode    Boolean @default(false)
 
   @@map("users")
 }

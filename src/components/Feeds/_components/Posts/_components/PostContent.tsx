@@ -1,11 +1,11 @@
-import { PostsDBType } from "@/types/PostsDBType";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import Linkify from "linkify-react";
+import { PostDBType } from "@/types/PostDBType";
 // ====================================================
-function PostContent({ post }: { post: PostsDBType }) {
+function PostContent({ post }: { post: PostDBType }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3 mt-4">
       <Linkify
         options={{
           target: "_blank",
@@ -15,7 +15,9 @@ function PostContent({ post }: { post: PostsDBType }) {
           },
         }}
       >
-        <span className="whitespace-pre-line text-sm">{post.content}</span>
+        <p dir="auto" className="whitespace-pre-line text-sm">
+          {post.content}
+        </p>
       </Linkify>
       {post.medias.length > 0 && (
         <div
@@ -24,15 +26,23 @@ function PostContent({ post }: { post: PostsDBType }) {
           {post.medias.map((item) => (
             <div
               key={item.id}
-              className={`w-full overflow-hidden bg-black rounded-xl relative h-100 `}
+              className={`w-full overflow-hidden bg-black rounded-lg relative h-100 `}
             >
               {item.type == "IMAGE" && (
-                <Image
-                  src={item.url}
-                  alt="صورة من المنشور"
-                  fill
-                  className="object-contain"
-                />
+                <>
+                  <Image
+                    src={item.url}
+                    alt=""
+                    fill
+                    className="object-cover blur-xl opacity-30 pointer-events-none"
+                  />
+                  <Image
+                    src={item.url}
+                    alt="صورة من المنشور"
+                    fill
+                    className="object-contain relative z-8"
+                  />
+                </>
               )}
               {item.type == "VIDEO" && (
                 <ReactPlayer

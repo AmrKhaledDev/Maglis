@@ -8,9 +8,11 @@ import { useState } from "react";
 function CreatePost_Modal_Media({
   media,
   remove,
+  disabled,
 }: {
   media: { preview: string; file: File; type: "video" | "image" }[];
   remove: UseFieldArrayRemove;
+  disabled: boolean;
 }) {
   const [showMedia, setShowMedia] = useState({
     mediaType: "",
@@ -38,7 +40,7 @@ function CreatePost_Modal_Media({
                   src={item.preview}
                   alt="صورة للمنشور"
                   fill
-                  className="rounded object-cover cursor-pointer media" 
+                  className="rounded object-cover cursor-pointer media"
                   onClick={() => {
                     handleShowMediaUploaded("image", item.preview);
                   }}
@@ -53,16 +55,18 @@ function CreatePost_Modal_Media({
                   className="size-20 cursor-pointer media"
                 />
               )}
-              <button
-                type="button"
-                onClick={() => {
-                  URL.revokeObjectURL(item.preview);
-                  remove(i);
-                }}
-                className="absolute top-1 left-1"
-              >
-                <X className="size-4 cursor-pointer text-white" />
-              </button>
+              {!disabled && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    URL.revokeObjectURL(item.preview);
+                    remove(i);
+                  }}
+                  className="absolute top-1 left-1"
+                >
+                  <X className="size-4 cursor-pointer text-white" />
+                </button>
+              )}
               {showMedia.open && (
                 <ShowMediaUploaded
                   mediaType={showMedia.mediaType as "image" | "video"}

@@ -10,7 +10,7 @@ import "dayjs/locale/ar";
 // ====================================================
 dayjs.locale("ar");
 export const CreatePostAction = async (
-  privacy: Privacy,
+  privacy: Privacy = "PUBLIC",
   commentsDisabled: boolean = false,
   isPinnedToProfile: boolean = false,
   content?: string,

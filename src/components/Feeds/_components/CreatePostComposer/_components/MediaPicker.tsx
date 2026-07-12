@@ -1,6 +1,4 @@
-"use client";
-
-import { Images } from "lucide-react";
+import { MdOutlinePermMedia } from "react-icons/md";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 // ================================================================
 function MediaPicker({
@@ -23,9 +21,9 @@ function MediaPicker({
     <div>
       <label
         htmlFor="upload_media"
-        className="hover:bg-gray-50/5 block rounded-full p-2 mytransition cursor-pointer text-gray-200"
+        className="text-2xl block rounded-full hover:text-white mytransition cursor-pointer text-gray-400"
       >
-        <Images />
+        <MdOutlinePermMedia />
       </label>
       <input
         onChange={handleChange}

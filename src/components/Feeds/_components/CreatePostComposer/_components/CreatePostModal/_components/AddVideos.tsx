@@ -2,16 +2,19 @@
 import { GoVideo } from "react-icons/go";
 import { AddMediaPropsType } from "../_types/AddMediaPropsType";
 // =============================================================
-function AddVideos({ append, fields }: AddMediaPropsType) {
+function AddVideos({ append, fields, disabled }: AddMediaPropsType) {
   return (
     <div>
       <label
         htmlFor="upload_video"
-        className="text-2xl text-gray-400 hover:text-white mytransition active:scale-90 cursor-pointer"
+        className={`text-2xl text-gray-400 block mytransition 
+          ${disabled ? "" : "hover:text-white cursor-pointer active:scale-90 "}
+          `}
       >
         <GoVideo />
       </label>
       <input
+        disabled={disabled}
         onChange={(e) => {
           if (fields.length >= 4) return;
           const file = e.target.files?.[0];
