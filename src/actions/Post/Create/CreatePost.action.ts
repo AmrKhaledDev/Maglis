@@ -1,14 +1,10 @@
 "use server";
-
-import GetSession from "@/lib/GetSession";
 import { prisma } from "@/lib/prisma";
 import { CreatePostSchema } from "@/schemas/Post/Create/CreatePost.schema";
 import { MediaType, Privacy } from "@prisma/client";
-import dayjs from "dayjs";
 import { revalidateTag } from "next/cache";
-import "dayjs/locale/ar";
+import validateSession from "@/auth/validateSession";
 // ====================================================
-dayjs.locale("ar");
 export const CreatePostAction = async (
   privacy: Privacy = "PUBLIC",
   commentsDisabled: boolean = false,
@@ -20,24 +16,10 @@ export const CreatePostAction = async (
   }[],
 ): Promise<{ success: boolean; message?: string }> => {
   try {
-    const session = await GetSession();
-    if (!session)
-      return {
-        success: false,
-        message: "لا يمكنك إنشاء منشور برجاء تسجيل الدخول",
-      };
-    if (!session)
-      return { success: false, message: "عذراً لم نستطع التعرف على حسابك." };
-    if (session.isPermanentlyBanned)
-      return {
-        success: false,
-        message: "تم إيقاف حسابك بشكل دائم، لذلك لا يمكنك إنشاء منشورات.",
-      };
-    if (session.banExpiresAt && session.banExpiresAt > new Date())
-      return {
-        success: false,
-        message: `تم إيقاف حسابك مؤقتاً حتى ${dayjs(session.banExpiresAt).format("D MMMM YYYY - h:mm A")}`,
-      };
+    const validatingSession = await validateSession();
+    if (!validatingSession.success || !validatingSession.session)
+      return { success: false, message: validatingSession.message };
+    const session = validatingSession.session;
     const validation = CreatePostSchema.safeParse({ content, media, privacy });
     if (!validation.success)
       return { success: false, message: validation.error.issues[0].message };

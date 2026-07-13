@@ -2,7 +2,7 @@ import { getPosts } from "@/cached-queries/getPosts";
 import CreatePostComposer from "./_components/CreatePostComposer/CreatePostComposer";
 import Posts from "./_components/Posts/Posts";
 import Stories from "./_components/Stories/Stories";
-import GetSession from "@/lib/GetSession";
+import GetSession from "@/auth/GetSession";
 import { redirect } from "next/navigation";
 import { UserProvider } from "../../providers/UserProvider";
 import { PostDBType } from "@/types/PostDBType";

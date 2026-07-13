@@ -38,8 +38,11 @@ function LoginForm({ errorAuthWithGoogle }: { errorAuthWithGoogle?: string }) {
     const result = await LoginAction(data);
     setLoading(false);
     setShowBlur(false);
-    if (!result.success) return setServerError(result.message);
-    setServerSuccess(result.message);
+    if (!result.success)
+      return setServerError(
+        result.message ?? "حدث خطأ أثناء تسجيل دخولك حاول مرة أخرى",
+      );
+    setServerSuccess(result.message ?? "");
     router.refresh();
   };
   return (

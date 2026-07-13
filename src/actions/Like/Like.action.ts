@@ -1,8 +1,7 @@
 "use server";
 
-import GetSession from "@/lib/GetSession";
+import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import dayjs from "dayjs";
 import { revalidateTag } from "next/cache";
 // =============================================
 export const LikeAction = async (
@@ -12,22 +11,10 @@ export const LikeAction = async (
   message?: string;
 }> => {
   try {
-    const session = await GetSession();
-    if (!session)
-      return {
-        success: false,
-        message: "برجاء تسجيل الدخول أو إنشاء حساب للإعجاب بهذا المنشور.",
-      };
-    if (session.isPermanentlyBanned)
-      return {
-        success: false,
-        message: "تم إيقاف حسابك بشكل دائم لا يمكنك التفاعل على أي منشور.",
-      };
-    if (session.banExpiresAt && session.banExpiresAt > new Date())
-      return {
-        success: false,
-        message: `تم إيقاف حسابك مؤقتاً حتى ${dayjs(session.banExpiresAt).format("D MMMM YYYY - h:mm A")}`,
-      };
+    const validatingSession = await validateSession();
+    if (!validatingSession.success || !validatingSession.session)
+      return { success: false, message: validatingSession.message };
+    const session = validatingSession.session;
     const likedPost = await prisma.like.findUnique({
       where: {
         userId_postId: {

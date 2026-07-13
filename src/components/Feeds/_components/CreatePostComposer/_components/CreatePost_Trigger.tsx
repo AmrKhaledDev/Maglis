@@ -1,13 +1,17 @@
-"use client";
-
+import { useUser } from "@/providers/UserProvider";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 // ================================================================
-function CreatePost_Trigger({setIsOpen}:{setIsOpen:Dispatch<SetStateAction<boolean>>}) {
+function CreatePost_Trigger({
+  setIsOpen,
+}: {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) {
+  const user = useUser();
   return (
     <div className="flex items-center gap-2 w-full">
       <Image
-        src={"/my_photo.jpeg"}
+        src={user.image || "/user.jpg"}
         alt="صورتك"
         width={50}
         height={50}

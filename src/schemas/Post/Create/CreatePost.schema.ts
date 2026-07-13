@@ -5,6 +5,9 @@ export const CreatePostSchema = z
     content: z
       .string({ message: "المحتوى النصي للمنشور يجب أن يكون نصاً" })
       .trim()
+      .max(5000, {
+        message: "محتوى المنشور طويل للغاية يجب ألا يزيد عن 5000 كلمة.",
+      })
       .optional(),
     media: z.any().nullable().optional(),
     privacy: z.string().nonempty({ message: "برجاء إختيار خصوصية للمنشور" }),

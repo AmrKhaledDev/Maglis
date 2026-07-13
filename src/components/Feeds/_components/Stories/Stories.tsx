@@ -5,9 +5,11 @@ import "swiper/css";
 import Image from "next/image";
 import { useState } from "react";
 import StoryModal from "./_components/StoryModal";
+import { useUser } from "@/providers/UserProvider";
 // =============================================================
 function Stories() {
   const [modal, setModal] = useState(false);
+  const user = useUser();
   return (
     <div>
       <Swiper slidesPerView={"auto"} spaceBetween={6} className="w-full h-30 ">
@@ -17,7 +19,7 @@ function Stories() {
             className="relative cursor-pointer"
           >
             <Image
-              src={"/my_photo.jpeg"}
+              src={user.image ?? "/user.jpg"}
               alt="صورتك"
               width={100}
               height={100}
@@ -27,7 +29,7 @@ function Stories() {
           </button>
           <p className=" text-gray-300 text-xs">قصتك</p>
         </SwiperSlide>
-        {Array(10)
+        {/* {Array(10)
           .fill(0)
           .map((_, i) => (
             <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-25! justify-center shrink-0">
@@ -49,7 +51,7 @@ function Stories() {
                 Amr Khaled
               </p>
             </SwiperSlide>
-          ))}
+          ))} */}
       </Swiper>
       <StoryModal modal={modal} setModal={setModal} />
     </div>

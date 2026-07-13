@@ -20,7 +20,7 @@ function Toast() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="sticky top-19 z-20 "
+          className="sticky top-20 z-20 "
         >
           <p
             className={`p-5 font-semibold flex items-center gap-3

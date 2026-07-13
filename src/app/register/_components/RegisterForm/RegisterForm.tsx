@@ -69,6 +69,7 @@ function RegisterForm() {
 
         {fields.map((field) => (
           <AuthFormFiled
+            key={field.id}
             register={register}
             placeholder={field.placeholder}
             id={field.id as Path<z.infer<typeof RegisterSchema>>}

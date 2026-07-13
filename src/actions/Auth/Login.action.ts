@@ -10,7 +10,7 @@ import z from "zod";
 // =========================================================
 export const LoginAction = async (
   data: z.infer<typeof LoginSchema>,
-): Promise<{ success: boolean; message: string }> => {
+): Promise<{ success: boolean; message?: string }> => {
   try {
     const validation = LoginSchema.safeParse(data);
     if (!validation.success)
@@ -51,8 +51,9 @@ export const LoginAction = async (
     await signIn("credentials", {
       email: validation.data.email,
       password: validation.data.password,
+      redirect: false,
     });
-    return { success: false, message: "جاري تسجيل دخولك" };
+    return { success: true};
   } catch (error) {
     console.log(error);
     return {

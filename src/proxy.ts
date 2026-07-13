@@ -1,6 +1,6 @@
 import { auth as proxy } from "@/lib/auth";
 import { NextResponse } from "next/server";
-import GetSession from "./lib/GetSession";
+import GetSession from "./auth/GetSession";
 // ===========================================
 const authPages = ["/login", "/register", "/credential-login"];
 export default proxy(async (req) => {

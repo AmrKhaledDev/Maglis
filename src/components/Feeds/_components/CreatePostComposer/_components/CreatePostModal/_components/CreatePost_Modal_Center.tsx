@@ -26,9 +26,9 @@ function CreatePost_Modal_Center({
       />
       <div className="flex items-center justify-between">
         <p
-          className={`text-sm ${content.length > 2000 ? "text-red-400" : "text-gray-300 "}`}
+          className={`text-sm ${content.length > 5000 ? "text-red-400" : "text-gray-300 "}`}
         >
-          2000 / {content.length}
+          5000 / {content.length}
         </p>
         <SelectPrivacy disabled={disabled} setValue={setValue} control={control} />
       </div>

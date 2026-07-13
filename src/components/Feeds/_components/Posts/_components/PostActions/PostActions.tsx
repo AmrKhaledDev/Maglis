@@ -1,4 +1,4 @@
-import { Link2, MessageCircle, ThumbsDown, ThumbsUp } from "lucide-react";
+import {  MessageCircle } from "lucide-react";
 import SavePostBtn from "./_components/SavePostBtn";
 import { PostDBType } from "@/types/PostDBType";
 import LikeBtn from "./_components/LikeBtn";
@@ -21,10 +21,6 @@ function PostActions({ post }: { post: PostDBType }) {
         <p className="font-normal text-xs text-gray-300">
           <span>10</span> تعليقات
         </p>
-        <div className="flex items-center gap-1 text-gray-300">
-          <Link2 strokeWidth={1} className="size-4.5" />
-          <span className="text-sm">0</span>
-        </div>
         <SavePostBtn post={post} />
       </div>
     </div>

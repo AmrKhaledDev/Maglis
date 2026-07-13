@@ -1,5 +1,5 @@
-import { auth } from "./auth";
-import { prisma } from "./prisma";
+import { auth } from "../lib/auth";
+import { prisma } from "../lib/prisma";
 // =====================================
 const GetSession = async () => {
   try {

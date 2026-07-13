@@ -1,11 +1,7 @@
 "use server";
-
-import GetSession from "@/lib/GetSession";
+import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import dayjs from "dayjs";
-import "dayjs/locale/ar";
 // =====================================
-dayjs.locale("ar");
 export const SavePostAction = async (
   postId: string,
 ): Promise<{
@@ -13,22 +9,13 @@ export const SavePostAction = async (
   message: string;
 }> => {
   try {
-    const session = await GetSession();
-    if (!session)
+    const validatingSession = await validateSession();
+    if (!validatingSession.success || !validatingSession.session)
       return {
         success: false,
-        message: "برجاء تسجيل الدخول أو إنشاء حساب لإدارة المحفوظات.",
+        message: validatingSession.message ?? "حدث خطأ أثناء التحقق من حسابك",
       };
-    if (session.isPermanentlyBanned)
-      return {
-        success: false,
-        message: "تم إيقاف حسابك بشكل دائم، لذلك لا يمكنك إدارة المحفوظات.",
-      };
-    if (session.banExpiresAt && session.banExpiresAt > new Date())
-      return {
-        success: false,
-        message: `تم إيقاف حسابك مؤقتاً حتى ${dayjs(session.banExpiresAt).format("D MMMM YYYY - h:mm A")}`,
-      };
+    const session = validatingSession.session;
     if (!postId)
       return { success: false, message: "حدث خطأ غير متوقع حاول مرة أخرى" };
     const existingPost = await prisma.post.findUnique({
@@ -67,7 +54,10 @@ export const SavePostAction = async (
         },
       });
     }
-    return { success: true, message: "اكتمل تحديث المحفوظات بنجاح، وستظهر التغييرات على الفور." };
+    return {
+      success: true,
+      message: "اكتمل تحديث المحفوظات بنجاح، وستظهر التغييرات على الفور.",
+    };
   } catch (error) {
     console.error(error);
     return {
