@@ -1,6 +1,6 @@
 "use client";
 
-import { SessionWithoutPasswordType } from "@/types/SessionWithoutPasswordType";
+import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type";
 import React, { createContext, useContext } from "react";
 // ================================================
 

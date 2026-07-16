@@ -1,7 +1,7 @@
 "use client";
 import { FieldValues } from "react-hook-form";
-import { InterfaceAuthFormField } from "./InterfaceAuthFormField";
 import AlertMessage from "../AlertMessage/AlertMessage";
+import { AuthFormFieldType } from "./AuthFormField.type";
 // ======================================================================
 function AuthFormFiled<T extends FieldValues>({
   placeholder,
@@ -14,7 +14,7 @@ function AuthFormFiled<T extends FieldValues>({
   register,
   error,
   disabled,
-}: InterfaceAuthFormField<T>) {
+}: AuthFormFieldType<T>) {
   return (
     <div className="flex flex-col gap-1 w-full">
       <label htmlFor={id} className="font-semibold text-sm w-fit">

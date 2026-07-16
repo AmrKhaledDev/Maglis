@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import MediaPicker from "./_components/MediaPicker";
-import MediaPreview from "./_components/MediaPreview/MediaPreview";
-import CreatePost_Modal from "./_components/CreatePostModal/CreatePost_Modal";
+import MediaPreview from "./_components/MediaPreview";
 import CreatePost_Trigger from "./_components/CreatePost_Trigger";
+import CreatePost_Modal from "./_components/CreatePost_Modal";
 // ==============================================
 function CreatePostComposer() {
   const [isOpen, setIsOpen] = useState(false);

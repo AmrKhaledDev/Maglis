@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import GetSession from "./GetSession";
-import { SessionWithoutPasswordType } from "@/types/SessionWithoutPasswordType";
+import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type";
 import "dayjs/locale/ar";
 // ===========================================================================
 dayjs.locale("ar");

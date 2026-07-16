@@ -1,6 +1,6 @@
 import { Cache } from "@/lib/Cache";
 import { prisma } from "@/lib/prisma";
-import { PostDBType } from "@/types/PostDBType";
+import { PostDBType } from "@/types/PostDB.type";
 // ======================================
 export const getPosts = Cache(
   async ():Promise<PostDBType[]> => {

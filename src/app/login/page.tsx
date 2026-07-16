@@ -1,5 +1,5 @@
+import LoginForm from "./_components/LoginForm";
 import LoginHeader from "./_components/LoginHeader";
-import LoginForm from "./_components/LoginForm/LoginForm";
 import LoginHero from "./_components/LoginHero";
 // ==========================================
 async function Login({

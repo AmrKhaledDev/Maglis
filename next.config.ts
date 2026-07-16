@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    middlewareClientMaxBodySize: "200mb",
+    proxyClientMaxBodySize: "200mb",
   },
 };
 

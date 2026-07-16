@@ -12,7 +12,7 @@ export const CreatePostAction = async (
   content?: string,
   media?: {
     url: string;
-    type: "IMAGE" | "VIDEO";
+    type: MediaType;
   }[],
 ): Promise<{ success: boolean; message?: string }> => {
   try {
@@ -23,6 +23,11 @@ export const CreatePostAction = async (
     const validation = CreatePostSchema.safeParse({ content, media, privacy });
     if (!validation.success)
       return { success: false, message: validation.error.issues[0].message };
+    if (media && media.length > 4)
+      return {
+        success: false,
+        message: "لا يمكنك إضافة أكثر من 4 صور / فيديوهات.",
+      };
     await prisma.$transaction(async (tx) => {
       const newPost = await tx.post.create({
         data: {

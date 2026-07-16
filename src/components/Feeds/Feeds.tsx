@@ -5,7 +5,7 @@ import Stories from "./_components/Stories/Stories";
 import GetSession from "@/auth/GetSession";
 import { redirect } from "next/navigation";
 import { UserProvider } from "../../providers/UserProvider";
-import { PostDBType } from "@/types/PostDBType";
+import { PostDBType } from "@/types/PostDB.type";
 // =================================================
 async function Feeds() {
   const posts: PostDBType[] = await getPosts();
@@ -13,7 +13,7 @@ async function Feeds() {
   if (!session) return redirect("/login");
   return (
     <UserProvider user={session}>
-      <div className="flex flex-col max-w-200 gap-7 mx-auto mb-5">
+      <div className="flex flex-col max-w-180 gap-7 mx-auto mb-5">
         <div className="w-full flex flex-col gap-1">
           <Stories />
           <span className="w-full h-px bg-white/3 rounded-full" />
