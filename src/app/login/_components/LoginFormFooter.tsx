@@ -8,7 +8,7 @@ function LoginFormFooter() {
       <span className="w-full h-px bg-gray-50/7 block rounded-full" />
       <Link
         href={"/forgot-password"}
-        className="block w-fit mx-auto text-center text-sm text-blue-400 underline hover:no-underline"
+        className="block w-fit mx-auto text-center text-xs text-blue-400 hover:underline"
       >
         هل نسيت كلمة المرور؟
       </Link>

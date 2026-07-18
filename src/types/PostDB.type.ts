@@ -14,5 +14,20 @@ export type PostDBType = Prisma.PostGetPayload<{
       };
     };
     likes: true;
+    comments: {
+      orderBy: {
+        createdAt: "desc";
+      };
+      include: {
+        user: {
+          select: {
+            image: true;
+            name: true;
+            username: true;
+            id: true;
+          };
+        };
+      };
+    };
   };
 }>;

@@ -14,8 +14,8 @@ function AlertMessage({
     <>
       {message !== undefined && (
         <p
-          className={`text-xs font-semibold ${
-            type === "success" ? "text-green-500" : "text-red-500"
+          className={`text-xs font-semibold p-2 ${
+            type === "success" ? "text-green-200 bg-green-900" : "text-red-200 bg-red-900"
           } flex items-center gap-1 
         ${isServerError && "bg-red-100 py-1 px-2"}`}
         >

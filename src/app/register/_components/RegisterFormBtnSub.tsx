@@ -1,5 +1,4 @@
 "use client";
-
 function RegisterFormBtnSub({ loading }: { loading: boolean }) {
   return (
     <button

@@ -16,7 +16,7 @@ async function Feeds() {
       <div className="flex flex-col max-w-180 gap-7 mx-auto mb-5">
         <div className="w-full flex flex-col gap-1">
           <Stories />
-          <span className="w-full h-px bg-white/3 rounded-full" />
+          <hr className="border-white opacity-5"/>
         </div>
         <div className="flex flex-col gap-2">
           <CreatePostComposer />

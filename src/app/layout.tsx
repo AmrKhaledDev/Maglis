@@ -35,7 +35,7 @@ export default function RootLayout({
       )}
     >
       <TooltipProvider>
-        <body className="min-h-full flex flex-col bg-linear-to-r from-slate-900 to-slate-800 text-white">
+        <body className="min-h-full flex flex-col bg-[#09090B] text-white">
           <ToastProvider> {children}</ToastProvider>
         </body>
       </TooltipProvider>

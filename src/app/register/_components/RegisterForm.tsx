@@ -13,7 +13,7 @@ import z from "zod";
 import { useRouter } from "next/navigation";
 import AuthBlur from "@/components/AuthBlur/AuthBlur";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
-import RegisterFormBtnSub from "./_components/RegisterFormBtnSub";
+import RegisterFormBtnSub from "./RegisterFormBtnSub";
 // ====================================================================
 function RegisterForm() {
   const {

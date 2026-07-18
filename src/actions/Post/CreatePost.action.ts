@@ -1,0 +1,70 @@
+"use server";
+import { prisma } from "@/lib/prisma";
+import { CreatePostSchema } from "@/schemas/Post/CreatePost.schema";
+import { MediaType, Privacy } from "@prisma/client";
+import { revalidateTag } from "next/cache";
+import validateSession from "@/auth/validateSession";
+// ====================================================
+export const CreatePostAction = async (
+  privacy: Privacy = "PUBLIC",
+  commentsDisabled: boolean = false,
+  isPinnedToProfile: boolean = false,
+  content?: string,
+  media?: {
+    url: string;
+    type: MediaType;
+  }[],
+): Promise<{ success: boolean; message?: string }> => {
+  try {
+    const validatingSession = await validateSession();
+    if (!validatingSession.success || !validatingSession.session)
+      return { success: false, message: validatingSession.message };
+    const session = validatingSession.session;
+    const validation = CreatePostSchema.safeParse({ content, media, privacy });
+    if (!validation.success)
+      return { success: false, message: validation.error.issues[0].message };
+    if (media && media.length > 4)
+      return {
+        success: false,
+        message: "لا يمكنك إضافة أكثر من 4 صور / فيديوهات.",
+      };
+    await prisma.$transaction(async (tx) => {
+      const newPost = await tx.post.create({
+        data: {
+          authorId: session.id,
+          content: content || null,
+          commentsDisabled,
+          isPinnedToProfile,
+          privacy,
+        },
+      });
+      if (media && media.length > 0) {
+        await tx.media.createMany({
+          data: media.map((item) => ({
+            url: item.url,
+            type: item.type.toUpperCase() as MediaType,
+            postId: newPost.id,
+          })),
+        });
+      }
+      await tx.user.update({
+        where: {
+          id: session.id,
+        },
+        data: {
+          postsCount: {
+            increment: 1,
+          },
+        },
+      });
+    });
+    revalidateTag("posts", "");
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "حدث خطأ أثناء إنشاء منشورك حاول مرة أخرى",
+    };
+  }
+};

@@ -1,7 +1,6 @@
 "use client";
 import AuthFormFiled from "@/components/AuthFormFiled/AuthFormFiled";
 import { useState } from "react";
-import LoginFormHeader from "./_components/LoginFormHeader";
 import { Path, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/schemas/Auth/Login.schema";
@@ -9,10 +8,11 @@ import { LoginFields } from "@/data/Login/LoginFields";
 import { LoginAction } from "@/actions/Auth/Login.action";
 import { useRouter } from "next/navigation";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
-import LoginFormFooter from "./_components/LoginFormFooter";
-import LoginFormBtnSub from "./_components/LoginFormBtnSub";
 import AuthBlur from "@/components/AuthBlur/AuthBlur";
 import z from "zod";
+import LoginFormBtnSub from "./LoginFormBtnSub";
+import LoginFormFooter from "./LoginFormFooter";
+import LoginFormHeader from "./LoginFormHeader";
 // =========================================================================
 function LoginForm({ errorAuthWithGoogle }: { errorAuthWithGoogle?: string }) {
   const {

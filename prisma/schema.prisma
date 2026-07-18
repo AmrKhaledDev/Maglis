@@ -74,6 +74,7 @@ model User {
   role                Role       @default(USER)
   professionalMode    Boolean    @default(false)
   likes               Like[]
+  comments            Comment[]
 
   @@map("users")
 }
@@ -91,6 +92,7 @@ model Post {
   medias            Media[]
   savedPosts        SavePost[]
   likes             Like[]
+  comments          Comment[]
 
   @@index([authorId])
 }
@@ -123,6 +125,18 @@ model Like {
   createdAt DateTime @default(now())
 
   @@unique([userId, postId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String?
+  image     String?
+  postId    String
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  isEdited  Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
 
 model VerificationToken {

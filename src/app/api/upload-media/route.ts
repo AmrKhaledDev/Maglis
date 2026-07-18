@@ -10,7 +10,7 @@ const allowedFileTypes = [
 ];
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024;
-const ALLOWED_PATHNAMES = ["maglis-posts-media"];
+const ALLOWED_PATHNAMES = ["maglis-media"];
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
