@@ -21,7 +21,7 @@ function CommentUploadImage({
     <div>
       <label
         htmlFor="upload_image"
-        className="m-2 text-gray-300 block cursor-pointer rounded-full hover:text-white mytransition"
+        className=" text-gray-300 block cursor-pointer rounded-full hover:text-white mytransition"
       >
         <ImageUp strokeWidth={1.5} className="size-5" />
       </label>

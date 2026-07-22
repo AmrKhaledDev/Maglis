@@ -23,7 +23,6 @@ function PostViewerOptions({ post }: { post: PostDBType }) {
           <button className="postBtnAct">
             <UserPlus className="postBtnActIcon" /> متابعة المستخدم
           </button>
-          <hr className=" border-zinc-700 opacity-8" />
         </>
       )}
     </>

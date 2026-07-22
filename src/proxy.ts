@@ -5,7 +5,6 @@ import GetSession from "./auth/GetSession";
 const authPages = ["/login", "/register", "/credential-login"];
 export default proxy(async (req) => {
   const session = await GetSession();
-  console.log(session);
   const pathname = req.nextUrl.pathname;
   if (authPages.includes(pathname) && session)
     return NextResponse.redirect(new URL("/", req.nextUrl.origin));

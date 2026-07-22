@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Ellipsis } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -44,10 +44,11 @@ function PostOptions({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="p-2 shadow-2xl flex boxOptions flex-col gap-2 absolute bg-gray-200 text-slate-900 rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold"
+          className="bgOptionsBox boxOptions"
         >
           <PostOwnerOptions post={post} setShowOptions={setShowOptions} />
           <PostViewerOptions post={post} />
+          <hr className=" border-zinc-700 opacity-5" />
           <OptionsSavePostBtn post={post} />
           <OptionsCopyLinkBtn setShowOptions={setShowOptions} post={post} />
         </motion.div>

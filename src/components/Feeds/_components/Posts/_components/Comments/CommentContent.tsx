@@ -8,7 +8,7 @@ function CommentContent({ comment }: { comment: Comment }) {
         {comment.content}
       </p>
       {comment.image && (
-        <button className="relative w-full h-70 rounded-xl overflow-hidden group cursor-pointer">
+        <button className="relative size-30 rounded overflow-hidden group cursor-pointer">
           <Image
             src={comment.image}
             alt="صورة"

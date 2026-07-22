@@ -16,7 +16,7 @@ function SelectPrivacyOptions({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="absolute mt-1 w-25 gap-px boxPrivacyOptions shadow-2xl left-0 bg-gray-200 text-black font-semibold p-2 flex flex-col rounded-xl"
+      className="absolute mt-1 w-25 gap-px boxPrivacyOptions shadow-2xl left-0 bg-gray-300 text-black font-semibold p-2 flex flex-col rounded-xl"
     >
       {privacyOptions.map((item) => (
         <button

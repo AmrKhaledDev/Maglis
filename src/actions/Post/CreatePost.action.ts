@@ -18,7 +18,10 @@ export const CreatePostAction = async (
   try {
     const validatingSession = await validateSession();
     if (!validatingSession.success || !validatingSession.session)
-      return { success: false, message: validatingSession.message };
+      return {
+        success: false,
+        message: validatingSession.message || "حدث خطأ أثناء التحقق من حسابك.",
+      };
     const session = validatingSession.session;
     const validation = CreatePostSchema.safeParse({ content, media, privacy });
     if (!validation.success)

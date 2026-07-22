@@ -19,9 +19,9 @@ function CreatePostTrigger({
       />
       <button
         onClick={() => setIsOpen(true)}
-        className="p-3.5 flex-1 text-sm hover:border-gray-50/40 mytransition rounded-full border border-gray-50/20 text-gray-400 font-semibold cursor-pointer text-start"
+        className="p-3.5 flex-1 text-sm hover:border-gray-50/40 mytransition rounded-full border border-gray-50/20 text-gray-400 cursor-pointer text-start"
       >
-        بماذا تفكر اليوم؟
+        {`أهلًا ${user.name}، بماذا تفكر اليوم؟`}
       </button>
     </div>
   );

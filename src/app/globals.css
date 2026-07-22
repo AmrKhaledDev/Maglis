@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 /* ========================= */
 @utility mycontainer {
-  @apply mx-auto max-w-325;
+  @apply mx-auto max-w-310 px-3;
 }
 @utility mytransition {
   @apply transition-all duration-300;
@@ -15,6 +15,9 @@
 }
 @utility postBtnActIcon{
   @apply size-4.5
+}
+@utility bgOptionsBox{
+  @apply p-2 shadow-2xl flex  flex-col gap-2 absolute bg-gray-300 text-slate-900 rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold
 }
 @theme inline {
   --font-heading: var(--font-sans);

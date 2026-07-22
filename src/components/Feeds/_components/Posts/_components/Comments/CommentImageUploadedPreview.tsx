@@ -5,25 +5,23 @@ import { X } from "lucide-react";
 // =======================================================
 function CommentImageUploadedPreview({
   imagePreview,
-  imageFile,
   setImagePreview,
   setImageFile,
 }: {
   imagePreview: string;
-  imageFile: File | null;
   setImagePreview: Dispatch<SetStateAction<string>>;
   setImageFile: Dispatch<SetStateAction<File | null>>;
 }) {
   return (
     <>
-      {imagePreview && imageFile && (
+      {imagePreview  && (
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
-          className="flex items-center gap-2"
+          className="flex items-center"
         >
-          <div className="size-35 relative m-2 rounded overflow-hidden">
+          <div className="size-30 relative rounded overflow-hidden gap-0.5">
             <Image
               src={imagePreview}
               alt="صورة"

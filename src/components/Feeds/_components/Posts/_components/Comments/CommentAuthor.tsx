@@ -2,20 +2,15 @@ import Image from "next/image";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
-import { Prisma } from "@prisma/client";
+import { Comment, Prisma } from "@prisma/client";
 import { PostDBType } from "@/types/PostDB.type";
-import { PenLine } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 // =========================================================================
 dayjs.locale("ar");
 dayjs.extend(relativeTime);
 function CommentAuthor({
   user,
   post,
+  comment,
 }: {
   user: Prisma.UserGetPayload<{
     select: {
@@ -26,6 +21,7 @@ function CommentAuthor({
     };
   }>;
   post: PostDBType;
+  comment: Comment;
 }) {
   return (
     <div className="flex items-center gap-2">
@@ -43,19 +39,17 @@ function CommentAuthor({
           <h4 dir="auto" className="text-xs text-slate-300">
             @{user.username}
           </h4>
+          {comment.isEdited && (
+            <p className="text-[10px] mr-2 text-gray-400">مُعدله</p>
+          )}
           {post.authorId == user.id && (
-            <Tooltip>
-              <TooltipTrigger>
-                <p className="mr-3 text-xs rounded-full text-slate-400">
-                  <PenLine className="size-3.5" strokeWidth={1.5} />
-                </p>
-              </TooltipTrigger>
-              <TooltipContent side="left">الناشر</TooltipContent>
-            </Tooltip>
+            <p className="mr-4 text-slate-300 text-[10px] bg-[#09090B]/20 py-px px-2 rounded ring ring-[#09090B]/25">
+              الكاتب
+            </p>
           )}
         </div>
         <p className="text-[10px] text-slate-300">
-          {dayjs(new Date()).fromNow()}
+          {dayjs(comment.createdAt).fromNow()}
         </p>
       </div>
     </div>

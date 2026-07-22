@@ -30,7 +30,7 @@ function Menu() {
           initial={{ opacity: 0, x: 100,scale:0 }}
           animate={{ opacity: 1, x: 0 ,scale:1}}
           transition={{ duration: 0.3 }}
-          className="fixed menu bottom-1/2 translate-y-1/2 z-10 right-5 flex-col flex justify-between gap-2 bg-white/10 ring ring-gray-50/20 shadow backdrop-blur-2xl p-2 w-fit rounded-lg"
+          className="fixed menu bottom-1/2 translate-y-1/2 z-40 right-5 flex-col flex justify-between gap-2 bg-white/10 ring ring-gray-50/20 shadow backdrop-blur-2xl p-2 w-fit rounded-lg"
         >
           {navLinks.map((link) => (
             <Tooltip key={link.id}>
@@ -58,7 +58,7 @@ function Menu() {
       <button
         disabled={menuOpen}
         onClick={() => setMenuOpen(true)}
-        className="fixed hover:scale-105 z-10 mytransition active:scale-95 buttonOpenMenu disabled:hidden cursor-pointer shadow-[0_0_10px_#87734a] bottom-1/2 translate-y-1/2 right-5 p-1 rounded-full bg-[#87734a] caret-primary-foreground"
+        className="fixed hover:scale-105 z-40 mytransition active:scale-95 buttonOpenMenu disabled:hidden cursor-pointer shadow-[0_0_10px_#87734a] bottom-1/2 translate-y-1/2 right-5 p-1 rounded-full bg-[#87734a] caret-primary-foreground"
       >
         <StepBack className="size-5" />
       </button>

@@ -98,7 +98,7 @@ function CreatePostModal({
         onSubmit={handleSubmit(handleCreatePost)}
         className="bg-slate-800 ring ring-gray-50/5 text-white shadow-2xl p-3 rounded-xl w-200 max-h-170 overflow-y-auto"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between">
           <div className="mb-5 flex items-center gap-2">
             <TogglePinButton
               disabled={loading}
@@ -113,7 +113,7 @@ function CreatePostModal({
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="cursor-pointer text-gray-300 hover:text-white mytransition"
+            className="cursor-pointer text-gray-300 h-fit hover:text-white mytransition"
           >
             <X className="size-5" />
           </button>

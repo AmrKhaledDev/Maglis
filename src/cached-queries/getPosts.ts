@@ -19,6 +19,7 @@ export const getPosts = Cache(
         },
         likes: true,
         comments: {
+          orderBy: [{ isPinned: "desc" }, { createdAt: "desc" }],
           include: {
             user: {
               select: {

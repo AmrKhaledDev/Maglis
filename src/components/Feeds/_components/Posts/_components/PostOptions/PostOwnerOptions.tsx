@@ -22,7 +22,6 @@ function PostOwnerOptions({
           <PinnedToProfileBtn post={post} />
           <CommentsDisabledBtn post={post} />
           <DeletePostBtn post={post} setShowOptions={setShowOptions} />
-          <hr className=" border-zinc-700 opacity-8" />
         </>
       )}
     </>

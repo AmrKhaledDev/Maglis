@@ -5,7 +5,9 @@ export const CreateCommentSchema = z
     content: z
       .string()
       .trim()
-      .max(150, { message: "محتوى التعليق كبير للغاية." })
+      .max(150, {
+        message: "محتوى التعليق كبير للغاية يجب ألا يزيد عن 150 حرف.",
+      })
       .optional()
       .nullable(),
     imageUrl: z.string().trim().optional().nullable(),

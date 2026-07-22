@@ -10,7 +10,7 @@ function PostContentMedia({ post }: { post: PostDBType }) {
       {post.medias.map((item) => (
         <div
           key={item.id}
-          className={`w-full overflow-hidden bg-black rounded-lg relative h-60 `}
+          className={`w-full overflow-hidden bg-black rounded-lg relative ${post.medias.length>1 ? "h-80" :"h-110"} `}
         >
           {item.type == "IMAGE" && (
             <>
@@ -18,7 +18,7 @@ function PostContentMedia({ post }: { post: PostDBType }) {
                 src={item.url}
                 alt=""
                 fill
-                className="object-cover blur-xl opacity-30 pointer-events-none"
+                className="object-cover blur opacity-30 pointer-events-none"
               />
               <Image
                 src={item.url}

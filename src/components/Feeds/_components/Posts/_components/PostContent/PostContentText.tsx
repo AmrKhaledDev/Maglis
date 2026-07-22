@@ -3,7 +3,7 @@ import Linkify from "linkify-react";
 // =======================================
 function PostContentText({post}:{post:PostDBType}) {
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 mb-3">
       <Linkify
         options={{
           target: "_blank",

@@ -24,6 +24,7 @@ function OptionsCopyLinkBtn({
         open: true,
         message: "تم نسخ الرابط إلى الحافظة.",
         type: "success",
+        duration: 2000,
       });
     } catch {
       setToast({

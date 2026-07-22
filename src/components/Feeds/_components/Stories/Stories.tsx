@@ -25,7 +25,7 @@ function Stories() {
               height={100}
               className="rounded-full shrink-0 size-16 object-cover"
             />
-            <Plus className="absolute bottom-0 left-0 text-white bg-slate-800 rounded-full p-1 size-5" />
+            <Plus className="absolute bottom-0.5 left-0.5 text-slate-700 bg-gray-200 rounded-full p-0.5 size-4" strokeWidth={1.5}/>
           </button>
           <p className=" text-gray-300 text-xs">قصتك</p>
         </SwiperSlide>

@@ -46,7 +46,7 @@ function EditPostBtnModalAuthor({
             disabled={loading}
             onClick={() => setShowPrivacyOptions(!showPrivacyOptions)}
             type="button"
-            className="flex buttonShowPrivacyOptions hover:bg-gray-300 mytransition items-center not-disabled:cursor-pointer text-black font-semibold gap-3 bg-gray-200 p-1 rounded-full shadow text-xs"
+            className="flex buttonShowPrivacyOptions hover:bg-gray-400 mytransition items-center not-disabled:cursor-pointer text-black font-semibold gap-3 bg-gray-300 p-1 rounded-full shadow text-xs"
           >
             <span className="flex items-center gap-1">
               <privacy.icon className="size-4" strokeWidth={1.5} />

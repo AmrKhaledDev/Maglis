@@ -113,7 +113,7 @@ function EditPostBtnModal({
           isPinnedToProfile={isPinnedToProfile}
         />
 
-        <hr className="border-white/5 my-2" />
+        <hr className="border-white opacity-3 my-2" />
         {error && (
           <p className="text-sm text-red-500 mb-2 bg-red-100 p-1 font-semibold flex items-center gap-2">
             <CircleAlert className="size-4" />

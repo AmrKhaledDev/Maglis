@@ -18,7 +18,7 @@ export const CreateCommentAction = async (
     if (!validatingSession.success || !validatingSession.session)
       return {
         success: false,
-        message: validatingSession.message ?? "حدث خطأ أثناء التحقق من حسابك.",
+        message: validatingSession.message || "حدث خطأ أثناء التحقق من حسابك.",
       };
     const session = validatingSession.session;
     if (!postId)

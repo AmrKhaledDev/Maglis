@@ -51,9 +51,9 @@ model Account {
 }
 
 model User {
-  id                  String     @id @default(cuid())
+  id                  String           @id @default(cuid())
   name                String
-  email               String     @unique
+  email               String           @unique
   password            String?
   emailVerified       Boolean?
   image               String?
@@ -62,19 +62,21 @@ model User {
   savedPosts          SavePost[]
   cover               String?
   bio                 String?
-  username            String?    @unique
+  username            String?          @unique
   gender              Gender?
-  isPermanentlyBanned Boolean    @default(false)
+  isPermanentlyBanned Boolean          @default(false)
   banExpiresAt        DateTime?
   banReason           String?
   lastSeenAt          DateTime?
-  postsCount          Int        @default(0)
-  followersCount      Int        @default(0)
-  followingCount      Int        @default(0)
-  role                Role       @default(USER)
-  professionalMode    Boolean    @default(false)
+  postsCount          Int              @default(0)
+  followersCount      Int              @default(0)
+  followingCount      Int              @default(0)
+  role                Role             @default(USER)
+  professionalMode    Boolean          @default(false)
   likes               Like[]
   comments            Comment[]
+  likeForComments     LikeForComment[]
+  location            String?
 
   @@map("users")
 }
@@ -120,23 +122,36 @@ model Like {
   id        String   @id @default(cuid())
   userId    String
   postId    String
-  user      User     @relation(fields: [userId], references: [id])
-  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
   @@unique([userId, postId])
 }
 
 model Comment {
+  id              String           @id @default(cuid())
+  content         String?
+  image           String?
+  postId          String
+  userId          String
+  post            Post             @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isEdited        Boolean          @default(false)
+  isPinned        Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  likeForComments LikeForComment[]
+}
+
+model LikeForComment {
   id        String   @id @default(cuid())
-  content   String?
-  image     String?
-  postId    String
   userId    String
-  post      Post     @relation(fields: [postId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-  isEdited  Boolean  @default(false)
+  commentId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+
+  @@unique([userId, commentId])
 }
 
 model VerificationToken {

@@ -1,26 +1,39 @@
 import { useUser } from "@/providers/UserProvider";
-import { SendHorizontal } from "lucide-react";
 import Image from "next/image";
-import { FormEvent, useState } from "react";
-import TextareaAutoResize from "react-textarea-autosize";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import CommentUploadImage from "./CommentUploadImage";
 import CommentImageUploadedPreview from "./CommentImageUploadedPreview";
 import axios from "axios";
 import { CreateCommentAction } from "@/actions/Comment/CreateComment.action";
 import { PostDBType } from "@/types/PostDB.type";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import { Comment } from "@prisma/client";
+import { EditCommentAction } from "@/actions/Comment/EditComment.action";
+import CommentTextarea from "./CommentTextarea";
+import CommentSubmitButton from "./CommentSubmitButton";
 // =====================================================
-function CommentComposer({ post }: { post: PostDBType }) {
+function CommentComposer({
+  post,
+  currentComment,
+  setCurrentComment,
+}: {
+  post: PostDBType;
+  currentComment?: Comment | null;
+  setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
+}) {
   const [content, setContent] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const user = useUser();
+  const currentMessage = currentComment
+    ? "حدث خطأ أثناء تعديل تعليقك."
+    : "حدث خطأ أثناء إنشاء تعليقك.";
   const handleCreateComment = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      if (!content.trim() && !imageFile)
+      if (!content.trim() && !imagePreview)
         return setError("لا يمكنك نشر تعليق فارغ.");
       setLoading(true);
       setError("");
@@ -43,19 +56,24 @@ function CommentComposer({ post }: { post: PostDBType }) {
       }
       if (imageUrl && "error" in imageUrl)
         return setError("حدث خطأ أثناء رفع الصورة.");
-      const result = await CreateCommentAction(post.id, content, imageUrl?.url);
-      if (!result.success)
-        return setError(result.message ?? "حدث خطأ أثناء إنشاء تعليقك.");
+      const action = currentComment
+        ? EditCommentAction(currentComment.id, content, imagePreview)
+        : CreateCommentAction(post.id, content, imageUrl?.url);
+      const result = await action;
+      if (!result.success) {
+        return setError(result.message || currentMessage);
+      }
       setContent("");
       setImageFile(null);
       setImagePreview("");
     } catch (error) {
       console.error(error);
-      setError("حدث خطأ أثناء إنشاء تعليقك.");
+      setError(currentMessage);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="flex flex-col gap-4">
       {error && <AlertMessage message={error} type="error" />}
@@ -68,31 +86,31 @@ function CommentComposer({ post }: { post: PostDBType }) {
           className="object-cover size-7 rounded-full shrink-0"
         />
         <div className="border border-white/10 w-full focus:border-white/25 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
-          <TextareaAutoResize
-            disabled={loading}
-            minRows={2}
-            placeholder={`مرحبًا ${user.name}، شاركنا رأيك في هذا المنشور`}
-            maxRows={5}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full outline-none p-2 text-sm resize-none"
+          <CommentTextarea
+            content={content}
+            setContent={setContent}
+            setImagePreview={setImagePreview}
+            currentComment={currentComment}
+            user={user}
+            loading={loading}
           />
-          <form onSubmit={handleCreateComment}>
-            <div className="flex items-center justify-between w-full ">
-              <button
-                disabled={(!content.trim() && !imageFile) || loading}
-                className="m-2 p-1 rounded-full not-disabled:hover:bg-blue-800 mytransition disabled:bg-gray-400 disabled:text-gray-600 not-disabled:cursor-pointer bg-blue-600"
-              >
-                <SendHorizontal className="size-4" />
-              </button>
-              <CommentUploadImage
-                setImageFile={setImageFile}
-                setImagePreview={setImagePreview}
-              />
-            </div>
-            <CommentImageUploadedPreview
-              imageFile={imageFile}
+          <CommentImageUploadedPreview
+            imagePreview={imagePreview}
+            setImageFile={setImageFile}
+            setImagePreview={setImagePreview}
+          />
+          <form
+            onSubmit={handleCreateComment}
+            className="flex items-center justify-between w-full p-2"
+          >
+            <CommentSubmitButton
+              loading={loading}
+              setCurrentComment={setCurrentComment}
+              currentComment={currentComment}
+              content={content}
               imagePreview={imagePreview}
+            />
+            <CommentUploadImage
               setImageFile={setImageFile}
               setImagePreview={setImagePreview}
             />

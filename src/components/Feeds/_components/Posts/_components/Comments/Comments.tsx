@@ -1,16 +1,14 @@
 import CommentAuthor from "./CommentAuthor";
 import CommentContent from "./CommentContent";
 import CommentActions from "./CommentActions";
-import { Ellipsis } from "lucide-react";
 import CommentComposer from "./CommentComposer";
 import { PostDBType } from "@/types/PostDB.type";
 import { useState } from "react";
+import CommentOptions from "./CommentOptions";
+import { Comment } from "@prisma/client";
+import CommentIsPinned from "./CommentIsPinned";
 // ===================================================================
-function Comments({
-  post,
-}: {
-  post: PostDBType;
-}) {
+function Comments({ post }: { post: PostDBType }) {
   const [showMoreComments, setShowMoreComments] = useState(false);
   const sortedComments = [...post.comments].sort((a, b) => {
     const aIsAuthor = a.userId === post.authorId;
@@ -24,9 +22,15 @@ function Comments({
   const comments = showMoreComments
     ? sortedComments
     : sortedComments.slice(0, 3);
+  const [showOptions, setShowOptions] = useState("");
+  const [currentComment, setCurrentComment] = useState<Comment | null>(null);
   return (
     <div className="mt-5 flex flex-col gap-3">
-      <CommentComposer post={post} />
+      <CommentComposer
+        post={post}
+        currentComment={currentComment}
+        setCurrentComment={setCurrentComment}
+      />
       <div className="flex flex-col gap-3 mt-3">
         <p className="text-slate-300 flex items-center gap-1">
           التعليقات <span>({post.comments.length})</span>
@@ -34,13 +38,21 @@ function Comments({
         {comments.map((comment) => (
           <div
             key={comment.id}
-            className="bg-gray-800 p-3 rounded-xl shadow w-full flex flex-col gap-3"
+            className="bg-white/10 p-3 rounded-xl shadow w-full flex flex-col gap-3"
           >
+            <CommentIsPinned comment={comment} />
             <div className="flex justify-between">
-              <CommentAuthor user={comment.user} post={post} />
-              <button className="cursor-pointer text-slate-300 h-fit">
-                <Ellipsis className="size-4" strokeWidth={1.5} />
-              </button>
+              <CommentAuthor
+                comment={comment}
+                user={comment.user}
+                post={post}
+              />
+              <CommentOptions
+                showOptions={showOptions}
+                setShowOptions={setShowOptions}
+                comment={comment}
+                setCurrentComment={setCurrentComment}
+              />
             </div>
             <CommentContent comment={comment} />
             <hr className="border-white opacity-3" />
@@ -53,12 +65,12 @@ function Comments({
             </div>
           </div>
         ))}
-        {post.comments.length > 3 && !showMoreComments && (
+        {post.comments.length > 3 && (
           <button
-            onClick={() => setShowMoreComments(true)}
+            onClick={() => setShowMoreComments(!showMoreComments)}
             className="text-xs w-fit mt-3 mx-auto hover:underline text-blue-500 cursor-pointer"
           >
-            عرض المزيد من التعليقات
+            {showMoreComments ? "عرض تعليقات أقل" : "عرض المزيد من التعليقات"}
           </button>
         )}
       </div>
