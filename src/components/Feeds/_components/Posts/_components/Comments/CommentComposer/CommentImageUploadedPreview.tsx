@@ -19,7 +19,7 @@ function CommentImageUploadedPreview({
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
-          className="flex items-center"
+          className="flex items-center p-2 gap-2"
         >
           <div className="size-30 relative rounded overflow-hidden gap-0.5">
             <Image

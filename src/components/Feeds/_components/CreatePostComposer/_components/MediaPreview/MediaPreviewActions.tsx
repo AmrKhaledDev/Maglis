@@ -1,4 +1,5 @@
 import { CreatePostAction } from "@/actions/Post/CreatePost.action";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -17,11 +18,11 @@ function MediaPreviewActions({
   const handleCreatePost = async () => {
     try {
       setLoading(true);
+      setError("");
       if (!mediaFile || !(mediaFile instanceof File))
         return setError("لا يمكنك إرسال منشور فارغ");
       const formData = new FormData();
       formData.append("file", mediaFile);
-      formData.append("pathname", "maglis-posts-media");
       const { data } = await axios.post("/api/upload-media", formData);
       const result = await CreatePostAction("PUBLIC", false, false, undefined, [
         data,
@@ -35,15 +36,15 @@ function MediaPreviewActions({
     } catch (error) {
       console.error(error);
       if (axios.isAxiosError(error))
-        return setError(error.response?.data.error);
+        return setError(error.response?.data.error || "حدث خطأ أثناء إرسال الصورة / الفيديو.");
       setError("حدث خطأ أثناء رفع الصورة / الفيديو المرفق");
     } finally {
       setLoading(false);
     }
   };
   return (
-    <div>
-      {error && <p>{error}</p>}
+    <div className="flex flex-col gap-3">
+      {error && <AlertMessage message={error} type="error" />}
       <div className="flex items-center gap-1.5">
         <button
           disabled={loading}

@@ -1,17 +1,13 @@
 import { DeletePostAction } from "@/actions/Post/DeletePost.action";
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { PostDBType } from "@/types/PostDB.type";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 // ==============================================
-function DeletePostBtn({
-  post,
-  setShowOptions,
-}: {
-  post: PostDBType;
-  setShowOptions: Dispatch<SetStateAction<string>>;
-}) {
+function DeletePostBtn({ post }: { post: PostDBType }) {
+  const {setActiveMenu} = useActiveMenu()
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { setToast } = useToast();
@@ -25,7 +21,7 @@ function DeletePostBtn({
           type: "error",
           open: true,
         });
-      setShowOptions("");
+      setActiveMenu("");
       router.refresh();
     } catch (error) {
       console.error(error);

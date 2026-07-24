@@ -1,22 +1,22 @@
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { Copy } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 // =========================================
 function BtnCopyContentTxt({
   content,
-  setShowOptions,
   loading,
-  setLoading
+  setLoading,
 }: {
   content: string;
-  setShowOptions: Dispatch<SetStateAction<string>>;
-  loading:boolean,
-  setLoading:Dispatch<SetStateAction<boolean>>
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }) {
   const { setToast } = useToast();
+  const { setActiveMenu } = useActiveMenu();
   const handleCopyContent = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       await navigator.clipboard.writeText(content);
       setToast({
         open: true,
@@ -24,7 +24,7 @@ function BtnCopyContentTxt({
         duration: 2000,
         type: "success",
       });
-      setShowOptions("");
+      setActiveMenu("");
     } catch (error) {
       console.error(error);
       setToast({
@@ -32,13 +32,13 @@ function BtnCopyContentTxt({
         open: true,
         type: "error",
       });
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
   return (
     <button
-    disabled={loading}
+      disabled={loading}
       onClick={handleCopyContent}
       className="flex items-center gap-2 text-xs not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer"
     >

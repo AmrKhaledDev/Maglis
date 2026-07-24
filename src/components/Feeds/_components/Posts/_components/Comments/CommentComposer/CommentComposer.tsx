@@ -42,14 +42,13 @@ function CommentComposer({
         try {
           const formData = new FormData();
           formData.append("file", imageFile);
-          formData.append("pathname", "maglis-media");
           const res = await axios.post("/api/upload-media", formData);
           imageUrl = res.data;
         } catch (error) {
           console.error(error);
           if (axios.isAxiosError(error)) {
             return setError(
-              error.response?.data.error ?? "حدث خطأ أثناء رفع الصورة.",
+              error.response?.data.error || "حدث خطأ أثناء رفع الصورة.",
             );
           }
         }
@@ -85,7 +84,7 @@ function CommentComposer({
           height={60}
           className="object-cover size-7 rounded-full shrink-0"
         />
-        <div className="border border-white/10 w-full focus:border-white/25 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
+        <div className="border border-white/10 w-full focus-within:border-white/25 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
           <CommentTextarea
             content={content}
             setContent={setContent}

@@ -1,16 +1,12 @@
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { PostDBType } from "@/types/PostDB.type";
 import { Link2 } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 // ====================================================
-function OptionsCopyLinkBtn({
-  post,
-  setShowOptions,
-}: {
-  post: PostDBType;
-  setShowOptions: Dispatch<SetStateAction<string>>;
-}) {
+function OptionsCopyLinkBtn({ post }: { post: PostDBType }) {
   const [loading, setLoading] = useState(false);
+  const { setActiveMenu } = useActiveMenu();
   const { setToast } = useToast();
   const handleCopyLink = async () => {
     try {
@@ -34,7 +30,7 @@ function OptionsCopyLinkBtn({
       });
     } finally {
       setLoading(false);
-      setShowOptions("");
+      setActiveMenu("");
     }
   };
   return (

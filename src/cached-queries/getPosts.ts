@@ -1,7 +1,7 @@
 import { Cache } from "@/lib/Cache";
 import { prisma } from "@/lib/prisma";
 import { PostDBType } from "@/types/PostDB.type";
-// ======================================
+// ================================================
 export const getPosts = Cache(
   async (): Promise<PostDBType[]> => {
     const posts = await prisma.post.findMany({
@@ -19,14 +19,32 @@ export const getPosts = Cache(
         },
         likes: true,
         comments: {
+          where: { parentId: null },
           orderBy: [{ isPinned: "desc" }, { createdAt: "desc" }],
           include: {
+            parent: {
+              include: {
+                user: {
+                  select: { name: true, id: true },
+                },
+              },
+            },
             user: {
               select: {
                 image: true,
                 name: true,
                 username: true,
                 id: true,
+              },
+            },
+            likeForComments: {
+              select: {
+                userId: true,
+              },
+            },
+            _count: {
+              select: {
+                replies: true,
               },
             },
           },

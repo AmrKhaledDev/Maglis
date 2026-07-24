@@ -2,7 +2,7 @@
 import { X } from "lucide-react";
 import Image from "next/image";
 import { UseFieldArrayRemove } from "react-hook-form";
-import ShowMediaUploaded from "./ShowMediaUploaded";
+import ShowMediaUploaded from "../../../../../ShowMediaUploaded/ShowMediaUploaded";
 import { useState } from "react";
 // ========================================================
 function CreatePostModalMedia({
@@ -67,10 +67,9 @@ function CreatePostModalMedia({
                   <X className="size-4 cursor-pointer text-white" />
                 </button>
               )}
-              {showMedia.open && (
+              {showMedia.open && showMedia.preview && (
                 <ShowMediaUploaded
-                  mediaType={showMedia.mediaType as "image" | "video"}
-                  preview={showMedia.preview}
+                  showMedia={showMedia}
                   setShowMedia={setShowMedia}
                 />
               )}

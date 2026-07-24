@@ -1,27 +1,24 @@
 import { Ellipsis, Pencil, Pin } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import BtnDeleteComment from "./ButtonsOptions/BtnDeleteComment";
-import BtnCopyContentTxt from "./ButtonsOptions/BtnCopyContentTxt";
+import BtnDeleteComment from "../ButtonsOptions/BtnDeleteComment";
+import BtnCopyContentTxt from "../ButtonsOptions/BtnCopyContentTxt";
 import { Comment } from "@prisma/client";
-import BtnPinnedComment from "./ButtonsOptions/BtnPinnedComment";
-// ===========================================================
+import BtnPinnedComment from "../ButtonsOptions/BtnPinnedComment";
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
+// ===============================================================================
 function CommentOptions({
-  showOptions,
-  setShowOptions,
   comment,
   setCurrentComment,
 }: {
-  showOptions: string;
-  setShowOptions: Dispatch<SetStateAction<string>>;
   comment: Comment;
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
 }) {
+  const { activeMenu, setActiveMenu } = useActiveMenu();
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (e.target instanceof Element) {
-        if (!e.target.closest(".butonShowCommentOptions, .boxCommentOptions"))
-          setShowOptions("");
+        if (!e.target.closest(".buttonActiveMenu, .boxMenu")) setActiveMenu("");
       }
     };
     document.addEventListener("click", handle);
@@ -32,23 +29,23 @@ function CommentOptions({
     <div className="relative">
       <button
         onClick={() =>
-          setShowOptions((prev) => (prev === comment.id ? "" : comment.id))
+          setActiveMenu((prev) => (prev === comment.id ? "" : comment.id))
         }
-        className={`cursor-pointer text-slate-300 h-fit hover:bg-white/5 mytransition hover:shadow butonShowCommentOptions rounded-full p-0.5
-          ${showOptions === comment.id && "bg-white/5"}`}
+        className={`cursor-pointer text-slate-300 h-fit hover:bg-white/5 mytransition hover:shadow buttonActiveMenu rounded-full p-0.5
+          ${activeMenu === comment.id && "bg-white/5"}`}
       >
         <Ellipsis className="size-4" strokeWidth={1.5} />
       </button>
-      {showOptions === comment.id && (
+      {activeMenu === comment.id && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="bgOptionsBox boxCommentOptions rounded-lg w-30"
+          className="bgOptionsBox boxMenu rounded-lg w-30"
         >
           <button
             onClick={() => {
-              setShowOptions("");
+              setActiveMenu("");
               setCurrentComment(comment);
             }}
             className="flex items-center gap-2 text-xs hover:bg-white mytransition cursor-pointer"
@@ -59,12 +56,10 @@ function CommentOptions({
             comment={comment}
             loading={publicLoading}
             setLoading={setPublicLoading}
-            setShowOptions={setShowOptions}
           />
           {comment.content && (
             <BtnCopyContentTxt
               content={comment.content}
-              setShowOptions={setShowOptions}
               loading={publicLoading}
               setLoading={setPublicLoading}
             />
@@ -74,7 +69,6 @@ function CommentOptions({
             loading={publicLoading}
             setLoading={setPublicLoading}
             commentId={comment.id}
-            setShowOptions={setShowOptions}
           />
         </motion.div>
       )}

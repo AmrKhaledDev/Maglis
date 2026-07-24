@@ -64,7 +64,6 @@ function EditPostBtnModal({
             if (!mediaItem.file) continue;
             const formData = new FormData();
             formData.append("file", mediaItem.file);
-            formData.append("pathname", "maglis-media");
             const res = await axios.post("/api/upload-media", formData);
             const result: { url: string; type: MediaType } = res.data;
             media.push({

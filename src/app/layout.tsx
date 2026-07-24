@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ToastProvider } from "@/providers/ToastProvider";
+import ActiveMenuProvider from "@/providers/ActiveMenuProvider";
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 // ========================================
 const cairo = Cairo({
@@ -35,9 +36,11 @@ export default function RootLayout({
       )}
     >
       <TooltipProvider>
-        <body className="min-h-full flex flex-col bg-[#09090B] text-white">
-          <ToastProvider> {children}</ToastProvider>
-        </body>
+        <ActiveMenuProvider>
+          <body className="min-h-full flex flex-col bg-[#19191d] text-white">
+            <ToastProvider> {children}</ToastProvider>
+          </body>
+        </ActiveMenuProvider>
       </TooltipProvider>
     </html>
   );

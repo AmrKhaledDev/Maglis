@@ -7,21 +7,19 @@ import PostOwnerOptions from "./PostOwnerOptions";
 import PostViewerOptions from "./PostViewerOptions";
 import OptionsSavePostBtn from "./OptionsSavePostBtn";
 import OptionsCopyLinkBtn from "./OptionsCopyLinkBtn";
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 // ===========================================================
 function PostOptions({
-  showOptions,
-  setShowOptions,
   post,
 }: {
-  showOptions: string;
-  setShowOptions: Dispatch<SetStateAction<string>>;
   post: PostDBType;
 }) {
+  const {activeMenu,setActiveMenu} = useActiveMenu()
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (e.target instanceof Element) {
-        if (!e.target.closest(".buttonOptions, .boxOptions, .button"))
-          setShowOptions("");
+        if (!e.target.closest(".buttonActiveMenu, .boxMenu, .button"))
+          setActiveMenu("");
       }
     };
     document.addEventListener("click", handle);
@@ -31,26 +29,26 @@ function PostOptions({
     <div className="absolute top-1 left-1 ">
       <button
         onClick={() =>
-          setShowOptions((prev) => (prev == post.id ? "" : post.id))
+          setActiveMenu((prev) => (prev == post.id ? "" : post.id))
         }
-        className={`cursor-pointer mytransition buttonOptions hover:shadow p-1 rounded-full hover:bg-white/5
-          ${showOptions === post.id && "bg-white/5"}
+        className={`cursor-pointer mytransition buttonActiveMenu hover:shadow p-1 rounded-full hover:bg-white/5
+          ${activeMenu === post.id && "bg-white/5"}
           `}
       >
         <Ellipsis className="size-5" />
       </button>
-      {showOptions === post.id && (
+      {activeMenu === post.id && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="bgOptionsBox boxOptions"
+          className="bgOptionsBox boxMenu"
         >
-          <PostOwnerOptions post={post} setShowOptions={setShowOptions} />
+          <PostOwnerOptions post={post}  />
           <PostViewerOptions post={post} />
           <hr className=" border-zinc-700 opacity-5" />
           <OptionsSavePostBtn post={post} />
-          <OptionsCopyLinkBtn setShowOptions={setShowOptions} post={post} />
+          <OptionsCopyLinkBtn  post={post} />
         </motion.div>
       )}
     </div>

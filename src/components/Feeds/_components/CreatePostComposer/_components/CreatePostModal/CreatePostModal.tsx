@@ -50,7 +50,6 @@ function CreatePostModal({
           for (const field of data.media) {
             const formData = new FormData();
             formData.append("file", field.file);
-            formData.append("pathname", "maglis-media");
             const { data: uploadResult } = await axios.post(
               `/api/upload-media`,
               formData,

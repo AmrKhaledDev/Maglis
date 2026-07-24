@@ -1,4 +1,5 @@
 import { DeleteCommentAction } from "@/actions/Comment/DeleteComment.action";
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { Trash2 } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
@@ -7,18 +8,17 @@ function BtnDeleteComment({
   commentId,
   loading,
   setLoading,
-  setShowOptions,
 }: {
   commentId: string;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  setShowOptions: Dispatch<SetStateAction<string>>;
 }) {
   const { setToast } = useToast();
+  const {setActiveMenu} = useActiveMenu()
   const handleDeleteComment = async () => {
     try {
       setLoading(true);
-      setShowOptions("");
+      setActiveMenu("");
       const result = await DeleteCommentAction(commentId);
       if (!result.success)
         return setToast({

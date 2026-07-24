@@ -3,25 +3,20 @@ import EditPostBtn from "./EditPostBtn";
 import CommentsDisabledBtn from "./CommentsDisabledBtn";
 import { useUser } from "@/providers/UserProvider";
 import DeletePostBtn from "./DeletePostBtn";
-import { Dispatch, SetStateAction } from "react";
 import PinnedToProfileBtn from "./PinnedToProfileBtn";
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 // =============================================================
-function PostOwnerOptions({
-  post,
-  setShowOptions,
-}: {
-  post: PostDBType;
-  setShowOptions: Dispatch<SetStateAction<string>>;
-}) {
+function PostOwnerOptions({ post }: { post: PostDBType }) {
+  const { setActiveMenu } = useActiveMenu();
   const user = useUser();
   return (
     <>
       {user.id === post.authorId && (
         <>
-          <EditPostBtn post={post}/>
+          <EditPostBtn post={post} />
           <PinnedToProfileBtn post={post} />
           <CommentsDisabledBtn post={post} />
-          <DeletePostBtn post={post} setShowOptions={setShowOptions} />
+          <DeletePostBtn post={post} />
         </>
       )}
     </>

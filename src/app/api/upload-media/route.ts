@@ -10,25 +10,13 @@ const allowedFileTypes = [
 ];
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024;
-const ALLOWED_PATHNAMES = ["maglis-media"];
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
     const file = formData.get("file");
-    const pathname = formData.get("pathname") as string;
     if (!file || !(file instanceof File))
       return NextResponse.json(
         { error: "برجاء رفع ملف صالح" },
-        { status: 400 },
-      );
-    if (!pathname)
-      return NextResponse.json(
-        { error: "حدث خطأ غير متوقع أثناء رفع الملفات الخاصة بك" },
-        { status: 500 },
-      );
-    if (!ALLOWED_PATHNAMES.includes(pathname))
-      return NextResponse.json(
-        { error: "حدث خطأ أثناء حفظ ملفاتك" },
         { status: 400 },
       );
     if (!allowedFileTypes.includes(file.type))
@@ -55,7 +43,7 @@ export async function POST(req: NextRequest) {
     const base64Data = Buffer.from(fileBuffer).toString("base64");
     const fileUri = `data:${file.type};base64,${base64Data}`;
     const uploader = await cloudinary.uploader.upload(fileUri, {
-      folder: pathname,
+      folder: "maglis-media",
       resource_type: "auto",
     });
     return NextResponse.json(

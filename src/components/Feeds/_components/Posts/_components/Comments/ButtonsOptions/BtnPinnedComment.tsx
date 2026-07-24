@@ -1,4 +1,5 @@
 import { PinnedCommentAction } from "@/actions/Comment/PinnedComment.action";
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { Comment } from "@prisma/client";
 import { Pin } from "lucide-react";
@@ -8,18 +9,17 @@ function BtnPinnedComment({
   comment,
   loading,
   setLoading,
-  setShowOptions,
 }: {
   comment: Comment;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  setShowOptions: Dispatch<SetStateAction<string>>;
 }) {
   const { setToast } = useToast();
+  const {setActiveMenu}  = useActiveMenu()
   const handlePinnedComment = async () => {
     try {
       setLoading(true);
-      setShowOptions("");
+      setActiveMenu("");
       const result = await PinnedCommentAction(comment.id);
       if (!result.success)
         return setToast({
