@@ -1,4 +1,4 @@
-import { Ellipsis, Pencil, Pin } from "lucide-react";
+import { Ellipsis, Pencil } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import BtnDeleteComment from "../ButtonsOptions/BtnDeleteComment";
@@ -15,15 +15,6 @@ function CommentOptions({
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
 }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
-  useEffect(() => {
-    const handle = (e: MouseEvent) => {
-      if (e.target instanceof Element) {
-        if (!e.target.closest(".buttonActiveMenu, .boxMenu")) setActiveMenu("");
-      }
-    };
-    document.addEventListener("click", handle);
-    return () => document.removeEventListener("click", handle);
-  }, []);
   const [publicLoading, setPublicLoading] = useState(false);
   return (
     <div className="relative">
@@ -31,7 +22,7 @@ function CommentOptions({
         onClick={() =>
           setActiveMenu((prev) => (prev === comment.id ? "" : comment.id))
         }
-        className={`cursor-pointer text-slate-300 h-fit hover:bg-white/5 mytransition hover:shadow buttonActiveMenu rounded-full p-0.5
+        className={`cursor-pointer text-slate-300 btnActiveMenu h-fit hover:bg-white/5 mytransition hover:shadow rounded-full p-0.5
           ${activeMenu === comment.id && "bg-white/5"}`}
       >
         <Ellipsis className="size-4" strokeWidth={1.5} />

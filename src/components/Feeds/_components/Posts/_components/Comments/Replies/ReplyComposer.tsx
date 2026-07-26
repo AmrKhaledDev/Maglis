@@ -1,142 +1,163 @@
 import Image from "next/image";
 import TextareaAutoResize from "react-textarea-autosize";
-import { ImageUp, SendHorizontal } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { useUser } from "@/providers/UserProvider";
 import { CreateReplyAction } from "@/actions/Reply/CreateReply.action";
-import { CommentDbType } from "../../../../../../../types/Comment.type";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import axios from "axios";
-// ======================================================================
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRepliesState } from "@/providers/RepliesStateProvider";
+import { motion } from "framer-motion";
+import { EditCommentAction } from "@/actions/Comment/EditComment.action";
+import ReplyComposerActions from "./ReplyComposerActions";
+import { X } from "lucide-react";
+// ===================================================================================
 function ReplyComposer({
   userOwnerCommentName,
-  showReplyComposer,
   parentId,
-  setShowReplyComposer,
-  handleAddReplyLocally,
+  setShowRepliesList,
 }: {
   userOwnerCommentName: string;
-  showReplyComposer: string;
   parentId: string;
-  setShowReplyComposer: Dispatch<SetStateAction<string>>;
-  handleAddReplyLocally: (newReply: CommentDbType) => void;
+  setShowRepliesList: Dispatch<SetStateAction<boolean>>;
 }) {
+  const {
+    showReplyComposer,
+    setShowReplyComposer,
+    currentReply,
+    setCurrentReply,
+  } = useRepliesState();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => {
-    if (textareaRef) {
-      textareaRef.current?.focus();
-    }
-  }, [showReplyComposer]);
   const user = useUser();
+  const queryClient = useQueryClient();
   const [content, setContent] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const handleCreateReply = async () => {
-    try {
-      setLoading(true);
+  useEffect(() => {
+    setContent(currentReply?.content || "");
+    setImagePreview(currentReply?.image || "");
+  }, [currentReply]);
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, [showReplyComposer]);
+
+  const { mutate: handleCreateReply, isPending: loading } = useMutation({
+    mutationFn: async () => {
       setError("");
-      if (!content.trim() && !imagePreview)
-        return setError("لا يمكنك إنشاء رد فارغ.");
+      if (!content.trim() && !imagePreview) {
+        throw new Error("لا يمكنك إنشاء رد فارغ.");
+      }
       let imageUrl: { url: string } | null = null;
       if (imageFile) {
         try {
           const formData = new FormData();
           formData.append("file", imageFile);
           const res = await axios.post("/api/upload-media", formData);
-          const result = res.data;
-          imageUrl = result;
-        } catch (error) {
-          console.error(error);
-          if (axios.isAxiosError(error))
-            return setError(
-              error.response?.data.error || "حدث خطأ أثناء رفع الصورة.",
+          imageUrl = res.data;
+        } catch (err) {
+          if (axios.isAxiosError(err)) {
+            throw new Error(
+              err.response?.data.error || "حدث خطأ أثناء رفع الصورة.",
             );
-          return;
+          }
+          throw new Error("حدث خطأ أثناء رفع الصورة.");
         }
       }
-      const result = await CreateReplyAction(parentId, content,imageUrl?.url);
-      if (!result.success || !result.newReply)
-        return setError("حدث خطأ أثناء إرسال الرد الخاص بك.");
-      handleAddReplyLocally(result.newReply);
+      const action = currentReply
+        ? EditCommentAction(
+            currentReply.id,
+            content,
+            imageUrl ? imageUrl.url : undefined,
+          )
+        : CreateReplyAction(parentId, content, imageUrl?.url);
+      const result = await action;
+      if (!result.success) {
+        throw new Error("حدث خطأ أثناء إرسال الرد الخاص بك.");
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["replies"],
+      });
       setContent("");
       setImageFile(null);
       setImagePreview("");
       setShowReplyComposer("");
-    } catch (error) {
-      console.error(error);
-      setError("حدث خطأ أثناء إرسال الرد الخاص بك.");
-    } finally {
-      setLoading(false);
-    }
-  };
+      if (!currentReply) setShowRepliesList(true);
+      setCurrentReply(null);
+    },
+    onError: (err: Error) => {
+      setError(err.message || "حدث خطأ أثناء إرسال الرد الخاص بك.");
+    },
+  });
   return (
-    <div>
-      {error && <AlertMessage message={error} type="error" />}
-      <div className="flex gap-1.5 w-full">
-        <Image
-          src={user.image || "/user.jpg"}
-          alt="صورتك"
-          width={50}
-          height={50}
-          className="size-6 rounded-full object-cover shrink-0"
-        />
-        <div className="border border-white/10 w-1/2 focus-within:border-white/20 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
-          <div>
-            <TextareaAutoResize
-              minRows={1}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              ref={textareaRef}
-              placeholder={`رد على ${userOwnerCommentName}`}
-              maxRows={3}
-              className="w-full outline-none p-2 text-xs resize-none cursor-pointer"
+    <>
+      {showReplyComposer === parentId && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {error && <AlertMessage message={error} type="error" />}
+          <div className="flex gap-1.5 w-full">
+            <Image
+              src={user.image || "/user.jpg"}
+              alt="صورتك"
+              width={50}
+              height={50}
+              className="size-6 rounded-full object-cover shrink-0"
             />
-          </div>
-          <div className="p-1.5 flex items-center gap-1 justify-end">
-            <button
-              onClick={handleCreateReply}
-              disabled={(!content.trim() && !imagePreview) || loading}
-              className="p-1 rounded-full not-disabled:hover:bg-blue-800 w-fit mytransition disabled:bg-gray-400 disabled:text-gray-600 not-disabled:cursor-pointer bg-blue-600"
-            >
-              <SendHorizontal className="size-3" />
-            </button>
-            <label
-              htmlFor="upload_image_to_reply"
-              className="text-gray-300 block cursor-pointer rounded-full hover:text-white mytransition"
-            >
-              <ImageUp strokeWidth={1.5} className="size-4" />
-            </label>
-            <input
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const url = URL.createObjectURL(file);
-                  setImagePreview(url);
-                  setImageFile(file);
-                  e.target.value = "";
-                }
-              }}
-              type="file"
-              id="upload_image_to_reply"
-              hidden
-              className="hidden"
-            />
-          </div>
-          {imagePreview && (
-            <div className="relative size-30 rounded overflow-hidden m-2">
-              <Image
-                src={imagePreview}
-                alt="صورة للرد"
-                fill
-                className="object-cover"
+            <div className="border border-white/10 w-1/2 focus-within:border-white/20 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
+              <div>
+                <TextareaAutoResize
+                  minRows={1}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  ref={textareaRef}
+                  placeholder={`رد على ${userOwnerCommentName}`}
+                  maxRows={3}
+                  className="w-full outline-none p-2 text-xs resize-none cursor-pointer"
+                />
+              </div>
+              <ReplyComposerActions
+                content={content}
+                currentReply={currentReply}
+                setCurrentReply={setCurrentReply}
+                handleCreateReply={handleCreateReply}
+                imagePreview={imagePreview}
+                setImageFile={setImageFile}
+                setImagePreview={setImagePreview}
+                loading={loading}
               />
+              {imagePreview && (
+                <div className="flex items-center gap-2">
+                  <div className="relative size-30 rounded overflow-hidden m-2">
+                    <Image
+                      src={imagePreview}
+                      alt="صورة للرد"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      setImagePreview("");
+                      setImageFile(null);
+                    }}
+                    className="text-gray-400 hover:text-white mytransition cursor-pointer"
+                  >
+                    <X className="size-4" />
+                  </button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
-    </div>
+          </div>
+        </motion.div>
+      )}
+    </>
   );
 }
 

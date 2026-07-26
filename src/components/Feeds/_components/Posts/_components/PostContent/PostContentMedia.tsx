@@ -24,7 +24,7 @@ function PostContentMedia({ post }: { post: PostDBType }) {
             })
           }
           key={item.id}
-          className={`w-full overflow-hidden bg-black rounded-lg relative ${post.medias.length > 1 ? "h-80" : "h-110"} `}
+          className={`w-full cursor-pointer overflow-hidden bg-black rounded-lg relative ${post.medias.length > 1 ? "h-80" : "h-110"} `}
         >
           {item.type == "IMAGE" && (
             <>

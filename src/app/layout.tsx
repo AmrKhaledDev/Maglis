@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ToastProvider } from "@/providers/ToastProvider";
 import ActiveMenuProvider from "@/providers/ActiveMenuProvider";
+import QueryProvider from "@/providers/QueryProvider";
+import { RepliesStateProvider } from "@/providers/RepliesStateProvider";
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 // ========================================
 const cairo = Cairo({
@@ -35,13 +37,17 @@ export default function RootLayout({
         figtree.variable,
       )}
     >
-      <TooltipProvider>
-        <ActiveMenuProvider>
-          <body className="min-h-full flex flex-col bg-[#19191d] text-white">
-            <ToastProvider> {children}</ToastProvider>
-          </body>
-        </ActiveMenuProvider>
-      </TooltipProvider>
+      <body className="min-h-full flex flex-col bg-[#19191d] text-white">
+        <RepliesStateProvider>
+          <ActiveMenuProvider>
+            <TooltipProvider>
+              <QueryProvider>
+                <ToastProvider> {children}</ToastProvider>
+              </QueryProvider>
+            </TooltipProvider>
+          </ActiveMenuProvider>
+        </RepliesStateProvider>
+      </body>
     </html>
   );
 }

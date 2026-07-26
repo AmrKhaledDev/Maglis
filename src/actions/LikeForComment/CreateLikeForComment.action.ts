@@ -6,7 +6,10 @@ import { revalidateTag } from "next/cache";
 // ========================================
 export const CreateLikeForComentAction = async (
   commentId: string,
-): Promise<{ success: boolean; message?: string }> => {
+): Promise<{
+  success: boolean;
+  message?: string;
+}> => {
   try {
     if (!commentId) return { success: false, message: "حدث خطأ غير متوقع." };
     const validatingSession = await validateSession();
@@ -16,23 +19,11 @@ export const CreateLikeForComentAction = async (
         message: validatingSession.message || "حدث خطأ أثناء التحقق من حسابك.",
       };
     const session = validatingSession.session;
-    const comment = await prisma.comment.findUnique({
-      where: {
-        id: commentId,
-      },
-      select: { id: true },
-    });
-    if (!comment)
-      return {
-        success: false,
-        message:
-          "تعذر العثور على هذا التعليق. قد يكون تم حذفه أو لم يعد متاحًا.",
-      };
     const existingLike = await prisma.likeForComment.findUnique({
       where: {
         userId_commentId: {
           userId: session.id,
-          commentId: comment.id,
+          commentId: commentId,
         },
       },
     });
@@ -41,20 +32,22 @@ export const CreateLikeForComentAction = async (
         where: {
           userId_commentId: {
             userId: session.id,
-            commentId: comment.id,
+            commentId: commentId,
           },
         },
       });
     } else {
       await prisma.likeForComment.create({
         data: {
-          commentId: comment.id,
+          commentId: commentId,
           userId: session.id,
         },
       });
     }
     revalidateTag("posts", "");
-    return { success: true };
+    return {
+      success: true,
+    };
   } catch (error) {
     console.error(error);
     return { success: false, message: "حدث خطأ غير متوقع." };

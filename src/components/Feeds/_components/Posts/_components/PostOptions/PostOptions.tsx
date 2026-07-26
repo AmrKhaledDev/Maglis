@@ -1,6 +1,5 @@
 "use client";
 import { Ellipsis } from "lucide-react";
-import { Dispatch, SetStateAction, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PostDBType } from "@/types/PostDB.type";
 import PostOwnerOptions from "./PostOwnerOptions";
@@ -15,23 +14,13 @@ function PostOptions({
   post: PostDBType;
 }) {
   const {activeMenu,setActiveMenu} = useActiveMenu()
-  useEffect(() => {
-    const handle = (e: MouseEvent) => {
-      if (e.target instanceof Element) {
-        if (!e.target.closest(".buttonActiveMenu, .boxMenu, .button"))
-          setActiveMenu("");
-      }
-    };
-    document.addEventListener("click", handle);
-    return () => document.removeEventListener("click", handle);
-  });
   return (
     <div className="absolute top-1 left-1 ">
       <button
         onClick={() =>
           setActiveMenu((prev) => (prev == post.id ? "" : post.id))
         }
-        className={`cursor-pointer mytransition buttonActiveMenu hover:shadow p-1 rounded-full hover:bg-white/5
+        className={`cursor-pointer mytransition btnActiveMenu hover:shadow p-1 rounded-full hover:bg-white/5
           ${activeMenu === post.id && "bg-white/5"}
           `}
       >

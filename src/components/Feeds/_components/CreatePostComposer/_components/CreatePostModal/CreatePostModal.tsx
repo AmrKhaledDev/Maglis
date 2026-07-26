@@ -1,7 +1,7 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
-import { CircleAlert, Globe, X } from "lucide-react";
+import { CircleAlert, Globe, Images, X } from "lucide-react";
 import { CreatePost_ModalFormType } from "../../_types/CreatePost_ModalForm.type";
 import axios from "axios";
 import { CreatePostAction } from "@/actions/Post/CreatePost.action";
@@ -136,6 +136,12 @@ function CreatePostModal({
           media={fields}
           remove={remove}
         />
+        {fields.length > 0 && (
+          <div className="text-gray-300 mt-4 flex flex-col items-center w-fit gap-0.5">
+            <Images className="size-4" strokeWidth={2} />
+            <p className="font-normal text-xs">{fields.length} / 4</p>
+          </div>
+        )}
         <CreatePostModalFooter
           content={content}
           fields={fields}

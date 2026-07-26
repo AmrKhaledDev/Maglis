@@ -7,7 +7,7 @@ import { revalidateTag } from "next/cache";
 export const EditCommentAction = async (
   commentId: string,
   content: string,
-  imageUrl: string,
+  imageUrl?: string,
 ): Promise<{
   success: boolean;
   message?: string;

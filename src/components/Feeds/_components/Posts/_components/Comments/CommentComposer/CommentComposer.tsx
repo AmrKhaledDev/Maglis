@@ -65,6 +65,7 @@ function CommentComposer({
       setContent("");
       setImageFile(null);
       setImagePreview("");
+      setCurrentComment(null)
     } catch (error) {
       console.error(error);
       setError(currentMessage);

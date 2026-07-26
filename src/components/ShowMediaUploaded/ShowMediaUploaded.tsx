@@ -38,7 +38,7 @@ function ShowMediaUploaded({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="relative w-250 h-180 bg-black rounded-2xl overflow-hidden mediaPreview"
+        className="relative w-250 h-150 bg-black rounded-xl overflow-hidden mediaPreview"
       >
         {showMedia.mediaType == "image" && (
           <>

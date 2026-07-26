@@ -32,6 +32,9 @@ function ReplyAuthor({
           <p dir="auto" className="text-[10px] text-slate-300">
             @{reply.user.username}
           </p>
+          {reply.isEdited && (
+            <p className="text-[10px] mr-2 text-gray-400">مُعدله</p>
+          )}
           {post.authorId == user.id && (
             <p className="mr-4 text-slate-300 text-[10px] bg-[#09090B]/20 py-px px-2 rounded ring ring-[#09090B]/25">
               الكاتب

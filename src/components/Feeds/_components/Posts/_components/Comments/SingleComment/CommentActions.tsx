@@ -4,14 +4,10 @@ import { useUser } from "@/providers/UserProvider";
 import { Heart, MessageCircleReply } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { CommentDbType } from "../../../../../../../types/Comment.type";
+import { useRepliesState } from "@/providers/RepliesStateProvider";
 // =======================================================
-function CommentActions({
-  comment,
-  setShowReplyComposer,
-}: {
-  comment: CommentDbType;
-  setShowReplyComposer: Dispatch<SetStateAction<string>>;
-}) {
+function CommentActions({ comment }: { comment: CommentDbType }) {
+  const { setShowReplyComposer } = useRepliesState();
   const user = useUser();
   const [loading, setLoading] = useState(false);
   const { setToast } = useToast();
@@ -54,7 +50,9 @@ function CommentActions({
       </button>
       <button
         onClick={() =>
-          setShowReplyComposer((prev) => (prev === comment.id ? "" : comment.id))
+          setShowReplyComposer((prev) =>
+            prev === comment.id ? "" : comment.id,
+          )
         }
         disabled={loading}
         className="not-disabled:cursor-pointer"

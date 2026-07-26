@@ -4,10 +4,8 @@ import CommentsDisabledBtn from "./CommentsDisabledBtn";
 import { useUser } from "@/providers/UserProvider";
 import DeletePostBtn from "./DeletePostBtn";
 import PinnedToProfileBtn from "./PinnedToProfileBtn";
-import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 // =============================================================
 function PostOwnerOptions({ post }: { post: PostDBType }) {
-  const { setActiveMenu } = useActiveMenu();
   const user = useUser();
   return (
     <>

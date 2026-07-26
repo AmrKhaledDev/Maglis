@@ -3,11 +3,11 @@ import { Loader2 } from "lucide-react";
 function ButtonShowReplies({
   repliesCount,
   loading,
-  handleFetchReplies,
+  handleShowReplies,
   showRepliesList
 }: {
   repliesCount: number;
-  handleFetchReplies: () => Promise<void>;
+  handleShowReplies: () => void;
   loading:boolean,
   showRepliesList:boolean
 }) {
@@ -15,7 +15,7 @@ function ButtonShowReplies({
     <>
       {repliesCount > 0 && (
         <button
-          onClick={handleFetchReplies}
+          onClick={handleShowReplies}
           disabled={loading}
           className="text-xs font-medium w-fit text-blue-400 hover:underline flex items-center gap-1 cursor-pointer my-1"
         >
