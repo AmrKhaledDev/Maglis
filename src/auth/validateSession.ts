@@ -19,7 +19,7 @@ const validateSession = async (): Promise<{
     if (session.isPermanentlyBanned)
       return {
         success: false,
-        message: "تم إيقاف حسابك بشكل دائم.",
+        message: "تم إيقاف حسابك بشكل دائم لا يمكنك التفاعل.",
       };
     if (session.banExpiresAt && session.banExpiresAt > new Date())
       return {

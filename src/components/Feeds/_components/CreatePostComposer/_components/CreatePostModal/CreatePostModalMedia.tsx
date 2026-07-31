@@ -2,8 +2,8 @@
 import { X } from "lucide-react";
 import Image from "next/image";
 import { UseFieldArrayRemove } from "react-hook-form";
-import ShowMediaUploaded from "../../../../../ShowMediaUploaded/ShowMediaUploaded";
 import { useState } from "react";
+import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
 // ========================================================
 function CreatePostModalMedia({
   media,
@@ -19,7 +19,7 @@ function CreatePostModalMedia({
     preview: "",
     open: false,
   });
-  const handleShowMediaUploaded = (
+  const handleMediaPreviewModal = (
     mediaType: "image" | "video",
     preview: string,
   ) => {
@@ -42,13 +42,13 @@ function CreatePostModalMedia({
                   fill
                   className="rounded object-cover cursor-pointer media"
                   onClick={() => {
-                    handleShowMediaUploaded("image", item.preview);
+                    handleMediaPreviewModal("image", item.preview);
                   }}
                 />
               ) : (
                 <video
                   onClick={() => {
-                    handleShowMediaUploaded("video", item.preview);
+                    handleMediaPreviewModal("video", item.preview);
                   }}
                   src={item.preview}
                   controls
@@ -68,7 +68,7 @@ function CreatePostModalMedia({
                 </button>
               )}
               {showMedia.open && showMedia.preview && (
-                <ShowMediaUploaded
+                <MediaPreviewModal
                   showMedia={showMedia}
                   setShowMedia={setShowMedia}
                 />

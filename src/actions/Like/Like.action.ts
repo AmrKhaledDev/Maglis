@@ -40,7 +40,7 @@ export const LikeAction = async (
         },
       });
     }
-    revalidateTag("posts", "");
+    revalidateTag("posts","");
     return { success: true };
   } catch (error) {
     console.error(error);

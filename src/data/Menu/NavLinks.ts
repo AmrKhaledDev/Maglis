@@ -22,7 +22,7 @@ export const navLinks = [
   {
     id: "profile",
     icon: User,
-    href: "",
+    href: "/u/profile",
     title: "الملف الشخصي",
   },
   {

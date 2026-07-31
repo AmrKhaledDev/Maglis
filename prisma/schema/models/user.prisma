@@ -1,0 +1,34 @@
+model User {
+  id                  String           @id @default(cuid())
+  name                String
+  email               String           @unique
+  password            String?
+  emailVerified       Boolean?
+  image               String?
+  accounts            Account[]
+  posts               Post[]
+  savedPosts          SavePost[]
+  cover               String?
+  bio                 String?
+  username            String?          @unique
+  gender              Gender?
+  isPermanentlyBanned Boolean          @default(false)
+  banExpiresAt        DateTime?
+  banReason           String?
+  lastSeenAt          DateTime         @default(now())
+  nickname            String?
+  postsCount          Int              @default(0)
+  followersCount      Int              @default(0)
+  followingCount      Int              @default(0)
+  role                Role             @default(USER)
+  professionalMode    Boolean          @default(false)
+  education           String?
+  jobTitle            String?
+  likes               Like[]
+  comments            Comment[]
+  likeForComments     LikeForComment[]
+  location            String?
+  socialLinks         SocialLink[]
+
+  @@map("users")
+}

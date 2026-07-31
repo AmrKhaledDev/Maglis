@@ -1,6 +1,6 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { CircleAlert, Globe, Images, X } from "lucide-react";
 import { CreatePost_ModalFormType } from "../../_types/CreatePost_ModalForm.type";
 import axios from "axios";
@@ -12,6 +12,7 @@ import CreatePostModalAuthor from "./CreatePostModalAuthor";
 import CreatePostModalCenter from "./CreatePostModalCenter";
 import CreatePostModalMedia from "./CreatePostModalMedia";
 import CreatePostModalFooter from "./CreatePostModalFooter";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 // ===========================================================
 function CreatePostModal({
   setIsOpen,
@@ -35,15 +36,16 @@ function CreatePostModal({
     control,
     name: "media",
   });
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const content = watch("content", "");
-  const handleCreatePost = async (data: CreatePost_ModalFormType) => {
-    try {
-      setLoading(true);
-      setError("");
+  const queryClient = useQueryClient();
+  const {
+    mutate,
+    isPending: loading,
+    error,
+  } = useMutation({
+    mutationFn: async (data: CreatePost_ModalFormType) => {
       if (!data.content.trim() && data.media.length < 1)
-        return setError("لا يمكنك إرسال منشور فارغ.");
+        throw new Error("لا يمكنك إرسال منشور فارغ.");
       let media: { url: string; type: "IMAGE" | "VIDEO" }[] = [];
       if (data.media.length > 0) {
         try {
@@ -58,13 +60,12 @@ function CreatePostModal({
           }
         } catch (error) {
           if (axios.isAxiosError(error)) {
-            setError(
+            throw new Error(
               error.response?.data.error ?? "حدث خطأ أثناء رفع الملفات.",
             );
-            return;
           }
           console.error(error);
-          setError("حدث خطأ أثناء إنشاء منشورك.");
+          throw new Error("حدث خطأ أثناء إنشاء منشورك.");
         }
       }
       const result = await CreatePostAction(
@@ -75,16 +76,25 @@ function CreatePostModal({
         media,
       );
       if (!result.success)
-        return setError(
+        throw new Error(
           result.message || "حدث خطأ غير متوقع أثناء إنشاء منشورك.",
         );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["user_posts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["user_postsPhotos"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["user_postsVideos"],
+      });
       setIsOpen(false);
-    } catch (error) {
-      console.log(error);
-      setError("حدث خطأ أثناء إنشاء منشورك حاول مرة أخرى");
-    } finally {
-      setLoading(false);
-    }
+    },
+  });
+  const handleCreatePost = (data: CreatePost_ModalFormType) => {
+    mutate(data);
   };
   return (
     <motion.div
@@ -120,7 +130,7 @@ function CreatePostModal({
         {error && (
           <p className="text-sm text-red-500 mb-2 bg-red-100 p-1 font-semibold flex items-center gap-2">
             <CircleAlert className="size-4" />
-            {error}
+            {error.message}
           </p>
         )}
         <CreatePostModalAuthor />

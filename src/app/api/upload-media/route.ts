@@ -53,7 +53,10 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "حدث خطأ أثناء رفع الملفات الخاصه بك" },
+      {
+        error:
+          "حدث خطأ أثناء رفع الملفات الخاصه بك برجاء التأكد من الإتصال بالإنترنت.",
+      },
       { status: 500 },
     );
   }

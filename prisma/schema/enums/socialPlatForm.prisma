@@ -1,0 +1,7 @@
+enum SocialPlatform {
+  GITHUB
+  FACEBOOK
+  INSTAGRAM
+  X
+  LINKEDIN
+}

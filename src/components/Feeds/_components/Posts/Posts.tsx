@@ -1,28 +1,19 @@
 "use client";
-import PostAuthor from "./_components/PostAuthor/PostAuthor";
-import PostContent from "./_components/PostContent/PostContent";
-import PostActions from "./_components/PostActions/PostActions";
-import PostOptions from "./_components/PostOptions/PostOptions";
 import { useState } from "react";
 import { PostDBType } from "@/types/PostDB.type";
-import Comments from "./_components/Comments/Comments";
+import PostCard from "@/components/PostCard/PostCard";
 // ===================================================================
 function Posts({ posts }: { posts: PostDBType[] }) {
-  const [showCommets, setShowComments] = useState("");
+  const [showComments, setShowComments] = useState("");
   return (
     <div className="w-full flex flex-col gap-3">
       {posts.map((post) => (
-        <div
+        <PostCard
           key={post.id}
-          className="p-3 bg-white/5 relative ring ring-gray-50/8 rounded-lg shadow"
-        >
-          <PostOptions post={post} />
-          <PostAuthor post={post} />
-          <PostContent post={post} />
-          <span className="w-full h-px rounded-full bg-white opacity-3 block my-2" />
-          <PostActions setShowComments={setShowComments} post={post} />
-          {showCommets == post.id && <Comments post={post} />}
-        </div>
+          post={post}
+          setShowComments={setShowComments}
+          showComments={showComments}
+        />
       ))}
     </div>
   );

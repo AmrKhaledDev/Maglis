@@ -19,6 +19,12 @@
 @utility bgOptionsBox{
   @apply p-2 shadow-2xl flex  flex-col gap-2 absolute bg-gray-300 text-slate-900 rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold
 }
+@utility  profileSectionStyle{
+  @apply flex flex-col gap-6
+}
+@utility profileSectionFieldsStyle{
+  @apply flex flex-col gap-4
+}
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

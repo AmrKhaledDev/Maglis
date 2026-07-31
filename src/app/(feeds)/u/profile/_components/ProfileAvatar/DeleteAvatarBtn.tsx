@@ -1,0 +1,53 @@
+import { DeleteUserImageAction } from "@/actions/User/DeleteUserImageAction";
+import { useUser } from "@/providers/UserProvider";
+import { Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useState } from "react";
+// ======================================
+function DeleteImageBtn({
+  setShowEditAvatarModal,
+  setError,
+  typeImage,
+}: {
+  setShowEditAvatarModal: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<string>>;
+  typeImage: "COVER" | "AVATAR";
+}) {
+  const user = useUser();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const handleDeleteAvatar = async () => {
+    try {
+      setError("");
+      setLoading(true);
+      const result = await DeleteUserImageAction(user.id, typeImage);
+      if (!result.success)
+        return setError(
+          result.message || "حدث خطأ أثناء حذف صورة الملف الشخصي.",
+        );
+      router.refresh();
+      setShowEditAvatarModal(false);
+    } catch (error) {
+      console.error(error);
+      setError("حدث خطأ أثناء حذف صورة الملف الشخصي.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  return (
+    <button
+      disabled={loading}
+      onClick={handleDeleteAvatar}
+      className="flex items-center not-disabled:hover:bg-slate-600/20 mytransition disabled:text-gray-500 p-3 text-[17px] text-red-300 not-disabled:cursor-pointer flex-col"
+    >
+      <Trash2 strokeWidth={1.5} />{" "}
+      {loading ? (
+        <div className="border border-gray-500 rounded-full size-4 animate-[spin_0.5s_linear_infinite] border-t-transparent mt-2" />
+      ) : (
+        "حذف"
+      )}
+    </button>
+  );
+}
+
+export default DeleteImageBtn;
