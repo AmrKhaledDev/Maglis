@@ -40,8 +40,8 @@ function PostAuthor({ post }: { post: PostDBType }) {
         <div className="flex items-center gap-1.5">
           {post.author.username && (
             <>
-              <p dir="auto" className="text-[11px] text-gray-400">
-                @{post.author.username}
+              <p className="text-[11px] text-gray-400">
+                {post.author.username}@
               </p>
               <span className="size-[3.5px] rounded-full bg-white block opacity-5 shrink-0" />
             </>

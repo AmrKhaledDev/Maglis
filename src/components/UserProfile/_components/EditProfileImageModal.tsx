@@ -87,14 +87,14 @@ function EditProfileImageModal({
             "w-full h-full flex items-center justify-center bg-gray-700",
             {
               "p-5": typeImage == "AVATAR",
-              "p-2": typeImage == "COVER",
+              "p-0": typeImage == "COVER",
             },
           )}
         >
           <div
             className={clsx("relative shrink-0 ", {
               "size-60": typeImage == "AVATAR",
-              "w-full h-110": typeImage == "COVER",
+              "w-full h-80": typeImage == "COVER",
             })}
           >
             <Image

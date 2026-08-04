@@ -28,7 +28,7 @@ function BasicInfoSection({
           label="إسم الشهرة"
           typeField="INPUT"
           register={register}
-          error={errors.name?.message}
+          error={errors.nickname?.message}
         />
         <ProfileFormField
           id="username"
@@ -36,7 +36,7 @@ function BasicInfoSection({
           label="إسم المستخدم"
           typeField="INPUT"
           register={register}
-          error={errors.name?.message}
+          error={errors.username?.message}
         />
         <ProfileFormField
           id="bio"

@@ -1,31 +1,39 @@
-import { FaInstagramSquare } from "react-icons/fa";
-import { FaFacebook, FaGithub, FaLinkedin, FaSquareXTwitter } from "react-icons/fa6";
+import { SOCIAL_PLATFORMS_MAP } from "@/data/UserProfile/SOCIAL_PLATFORMS_MAP";
+import { UserWithSocialLinkType } from "../_types/UserWithSocialLink.type";
+import clsx from "clsx";
+import Link from "next/link";
 // =====================================================================================
-function ProfileSocialLinks() {
+function ProfileSocialLinks({ user }: { user: UserWithSocialLinkType }) {
   return (
-    <div className="w-full flex flex-col gap-7">
+    <div
+      className={clsx(
+        "w-full flex flex-col",
+        user.socialLinks.length < 1 && "gap-3",
+        user.socialLinks.length > 0 && "gap-7",
+      )}
+    >
       <h2 className="font-bold text-xl text-gray-200">روابط التواصل</h2>
       <div className="grid grid-cols-5 gap-5 cursor-pointer">
-        <div className="p-3 hover:bg-white/30 hover:scale-102 mytransition flex flex-col gap-2 items-center ring-1 ring-gray-50/10 bg-white/10 rounded-2xl shadow">
-          <FaGithub className="text-xl" />
-          <p className="font-bold text-shadow-2xs">Github</p>
-        </div>
-        <div className="p-3 hover:bg-white/30 hover:scale-102 mytransition flex flex-col gap-2 items-center ring-1 ring-gray-50/10 bg-white/10 rounded-2xl shadow">
-          <FaFacebook className="text-xl" />
-          <p className="font-bold text-shadow-2xs">Facebook</p>
-        </div>
-        <div className="p-3 hover:bg-white/30 hover:scale-102 mytransition flex flex-col gap-2 items-center ring-1 ring-gray-50/10 bg-white/10 rounded-2xl shadow">
-          <FaSquareXTwitter className="text-xl" />
-          <p className="font-bold text-shadow-2xs">X</p>
-        </div>
-        <div className="p-3 hover:bg-white/30 hover:scale-102 mytransition flex flex-col gap-2 items-center ring-1 ring-gray-50/10 bg-white/10 rounded-2xl shadow">
-          <FaInstagramSquare className="text-xl" />
-          <p className="font-bold text-shadow-2xs">Instagram</p>
-        </div>
-        <div className="p-3 hover:bg-white/30 hover:scale-102 mytransition flex flex-col gap-2 items-center ring-1 ring-gray-50/10 bg-white/10 rounded-2xl shadow">
-          <FaLinkedin className="text-xl" />
-          <p className="font-bold text-shadow-2xs">Linkedin</p>
-        </div>
+        {user.socialLinks.length > 0 ? (
+          user.socialLinks.map((platform) => {
+            const PLATFORM = SOCIAL_PLATFORMS_MAP[platform.platform];
+            return (
+              <Link
+              target="_blank"
+                href={platform.link}
+                key={platform.id}
+                className="p-3 hover:bg-white/30 hover:scale-102 mytransition flex flex-col gap-2 items-center ring-1 ring-gray-50/15 bg-white/10 rounded-2xl shadow"
+              >
+                <PLATFORM.icon className="text-2xl" />
+                <p className="font-bold text-shadow-2xs">{PLATFORM.label}</p>
+              </Link>
+            );
+          })
+        ) : (
+          <p className="font-semibold text-sm text-gray-400">
+            لا يوجد روابط تواصل حالياً.
+          </p>
+        )}
       </div>
     </div>
   );

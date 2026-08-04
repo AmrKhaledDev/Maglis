@@ -31,7 +31,7 @@ async function UserProfile({ userId }: { userId: string }) {
               <ProfileAbout user={user} />
             </div>
           </div>
-          <ProfileSocialLinks />
+          <ProfileSocialLinks user={user} />
         </div>
         <ProfileContent userId={user.id} />
       </div>

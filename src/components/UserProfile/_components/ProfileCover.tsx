@@ -10,7 +10,7 @@ function ProfileCover({ user }: { user: User }) {
   const [showEditCoverModal, setShowEditCoverModal] = useState(false);
   const sessionUser = useUser();
   return (
-    <div className="bg-white/5 h-100 shadow relative">
+    <div className="bg-white/5 h-70 shadow relative">
       <Image
         src={user.cover || "/cover_default.jpg"}
         alt="cover"

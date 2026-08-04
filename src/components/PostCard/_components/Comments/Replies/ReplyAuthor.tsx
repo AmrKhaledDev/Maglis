@@ -28,9 +28,7 @@ function ReplyAuthor({
         <div className="flex items-center gap-1">
           <h2 className="text-[11px]">{reply.user.name}</h2>
           <span className="size-0.5 rounded-full block bg-white opacity-25" />
-          <p dir="auto" className="text-[10px] text-slate-300">
-            @{reply.user.username}
-          </p>
+          <p className="text-[10px] text-slate-300">{reply.user.username}@</p>
           {reply.isEdited && (
             <p className="text-[10px] mr-2 text-gray-400">مُعدله</p>
           )}

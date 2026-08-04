@@ -38,9 +38,7 @@ function CommentAuthor({
           {user.username && (
             <>
               <span className="size-[2.5px] rounded-full block bg-white opacity-25" />
-              <h4 dir="auto" className="text-xs text-slate-300">
-                @{user.username}
-              </h4>
+              <h4 className="text-xs text-slate-300">{user.username}@</h4>
             </>
           )}
           {comment.isEdited && (

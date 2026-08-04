@@ -146,11 +146,12 @@ function ReplyComposer({
                     />
                   </div>
                   <button
+                    disabled={loading}
                     onClick={() => {
                       setImagePreview("");
                       setImageFile(null);
                     }}
-                    className="text-gray-400 hover:text-white mytransition cursor-pointer"
+                    className="text-gray-400 disabled:hidden hover:text-white mytransition cursor-pointer"
                   >
                     <X className="size-4" />
                   </button>

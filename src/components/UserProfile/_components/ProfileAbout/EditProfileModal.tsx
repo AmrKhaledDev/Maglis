@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import EditProfileHeader from "./EditProfileHeader";
 import BasicInfoSection from "./Sections/BasicInfoSection";
 import CareerInfoSection from "./Sections/CareerInfoSection";
@@ -11,6 +11,9 @@ import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
 import { FormHookValues } from "../../_types/FormHookValues.type";
 import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
 import { SOCIAL_PLATFORMS } from "@/data/Profile/socialPlatforms";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { EditUserProfileAction } from "@/actions/User/EditUserProfile.action";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
 // =================================================================================
 function EditProfileModal({
   setShowEditProfileModal,
@@ -51,7 +54,29 @@ function EditProfileModal({
     },
   });
   const professionalMode = watch("professionalMode");
-  const onSubmit = (data: FormHookValues) => console.log(data);
+  const queryClient = useQueryClient();
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: async (data: FormHookValues) => {
+      const result = await EditUserProfileAction(user.id, data);
+      if (!result.success) throw new Error(result.message);
+    },
+    onSuccess: () => {
+      setShowEditProfileModal(false);
+      queryClient.invalidateQueries({
+        queryKey: ["user_posts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["user_savedPosts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["user_postsPhotos"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["user_postsVideos"],
+      });
+    },
+  });
+  const onSubmit = (data: FormHookValues) => mutate(data);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -78,8 +103,12 @@ function EditProfileModal({
             <PersonalInformationSection control={control} setValue={setValue} />
             <SocialConnectionsSection register={register} errors={errors} />
           </div>
-          <button className="py-3 px-10 rounded-full text-sm w-fit hover:outline-2 outline-slate-950 outline-offset-2 active:scale-95 mytransition shadow bg-slate-950 font-semibold cursor-pointer">
-            تعديل الملف الشخصي
+          {error && <AlertMessage type="error" message={error.message} />}
+          <button
+            disabled={isPending}
+            className="py-3 px-10 rounded-full text-sm w-fit not-disabled:hover:outline-2 outline-slate-950 outline-offset-2 not-disabled:active:scale-95 mytransition shadow disabled:bg-gray-600 bg-slate-950 font-semibold not-disabled:cursor-pointer"
+          >
+            {isPending ? "برجاء الإنتظار..." : "تعديل الملف الشخصي"}
           </button>
         </div>
       </form>

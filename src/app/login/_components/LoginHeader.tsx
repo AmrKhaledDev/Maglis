@@ -19,7 +19,7 @@ function LoginHeader() {
           href={"/"}
           className=" group hover:bg-[#a08b5f] mytransition bg-[#c5ab77]  flex items-center gap-2 py-2 px-6 font-semibold text-sm rounded-full shadow-[0_0_25px_rgba(197,171,119,0.5)] hover:shadow-none"
         >
-          <CircleUserRound className="size-5 group-hover:-translate-y-px mytransition" />{" "}
+          <CircleUserRound className="size-5 group-hover:-translate-y-px mytransition" />
           إنشاء حساب
         </Link>
       </div>

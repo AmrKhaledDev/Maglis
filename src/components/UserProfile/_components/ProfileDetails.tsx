@@ -30,7 +30,7 @@ function ProfileDetails({ user }: { user: User }) {
       {user.username && (
         <h4 className="text-sm text-gray-300 w-fit">{user.username}@</h4>
       )}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mt-5">
         <p className="text-[13px] text-gray-200 flex items-center gap-1.5">
           <FaUsers className="text-[17px] text-gray-300" />
           {user.followersCount} متابعين
@@ -41,7 +41,7 @@ function ProfileDetails({ user }: { user: User }) {
         </p>
       </div>
       {user.id !== sessionUser.id && (
-        <div className="mt-6 flex items-center gap-1.5">
+        <div className="mt-5 flex items-center gap-1.5">
           <button className="flex text-xs items-center hover:outline hover:outline-blue-600 outline-offset-2 gap-2 cursor-pointer text-gray-200 font-semibold bg-blue-800 shadow py-1.5 px-3 rounded-full">
             <UserRoundPlus className="size-4" /> طلب صداقة
           </button>
