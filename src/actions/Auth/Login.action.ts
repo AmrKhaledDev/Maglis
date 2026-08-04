@@ -4,7 +4,7 @@ import { signIn } from "@/lib/auth";
 import { registerSendVerificationToken } from "@/lib/email/registerSendVerificationToken";
 import { generateVerificationToken } from "@/lib/generateVerificationToken";
 import { prisma } from "@/lib/prisma";
-import { LoginSchema } from "@/schemas/Auth/Login.schema";
+import { LoginSchema } from "@/ZodSchemas/Auth/Login.schema";
 import bcrypt from "bcryptjs";
 import z from "zod";
 // =========================================================

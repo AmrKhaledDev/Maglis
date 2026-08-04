@@ -1,4 +1,4 @@
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import PostContentMedia from "./PostContentMedia";
 import PostContentText from "./PostContentText";
 // ====================================================

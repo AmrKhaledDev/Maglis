@@ -2,7 +2,7 @@ import CommentAuthor from "./CommentAuthor";
 import CommentIsPinned from "./CommentIsPinned";
 import { CommentDbType } from "@/types/Comment.type";
 import CommentOptions from "./CommentOptions";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { Dispatch, SetStateAction } from "react";
 import { Comment } from "@prisma/client";
 import CommentContent from "./CommentContent";

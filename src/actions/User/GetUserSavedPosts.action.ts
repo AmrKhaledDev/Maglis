@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { SavePostDBType } from "@/types/SavePostDB.type";
+import { SavePostDBType } from "@/types/SavePost.type";
 // ==========================================
 export const GetUserSavedPostsAction = async (
   userId: string,

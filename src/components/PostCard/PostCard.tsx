@@ -4,7 +4,7 @@ import PostAuthor from "./_components/PostAuthor/PostAuthor";
 import PostContent from "./_components/PostContent/PostContent";
 import PostActions from "./_components/PostActions/PostActions";
 import Comments from "./_components/Comments/Comments";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { Dispatch, SetStateAction } from "react";
 // ========================================================
 function PostCard({

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import PostCard from "@/components/PostCard/PostCard";
 // ===================================================================
 function Posts({ posts }: { posts: PostDBType[] }) {

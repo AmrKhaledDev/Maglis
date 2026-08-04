@@ -5,7 +5,6 @@ import { useState } from "react";
 // ==================================
 function CommentContent({ comment }: { comment: Comment }) {
   const [showMedia, setShowMedia] = useState({
-    mediaType: "",
     preview: "",
     open: false,
   });
@@ -20,7 +19,6 @@ function CommentContent({ comment }: { comment: Comment }) {
             onClick={() =>
               setShowMedia({
                 open: true,
-                mediaType: "image",
                 preview: comment.image as string,
               })
             }

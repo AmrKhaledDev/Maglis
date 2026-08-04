@@ -1,4 +1,4 @@
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { Dispatch, SetStateAction } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { EditPostModalFormType } from "../../_types/EditPostModalForm.type";

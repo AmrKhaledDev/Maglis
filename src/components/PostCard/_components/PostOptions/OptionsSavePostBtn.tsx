@@ -1,7 +1,7 @@
 import { SavePostAction } from "@/actions/SavePost/SavePost.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Save } from "lucide-react";
 import { useRouter } from "next/navigation";

@@ -1,4 +1,4 @@
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import ReactPlayer from "react-player";
 import Image from "next/image";
 import { useState } from "react";
@@ -8,7 +8,6 @@ function PostContentMedia({ post }: { post: PostDBType }) {
   const [showMedia, setShowMedia] = useState({
     open: false,
     preview: "",
-    mediaType: "",
   });
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   return (
@@ -21,7 +20,6 @@ function PostContentMedia({ post }: { post: PostDBType }) {
             setShowMedia({
               open: true,
               preview: item.url,
-              mediaType: item.type == "IMAGE" ? "image" : "video",
             })
           }
           key={item.id}
@@ -55,14 +53,9 @@ function PostContentMedia({ post }: { post: PostDBType }) {
           )}
         </button>
       ))}
-      {showMedia.open &&
-        showMedia.preview &&
-        showMedia.mediaType == "image" && (
-          <MediaPreviewModal
-            setShowMedia={setShowMedia}
-            showMedia={showMedia}
-          />
-        )}
+      {showMedia.open && showMedia.preview && (
+        <MediaPreviewModal setShowMedia={setShowMedia} showMedia={showMedia} />
+      )}
     </div>
   );
 }

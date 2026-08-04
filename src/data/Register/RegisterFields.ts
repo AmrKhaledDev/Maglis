@@ -1,4 +1,4 @@
-import { RegisterSchema } from "@/schemas/Auth/Register.schema";
+import { RegisterSchema } from "@/ZodSchemas/Auth/Register.schema";
 import { FieldErrors } from "react-hook-form";
 import z from "zod";
 // ===================================================================

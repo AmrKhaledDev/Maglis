@@ -5,7 +5,7 @@ import CommentUploadImage from "./CommentUploadImage";
 import CommentImageUploadedPreview from "./CommentImageUploadedPreview";
 import axios from "axios";
 import { CreateCommentAction } from "@/actions/Comment/CreateComment.action";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { Comment } from "@prisma/client";
 import { EditCommentAction } from "@/actions/Comment/EditComment.action";

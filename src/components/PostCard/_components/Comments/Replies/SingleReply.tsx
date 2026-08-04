@@ -2,7 +2,7 @@ import Image from "next/image";
 import ReplyActions from "./ReplyActions";
 import Replies from "./Replies";
 import { CommentDbType } from "../../../../../types/Comment.type";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import ReplyHeader from "./ReplyHeader";
 import ReplyAuthor from "./ReplyAuthor";
 import { useState } from "react";
@@ -20,7 +20,6 @@ function SingleReply({
   const [showMedia, setShowMedia] = useState({
     open: false,
     preview: "",
-    mediaType: "image",
   });
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -35,7 +34,6 @@ function SingleReply({
                 setShowMedia({
                   open: true,
                   preview: reply.image as string,
-                  mediaType: "image",
                 })
               }
               className="relative size-25 cursor-pointer rounded-md overflow-hidden group"

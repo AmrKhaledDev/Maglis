@@ -1,5 +1,5 @@
 import CommentComposer from "./CommentComposer/CommentComposer";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { useState } from "react";
 import { Comment } from "@prisma/client";
 import "dayjs/locale/ar";

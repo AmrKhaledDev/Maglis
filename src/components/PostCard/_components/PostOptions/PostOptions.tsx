@@ -1,7 +1,7 @@
 "use client";
 import { Ellipsis } from "lucide-react";
 import { motion } from "framer-motion";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import PostOwnerOptions from "./PostOwnerOptions";
 import PostViewerOptions from "./PostViewerOptions";
 import OptionsSavePostBtn from "./OptionsSavePostBtn";

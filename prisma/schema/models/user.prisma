@@ -27,7 +27,7 @@ model User {
   likes               Like[]
   comments            Comment[]
   likeForComments     LikeForComment[]
-  location            String?
+  city                String?
   socialLinks         SocialLink[]
 
   @@map("users")

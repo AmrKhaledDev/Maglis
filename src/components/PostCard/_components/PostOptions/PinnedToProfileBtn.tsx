@@ -1,6 +1,6 @@
 import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.action";
 import { useToast } from "@/providers/ToastProvider";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Pin } from "lucide-react";
 import { useRouter } from "next/navigation";

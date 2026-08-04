@@ -1,4 +1,4 @@
-import { LoginSchema } from "@/schemas/Auth/Login.schema";
+import { LoginSchema } from "@/ZodSchemas/Auth/Login.schema";
 import { Dispatch, SetStateAction } from "react";
 import { FieldErrors } from "react-hook-form";
 import z from "zod";

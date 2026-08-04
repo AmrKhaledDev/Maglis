@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GetCommentRepliesAction } from "@/actions/Reply/GetCommentReplies.action";
 import SingleReply from "./SingleReply";
 import { CommentDbType } from "../../../../../types/Comment.type";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import ButtonShowReplies from "./ButtonShowReplies";
 import { useQuery } from "@tanstack/react-query";
 // ============================================================

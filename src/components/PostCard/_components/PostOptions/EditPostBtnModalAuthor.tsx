@@ -1,6 +1,6 @@
 "use client"
 import { PrivacyType } from "@/types/Privacy.type";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import Image from "next/image";
 import { UseFormSetValue } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";

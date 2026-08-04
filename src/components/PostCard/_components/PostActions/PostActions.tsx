@@ -1,7 +1,7 @@
 "use client"
 import { MessageCircle } from "lucide-react";
 import SavePostBtn from "./SavePostBtn";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import LikeBtn from "./LikeBtn";
 import { formatLikes } from "@/formats/formatLikes";
 import { formatComments } from "@/formats/formatComments";

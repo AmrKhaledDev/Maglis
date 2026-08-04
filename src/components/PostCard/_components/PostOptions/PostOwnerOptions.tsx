@@ -1,4 +1,4 @@
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import EditPostBtn from "./EditPostBtn";
 import CommentsDisabledBtn from "./CommentsDisabledBtn";
 import { useUser } from "@/providers/UserProvider";

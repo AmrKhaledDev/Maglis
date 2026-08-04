@@ -11,13 +11,11 @@ function MediaPreviewModal({
 }: {
   setShowMedia: Dispatch<
     SetStateAction<{
-      mediaType: string;
       preview: string;
       open: boolean;
     }>
   >;
   showMedia: {
-    mediaType: string;
     preview: string;
     open: boolean;
   };
@@ -25,8 +23,8 @@ function MediaPreviewModal({
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (e.target instanceof Element) {
-        if (!e.target.closest(".media, .mediaPreview"))
-          setShowMedia((prev) => ({ ...prev, open: false }));
+        if (!e.target.closest(".mediaPreview"))
+          setShowMedia((prev) => ({ open: false, preview: "" }));
       }
     };
     document.addEventListener("click", handle);
@@ -40,25 +38,18 @@ function MediaPreviewModal({
         transition={{ duration: 0.3 }}
         className="relative w-250 h-150 bg-black rounded-xl overflow-hidden mediaPreview"
       >
-        {showMedia.mediaType == "image" && (
-          <>
-            <Image
-              src={showMedia.preview}
-              alt="صورة المنشور"
-              fill
-              className="object-contain z-20 rounded-xl"
-            />
-            <Image
-              src={showMedia.preview}
-              alt="صورة المنشور"
-              fill
-              className="object-cover blur opacity-20"
-            />
-          </>
-        )}
-        {showMedia.mediaType == "video" && (
-          <video src={showMedia.preview} className="w-full h-full" controls />
-        )}
+        <Image
+          src={showMedia.preview || "/user.jpg"}
+          alt="صورة المنشور"
+          fill
+          className="object-contain z-20 rounded-xl"
+        />
+        <Image
+          src={showMedia.preview || "/user.jpg"}
+          alt="صورة المنشور"
+          fill
+          className="object-cover blur opacity-20"
+        />
       </motion.div>
     </div>,
     document.body,

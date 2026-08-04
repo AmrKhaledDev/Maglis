@@ -1,4 +1,4 @@
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { useState } from "react";
 import { Pencil } from "lucide-react";
 import EditPostBtnModal from "./EditPostBtnModal";

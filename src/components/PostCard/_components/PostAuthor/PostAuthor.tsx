@@ -4,7 +4,7 @@ import Link from "next/link";
 import relativeTime from "dayjs/plugin/relativeTime";
 import local from "dayjs/locale/ar";
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import PostAuthorActions from "./PostAuthorAction";
 import PostPrivacy from "../../../PostPrivacy/PostPrivacy";
 // =========================================
@@ -13,7 +13,7 @@ dayjs.locale(local);
 function PostAuthor({ post }: { post: PostDBType }) {
   const session = useUser();
   const url =
-    session.id === post.authorId ? `/u/profile` : `/u/profile/${post.authorId}`;
+    session.id === post.authorId ? `/u/profile` : `/u/${post.authorId}`;
   return (
     <div className="flex gap-2 items-center">
       <Image

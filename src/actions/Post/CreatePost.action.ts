@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { CreatePostSchema } from "@/schemas/Post/CreatePost.schema";
+import { CreatePostSchema } from "@/ZodSchemas/Post/CreatePost.schema";
 import { MediaType, Privacy } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 import validateSession from "@/auth/validateSession";

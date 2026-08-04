@@ -3,7 +3,7 @@ import AuthFormFiled from "@/components/AuthFormFiled/AuthFormFiled";
 import { useState } from "react";
 import { Path, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/schemas/Auth/Login.schema";
+import { LoginSchema } from "@/ZodSchemas/Auth/Login.schema";
 import { LoginFields } from "@/data/Login/LoginFields";
 import { LoginAction } from "@/actions/Auth/Login.action";
 import { useRouter } from "next/navigation";

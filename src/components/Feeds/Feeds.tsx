@@ -2,7 +2,7 @@ import { getPosts } from "@/cached-queries/getPosts";
 import CreatePostComposer from "./_components/CreatePostComposer/CreatePostComposer";
 import Posts from "./_components/Posts/Posts";
 import Stories from "./_components/Stories/Stories";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 // =================================================
 async function Feeds() {
   const posts: PostDBType[] = await getPosts();

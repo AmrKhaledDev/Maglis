@@ -1,4 +1,4 @@
-import { ActiveTab } from "@/app/(feeds)/u/profile/_types/ActiveTab.type";
+import { ActiveTab } from "@/components/UserProfile/_types/ActiveTab.type";
 // ==========================================================================
 type TabButton = {
   label: string;

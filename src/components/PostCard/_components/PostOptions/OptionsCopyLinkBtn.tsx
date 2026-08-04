@@ -1,6 +1,6 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { Link2 } from "lucide-react";
 import { useState } from "react";
 // ====================================================

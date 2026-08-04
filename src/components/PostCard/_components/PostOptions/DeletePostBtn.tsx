@@ -1,7 +1,7 @@
 import { DeletePostAction } from "@/actions/Post/DeletePost.action";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -24,6 +24,15 @@ function DeletePostBtn({ post }: { post: PostDBType }) {
       router.refresh();
       queryCLient.invalidateQueries({
         queryKey: ["user_posts"],
+      });
+      queryCLient.invalidateQueries({
+        queryKey: ["user_postsVideos"],
+      });
+      queryCLient.invalidateQueries({
+        queryKey: ["user_postsPhotos"],
+      });
+      queryCLient.invalidateQueries({
+        queryKey: ["user_savedPosts"],
       });
     },
     onError: (error: Error) => {

@@ -1,5 +1,5 @@
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/PostDB.type";
+import { PostDBType } from "@/types/Post.type";
 import { Ban, BellOff, EyeOff, UserPlus, UserRound } from "lucide-react";
 // ========================================================
 function PostViewerOptions({ post }: { post: PostDBType }) {
@@ -18,10 +18,10 @@ function PostViewerOptions({ post }: { post: PostDBType }) {
             <BellOff className="postBtnActIcon" /> كتم المنشورات
           </button>
           <button className="postBtnAct">
-            <Ban className="postBtnActIcon" /> حظر
-          </button>
-          <button className="postBtnAct">
             <UserPlus className="postBtnActIcon" /> متابعة
+          </button>
+          <button className="postBtnAct text-red-600">
+            <Ban className="postBtnActIcon" /> حظر
           </button>
         </>
       )}

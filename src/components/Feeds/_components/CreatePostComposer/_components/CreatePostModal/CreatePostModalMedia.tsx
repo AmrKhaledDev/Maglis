@@ -15,20 +15,9 @@ function CreatePostModalMedia({
   disabled: boolean;
 }) {
   const [showMedia, setShowMedia] = useState({
-    mediaType: "",
     preview: "",
     open: false,
   });
-  const handleMediaPreviewModal = (
-    mediaType: "image" | "video",
-    preview: string,
-  ) => {
-    setShowMedia({
-      mediaType: mediaType,
-      preview,
-      open: true,
-    });
-  };
   return (
     <>
       {media.length > 0 && (
@@ -41,32 +30,28 @@ function CreatePostModalMedia({
                   alt="صورة للمنشور"
                   fill
                   className="rounded object-cover cursor-pointer media"
-                  onClick={() => {
-                    handleMediaPreviewModal("image", item.preview);
-                  }}
+                  onClick={() =>
+                    setShowMedia({ preview: item.preview, open: true })
+                  }
                 />
               ) : (
                 <video
-                  onClick={() => {
-                    handleMediaPreviewModal("video", item.preview);
-                  }}
                   src={item.preview}
                   controls
                   className="size-20 cursor-pointer media"
                 />
               )}
-              {!disabled && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    URL.revokeObjectURL(item.preview);
-                    remove(i);
-                  }}
-                  className="absolute top-1 left-1"
-                >
-                  <X className="size-4 cursor-pointer text-white" />
-                </button>
-              )}
+              <button
+                disabled={disabled}
+                type="button"
+                onClick={() => {
+                  URL.revokeObjectURL(item.preview);
+                  remove(i);
+                }}
+                className="absolute top-1 left-1 disabled:hdden"
+              >
+                <X className="size-4 cursor-pointer text-white" />
+              </button>
               {showMedia.open && showMedia.preview && (
                 <MediaPreviewModal
                   showMedia={showMedia}
