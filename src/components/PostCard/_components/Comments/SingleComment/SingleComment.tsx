@@ -22,7 +22,7 @@ function SingleComment({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-white/10 p-3 rounded-xl shadow w-full flex flex-col gap-3">
+      <div className="bg-white/7 p-3 rounded-xl ring ring-gray-50/13 shadow w-full flex flex-col gap-3">
         <CommentIsPinned comment={comment} />
         <div className="flex justify-between">
           <CommentAuthor comment={comment} user={comment.user} post={post} />

@@ -26,7 +26,7 @@ function UserVideos({ userId }: { userId: string }) {
   return (
     <div className="w-full justify-center flex">
       {media && media.length > 0 ? (
-        <div className="grid grid-cols-3 gap-2 w-full">
+        <div className="grid grid-cols-2 gap-4 w-full">
           {media.map((video) => (
             <button
               key={video.id}

@@ -2,6 +2,7 @@ import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.acti
 import { useToast } from "@/providers/ToastProvider";
 import { PostDBType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { MessageSquareOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =================================================
@@ -35,7 +36,7 @@ function CommentsDisabledBtn({ post }: { post: PostDBType }) {
     <button
       disabled={loading}
       onClick={() => handleCommentsDisabled()}
-      className={`postBtnAct ${post.commentsDisabled && "text-red-500"}`}
+      className={clsx("postBtnAct", post.commentsDisabled && "text-red-500")}
     >
       <MessageSquareOff className="postBtnActIcon" />
       {post.commentsDisabled ? "السماح بالتعليقات" : "إيقاف التعليقات"}

@@ -2,7 +2,7 @@
 import { Ellipsis } from "lucide-react";
 import { motion } from "framer-motion";
 import { PostDBType } from "@/types/Post.type";
-import PostOwnerOptions from "./PostOwnerOptions";
+import PostOwnerOptions from "./PostOwnerOptions/PostOwnerOptions";
 import PostViewerOptions from "./PostViewerOptions";
 import OptionsSavePostBtn from "./OptionsSavePostBtn";
 import OptionsCopyLinkBtn from "./OptionsCopyLinkBtn";

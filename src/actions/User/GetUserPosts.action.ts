@@ -66,9 +66,14 @@ export const GetUserPostsAction = async (
           },
         },
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: [
+        {
+          isPinnedToProfile: "desc",
+        },
+        {
+          createdAt: "desc",
+        },
+      ],
     });
     return { success: true, posts };
   } catch (error) {

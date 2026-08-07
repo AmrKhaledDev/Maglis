@@ -1,8 +1,8 @@
 import { UseFormRegister } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
-import { EditPostModalFormType } from "../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
 // =======================================================
-function EditPostBtnModalContent({
+function EditPostModalContent({
   register,
   content,
 }: {
@@ -30,4 +30,4 @@ function EditPostBtnModalContent({
   );
 }
 
-export default EditPostBtnModalContent;
+export default EditPostModalContent;

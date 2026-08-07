@@ -11,9 +11,9 @@ import PostPrivacy from "../../../PostPrivacy/PostPrivacy";
 dayjs.extend(relativeTime);
 dayjs.locale(local);
 function PostAuthor({ post }: { post: PostDBType }) {
-  const session = useUser();
+  const userSession = useUser();
   const url =
-    session.id === post.authorId ? `/u/profile` : `/u/${post.authorId}`;
+    userSession.id === post.authorId ? `/u/profile` : `/u/${post.authorId}`;
   return (
     <div className="flex gap-2 items-center">
       <Image

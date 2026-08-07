@@ -1,7 +1,7 @@
 import { PostDBType } from "@/types/Post.type";
 import { useState } from "react";
 import { Pencil } from "lucide-react";
-import EditPostBtnModal from "./EditPostBtnModal";
+import EditPostModal from "../EditPostModal/EditPostModal";
 // ================================================================
 function EditPostBtn({ post }: { post: PostDBType }) {
   const [modal, setModal] = useState(false);
@@ -15,7 +15,7 @@ function EditPostBtn({ post }: { post: PostDBType }) {
       >
         <Pencil className="postBtnActIcon" /> تعديل
       </button>
-      {modal && <EditPostBtnModal post={post} setModal={setModal} />}
+      {modal && <EditPostModal post={post} setModal={setModal} />}
     </div>
   );
 }

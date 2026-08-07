@@ -48,7 +48,7 @@ function MediaPreviewModal({
           src={showMedia.preview || "/user.jpg"}
           alt="صورة المنشور"
           fill
-          className="object-cover blur opacity-20"
+          className="object-top blur opacity-30"
         />
       </motion.div>
     </div>,

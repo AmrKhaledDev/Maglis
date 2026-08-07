@@ -1,7 +1,7 @@
 import { PostDBType } from "@/types/Post.type";
 import { Dispatch, SetStateAction } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { EditPostModalFormType } from "../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
 import { PrivacyType } from "@/types/Privacy.type";
 import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
 import { CircleAlert, Globe } from "lucide-react";
@@ -9,14 +9,14 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { MediaType, Privacy } from "@prisma/client";
 import { EditPostAction } from "@/actions/Post/EditPost.action";
-import EditPostBtnModalMedia from "./EditPostBtnModalMedia";
-import EditPostBtnModalFooter from "./EditPostBtnModalFooter";
-import EditPostBtnModalContent from "./EditPostBtnModalContent";
-import EditPostBtnModalHeader from "./EditPostBtnModalHeader";
-import EditPostBtnModalAuthor from "./EditPostBtnModalAuthor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import EditPostModalAuthor from "./EditPostModalAuthor";
+import EditPostModalHeader from "./EditPostModalHeader";
+import EditPostModalContent from "./EditPostModalContent";
+import EditPostModalFooter from "./EditPostModalFooter";
+import EditPostModalMedia from "./EditPostModalMedia";
 // ==========================================================================================================
-function EditPostBtnModal({
+function EditPostModal({
   post,
   setModal,
 }: {
@@ -109,7 +109,7 @@ function EditPostBtnModal({
         onSubmit={handleSubmit(handleEditPost)}
         className="w-200 p-3 max-h-150 overflow-y-auto ring ring-gray-50/10 bg-slate-800 rounded-2xl shadow-2xl text-white"
       >
-        <EditPostBtnModalHeader
+        <EditPostModalHeader
           setValue={setValue}
           setModal={setModal}
           commentsDisabled={commentsDisabled}
@@ -124,21 +124,21 @@ function EditPostBtnModal({
             {error.message}
           </p>
         )}
-        <EditPostBtnModalAuthor
+        <EditPostModalAuthor
           post={post}
           setValue={setValue}
           privacy={privacy}
           loading={loading}
         />
-        <EditPostBtnModalContent content={content} register={register} />
+        <EditPostModalContent content={content} register={register} />
         {fields && fields.length > 0 && (
-          <EditPostBtnModalMedia
+          <EditPostModalMedia
             loading={loading}
             fields={fields}
             remove={remove}
           />
         )}
-        <EditPostBtnModalFooter
+        <EditPostModalFooter
           fields={fields}
           append={append}
           loading={loading}
@@ -148,4 +148,4 @@ function EditPostBtnModal({
   );
 }
 
-export default EditPostBtnModal;
+export default EditPostModal;

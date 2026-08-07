@@ -30,7 +30,7 @@ function UserImages({userId}:{userId:string}) {
   return (
     <div className="w-full flex justify-center">
       {media && media.length > 0 ? (
-        <div className="grid grid-cols-5 gap-1 w-full">
+        <div className="grid grid-cols-4 gap-3 w-full ">
           {media.map((img) => (
             <button
               onClick={() =>
@@ -40,7 +40,7 @@ function UserImages({userId}:{userId:string}) {
                 })
               }
               key={img.id}
-              className="relative rounded-xl overflow-hidden group cursor-pointer h-50"
+              className="relative rounded-xl overflow-hidden group cursor-pointer h-90"
             >
               <Image
                 src={img.url}

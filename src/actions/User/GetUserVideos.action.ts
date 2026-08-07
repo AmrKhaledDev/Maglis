@@ -24,6 +24,7 @@ export const GetUserVideosAction = async (
             type: "VIDEO",
           },
         },
+        showMediaInProfile: true,
       },
       select: {
         id: true,

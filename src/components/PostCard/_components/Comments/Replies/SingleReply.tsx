@@ -23,7 +23,7 @@ function SingleReply({
   });
   return (
     <div className="flex flex-col gap-2 w-full">
-      <div className="bg-white/4 p-3 rounded-xl shadow w-full mt-2 flex flex-col gap-3">
+      <div className="bg-white/3 p-3 ring ring-gray-50/10 rounded-xl shadow w-full mt-2 flex flex-col gap-3">
         <ReplyHeader reply={reply} topLevelComment={topLevelComment} />
         <ReplyAuthor post={post} reply={reply} />
         <div className="flex flex-col gap-2">

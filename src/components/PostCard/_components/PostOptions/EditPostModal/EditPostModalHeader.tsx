@@ -2,9 +2,9 @@ import { MessageSquareOff, X } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import { TiPin } from "react-icons/ti";
 import { UseFormSetValue } from "react-hook-form";
-import { EditPostModalFormType } from "../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
 // ========================================================
-function EditPostBtnModalHeader({
+function EditPostModalHeader({
   setModal,
   setValue,
   isPinnedToProfile,
@@ -47,4 +47,4 @@ function EditPostBtnModalHeader({
   );
 }
 
-export default EditPostBtnModalHeader;
+export default EditPostModalHeader;

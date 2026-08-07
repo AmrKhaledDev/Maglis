@@ -4,7 +4,7 @@ import Image from "next/image";
 import { UseFieldArrayRemove } from "react-hook-form";
 import ReactPlayer from "react-player";
 // ==================================================
-function EditPostBtnModalMedia({
+function EditPostModalMedia({
   remove,
   fields,
   loading,
@@ -53,4 +53,4 @@ function EditPostBtnModalMedia({
   );
 }
 
-export default EditPostBtnModalMedia;
+export default EditPostModalMedia;

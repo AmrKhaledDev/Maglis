@@ -4,6 +4,7 @@ import CommentsDisabledBtn from "./CommentsDisabledBtn";
 import { useUser } from "@/providers/UserProvider";
 import DeletePostBtn from "./DeletePostBtn";
 import PinnedToProfileBtn from "./PinnedToProfileBtn";
+import ShowMediaInProfileBtn from "./ShowMediaInProfileBtn";
 // =============================================================
 function PostOwnerOptions({ post }: { post: PostDBType }) {
   const user = useUser();
@@ -14,6 +15,7 @@ function PostOwnerOptions({ post }: { post: PostDBType }) {
           <EditPostBtn post={post} />
           <PinnedToProfileBtn post={post} />
           <CommentsDisabledBtn post={post} />
+          <ShowMediaInProfileBtn post={post} />
           <DeletePostBtn post={post} />
         </>
       )}

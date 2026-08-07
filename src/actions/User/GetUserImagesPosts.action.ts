@@ -20,6 +20,7 @@ export const GetUserImagesPostsAction = async (
             type: "IMAGE",
           },
         },
+        showMediaInProfile: true,
       },
       orderBy: {
         createdAt: "desc",

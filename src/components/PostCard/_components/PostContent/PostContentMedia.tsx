@@ -15,18 +15,19 @@ function PostContentMedia({ post }: { post: PostDBType }) {
       className={`${post.medias.length > 1 ? "grid grid-cols-2 gap-1" : ""}`}
     >
       {post.medias.map((item) => (
-        <button
-          onClick={() =>
-            setShowMedia({
-              open: true,
-              preview: item.url,
-            })
-          }
+        <div
           key={item.id}
-          className={`w-full cursor-pointer overflow-hidden bg-black rounded-lg relative ${post.medias.length > 1 ? "h-80" : "h-110"} `}
+          className={`w-full overflow-hidden bg-black rounded-lg relative ${post.medias.length > 1 ? "h-80" : "h-110"} `}
         >
           {item.type == "IMAGE" && (
-            <>
+            <button
+              onClick={() =>
+                setShowMedia({
+                  open: true,
+                  preview: item.url,
+                })
+              }
+            >
               <Image
                 src={item.url}
                 alt=""
@@ -39,7 +40,7 @@ function PostContentMedia({ post }: { post: PostDBType }) {
                 fill
                 className="object-contain relative z-8"
               />
-            </>
+            </button>
           )}
           {item.type == "VIDEO" && (
             <ReactPlayer
@@ -51,7 +52,7 @@ function PostContentMedia({ post }: { post: PostDBType }) {
               controls
             />
           )}
-        </button>
+        </div>
       ))}
       {showMedia.open && showMedia.preview && (
         <MediaPreviewModal setShowMedia={setShowMedia} showMedia={showMedia} />

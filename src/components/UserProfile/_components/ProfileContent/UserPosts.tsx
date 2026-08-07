@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GetUserPostsAction } from "@/actions/User/GetUserPosts.action";
 import ProfileLoader from "./ProfileLoader";
 // ======================================================
-function UserPosts({userId}:{userId:string}) {
+function UserPosts({ userId }: { userId: string }) {
   const [showComments, setShowComments] = useState("");
   const {
     data: posts,
@@ -32,6 +32,7 @@ function UserPosts({userId}:{userId:string}) {
             post={post}
             showComments={showComments}
             setShowComments={setShowComments}
+            isProfilePage={true}
           />
         ))
       ) : (

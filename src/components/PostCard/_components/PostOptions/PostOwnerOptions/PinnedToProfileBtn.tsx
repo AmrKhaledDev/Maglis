@@ -2,6 +2,7 @@ import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.acti
 import { useToast } from "@/providers/ToastProvider";
 import { PostDBType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { Pin } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =====================================================================================
@@ -32,10 +33,13 @@ function PinnedToProfileBtn({ post }: { post: PostDBType }) {
     <button
       onClick={() => handlePinnedToProfile()}
       disabled={loading}
-      className={`postBtnAct ${post.isPinnedToProfile && "text-amber-500"}`}
+      className={`postBtnAct ${post.isPinnedToProfile && "text-red-500"}`}
     >
       <Pin
-        className={`postBtnActIcon ${post.isPinnedToProfile && "rotate-45"}`}
+        className={clsx(
+          "postBtnActIcon",
+          post.isPinnedToProfile && "rotate-45",
+        )}
       />
       {post.isPinnedToProfile
         ? "إلغاء التثبيت من الملف الشخصي"

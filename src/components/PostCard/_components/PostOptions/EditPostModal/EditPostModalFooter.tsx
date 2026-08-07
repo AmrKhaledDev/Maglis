@@ -1,11 +1,11 @@
 import { $Enums } from "@prisma/client";
 import { ChangeEvent } from "react";
 import { UseFieldArrayAppend } from "react-hook-form";
-import { EditPostModalFormType } from "../../_types/EditPostModalForm.type";
-import AddImage from "./AddImage";
-import AddVideo from "./AddVideo";
+import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
+import AddImage from "../AddImage";
+import AddVideo from "../AddVideo";
 // ==================================================
-function EditPostBtnModalFooter({
+function EditPostModalFooter({
   fields,
   append,
   loading,
@@ -50,4 +50,4 @@ function EditPostBtnModalFooter({
   );
 }
 
-export default EditPostBtnModalFooter;
+export default EditPostModalFooter;

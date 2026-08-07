@@ -5,10 +5,10 @@ import Image from "next/image";
 import { UseFormSetValue } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useEffect, useState } from "react";
-import { EditPostModalFormType } from "../../_types/EditPostModalForm.type";
-import SelectPrivacyOptions from "./SelectPrivacyOptions";
+import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
+import SelectPrivacyOptions from "../SelectPrivacyOptions";
 // ====================================================
-function EditPostBtnModalAuthor({
+function EditPostModalAuthor({
   post,
   setValue,
   privacy,
@@ -61,4 +61,4 @@ function EditPostBtnModalAuthor({
   );
 }
 
-export default EditPostBtnModalAuthor;
+export default EditPostModalAuthor;

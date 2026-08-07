@@ -8,7 +8,7 @@ const allowedFileTypes = [
   "video/mp4",
   "video/webm",
 ];
-const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024;
 export async function POST(req: NextRequest) {
   try {

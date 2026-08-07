@@ -12,7 +12,7 @@ async function Feeds() {
           <Stories />
           <hr className="border-white opacity-3"/>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-5">
           <CreatePostComposer />
           <Posts posts={posts} />
         </div>

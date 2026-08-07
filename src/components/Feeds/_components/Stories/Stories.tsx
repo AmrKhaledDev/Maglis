@@ -8,14 +8,14 @@ import StoryModal from "./_components/StoryModal";
 import { useUser } from "@/providers/UserProvider";
 // =============================================================
 function Stories() {
-  const [modal, setModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const user = useUser();
   return (
     <div>
       <Swiper slidesPerView={"auto"} spaceBetween={6} className="w-full h-30 ">
-        <SwiperSlide className="flex! buttonShowModal flex-col items-center gap-2 h-full! w-20! justify-center">
+        <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-20! justify-center">
           <button
-            onClick={() => setModal(true)}
+            onClick={() => setShowModal(true)}
             className="relative cursor-pointer"
           >
             <Image
@@ -25,15 +25,18 @@ function Stories() {
               height={100}
               className="rounded-full shrink-0 size-16 object-cover"
             />
-            <Plus className="absolute bottom-0.5 left-0.5 text-slate-700 bg-gray-200 rounded-full p-0.5 size-4" strokeWidth={1.5}/>
+            <Plus
+              className="absolute bottom-0.5 left-0.5 text-slate-700 bg-gray-200 rounded-full p-0.5 size-4"
+              strokeWidth={1.5}
+            />
           </button>
           <p className=" text-gray-300 text-xs">قصتك</p>
         </SwiperSlide>
-        {/* {Array(10)
+        {Array(2)
           .fill(0)
           .map((_, i) => (
             <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-25! justify-center shrink-0">
-              <div className="p-px  size-17 shrink-0 rounded-full bg-linear-to-r from-[#c5ab77] to-purple-600 hover:scale-103 mytransition">
+              <div className="p-0.5  size-17 shrink-0 rounded-full bg-linear-to-r from-[#c5ab77] to-purple-600 hover:scale-103 mytransition">
                 <div className="relative size-full rounded-full ">
                   <Image
                     src="/my_photo.jpeg"
@@ -51,9 +54,9 @@ function Stories() {
                 Amr Khaled
               </p>
             </SwiperSlide>
-          ))} */}
+          ))}
       </Swiper>
-      <StoryModal modal={modal} setModal={setModal} />
+      {showModal && <StoryModal setShowModal={setShowModal} />}
     </div>
   );
 }
