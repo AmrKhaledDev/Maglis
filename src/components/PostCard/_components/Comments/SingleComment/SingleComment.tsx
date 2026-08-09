@@ -1,8 +1,6 @@
 import CommentAuthor from "./CommentAuthor";
 import CommentIsPinned from "./CommentIsPinned";
-import { CommentDbType } from "@/types/Comment.type";
 import CommentOptions from "./CommentOptions";
-import { PostDBType } from "@/types/Post.type";
 import { Dispatch, SetStateAction } from "react";
 import { Comment } from "@prisma/client";
 import CommentContent from "./CommentContent";
@@ -10,14 +8,16 @@ import CommentActions from "./CommentActions";
 import { formatLikes } from "@/formats/formatLikes";
 import Replies from "../Replies/Replies";
 import { formatReplies } from "@/formats/formatReplies";
+import { PostType } from "@/types/Post.type";
+import { CommentType } from "@/types/Comment.type";
 // ==================================================================
 function SingleComment({
   post,
   comment,
   setCurrentComment,
 }: {
-  post: PostDBType;
-  comment: CommentDbType;
+  post: PostType;
+  comment: CommentType;
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
 }) {
   return (

@@ -1,12 +1,13 @@
 import { LikeAction } from "@/actions/Like/Like.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 // ===========================================
-function LikeBtn({ post }: { post: PostDBType }) {
+function LikeBtn({ post }: { post: PostType }) {
   const { setToast } = useToast();
   const user = useUser();
   const isLiker = post.likes.some((like) => like.userId === user.id);
@@ -45,7 +46,7 @@ function LikeBtn({ post }: { post: PostDBType }) {
     >
       <Heart
         strokeWidth={1}
-        className={`size-5 ${isLiker && "fill-red-500 text-red-500"}`}
+        className={clsx("size-5",isLiker && "fill-red-500 text-red-500")}
       />
     </button>
   );

@@ -1,12 +1,14 @@
 import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.action";
 import { useToast } from "@/providers/ToastProvider";
-import { PostDBType } from "@/types/Post.type";
+import { useUser } from "@/providers/UserProvider";
+import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Pin } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =====================================================================================
-function PinnedToProfileBtn({ post }: { post: PostDBType }) {
+function PinnedToProfileBtn({ post }: { post: PostType }) {
+  const user = useUser();
   const router = useRouter();
   const { setToast } = useToast();
   const queryClient = useQueryClient();
@@ -18,7 +20,7 @@ function PinnedToProfileBtn({ post }: { post: PostDBType }) {
     onSuccess: () => {
       router.refresh();
       queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
+        queryKey: ["user_posts", user.id],
       });
     },
     onError: (error: Error) => {

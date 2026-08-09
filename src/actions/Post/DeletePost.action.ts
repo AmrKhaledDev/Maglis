@@ -40,6 +40,8 @@ export const DeletePostAction = async (
       },
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
+
     return { success: true };
   } catch (error) {
     console.error(error);

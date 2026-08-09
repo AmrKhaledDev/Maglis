@@ -2,10 +2,10 @@ import { getPosts } from "@/cached-queries/getPosts";
 import CreatePostComposer from "./_components/CreatePostComposer/CreatePostComposer";
 import Posts from "./_components/Posts/Posts";
 import Stories from "./_components/Stories/Stories";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 // =================================================
 async function Feeds() {
-  const posts: PostDBType[] = await getPosts();
+  const posts: PostType[] = await getPosts();
   return (
       <div className="flex flex-col max-w-200 gap-7 mx-auto mb-5">
         <div className="w-full">

@@ -5,20 +5,20 @@ import CommentUploadImage from "./CommentUploadImage";
 import CommentImageUploadedPreview from "./CommentImageUploadedPreview";
 import axios from "axios";
 import { CreateCommentAction } from "@/actions/Comment/CreateComment.action";
-import { PostDBType } from "@/types/Post.type";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { Comment } from "@prisma/client";
 import { EditCommentAction } from "@/actions/Comment/EditComment.action";
 import CommentTextarea from "./CommentTextarea";
 import CommentSubmitButton from "./CommentSubmitButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { PostType } from "@/types/Post.type";
 // =====================================================
 function CommentComposer({
   post,
   currentComment,
   setCurrentComment,
 }: {
-  post: PostDBType;
+  post: PostType;
   currentComment?: Comment | null;
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
 }) {

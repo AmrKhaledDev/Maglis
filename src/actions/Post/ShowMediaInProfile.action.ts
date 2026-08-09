@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
@@ -15,7 +15,7 @@ export const ShowMediaInProfileAction = async (
       where: {
         id: postId,
       },
-      select: { authorId: true, showMediaInProfile: true },
+      select: { authorId: true, showMediaInProfile: true, medias: true },
     });
     if (!post)
       return {
@@ -25,6 +25,8 @@ export const ShowMediaInProfileAction = async (
       };
     if (post.authorId !== user.id)
       return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
+    if (post.medias.length < 1)
+      return { success: false, message: "لا يوجد وسائط لعرضها." };
     await prisma.post.update({
       where: {
         id: postId,
@@ -34,6 +36,7 @@ export const ShowMediaInProfileAction = async (
       },
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true };
   } catch (error) {
     console.error(error);

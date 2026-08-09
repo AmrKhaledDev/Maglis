@@ -1,9 +1,9 @@
-import { CommentDbType } from "@/types/Comment.type";
-import { PostDBType } from "@/types/Post.type";
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useUser } from "@/providers/UserProvider";
+import { PostType } from "@/types/Post.type";
+import { CommentType } from "@/types/Comment.type";
 // =======================================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
@@ -11,8 +11,8 @@ function ReplyAuthor({
   reply,
   post,
 }: {
-  reply: CommentDbType;
-  post: PostDBType;
+  reply: CommentType;
+  post: PostType;
 }) {
   const user = useUser();
   return (

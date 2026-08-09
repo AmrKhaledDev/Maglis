@@ -1,12 +1,12 @@
 "use client";
-import PostOptions from "./_components/PostOptions/PostOptions";
+import PostOptions from "../PostOptions/PostOptions";
 import PostAuthor from "./_components/PostAuthor/PostAuthor";
 import PostContent from "./_components/PostContent/PostContent";
 import PostActions from "./_components/PostActions/PostActions";
 import Comments from "./_components/Comments/Comments";
-import { PostDBType } from "@/types/Post.type";
 import { Dispatch, SetStateAction } from "react";
 import { Pin } from "lucide-react";
+import { PostType } from "@/types/Post.type";
 // ========================================================
 function PostCard({
   post,
@@ -14,7 +14,7 @@ function PostCard({
   setShowComments,
   isProfilePage,
 }: {
-  post: PostDBType;
+  post: PostType;
   showComments: string;
   setShowComments: Dispatch<SetStateAction<string>>;
   isProfilePage?: boolean;

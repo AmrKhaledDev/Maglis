@@ -40,14 +40,15 @@ export const LikeAction = async (
         },
       });
     }
-    revalidateTag("posts","");
+    revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true };
   } catch (error) {
     console.error(error);
     return {
       success: false,
       message:
-        "حدث خطأ غير متوقع، وتعذر تحديث حالة الإعجاب بهذا المنشور. يرجى المحاولة مرة أخرى.",
+        "حدث خطأ، وتعذر تحديث حالة الإعجاب بهذا المنشور. يرجى المحاولة مرة أخرى.",
     };
   }
 };

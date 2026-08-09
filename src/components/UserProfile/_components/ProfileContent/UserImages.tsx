@@ -24,7 +24,7 @@ function UserImages({userId}:{userId:string}) {
         );
       return result.media;
     },
-    queryKey: ["user_postsPhotos"],
+    queryKey: ["user_postsPhotos",userId],
   });
   if (isPending) return <ProfileLoader />;
   return (

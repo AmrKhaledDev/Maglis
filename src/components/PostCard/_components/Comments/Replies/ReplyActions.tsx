@@ -4,11 +4,11 @@ import { formatReplies } from "@/formats/formatReplies";
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { CommentDbType } from "@/types/Comment.type";
+import { CommentType } from "@/types/Comment.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Heart, MessageCircleReply } from "lucide-react";
 // ==========================================================================
-function ReplyActions({ reply }: { reply: CommentDbType }) {
+function ReplyActions({ reply }: { reply: CommentType }) {
   const { setShowReplyComposer } = useRepliesState();
   const user = useUser();
   const { setToast } = useToast();

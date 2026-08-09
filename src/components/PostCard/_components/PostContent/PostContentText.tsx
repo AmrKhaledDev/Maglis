@@ -1,7 +1,7 @@
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import Linkify from "linkify-react";
 // =======================================
-function PostContentText({post}:{post:PostDBType}) {
+function PostContentText({post}:{post:PostType}) {
   return (
     <div className="space-y-5 mb-3">
       <Linkify

@@ -4,6 +4,7 @@ import { useToast } from "@/providers/ToastProvider";
 import { CircleAlert, CircleCheckBig } from "lucide-react";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 // ===================================================
 function Toast() {
   const { toast, setToast } = useToast();
@@ -20,13 +21,14 @@ function Toast() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="sticky top-20 z-20 "
+          className="sticky top-19.5 z-20 "
         >
           <p
-            className={`p-5 font-semibold flex items-center gap-3
-            ${toast.type == "error" && "text-red-500 bg-red-200 "}
-            ${toast.type == "success" && "text-emerald-500 bg-emerald-200 "}
-            `}
+            className={clsx(
+              "p-5 font-semibold flex items-center gap-3 backdrop-blur-3xl",
+              toast.type == "error" && "text-red-500 bg-red-900/40",
+              toast.type == "success" && "text-emerald-500 bg-emerald-900/40",
+            )}
           >
             {toast.type === "error" && <CircleAlert className="size-5.5" />}
             {toast.type === "success" && (

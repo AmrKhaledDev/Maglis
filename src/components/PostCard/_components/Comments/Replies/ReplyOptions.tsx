@@ -1,14 +1,14 @@
 import { Copy, Ellipsis, Pencil, Trash2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { CommentDbType } from "@/types/Comment.type";
 import { useState } from "react";
 import { useToast } from "@/providers/ToastProvider";
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DeleteCommentAction } from "@/actions/Comment/DeleteComment.action";
+import { CommentType } from "@/types/Comment.type";
 // ==================================================================
-function ReplyOptions({ reply }: { reply: CommentDbType }) {
+function ReplyOptions({ reply }: { reply: CommentType }) {
   const { setShowReplyComposer, setCurrentReply } = useRepliesState();
   const { activeMenu, setActiveMenu } = useActiveMenu();
   const { setToast } = useToast();

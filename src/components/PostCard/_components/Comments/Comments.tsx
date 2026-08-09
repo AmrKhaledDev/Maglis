@@ -1,11 +1,11 @@
 import CommentComposer from "./CommentComposer/CommentComposer";
-import { PostDBType } from "@/types/Post.type";
 import { useState } from "react";
 import { Comment } from "@prisma/client";
 import "dayjs/locale/ar";
 import SingleComment from "./SingleComment/SingleComment";
+import { PostType } from "@/types/Post.type";
 // ==================================================================
-function Comments({ post }: { post: PostDBType }) {
+function Comments({ post }: { post: PostType }) {
   const [showMoreComments, setShowMoreComments] = useState(false);
   const sortedComments = [...post.comments].sort((a, b) => {
     const aIsAuthor = a.userId === post.authorId;

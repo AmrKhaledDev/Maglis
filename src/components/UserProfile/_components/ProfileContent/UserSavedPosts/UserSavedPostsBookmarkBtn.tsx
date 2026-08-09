@@ -1,12 +1,11 @@
 import { SavePostAction } from "@/actions/SavePost/SavePost.action";
 import { useToast } from "@/providers/ToastProvider";
-import { SavePostDBType } from "@/types/SavePost.type";
+import { SavePostType } from "@/types/SavePost.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 // ========================================
-function UserSavedPostsBookmarkBtn({ saveItem }: { saveItem: SavePostDBType }) {
+function UserSavedPostsBookmarkBtn({ saveItem }: { saveItem: SavePostType }) {
   const router = useRouter();
   const { setToast } = useToast();
   const queryClient = useQueryClient();

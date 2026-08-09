@@ -42,7 +42,10 @@ function EditPostModalMedia({
           <button
             disabled={loading}
             type="button"
-            onClick={() => remove(i)}
+            onClick={(e) => {
+              e.stopPropagation();
+              remove(i);
+            }}
             className="absolute button disabled:hidden hover:text-black top-px left-px cursor-pointer p-1 hover:bg-white mytransition rounded-full"
           >
             <X className="size-3.5" />

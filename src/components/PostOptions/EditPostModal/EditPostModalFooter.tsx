@@ -1,7 +1,7 @@
 import { $Enums } from "@prisma/client";
 import { ChangeEvent } from "react";
 import { UseFieldArrayAppend } from "react-hook-form";
-import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 import AddImage from "../AddImage";
 import AddVideo from "../AddVideo";
 // ==================================================

@@ -1,10 +1,10 @@
-import { PostDBType } from "@/types/Post.type";
 import ReactPlayer from "react-player";
 import Image from "next/image";
 import { useState } from "react";
 import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
+import { PostType } from "@/types/Post.type";
 // ==============================================
-function PostContentMedia({ post }: { post: PostDBType }) {
+function PostContentMedia({ post }: { post: PostType }) {
   const [showMedia, setShowMedia] = useState({
     open: false,
     preview: "",
@@ -21,6 +21,7 @@ function PostContentMedia({ post }: { post: PostDBType }) {
         >
           {item.type == "IMAGE" && (
             <button
+            className="cursor-pointer"
               onClick={() =>
                 setShowMedia({
                   open: true,

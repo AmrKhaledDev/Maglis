@@ -1,8 +1,8 @@
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import { Ban, BellOff, EyeOff, UserPlus, UserRound } from "lucide-react";
 // ========================================================
-function PostViewerOptions({ post }: { post: PostDBType }) {
+function PostViewerOptions({ post }: { post: PostType }) {
   const user = useUser();
   return (
     <>

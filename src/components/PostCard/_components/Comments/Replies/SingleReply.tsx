@@ -1,21 +1,21 @@
 import Image from "next/image";
 import ReplyActions from "./ReplyActions";
 import Replies from "./Replies";
-import { CommentDbType } from "../../../../../types/Comment.type";
-import { PostDBType } from "@/types/Post.type";
 import ReplyHeader from "./ReplyHeader";
 import ReplyAuthor from "./ReplyAuthor";
 import { useState } from "react";
 import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
+import { PostType } from "@/types/Post.type";
+import { CommentType } from "@/types/Comment.type";
 // ================================================================================
 function SingleReply({
   reply,
   post,
   topLevelComment,
 }: {
-  reply: CommentDbType;
-  post: PostDBType;
-  topLevelComment: CommentDbType;
+  reply: CommentType;
+  post: PostType;
+  topLevelComment: CommentType;
 }) {
   const [showMedia, setShowMedia] = useState({
     open: false,

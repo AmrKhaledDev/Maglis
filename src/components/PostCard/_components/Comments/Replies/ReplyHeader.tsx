@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { useUser } from "@/providers/UserProvider";
-import { CommentDbType } from "@/types/Comment.type";
 import ReplyOptions from "./ReplyOptions";
+import { CommentType } from "@/types/Comment.type";
 // ===============================================================
 function ReplyHeader({
   reply,
   topLevelComment,
 }: {
-  reply: CommentDbType;
-  topLevelComment: CommentDbType;
+  reply: CommentType;
+  topLevelComment: CommentType;
 }) {
   if (!reply.parent) return null;
   const user = useUser();

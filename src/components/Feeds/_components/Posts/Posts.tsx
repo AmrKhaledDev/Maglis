@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import { PostDBType } from "@/types/Post.type";
 import PostCard from "@/components/PostCard/PostCard";
+import { PostType } from "@/types/Post.type";
 // ===================================================================
-function Posts({ posts }: { posts: PostDBType[] }) {
+function Posts({ posts }: { posts: PostType[] }) {
   const [showComments, setShowComments] = useState("");
   return (
     <div className="w-full flex flex-col gap-3">

@@ -1,13 +1,13 @@
 "use client"
-import { CommentDbType } from "@/types/Comment.type";
 import { createContext, ReactNode, useContext, useState } from "react";
 import { RepliesStateProviderType } from "./types/RepliesStateProvider.type";
+import { CommentType } from "@/types/Comment.type";
 // ============================================================================
 const RepliesStateContext = createContext<RepliesStateProviderType | null>(
   null,
 );
 export function RepliesStateProvider({ children }: { children: ReactNode }) {
-  const [currentReply, setCurrentReply] = useState<CommentDbType | null>(null);
+  const [currentReply, setCurrentReply] = useState<CommentType | null>(null);
   const [showReplyComposer, setShowReplyComposer] = useState("");
   return (
     <RepliesStateContext.Provider

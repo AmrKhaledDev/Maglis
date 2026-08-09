@@ -20,7 +20,7 @@ function UserPosts({ userId }: { userId: string }) {
         );
       return result.posts;
     },
-    queryKey: ["user_posts"],
+    queryKey: ["user_posts", userId],
   });
   if (isPending) return <ProfileLoader />;
   return (

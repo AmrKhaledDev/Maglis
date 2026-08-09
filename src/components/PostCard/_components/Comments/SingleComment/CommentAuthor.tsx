@@ -3,7 +3,7 @@ import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { Comment, Prisma } from "@prisma/client";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 // =========================================================================
 dayjs.locale("ar");
 dayjs.extend(relativeTime);
@@ -20,7 +20,7 @@ function CommentAuthor({
       username: true;
     };
   }>;
-  post: PostDBType;
+  post: PostType;
   comment: Comment;
 }) {
   return (

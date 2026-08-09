@@ -62,6 +62,7 @@ export const CreatePostAction = async (
       });
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true };
   } catch (error) {
     console.log(error);

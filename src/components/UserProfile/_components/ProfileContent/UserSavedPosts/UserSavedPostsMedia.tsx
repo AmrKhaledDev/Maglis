@@ -1,10 +1,10 @@
-import { SavePostDBType } from "@/types/SavePost.type";
+import { SavePostType } from "@/types/SavePost.type";
 import clsx from "clsx";
 import Image from "next/image";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 // ===========================================================================
-function UserSavedPostsMedia({ saveItem }: { saveItem: SavePostDBType }) {
+function UserSavedPostsMedia({ saveItem }: { saveItem: SavePostType }) {
   const [playingVideoId, setPlayingVideoId] = useState("");
   return (
     <div

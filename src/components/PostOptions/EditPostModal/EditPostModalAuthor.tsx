@@ -1,12 +1,12 @@
 "use client"
 import { PrivacyType } from "@/types/Privacy.type";
-import { PostDBType } from "@/types/Post.type";
 import Image from "next/image";
 import { UseFormSetValue } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useEffect, useState } from "react";
-import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 import SelectPrivacyOptions from "../SelectPrivacyOptions";
+import { PostType } from "@/types/Post.type";
 // ====================================================
 function EditPostModalAuthor({
   post,
@@ -14,7 +14,7 @@ function EditPostModalAuthor({
   privacy,
   loading,
 }: {
-  post: PostDBType;
+  post: PostType;
   setValue: UseFormSetValue<EditPostModalFormType>;
   privacy: PrivacyType;
   loading: boolean;

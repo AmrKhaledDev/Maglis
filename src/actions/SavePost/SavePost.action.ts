@@ -62,7 +62,7 @@ export const SavePostAction = async (
     console.error(error);
     return {
       success: false,
-      message: "حدث خطأ أثناء تحديث المحفوظات الخاصة بك",
+      message: "حدث خطأ أثناء حفظ هذا المنشور.",
     };
   }
 };

@@ -6,6 +6,8 @@ import ProfileLoader from "../ProfileLoader";
 import UserSavedPostsContent from "./UserSavedPostsContent";
 import UserSavedPostsAuthor from "./UserSavedPostsAuthor";
 import UserSavedPostsBookmarkBtn from "./UserSavedPostsBookmarkBtn";
+import { ExternalLink } from "lucide-react";
+import Link from "next/link";
 // ============================================================================
 function UserSavedPosts({ userId }: { userId: string }) {
   const {
@@ -21,7 +23,7 @@ function UserSavedPosts({ userId }: { userId: string }) {
         );
       return result.savedPosts;
     },
-    queryKey: ["user_savedPosts"],
+    queryKey: ["user_savedPosts",userId],
   });
   if (isPending) return <ProfileLoader />;
   return (
@@ -35,7 +37,19 @@ function UserSavedPosts({ userId }: { userId: string }) {
             >
               <div className="flex justify-between">
                 <UserSavedPostsAuthor saveItem={saveItem} />
-                <UserSavedPostsBookmarkBtn saveItem={saveItem} />
+                <div className="flex items-center gap-1">
+                  <Link
+                    target="_blank"
+                    href={`/post/${saveItem.postId}`}
+                    className="size-4 group-disabled:fill-gray-400 cursor-pointer hover:scale-103 mytransition text-gray-400 hover:text-white"
+                  >
+                    <ExternalLink
+                      strokeWidth={1}
+                      className="size-4 group-disabled:fill-gray-400"
+                    />
+                  </Link>
+                  <UserSavedPostsBookmarkBtn saveItem={saveItem} />
+                </div>
               </div>
               <UserSavedPostsContent saveItem={saveItem} />
             </div>

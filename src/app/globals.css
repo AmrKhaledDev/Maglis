@@ -25,6 +25,9 @@
 @utility profileSectionFieldsStyle{
   @apply flex flex-col gap-4
 }
+@utility videoBtnActionStyle{
+  @apply not-disabled:cursor-pointer mytransition flex bg-linear-to-r from-black/5 to-black shadow-[0_0_4px_black] rounded-full p-2.5 items-center gap-1 not-disabled:hover:scale-103
+}
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

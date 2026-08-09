@@ -1,12 +1,14 @@
 import { ShowMediaInProfileAction } from "@/actions/Post/ShowMediaInProfile.action";
 import { useToast } from "@/providers/ToastProvider";
-import { PostDBType } from "@/types/Post.type";
+import { useUser } from "@/providers/UserProvider";
+import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Images } from "lucide-react";
 // ==========================================================================================
-function ShowMediaInProfileBtn({ post }: { post: PostDBType }) {
+function ShowMediaInProfileBtn({ post }: { post: PostType }) {
   const { setToast } = useToast();
+  const user = useUser();
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
@@ -15,13 +17,13 @@ function ShowMediaInProfileBtn({ post }: { post: PostDBType }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
+        queryKey: ["user_posts", user.id],
       });
       queryClient.invalidateQueries({
-        queryKey: ["user_postsPhotos"],
+        queryKey: ["user_postsPhotos", user.id],
       });
       queryClient.invalidateQueries({
-        queryKey: ["user_postsVideos"],
+        queryKey: ["user_postsVideos", user.id],
       });
     },
     onError: (error: Error) => {
@@ -33,14 +35,21 @@ function ShowMediaInProfileBtn({ post }: { post: PostDBType }) {
     },
   });
   return (
-    <button
-      onClick={() => mutate()}
-      disabled={isPending}
-      className={clsx("postBtnAct", post.showMediaInProfile && "text-red-500")}
-    >
-      <Images className="postBtnActIcon" />
-      {post.showMediaInProfile ? "إخفاء الوسائط" : "إظهار الوسائط"}
-    </button>
+    <>
+      {post.medias.length > 0 && (
+        <button
+          onClick={() => mutate()}
+          disabled={isPending}
+          className={clsx(
+            "postBtnAct",
+            post.showMediaInProfile && "text-red-500",
+          )}
+        >
+          <Images className="postBtnActIcon" />
+          {post.showMediaInProfile ? "إخفاء الوسائط" : "إظهار الوسائط"}
+        </button>
+      )}
+    </>
   );
 }
 

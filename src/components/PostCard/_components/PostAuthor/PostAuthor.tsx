@@ -4,13 +4,13 @@ import Link from "next/link";
 import relativeTime from "dayjs/plugin/relativeTime";
 import local from "dayjs/locale/ar";
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/Post.type";
 import PostAuthorActions from "./PostAuthorAction";
 import PostPrivacy from "../../../PostPrivacy/PostPrivacy";
+import { PostType } from "@/types/Post.type";
 // =========================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
-function PostAuthor({ post }: { post: PostDBType }) {
+function PostAuthor({ post }: { post: PostType }) {
   const userSession = useUser();
   const url =
     userSession.id === post.authorId ? `/u/profile` : `/u/${post.authorId}`;

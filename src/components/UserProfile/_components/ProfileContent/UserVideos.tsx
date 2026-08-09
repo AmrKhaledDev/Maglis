@@ -20,7 +20,7 @@ function UserVideos({ userId }: { userId: string }) {
         );
       return result.media;
     },
-    queryKey: ["user_postsVideos"],
+    queryKey: ["user_postsVideos", userId],
   });
   if (isPending) return <ProfileLoader />;
   return (

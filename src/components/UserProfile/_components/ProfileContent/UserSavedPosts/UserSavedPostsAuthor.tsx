@@ -1,12 +1,12 @@
 import PostPrivacy from "@/components/PostPrivacy/PostPrivacy";
-import { SavePostDBType } from "@/types/SavePost.type";
 import dayjs from "dayjs";
 import Image from "next/image";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { SavePostType } from "@/types/SavePost.type";
 // =====================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function UserSavedPostsAuthor({ saveItem }: { saveItem: SavePostDBType }) {
+function UserSavedPostsAuthor({ saveItem }: { saveItem: SavePostType }) {
   return (
     <div className="flex items-center gap-2">
       <Image
@@ -21,8 +21,6 @@ function UserSavedPostsAuthor({ saveItem }: { saveItem: SavePostDBType }) {
           <h2 className="font-semibold text-sm text-gray-100 line-clamp-1 [word-break:break-word]">
             {saveItem.post.author.name}
           </h2>
-          <span className="size-[3.5px] rounded-full bg-white block opacity-5 shrink-0" />
-          <PostPrivacy privacy={saveItem.post.privacy} />
         </div>
         <div className="flex items-center gap-1.5">
           {saveItem.post.author.username && (

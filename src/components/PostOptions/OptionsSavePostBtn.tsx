@@ -1,12 +1,12 @@
 import { SavePostAction } from "@/actions/SavePost/SavePost.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Save } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =====================================================================
-function OptionsSavePostBtn({ post }: { post: PostDBType }) {
+function OptionsSavePostBtn({ post }: { post: PostType }) {
   const { setToast } = useToast();
   const router = useRouter();
   const queryClient = useQueryClient();

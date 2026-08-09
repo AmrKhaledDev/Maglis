@@ -1,14 +1,14 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { SavePostDBType } from "@/types/SavePost.type";
+import { SavePostType } from "@/types/SavePost.type";
 // ==========================================
 export const GetUserSavedPostsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;
   message?: string;
-  savedPosts?: SavePostDBType[];
+  savedPosts?: SavePostType[];
 }> => {
   try {
     if (!userId)
@@ -16,7 +16,7 @@ export const GetUserSavedPostsAction = async (
         success: false,
         message: "حدث خطأ غير متوقع أثناء جلب المنشورات المحفوظة.",
       };
-    const savedPosts: SavePostDBType[] = await prisma.savePost.findMany({
+    const savedPosts: SavePostType[] = await prisma.savePost.findMany({
       where: {
         userId,
       },

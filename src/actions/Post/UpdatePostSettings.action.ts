@@ -50,6 +50,7 @@ export const UpdatePostSettingsAction = async (
       data,
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true, message: "تم تحديث إعدادات المنشور." };
   } catch (error) {
     console.error(error);

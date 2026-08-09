@@ -1,9 +1,9 @@
-import { CommentDbType } from "@/types/Comment.type";
+import { CommentType } from "@/types/Comment.type";
 import { Dispatch, SetStateAction } from "react";
 // =====================================================
 export type ReplyComposerActionsType = {
-  currentReply: CommentDbType | null;
-  setCurrentReply: Dispatch<SetStateAction<CommentDbType | null>>;
+  currentReply: CommentType | null;
+  setCurrentReply: Dispatch<SetStateAction<CommentType | null>>;
   handleCreateReply: () => void;
   content: string;
   imagePreview: string;

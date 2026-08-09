@@ -2,16 +2,16 @@ import { MessageSquareOff, X } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import { TiPin } from "react-icons/ti";
 import { UseFormSetValue } from "react-hook-form";
-import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 // ========================================================
 function EditPostModalHeader({
-  setModal,
+  setShowModalEditPost,
   setValue,
   isPinnedToProfile,
   commentsDisabled,
   loading,
 }: {
-  setModal: Dispatch<SetStateAction<boolean>>;
+  setShowModalEditPost: Dispatch<SetStateAction<boolean>>;
   setValue: UseFormSetValue<EditPostModalFormType>;
   isPinnedToProfile: boolean;
   commentsDisabled: boolean;
@@ -40,7 +40,11 @@ function EditPostModalHeader({
           <MessageSquareOff className="postBtnActIcon" />
         </button>
       </div>
-      <button onClick={() => setModal(false)} className="cursor-pointer">
+      <button
+        type="button"
+        onClick={() => setShowModalEditPost(false)}
+        className="cursor-pointer button"
+      >
         <X className="size-5" strokeWidth={1.4} />
       </button>
     </div>

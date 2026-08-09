@@ -67,7 +67,8 @@ export const EditPostAction = async (
           })),
         });
     });
-    revalidateTag("posts","")
+    revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true };
   } catch (error) {
     console.error(error);

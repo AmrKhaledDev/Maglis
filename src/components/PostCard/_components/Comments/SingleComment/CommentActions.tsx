@@ -2,11 +2,11 @@ import { CreateLikeForComentAction } from "@/actions/LikeForComment/CreateLikeFo
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { Heart, MessageCircleReply } from "lucide-react";
-import { CommentDbType } from "../../../../../types/Comment.type";
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CommentType } from "@/types/Comment.type";
 // =======================================================
-function CommentActions({ comment }: { comment: CommentDbType }) {
+function CommentActions({ comment }: { comment: CommentType }) {
   const queryClient = useQueryClient();
   const { setShowReplyComposer } = useRepliesState();
   const user = useUser();

@@ -1,7 +1,7 @@
 import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
 import { motion } from "framer-motion";
 import { UseFormSetValue } from "react-hook-form";
-import { EditPostModalFormType } from "../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../PostCard/_types/EditPostModalForm.type";
 import { PrivacyType } from "@/types/Privacy.type";
 // ================================================================================
 function SelectPrivacyOptions({

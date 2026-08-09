@@ -1,17 +1,17 @@
 "use client"
 import { MessageCircle } from "lucide-react";
 import SavePostBtn from "./SavePostBtn";
-import { PostDBType } from "@/types/Post.type";
 import LikeBtn from "./LikeBtn";
 import { formatLikes } from "@/formats/formatLikes";
 import { formatComments } from "@/formats/formatComments";
 import { Dispatch, SetStateAction } from "react";
+import { PostType } from "@/types/Post.type";
 // =============================================
 function PostActions({
   post,
   setShowComments,
 }: {
-  post: PostDBType;
+  post: PostType;
   setShowComments: Dispatch<SetStateAction<string>>;
 }) {
   return (

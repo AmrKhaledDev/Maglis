@@ -1,14 +1,16 @@
 import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.action";
 import { useToast } from "@/providers/ToastProvider";
-import { PostDBType } from "@/types/Post.type";
+import { useUser } from "@/providers/UserProvider";
+import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { MessageSquareOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =================================================
-function CommentsDisabledBtn({ post }: { post: PostDBType }) {
+function CommentsDisabledBtn({ post }: { post: PostType }) {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const user = useUser();
   const { setToast } = useToast();
   const { mutate: handleCommentsDisabled, isPending: loading } = useMutation({
     mutationFn: async () => {
@@ -21,7 +23,7 @@ function CommentsDisabledBtn({ post }: { post: PostDBType }) {
     onSuccess: () => {
       router.refresh();
       queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
+        queryKey: ["user_posts", user.id],
       });
     },
     onError: (error: Error) => {

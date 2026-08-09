@@ -1,14 +1,14 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 // =================================================
 export const GetUserPostsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;
   message?: string;
-  posts?: PostDBType[];
+  posts?: PostType[];
 }> => {
   try {
     if (!userId)
@@ -16,7 +16,7 @@ export const GetUserPostsAction = async (
         success: false,
         message: "حدث خطأ غير متوقع أثناء جلب المنشورات الخاصة بك.",
       };
-    const posts: PostDBType[] = await prisma.post.findMany({
+    const posts: PostType[] = await prisma.post.findMany({
       where: {
         authorId: userId,
       },

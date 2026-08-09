@@ -1,8 +1,8 @@
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import { UserPlus } from "lucide-react";
 // =====================================================
-function PostAuthorAction({ post }: { post: PostDBType }) {
+function PostAuthorAction({ post }: { post: PostType }) {
   const user = useUser();
   return (
     <>

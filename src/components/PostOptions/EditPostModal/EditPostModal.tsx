@@ -1,7 +1,7 @@
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import { Dispatch, SetStateAction } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { EditPostModalFormType } from "../../../_types/EditPostModalForm.type";
+import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 import { PrivacyType } from "@/types/Privacy.type";
 import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
 import { CircleAlert, Globe } from "lucide-react";
@@ -15,14 +15,16 @@ import EditPostModalHeader from "./EditPostModalHeader";
 import EditPostModalContent from "./EditPostModalContent";
 import EditPostModalFooter from "./EditPostModalFooter";
 import EditPostModalMedia from "./EditPostModalMedia";
+import { useUser } from "@/providers/UserProvider";
 // ==========================================================================================================
 function EditPostModal({
   post,
-  setModal,
+  setShowModalEditPost,
 }: {
-  post: PostDBType;
-  setModal: Dispatch<SetStateAction<boolean>>;
+  post: PostType;
+  setShowModalEditPost: Dispatch<SetStateAction<boolean>>;
 }) {
+  const user = useUser();
   const postPrivacy: PrivacyType = privacyOptions.find(
     (item) => item.value === post.privacy,
   ) ?? { icon: Globe, label: "عام", value: "PUBLIC" };
@@ -92,16 +94,16 @@ function EditPostModal({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
+        queryKey: ["user_posts", user.id],
       });
-      setModal(false);
+      setShowModalEditPost(false);
     },
   });
   const handleEditPost = async (data: EditPostModalFormType) => {
     mutate(data);
   };
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur z-60">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur z-50">
       <motion.form
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -111,12 +113,11 @@ function EditPostModal({
       >
         <EditPostModalHeader
           setValue={setValue}
-          setModal={setModal}
+          setShowModalEditPost={setShowModalEditPost}
           commentsDisabled={commentsDisabled}
           loading={loading}
           isPinnedToProfile={isPinnedToProfile}
         />
-
         <hr className="border-white opacity-3 my-2" />
         {error && (
           <p className="text-sm text-red-500 mb-2 bg-red-100 p-1 font-semibold flex items-center gap-2">

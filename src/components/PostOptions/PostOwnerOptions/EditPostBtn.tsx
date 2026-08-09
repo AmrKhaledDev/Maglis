@@ -1,21 +1,26 @@
-import { PostDBType } from "@/types/Post.type";
 import { useState } from "react";
 import { Pencil } from "lucide-react";
+import { PostType } from "@/types/Post.type";
 import EditPostModal from "../EditPostModal/EditPostModal";
 // ================================================================
-function EditPostBtn({ post }: { post: PostDBType }) {
-  const [modal, setModal] = useState(false);
+function EditPostBtn({ post }: { post: PostType }) {
+  const [showModalEditPost, setShowModalEditPost] = useState(false);
   return (
     <div className="w-full">
       <button
         onClick={() => {
-          setModal(true);
+          setShowModalEditPost(true);
         }}
         className="postBtnAct"
       >
         <Pencil className="postBtnActIcon" /> تعديل
       </button>
-      {modal && <EditPostModal post={post} setModal={setModal} />}
+      {showModalEditPost && (
+        <EditPostModal
+          post={post}
+          setShowModalEditPost={setShowModalEditPost}
+        />
+      )}
     </div>
   );
 }

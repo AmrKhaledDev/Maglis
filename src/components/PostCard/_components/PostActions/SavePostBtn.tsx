@@ -2,12 +2,13 @@
 import { SavePostAction } from "@/actions/SavePost/SavePost.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
 // ================================================
-function SavePostBtn({ post }: { post: PostDBType }) {
+function SavePostBtn({ post }: { post: PostType }) {
   const router = useRouter();
   const { setToast } = useToast();
   const queryClient = useQueryClient();
@@ -40,7 +41,7 @@ function SavePostBtn({ post }: { post: PostDBType }) {
     >
       <Bookmark
         strokeWidth={1}
-        className={`size-5  ${isSaved && "fill-green-500 text-green-500"}`}
+        className={clsx("size-5", isSaved && "fill-green-500 text-green-500")}
       />
     </button>
   );

@@ -1,10 +1,10 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
-import { PostDBType } from "@/types/Post.type";
+import { PostType } from "@/types/Post.type";
 import { Link2 } from "lucide-react";
 import { useState } from "react";
 // ====================================================
-function OptionsCopyLinkBtn({ post }: { post: PostDBType }) {
+function OptionsCopyLinkBtn({ post }: { post: PostType }) {
   const [loading, setLoading] = useState(false);
   const { setActiveMenu } = useActiveMenu();
   const { setToast } = useToast();
