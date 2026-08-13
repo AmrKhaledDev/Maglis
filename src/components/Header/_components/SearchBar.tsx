@@ -3,11 +3,9 @@ import { SearchUsersAction } from "@/actions/Search/SearchUsers.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { UserSearchResult } from "@/types/UserSearchResult.type";
-import clsx from "clsx";
 import { Search } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import UsersSearchResult from "./UsersSearchResult";
 // ============================================
 function SearchBar() {
   const userSession = useUser();
@@ -57,49 +55,7 @@ function SearchBar() {
           <Search className="size-8 p-2 mr-1 rounded-full ring ring-gray-50/10 bg-[#c5ab77]/10 mytransition shadow hover:scale-105" />
         </button>
       </div>
-      <div
-        className={clsx(
-          "p-3 absolute ring ring-gray-50/2 bg-gray-800 w-full rounded-2xl mt-1 shadow-2xl flex flex-col gap-2",
-          {
-            hidden: !searchValue.trim() || (data && data.length < 1),
-          },
-        )}
-      >
-        {data &&
-          data.length > 0 &&
-          data.map((user) => (
-            <Link
-              href={user.id === userSession.id ? "/u/profile" : `/u/${user.id}`}
-              key={user.id}
-              className="flex items-center gap-3 hover:bg-slate-900 mytransition"
-            >
-              <Image
-                src={user.image || "/user.jpg"}
-                alt={user.name}
-                width={50}
-                height={50}
-                className="rounded-full object-cover size-9 shrink-0"
-              />
-              <div className="flex items-center gap-1.5">
-                <h2 className="text-nowrap text-sm font-semibold text-gray-200">
-                  {user.name}
-                </h2>
-                {user.id === userSession.id && (
-                  <>
-                    <span className="size-0.75 shadow rounded-full bg-gray-500 shrink-0" />
-                    <h3 className="font-semibold text-xs text-green-600">
-                      أنت
-                    </h3>
-                  </>
-                )}
-                <span className="size-0.75 shadow rounded-full bg-gray-500 shrink-0" />
-                <p className="line-clamp-1 text-xs font-normal text-gray-300">
-                  {user.bio}
-                </p>
-              </div>
-            </Link>
-          ))}
-      </div>
+      <UsersSearchResult data={data} searchValue={searchValue} />
     </div>
   );
 }

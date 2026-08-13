@@ -29,12 +29,13 @@ function SingleComment({
           <CommentOptions
             comment={comment}
             setCurrentComment={setCurrentComment}
+            postAuthorId={post.authorId}
           />
         </div>
         <CommentContent comment={comment} />
         <hr className="border-white opacity-3" />
         <div className="flex items-center justify-between">
-          <CommentActions comment={comment} />
+          <CommentActions comment={comment} commentsIsDisabled={post.commentsDisabled}/>
           <div className="flex items-center gap-3">
             <p className="text-xs text-slate-300">
               {formatLikes(comment.likeForComments.length)}

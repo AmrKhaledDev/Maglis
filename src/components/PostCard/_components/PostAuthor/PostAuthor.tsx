@@ -3,17 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import relativeTime from "dayjs/plugin/relativeTime";
 import local from "dayjs/locale/ar";
-import { useUser } from "@/providers/UserProvider";
 import PostAuthorActions from "./PostAuthorAction";
 import PostPrivacy from "../../../PostPrivacy/PostPrivacy";
 import { PostType } from "@/types/Post.type";
+import { UrlUserProfile } from "@/lib/UrlUserProfile";
 // =========================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
 function PostAuthor({ post }: { post: PostType }) {
-  const userSession = useUser();
-  const url =
-    userSession.id === post.authorId ? `/u/profile` : `/u/${post.authorId}`;
   return (
     <div className="flex gap-2 items-center">
       <Image
@@ -27,7 +24,7 @@ function PostAuthor({ post }: { post: PostType }) {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">
             <Link
-              href={url}
+              href={UrlUserProfile(post.authorId)}
               className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
             >
               {post.author.name}

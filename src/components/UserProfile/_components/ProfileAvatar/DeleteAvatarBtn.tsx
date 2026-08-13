@@ -1,18 +1,18 @@
 import { DeleteUserImageAction } from "@/actions/User/DeleteUserImageAction";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 // ======================================
 function DeleteImageBtn({
-  setShowEditAvatarModal,
   setError,
   typeImage,
 }: {
-  setShowEditAvatarModal: Dispatch<SetStateAction<boolean>>;
   setError: Dispatch<SetStateAction<string>>;
   typeImage: "COVER" | "AVATAR";
 }) {
+  const {setActiveModal} = useActiveModal()
   const user = useUser();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ function DeleteImageBtn({
           result.message || "حدث خطأ أثناء حذف صورة الملف الشخصي.",
         );
       router.refresh();
-      setShowEditAvatarModal(false);
+      setActiveModal(null);
     } catch (error) {
       console.error(error);
       setError("حدث خطأ أثناء حذف صورة الملف الشخصي.");

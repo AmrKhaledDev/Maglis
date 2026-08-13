@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { useUser } from "@/providers/UserProvider";
 import ReplyOptions from "./ReplyOptions";
 import { CommentType } from "@/types/Comment.type";
+import { UrlUserProfile } from "@/lib/UrlUserProfile";
 // ===============================================================
 function ReplyHeader({
   reply,
@@ -11,20 +11,14 @@ function ReplyHeader({
   topLevelComment: CommentType;
 }) {
   if (!reply.parent) return null;
-  const user = useUser();
-  const urlProfile =
-    user.id === reply.parent.userId ? "/profile" : `/u/profile/${reply.userId}`;
-  const urlTopLevelCommentOwner =
-    user.id === topLevelComment.userId
-      ? "/profile"
-      : `/u/profile/${reply.userId}`;
   return (
     <div className="flex justify-between">
       <div className="flex items-center gap-5 mb-1">
         <p className="text-[10px] text-gray-400 flex items-center gap-1">
           رداً على
           <Link
-            href={urlProfile}
+            target="_blank"
+            href={UrlUserProfile(reply.parent.userId)}
             className="text-blue-400 block hover:underline"
           >
             {reply.parent?.user.name}
@@ -33,14 +27,15 @@ function ReplyHeader({
         <p className="text-[10px] text-gray-400 flex items-center gap-1">
           في تعليق
           <Link
-            href={urlTopLevelCommentOwner}
+            target="_blank"
+            href={UrlUserProfile(topLevelComment.userId)}
             className="text-blue-400 block hover:underline"
           >
             {topLevelComment.user.name}
           </Link>
         </p>
       </div>
-      <ReplyOptions reply={reply} />
+      <ReplyOptions reply={reply} commentId={topLevelComment.id} />
     </div>
   );
 }

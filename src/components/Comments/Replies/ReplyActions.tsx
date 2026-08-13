@@ -8,7 +8,13 @@ import { CommentType } from "@/types/Comment.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Heart, MessageCircleReply } from "lucide-react";
 // ==========================================================================
-function ReplyActions({ reply }: { reply: CommentType }) {
+function ReplyActions({
+  reply,
+  commentsIsDisabled,
+}: {
+  reply: CommentType;
+  commentsIsDisabled: boolean;
+}) {
   const { setShowReplyComposer } = useRepliesState();
   const user = useUser();
   const { setToast } = useToast();
@@ -43,14 +49,18 @@ function ReplyActions({ reply }: { reply: CommentType }) {
             className={`size-3.5 disabled:cursor-default ${isLiker && "fill-red-500 text-red-500"}`}
           />
         </button>
-        <button
-          onClick={() =>
-            setShowReplyComposer((prev) => (prev === reply.id ? "" : reply.id))
-          }
-          className="not-disabled:cursor-pointer"
-        >
-          <MessageCircleReply strokeWidth={1.5} className="size-3.5" />
-        </button>
+        {!commentsIsDisabled && (
+          <button
+            onClick={() =>
+              setShowReplyComposer((prev) =>
+                prev === reply.id ? "" : reply.id,
+              )
+            }
+            className="not-disabled:cursor-pointer"
+          >
+            <MessageCircleReply strokeWidth={1.5} className="size-3.5" />
+          </button>
+        )}
       </div>
       <div className="flex items-center gap-2">
         <p className="text-[10px] text-slate-300">

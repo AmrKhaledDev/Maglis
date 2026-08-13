@@ -21,11 +21,11 @@ function Toast() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="sticky top-19.5 z-20 "
+          className="fixed top-0 w-full z-100"
         >
           <p
             className={clsx(
-              "p-5 font-semibold flex items-center gap-3 backdrop-blur-3xl",
+              "p-7 font-semibold flex items-center gap-3 backdrop-blur-3xl",
               toast.type == "error" && "text-red-500 bg-red-900/40",
               toast.type == "success" && "text-emerald-500 bg-emerald-900/40",
             )}

@@ -5,7 +5,7 @@ export type CommentType = Prisma.CommentGetPayload<{
     parent: {
       include: {
         user: {
-         select: { name: true, id: true };
+          select: { name: true; id: true };
         };
       };
     };
@@ -25,6 +25,11 @@ export type CommentType = Prisma.CommentGetPayload<{
     _count: {
       select: {
         replies: true;
+      };
+    };
+    post: {
+      select: {
+        authorId: true;
       };
     };
   };

@@ -7,6 +7,7 @@ import { useState } from "react";
 import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
 import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
+import { Gem } from "lucide-react";
 // ================================================================================
 function SingleReply({
   reply,
@@ -24,6 +25,11 @@ function SingleReply({
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="bg-white/3 p-3 ring ring-gray-50/10 rounded-xl shadow w-full mt-2 flex flex-col gap-3">
+        {reply.isFeatured && (
+          <p className="flex items-center gap-1 text-[11px] text-yellow-600">
+            <Gem strokeWidth={1.5} className="size-3.5" /> رد مميز
+          </p>
+        )}
         <ReplyHeader reply={reply} topLevelComment={topLevelComment} />
         <ReplyAuthor post={post} reply={reply} />
         <div className="flex flex-col gap-2">
@@ -49,7 +55,10 @@ function SingleReply({
           )}
         </div>
         <hr className="border-white opacity-2" />
-        <ReplyActions reply={reply} />
+        <ReplyActions
+          reply={reply}
+          commentsIsDisabled={post.commentsDisabled}
+        />
       </div>
       <Replies
         userOwnerCommentName={reply.user.name}

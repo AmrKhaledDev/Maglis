@@ -1,12 +1,12 @@
 import ReactPlayer from "react-player";
-import { useState } from "react";
 import NoDataMessage from "./NoDataMessage";
 import { useQuery } from "@tanstack/react-query";
 import { GetUserVideosAction } from "@/actions/User/GetUserVideos.action";
 import ProfileLoader from "./ProfileLoader";
+import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
 // ==========================================================
 function UserVideos({ userId }: { userId: string }) {
-  const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
+  const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
   const {
     data: media,
     isPending,
@@ -26,7 +26,7 @@ function UserVideos({ userId }: { userId: string }) {
   return (
     <div className="w-full justify-center flex">
       {media && media.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 w-full">
+        <div className="grid grid-cols-3 gap-4 w-full">
           {media.map((video) => (
             <button
               key={video.id}

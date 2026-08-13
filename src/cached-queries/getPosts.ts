@@ -50,6 +50,11 @@ export const getPosts = Cache(
                 replies: true,
               },
             },
+            post: {
+              select: {
+                authorId: true,
+              },
+            },
           },
         },
       },

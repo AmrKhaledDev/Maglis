@@ -1,18 +1,22 @@
-import { Ellipsis, Pencil } from "lucide-react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Ellipsis } from "lucide-react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { motion } from "framer-motion";
-import BtnDeleteComment from "../ButtonsOptions/BtnDeleteComment";
-import BtnCopyContentTxt from "../ButtonsOptions/BtnCopyContentTxt";
 import { Comment } from "@prisma/client";
-import BtnPinnedComment from "../ButtonsOptions/BtnPinnedComment";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
+import PinnedCommentBtn from "./ButtonsOptions/PinnedCommentBtn";
+import DeleteCommentBtn from "./ButtonsOptions/DeleteCommentBtn";
+import CopyCommentContentBtn from "./ButtonsOptions/CopyCommentContentBtn";
+import EditCommentBtn from "./ButtonsOptions/EditCommentBtn";
+import clsx from "clsx";
 // ===============================================================================
 function CommentOptions({
   comment,
   setCurrentComment,
+  postAuthorId
 }: {
   comment: Comment;
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
+  postAuthorId:string
 }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
   const [publicLoading, setPublicLoading] = useState(false);
@@ -22,8 +26,10 @@ function CommentOptions({
         onClick={() =>
           setActiveMenu((prev) => (prev === comment.id ? "" : comment.id))
         }
-        className={`cursor-pointer text-slate-300 btnActiveMenu h-fit hover:bg-white/5 mytransition hover:shadow rounded-full p-0.5
-          ${activeMenu === comment.id && "bg-white/5"}`}
+        className={clsx(
+          "cursor-pointer text-slate-300 btnActiveMenu h-fit hover:bg-white/5 mytransition hover:shadow rounded-full p-0.5",
+          activeMenu === comment.id && "bg-white/5",
+        )}
       >
         <Ellipsis className="size-4" strokeWidth={1.5} />
       </button>
@@ -34,32 +40,25 @@ function CommentOptions({
           transition={{ duration: 0.3 }}
           className="bgOptionsBox boxMenu rounded-lg w-30"
         >
-          <button
-            onClick={() => {
-              setActiveMenu("");
-              setCurrentComment(comment);
-            }}
-            className="flex items-center gap-2 text-xs hover:bg-white mytransition cursor-pointer"
-          >
-            <Pencil className="size-4" /> تعديل
-          </button>
-          <BtnPinnedComment
+          <EditCommentBtn
+            comment={comment}
+            setCurrentComment={setCurrentComment}
+          />
+          <PinnedCommentBtn
+            comment={comment}
+            loading={publicLoading}
+            setLoading={setPublicLoading}
+            postAuthorId={postAuthorId}
+          />
+          <CopyCommentContentBtn
             comment={comment}
             loading={publicLoading}
             setLoading={setPublicLoading}
           />
-          {comment.content && (
-            <BtnCopyContentTxt
-              content={comment.content}
-              loading={publicLoading}
-              setLoading={setPublicLoading}
-            />
-          )}
-          <hr className=" border-zinc-700 opacity-5" />
-          <BtnDeleteComment
+          <DeleteCommentBtn
             loading={publicLoading}
             setLoading={setPublicLoading}
-            commentId={comment.id}
+            comment={comment}
           />
         </motion.div>
       )}

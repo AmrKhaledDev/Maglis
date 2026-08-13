@@ -1,25 +1,28 @@
 import { DeleteCommentAction } from "@/actions/Comment/DeleteComment.action";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
+import { useUser } from "@/providers/UserProvider";
+import { Comment } from "@prisma/client";
 import { Trash2 } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 // ===============================================
-function BtnDeleteComment({
-  commentId,
+function DeleteCommentBtn({
+  comment,
   loading,
   setLoading,
 }: {
-  commentId: string;
+  comment: Comment;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }) {
+  const userSession = useUser();
   const { setToast } = useToast();
-  const {setActiveMenu} = useActiveMenu()
+  const { setActiveMenu } = useActiveMenu();
   const handleDeleteComment = async () => {
     try {
       setLoading(true);
       setActiveMenu("");
-      const result = await DeleteCommentAction(commentId);
+      const result = await DeleteCommentAction(comment.id);
       if (!result.success)
         return setToast({
           open: true,
@@ -38,14 +41,21 @@ function BtnDeleteComment({
     }
   };
   return (
-    <button
-      disabled={loading}
-      onClick={handleDeleteComment}
-      className="flex items-center gap-2 text-xs not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer text-red-600"
-    >
-      <Trash2 className="size-4" /> حذف
-    </button>
+    <>
+      {userSession.id == comment.userId && (
+        <>
+          <hr className=" border-zinc-700 opacity-5" />
+          <button
+            disabled={loading}
+            onClick={handleDeleteComment}
+            className="flex items-center gap-2 text-xs not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer text-red-600"
+          >
+            <Trash2 className="size-4" /> حذف
+          </button>
+        </>
+      )}
+    </>
   );
 }
 
-export default BtnDeleteComment;
+export default DeleteCommentBtn;

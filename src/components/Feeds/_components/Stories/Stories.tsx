@@ -3,19 +3,19 @@ import { Plus } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
-import { useState } from "react";
 import StoryModal from "./_components/StoryModal";
 import { useUser } from "@/providers/UserProvider";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 // =============================================================
 function Stories() {
-  const [showModal, setShowModal] = useState(false);
   const user = useUser();
+  const { activeModal, setActiveModal } = useActiveModal();
   return (
     <div>
       <Swiper slidesPerView={"auto"} spaceBetween={6} className="w-full h-30 ">
         <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-20! justify-center">
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => setActiveModal("create_story_modal")}
             className="relative cursor-pointer"
           >
             <Image
@@ -56,7 +56,7 @@ function Stories() {
             </SwiperSlide>
           ))}
       </Swiper>
-      {showModal && <StoryModal setShowModal={setShowModal} />}
+      {activeModal == "create_story_modal" && <StoryModal />}
     </div>
   );
 }

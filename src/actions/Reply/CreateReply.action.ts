@@ -15,7 +15,25 @@ export const CreateReplyAction = async (
 }> => {
   try {
     if (!parentId) return { success: false, message: "حدث خطأ غير متوقع." };
-
+    const parent = await prisma.comment.findUnique({
+      where: {
+        id: parentId,
+      },
+      select: {
+        post: { select: { commentsDisabled: true, id: true } },
+      },
+    });
+    if (!parent)
+      return {
+        success: false,
+        message:
+          "لا يمكنك الرد على هذا التعليق ربما تم حذفه أو إيقاف التعليقات.",
+      };
+    if (parent.post.commentsDisabled)
+      return {
+        success: false,
+        message: "لا يمكنك التعليق, تم وقف ميزة التعليقات على هذا المنشور.",
+      };
     const validatingSession = await validateSession();
     if (!validatingSession.success || !validatingSession.session)
       return {
@@ -31,28 +49,22 @@ export const CreateReplyAction = async (
     });
     if (!validation.success)
       return { success: false, message: validation.error.issues[0].message };
-
     await prisma.comment.create({
       data: {
         parentId,
         userId: session.id,
         content,
         image: imageUrl,
+        postId: parent.post.id,
       },
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return {
       success: true,
     };
   } catch (error: any) {
     console.error("CreateReplyAction Error:", error);
-    if (error?.code === "P2003" || error?.code === "P2025") {
-      return {
-        success: false,
-        message: "تعذر إرسال الرد. التعليق الأصلي لم يعد متاحًا.",
-      };
-    }
-
     return { success: false, message: "حدث خطأ أثناء إرسال الرد الخاص بك." };
   }
 };

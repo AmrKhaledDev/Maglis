@@ -22,6 +22,13 @@ export type PostType = Prisma.PostGetPayload<{
         createdAt: "desc";
       };
       include: {
+        parent: {
+          include: {
+            user: {
+              select: { name: true; id: true };
+            };
+          };
+        };
         user: {
           select: {
             image: true;
@@ -38,6 +45,11 @@ export type PostType = Prisma.PostGetPayload<{
         _count: {
           select: {
             replies: true;
+          };
+        };
+        post: {
+          select: {
+            authorId: true;
           };
         };
       };

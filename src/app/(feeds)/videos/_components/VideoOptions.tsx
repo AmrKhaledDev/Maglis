@@ -11,8 +11,8 @@ function VideoOptions({ video }: { video: PostType }) {
       <button
         onClick={() => setActiveMenu(video.id)}
         className={clsx(
-          "cursor-pointer btnActiveMenu mt-2 p-2 rounded-full text-gray-300 hover:text-white mytransition",
-          activeMenu && "bg-black/30 shadow",
+          "cursor-pointer btnActiveMenu mt-2 p-1.5 rounded-full text-gray-300 hover:text-white mytransition",
+          activeMenu === video.id && "bg-black/30 shadow",
         )}
       >
         <Ellipsis strokeWidth={1.5} />

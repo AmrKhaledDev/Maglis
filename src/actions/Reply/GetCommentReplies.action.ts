@@ -42,10 +42,18 @@ export const GetCommentRepliesAction = async (
             replies: true,
           },
         },
+        post: {
+          select: {
+            authorId: true,
+          },
+        },
       },
-      orderBy: {
-        createdAt: "asc",
-      },
+      orderBy: [
+        { isFeatured: "desc" },
+        {
+          createdAt: "asc",
+        },
+      ],
     });
     return { success: true, data: replies };
   } catch (error) {

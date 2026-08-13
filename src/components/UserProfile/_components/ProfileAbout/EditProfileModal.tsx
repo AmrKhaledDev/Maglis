@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import EditProfileHeader from "./EditProfileHeader";
 import BasicInfoSection from "./Sections/BasicInfoSection";
 import CareerInfoSection from "./Sections/CareerInfoSection";
@@ -18,9 +18,11 @@ import AlertMessage from "@/components/AlertMessage/AlertMessage";
 function EditProfileModal({
   setShowEditProfileModal,
   user,
+  showEditProfileModal,
 }: {
   setShowEditProfileModal: Dispatch<SetStateAction<boolean>>;
   user: UserWithSocialLinkType;
+  showEditProfileModal: boolean;
 }) {
   const socialLinks = Object.fromEntries(
     user.socialLinks.map((link) => [link.platform, link.link]),
@@ -76,6 +78,13 @@ function EditProfileModal({
       });
     },
   });
+  useEffect(() => {
+    if (showEditProfileModal) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showEditProfileModal]);
   const onSubmit = (data: FormHookValues) => mutate(data);
   return (
     <motion.div

@@ -4,6 +4,7 @@ import { UseFieldArrayAppend } from "react-hook-form";
 import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 import AddImage from "../AddImage";
 import AddVideo from "../AddVideo";
+import { TbEdit } from "react-icons/tb";
 // ==================================================
 function EditPostModalFooter({
   fields,
@@ -42,9 +43,16 @@ function EditPostModalFooter({
       <button
         disabled={loading}
         type="submit"
-        className="text-sm text-gray-200 rounded-full not-disabled:hover:outline disabled:bg-gray-400 disabled:text-gray-600 not-disabled:active:outline active:outline-blue-600 outline-offset-2 not-disabled:hover:outline-blue-600 bg-blue-600  relative block py-2 w-30 shadow font-semibold not-disabled:cursor-pointer"
+        className="text-sm gap-2 flex items-center justify-center text-gray-200 rounded-full not-disabled:hover:outline disabled:bg-gray-400 disabled:text-gray-600 not-disabled:active:outline active:outline-blue-600 outline-offset-2 not-disabled:hover:outline-blue-600 bg-blue-600 relative py-2 w-30 shadow font-semibold not-disabled:cursor-pointer"
       >
-      {loading? "جاري النشر..." :"نشر"}
+        {loading ? (
+          "جاري التعديل..."
+        ) : (
+          <>
+            <TbEdit className="text-xl"/>
+          تعديل
+          </>
+        )}
       </button>
     </div>
   );

@@ -1,34 +1,25 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import EditAvatarModal from "../EditProfileImageModal";
+import { useState } from "react";
 import { User } from "@prisma/client";
 import { useUser } from "@/providers/UserProvider";
 import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
+import EditProfileImageModal from "../EditProfileImageModal";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ===========================================
 function ProfileAvatar({ user }: { user: User }) {
+  const { activeModal, setActiveModal } = useActiveModal();
   const sessionUser = useUser();
-  const [showEditAvatarModal, setShowEditAvatarModal] = useState(false);
   const [showAvatarModal, setShowAvatarModal] = useState({
     open: false,
     preview: "",
   });
-  useEffect(() => {
-    const handle = (e: MouseEvent) => {
-      if (e.target instanceof Element) {
-        if (!e.target.closest(".buttonOpenModalEditAvatar, .modalEditAvatar"))
-          setShowEditAvatarModal(false);
-      }
-    };
-    document.addEventListener("click", handle);
-    return () => document.removeEventListener("click", handle);
-  }, []);
   return (
     <div>
       <button
         onClick={() => {
           if (user.id === sessionUser.id) {
-            setShowEditAvatarModal(true);
+            setActiveModal("edit_avatar_modal");
             return;
           }
           setShowAvatarModal({
@@ -36,7 +27,7 @@ function ProfileAvatar({ user }: { user: User }) {
             preview: user.image || "/user.jpg",
           });
         }}
-        className="buttonOpenModalEditAvatar relative shrink-0 shadow size-35 -mt-10 cursor-pointer rounded-full"
+        className="relative shrink-0 shadow size-35 -mt-10 cursor-pointer rounded-full"
       >
         <Image
           src={user.image || "/user.jpg"}
@@ -45,10 +36,9 @@ function ProfileAvatar({ user }: { user: User }) {
           className="object-cover rounded-full"
         />
       </button>
-      {showEditAvatarModal && user.id === sessionUser.id && (
-        <EditAvatarModal
+      {activeModal == "edit_avatar_modal" && user.id === sessionUser.id && (
+        <EditProfileImageModal
           typeImage="AVATAR"
-          setShowEditProfileImageModal={setShowEditAvatarModal}
           image={user.image}
           user={user}
         />

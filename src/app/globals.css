@@ -13,20 +13,23 @@
 @utility postBtnAct {
   @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:bg-white mytransition;
 }
-@utility postBtnActIcon{
-  @apply size-4.5
+@utility commentBtnAct{
+  @apply flex items-center gap-2 text-[11px] not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer
 }
-@utility bgOptionsBox{
-  @apply p-2 shadow-2xl flex  flex-col gap-2 absolute bg-gray-300 text-slate-900 rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold
+@utility postBtnActIcon {
+  @apply size-4.5;
 }
-@utility  profileSectionStyle{
-  @apply flex flex-col gap-6
+@utility bgOptionsBox {
+  @apply p-2 shadow-2xl flex  flex-col gap-2 absolute bg-gray-300 text-slate-900 rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold;
 }
-@utility profileSectionFieldsStyle{
-  @apply flex flex-col gap-4
+@utility profileSectionStyle {
+  @apply flex flex-col gap-6;
 }
-@utility videoBtnActionStyle{
-  @apply not-disabled:cursor-pointer mytransition flex bg-linear-to-r from-black/5 to-black shadow-[0_0_4px_black] rounded-full p-2.5 items-center gap-1 not-disabled:hover:scale-103
+@utility profileSectionFieldsStyle {
+  @apply flex flex-col gap-4;
+}
+@utility videoBtnActionStyle {
+  @apply not-disabled:cursor-pointer size-fit flex bg-linear-to-t from-white/8 via-black/7 to-white/5 shadow rounded-full p-2.5 items-center gap-1 not-disabled:hover:scale-103;
 }
 @theme inline {
   --font-heading: var(--font-sans);
@@ -78,7 +81,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(20.463% 0.00002 271.152 / 0.552);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -150,4 +153,17 @@
   html {
     @apply font-sans;
   }
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #6d6d6d87;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(165, 163, 163, 0.529);
 }

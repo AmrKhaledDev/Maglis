@@ -49,6 +49,7 @@ export const EditCommentAction = async (
       },
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true };
   } catch (error) {
     console.error(error);

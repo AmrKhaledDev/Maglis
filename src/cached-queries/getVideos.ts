@@ -33,9 +33,10 @@ export const getVideos = Cache(
           },
         },
         comments: {
-          orderBy: {
-            createdAt: "desc",
+          where: {
+            parentId: null,
           },
+          orderBy: [{ isPinned: "desc" }, { createdAt: "desc" }],
           include: {
             user: {
               select: {
@@ -60,6 +61,11 @@ export const getVideos = Cache(
             _count: {
               select: {
                 replies: true,
+              },
+            },
+            post: {
+              select: {
+                authorId: true,
               },
             },
           },

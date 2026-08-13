@@ -24,7 +24,7 @@ function MediaPreviewModal({
     const handle = (e: MouseEvent) => {
       if (e.target instanceof Element) {
         if (!e.target.closest(".mediaPreview"))
-          setShowMedia((prev) => ({ open: false, preview: "" }));
+          setShowMedia({ open: false, preview: "" });
       }
     };
     document.addEventListener("click", handle);

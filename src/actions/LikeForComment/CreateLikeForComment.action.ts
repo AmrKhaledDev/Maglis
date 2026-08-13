@@ -45,6 +45,7 @@ export const CreateLikeForComentAction = async (
       });
     }
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return {
       success: true,
     };

@@ -4,6 +4,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { Comment, Prisma } from "@prisma/client";
 import { PostType } from "@/types/Post.type";
+import Link from "next/link";
+import { UrlUserProfile } from "@/lib/UrlUserProfile";
 // =========================================================================
 dayjs.locale("ar");
 dayjs.extend(relativeTime);
@@ -34,7 +36,13 @@ function CommentAuthor({
       />
       <div className="w-full">
         <div className="flex items-center gap-1">
-          <h2 className="text-sm font-semibold">{user.name}</h2>
+          <Link
+            target="_blank"
+            href={UrlUserProfile(comment.userId)}
+            className="text-sm font-semibold"
+          >
+            {user.name}
+          </Link>
           {user.username && (
             <>
               <span className="size-[2.5px] rounded-full block bg-white opacity-25" />

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Save } from "lucide-react";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
@@ -11,19 +11,19 @@ import EditImageModalHeader from "./ProfileAvatar/EditImageModalHeader";
 import ReplaceImageBtn from "./ProfileAvatar/ReplaceImageBtn";
 import DeleteImageBtn from "./ProfileAvatar/DeleteAvatarBtn";
 import { User } from "@prisma/client";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ==============================================================
 function EditProfileImageModal({
-  setShowEditProfileImageModal,
   typeImage,
   image,
   user,
 }: {
-  setShowEditProfileImageModal: Dispatch<SetStateAction<boolean>>;
   typeImage: "AVATAR" | "COVER";
   image: string | null;
   user: User;
 }) {
   if (!typeImage) return null;
+  const { activeModal, setActiveModal } = useActiveModal();
   const [imagePreview, setImagePreview] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,6 @@ function EditProfileImageModal({
       if (!result.success) return setError(result.message);
       setImageFile(null);
       setImagePreview("");
-      setShowEditProfileImageModal(false);
       router.refresh();
     } catch (error) {
       console.error(error);
@@ -78,17 +77,12 @@ function EditProfileImageModal({
           },
         )}
       >
-        <EditImageModalHeader
-          typeImage={typeImage}
-          setShowEditAvatarModal={setShowEditProfileImageModal}
-        />
+        <EditImageModalHeader typeImage={typeImage} />
         <div
           className={clsx(
             "w-full h-full flex items-center justify-center bg-gray-700",
-            {
-              "p-5": typeImage == "AVATAR",
-              "p-0": typeImage == "COVER",
-            },
+            typeImage == "AVATAR" && "p-5",
+            typeImage == "COVER" && "p-0",
           )}
         >
           <div
@@ -122,11 +116,7 @@ function EditProfileImageModal({
               <Save strokeWidth={1.5} /> حفظ
             </button>
           </div>
-          <DeleteImageBtn
-            setShowEditAvatarModal={setShowEditProfileImageModal}
-            setError={setError}
-            typeImage={typeImage}
-          />
+          <DeleteImageBtn setError={setError} typeImage={typeImage} />
         </div>
       </div>
     </motion.div>

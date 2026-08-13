@@ -19,7 +19,7 @@ export function ActiveMenuProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (e.target instanceof Element) {
-        if (!e.target.closest(".btnActiveMenu, .boxMenu, .button")) setActiveMenu("");
+        if (!e.target.closest(".btnActiveMenu, .boxMenu, .button, .boxEditPostModal")) setActiveMenu("");
       }
     };
     document.addEventListener("click", handle);

@@ -29,7 +29,7 @@ function UserSavedPosts({ userId }: { userId: string }) {
   return (
     <div className="w-full flex justify-center">
       {savedPosts && savedPosts.length > 0 ? (
-        <div className="grid grid-cols-3 gap-2  w-full">
+        <div className="grid grid-cols-3 gap-3  w-full">
           {savedPosts.map((saveItem) => (
             <div
               key={saveItem.id}

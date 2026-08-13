@@ -8,16 +8,16 @@ function VideoContent({ video }: { video: PostType }) {
   return (
     <>
       {video.content && (
-        <div className="flex items-end gap-1">
+        <div className="flex flex-col gap-2">
           <Linkify>
-            <p className={clsx(expanded ? "" : "line-clamp-2")}>
+            <p className={clsx("text-sm",expanded ? "" : "line-clamp-3")}>
               {video.content}
             </p>
           </Linkify>
           {video.content.length > 200 && (
             <button
               onClick={() => setExpanded(!expanded)}
-              className="font-bold cursor-pointer text-sm text-gray-300 shrink-0 hover:underline"
+              className="font-bold cursor-pointer w-fit text-sm text-blue-600 shrink-0 hover:underline"
             >
               {expanded ? "عرض أقل" : "عرض المزيد"}
             </button>

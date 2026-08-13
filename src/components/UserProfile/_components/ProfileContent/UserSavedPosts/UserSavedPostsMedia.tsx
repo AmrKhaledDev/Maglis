@@ -1,3 +1,4 @@
+import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
 import { SavePostType } from "@/types/SavePost.type";
 import clsx from "clsx";
 import Image from "next/image";
@@ -5,7 +6,7 @@ import { useState } from "react";
 import ReactPlayer from "react-player";
 // ===========================================================================
 function UserSavedPostsMedia({ saveItem }: { saveItem: SavePostType }) {
-  const [playingVideoId, setPlayingVideoId] = useState("");
+  const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
   return (
     <div
       className={clsx(

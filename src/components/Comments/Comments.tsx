@@ -25,10 +25,12 @@ function Comments({ post }: { post: PostType }) {
         currentComment={currentComment}
         setCurrentComment={setCurrentComment}
       />
+
       <div className="flex flex-col gap-3 mt-3">
         <p className="text-slate-300 flex items-center gap-1">
-          التعليقات <span>({post.comments.length})</span>
+          التعليقات <span>({comments.length})</span>
         </p>
+
         {comments.map((comment) => (
           <SingleComment
             key={comment.id}
@@ -37,7 +39,7 @@ function Comments({ post }: { post: PostType }) {
             post={post}
           />
         ))}
-        {post.comments.length > 3 && (
+        {comments.length > 3 && (
           <button
             onClick={() => setShowMoreComments(!showMoreComments)}
             className="text-xs w-fit mt-3 mx-auto hover:underline text-blue-500 cursor-pointer"

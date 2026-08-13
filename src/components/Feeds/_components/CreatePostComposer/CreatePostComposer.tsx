@@ -4,22 +4,23 @@ import MediaPicker from "./_components/MediaPicker";
 import MediaPreview from "./_components/MediaPreview/MediaPreview";
 import CreatePostTrigger from "./_components/CreatePostTrigger";
 import CreatePostModal from "./_components/CreatePostModal/CreatePostModal";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ==============================================
 function CreatePostComposer() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { activeModal } = useActiveModal();
   const [media, setMedia] = useState("");
   const [mediaFile, setMediaFile] = useState<File | null>(null);
-  useEffect(()=>{
-    if(isOpen){
-      setMedia("")
-      setMediaFile(null)
+  useEffect(() => {
+    if (activeModal == "create_post_modal") {
+      setMedia("");
+      setMediaFile(null);
     }
-  },[isOpen])
+  }, [activeModal == "create_post_modal"]);
   return (
     <div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-7 w-full">
-          <CreatePostTrigger setIsOpen={setIsOpen} />
+          <CreatePostTrigger />
           <MediaPicker setMedia={setMedia} setMediaFile={setMediaFile} />
         </div>
         <MediaPreview
@@ -29,7 +30,7 @@ function CreatePostComposer() {
           setMediaFile={setMediaFile}
         />
       </div>
-      {isOpen && <CreatePostModal setIsOpen={setIsOpen} />}
+      {activeModal == "create_post_modal" && <CreatePostModal />}
     </div>
   );
 }

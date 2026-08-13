@@ -74,52 +74,58 @@ function CommentComposer({
   });
 
   return (
-    <div className="flex flex-col gap-4">
-      {error && <AlertMessage message={error.message} type="error" />}
-      <div className="flex gap-2">
-        <Image
-          src={user.image ?? "/user.jpg"}
-          alt="صورتك"
-          width={60}
-          height={60}
-          className="object-cover size-7 rounded-full shrink-0"
-        />
-        <div className="border border-white/10 w-full focus-within:border-white/25 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
-          <CommentTextarea
-            content={content}
-            setContent={setContent}
-            setImagePreview={setImagePreview}
-            currentComment={currentComment}
-            user={user}
-            loading={loading}
-          />
-          <CommentImageUploadedPreview
-            imagePreview={imagePreview}
-            setImageFile={setImageFile}
-            setImagePreview={setImagePreview}
-          />
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleCreateComment();
-            }}
-            className="flex items-center justify-between w-full p-2"
-          >
-            <CommentSubmitButton
-              loading={loading}
-              setCurrentComment={setCurrentComment}
-              currentComment={currentComment}
-              content={content}
-              imagePreview={imagePreview}
+    <>
+      {!post.commentsDisabled ? (
+        <div className="flex flex-col gap-4">
+          {error && <AlertMessage message={error.message} type="error" />}
+          <div className="flex gap-2">
+            <Image
+              src={user.image ?? "/user.jpg"}
+              alt="صورتك"
+              width={60}
+              height={60}
+              className="object-cover size-7 rounded-full shrink-0"
             />
-            <CommentUploadImage
-              setImageFile={setImageFile}
-              setImagePreview={setImagePreview}
-            />
-          </form>
+            <div className="border border-white/10 w-full focus-within:border-white/25 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
+              <CommentTextarea
+                content={content}
+                setContent={setContent}
+                setImagePreview={setImagePreview}
+                currentComment={currentComment}
+                user={user}
+                loading={loading}
+              />
+              <CommentImageUploadedPreview
+                imagePreview={imagePreview}
+                setImageFile={setImageFile}
+                setImagePreview={setImagePreview}
+              />
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleCreateComment();
+                }}
+                className="flex items-center justify-between w-full p-2"
+              >
+                <CommentSubmitButton
+                  loading={loading}
+                  setCurrentComment={setCurrentComment}
+                  currentComment={currentComment}
+                  content={content}
+                  imagePreview={imagePreview}
+                />
+                <CommentUploadImage
+                  setImageFile={setImageFile}
+                  setImagePreview={setImagePreview}
+                />
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <AlertMessage type="warn" message="تم إيقاف ميزة التعليقات." />
+      )}
+    </>
   );
 }
 

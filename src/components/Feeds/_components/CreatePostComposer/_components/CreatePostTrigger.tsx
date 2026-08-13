@@ -1,14 +1,11 @@
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
 // ================================================================
-function CreatePostTrigger({
-  setIsOpen,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) {
+function CreatePostTrigger() {
   const user = useUser();
+  const { setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center gap-2 w-full">
       <Link href={"/u/profile"}>
@@ -21,7 +18,7 @@ function CreatePostTrigger({
         />
       </Link>
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => setActiveModal("create_post_modal")}
         className="p-3.5 flex-1 text-sm hover:border-gray-50/40 mytransition rounded-full border border-gray-50/20 text-gray-400 cursor-pointer text-start"
       >
         {`أهلًا ${user.name}، بماذا تفكر اليوم؟`}

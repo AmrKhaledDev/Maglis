@@ -1,22 +1,21 @@
 import { MessageSquareOff, X } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
 import { TiPin } from "react-icons/ti";
 import { UseFormSetValue } from "react-hook-form";
 import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ========================================================
 function EditPostModalHeader({
-  setShowModalEditPost,
   setValue,
   isPinnedToProfile,
   commentsDisabled,
   loading,
 }: {
-  setShowModalEditPost: Dispatch<SetStateAction<boolean>>;
   setValue: UseFormSetValue<EditPostModalFormType>;
   isPinnedToProfile: boolean;
   commentsDisabled: boolean;
   loading: boolean;
 }) {
+  const { activeModal, setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1.5">
@@ -42,7 +41,7 @@ function EditPostModalHeader({
       </div>
       <button
         type="button"
-        onClick={() => setShowModalEditPost(false)}
+        onClick={() => setActiveModal(null)}
         className="cursor-pointer button"
       >
         <X className="size-5" strokeWidth={1.4} />

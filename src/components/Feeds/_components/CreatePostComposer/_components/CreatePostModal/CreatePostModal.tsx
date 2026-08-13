@@ -13,12 +13,10 @@ import CreatePostModalCenter from "./CreatePostModalCenter";
 import CreatePostModalMedia from "./CreatePostModalMedia";
 import CreatePostModalFooter from "./CreatePostModalFooter";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ===========================================================
-function CreatePostModal({
-  setIsOpen,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) {
+function CreatePostModal() {
+  const { setActiveModal } = useActiveModal();
   const { control, register, handleSubmit, watch, setValue } =
     useForm<CreatePost_ModalFormType>({
       defaultValues: {
@@ -90,7 +88,7 @@ function CreatePostModal({
       queryClient.invalidateQueries({
         queryKey: ["user_postsVideos"],
       });
-      setIsOpen(false);
+      setActiveModal(null);
     },
   });
   const handleCreatePost = (data: CreatePost_ModalFormType) => {
@@ -121,7 +119,7 @@ function CreatePostModal({
             />
           </div>
           <button
-            onClick={() => setIsOpen(false)}
+            onClick={() => setActiveModal(null)}
             className="cursor-pointer text-gray-300 h-fit hover:text-white mytransition"
           >
             <X className="size-5" />

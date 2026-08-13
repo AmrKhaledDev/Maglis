@@ -1,5 +1,4 @@
 import { PostType } from "@/types/Post.type";
-import { Dispatch, SetStateAction } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 import { PrivacyType } from "@/types/Privacy.type";
@@ -16,14 +15,12 @@ import EditPostModalContent from "./EditPostModalContent";
 import EditPostModalFooter from "./EditPostModalFooter";
 import EditPostModalMedia from "./EditPostModalMedia";
 import { useUser } from "@/providers/UserProvider";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 // ==========================================================================================================
-function EditPostModal({
-  post,
-  setShowModalEditPost,
-}: {
-  post: PostType;
-  setShowModalEditPost: Dispatch<SetStateAction<boolean>>;
-}) {
+function EditPostModal({ post }: { post: PostType }) {
+  const { setActiveModal } = useActiveModal();
   const user = useUser();
   const postPrivacy: PrivacyType = privacyOptions.find(
     (item) => item.value === post.privacy,
@@ -96,24 +93,29 @@ function EditPostModal({
       queryClient.invalidateQueries({
         queryKey: ["user_posts", user.id],
       });
-      setShowModalEditPost(false);
+      setActiveModal(null);
     },
   });
   const handleEditPost = async (data: EditPostModalFormType) => {
     mutate(data);
   };
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+  return createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur z-50">
       <motion.form
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.1 }}
         onSubmit={handleSubmit(handleEditPost)}
-        className="w-200 p-3 max-h-150 overflow-y-auto ring ring-gray-50/10 bg-slate-800 rounded-2xl shadow-2xl text-white"
+        className="boxEditPostModal w-200 p-3 max-h-150 overflow-y-auto ring ring-gray-50/10 bg-slate-800 rounded-2xl shadow-2xl text-white"
       >
         <EditPostModalHeader
           setValue={setValue}
-          setShowModalEditPost={setShowModalEditPost}
           commentsDisabled={commentsDisabled}
           loading={loading}
           isPinnedToProfile={isPinnedToProfile}
@@ -145,7 +147,8 @@ function EditPostModal({
           loading={loading}
         />
       </motion.form>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

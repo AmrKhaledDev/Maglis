@@ -31,14 +31,14 @@ function SelectCityModal({
               <h2 className="text-[17px] text-gray-300 font-semibold">
                 المحافظات :
               </h2>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 {cities.map((city) => (
                   <button
                     disabled={currentCity === city}
                     type="button"
                     onClick={() => setValue("city", city)}
                     key={city}
-                    className="hover:bg-slate-900 flex items-center  justify-between disabled:bg-slate-900 disabled:outline-slate-900 text-sm outline-2 hover:outline-slate-900 not-disabled:outline-slate-700 outline-offset-3 bg-slate-700 rounded shadow text-gray-100 py-2 px-6 not-disabled:cursor-pointer font-semibold"
+                    className="hover:bg-slate-900 flex items-center  justify-between disabled:bg-slate-900  text-sm mytransition bg-slate-700 rounded shadow text-gray-100 py-2 px-6 not-disabled:cursor-pointer font-semibold"
                   >
                     {city}
                     {currentCity == city && <CircleCheck className="size-4" />}

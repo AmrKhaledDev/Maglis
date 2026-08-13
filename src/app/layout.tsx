@@ -9,6 +9,8 @@ import QueryProvider from "@/providers/QueryProvider";
 import { RepliesStateProvider } from "@/providers/RepliesStateProvider";
 import { UserProvider } from "@/providers/UserProvider";
 import GetSession from "@/auth/GetSession";
+import { PlayingVideoIdProvider } from "@/providers/PlayingVideoIdProvider";
+import ActiveModalProvider from "@/providers/ActiveModalProvider";
 // ========================================
 const tajawal = Tajawal({
   subsets: ["arabic"],
@@ -34,17 +36,21 @@ export default async function RootLayout({
       className={cn("h-full", "antialiased", tajawal.className, "font-sans")}
     >
       <body className="min-h-full flex flex-col bg-[#19191d] text-white">
-        <UserProvider user={session}>
-          <RepliesStateProvider>
-            <ActiveMenuProvider>
-              <TooltipProvider>
-                <QueryProvider>
-                  <ToastProvider> {children}</ToastProvider>
-                </QueryProvider>
-              </TooltipProvider>
-            </ActiveMenuProvider>
-          </RepliesStateProvider>
-        </UserProvider>
+        <QueryProvider>
+          <UserProvider user={session}>
+            <RepliesStateProvider>
+              <PlayingVideoIdProvider>
+                <ActiveMenuProvider>
+                  <ActiveModalProvider>
+                    <TooltipProvider>
+                      <ToastProvider> {children}</ToastProvider>
+                    </TooltipProvider>
+                  </ActiveModalProvider>
+                </ActiveMenuProvider>
+              </PlayingVideoIdProvider>
+            </RepliesStateProvider>
+          </UserProvider>
+        </QueryProvider>
       </body>
     </html>
   );

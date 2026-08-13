@@ -1,6 +1,6 @@
 import { Edit, SendHorizontal, X } from "lucide-react";
 import ReplyComposerUploadFile from "./ReplyComposerUploadFile";
-import { ReplyComposerActionsType } from "../../../_types/ReplyComposerActions.type";
+import { ReplyComposerActionsType } from "../../PostCard/_types/ReplyComposerActions.type";
 // ==========================================================
 function ReplyComposerActions({
   currentReply,

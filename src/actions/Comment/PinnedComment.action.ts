@@ -23,14 +23,18 @@ export const PinnedCommentAction = async (
       where: {
         id: commentId,
       },
-      select: { userId: true, isPinned: true },
+      select: {
+        userId: true,
+        isPinned: true,
+        post: { select: { authorId: true } },
+      },
     });
     if (!comment)
       return {
         success: false,
         message: "تعذر تثبيت التعليق . قد يكون تم حذفه أو لم يعد متاحًا.",
       };
-    if (comment.userId !== session.id)
+    if (comment.post.authorId !== session.id)
       return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
     await prisma.comment.update({
       where: {
@@ -41,6 +45,7 @@ export const PinnedCommentAction = async (
       },
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true };
   } catch (error) {
     console.error(error);

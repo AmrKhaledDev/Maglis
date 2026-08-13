@@ -10,7 +10,7 @@ function ProfileAbout({ user }: { user: UserWithSocialLinkType }) {
     <div className="p-2 flex flex-col gap-5">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl text-gray-200">معلومات شخصية</h2>
-        {user.id === sessionUser.id && <ButtonEditProfile user={user}/>}
+        {user.id === sessionUser.id && <ButtonEditProfile user={user} />}
       </div>
       <div className="flex flex-col gap-5 w-full">
         <p className=" text-gray-400">

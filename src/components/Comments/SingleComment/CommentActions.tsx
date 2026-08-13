@@ -6,7 +6,13 @@ import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentType } from "@/types/Comment.type";
 // =======================================================
-function CommentActions({ comment }: { comment: CommentType }) {
+function CommentActions({
+  comment,
+  commentsIsDisabled,
+}: {
+  comment: CommentType;
+  commentsIsDisabled: boolean;
+}) {
   const queryClient = useQueryClient();
   const { setShowReplyComposer } = useRepliesState();
   const user = useUser();
@@ -46,17 +52,19 @@ function CommentActions({ comment }: { comment: CommentType }) {
           className={`postBtnActIcon disabled:cursor-default ${isLikerForComment && "fill-red-500 text-red-500"}`}
         />
       </button>
-      <button
-        onClick={() =>
-          setShowReplyComposer((prev) =>
-            prev === comment.id ? "" : comment.id,
-          )
-        }
-        disabled={loading}
-        className="not-disabled:cursor-pointer"
-      >
-        <MessageCircleReply strokeWidth={1.5} className="postBtnActIcon" />
-      </button>
+      {!commentsIsDisabled && (
+        <button
+          onClick={() =>
+            setShowReplyComposer((prev) =>
+              prev === comment.id ? "" : comment.id,
+            )
+          }
+          disabled={loading}
+          className="not-disabled:cursor-pointer"
+        >
+          <MessageCircleReply strokeWidth={1.5} className="postBtnActIcon" />
+        </button>
+      )}
     </div>
   );
 }

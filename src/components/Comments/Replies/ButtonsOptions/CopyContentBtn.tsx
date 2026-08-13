@@ -1,23 +1,17 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
+import { CommentType } from "@/types/Comment.type";
 import { Copy } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
-// =========================================
-function BtnCopyContentTxt({
-  content,
-  loading,
-  setLoading,
-}: {
-  content: string;
-  loading: boolean;
-  setLoading: Dispatch<SetStateAction<boolean>>;
-}) {
+import { useState } from "react";
+// ===================================================
+function CopyContentBtn({ reply }: { reply: CommentType }) {
   const { setToast } = useToast();
+  const [loading, setLoading] = useState(false);
   const { setActiveMenu } = useActiveMenu();
   const handleCopyContent = async () => {
     try {
       setLoading(true);
-      await navigator.clipboard.writeText(content);
+      await navigator.clipboard.writeText(reply.content || "");
       setToast({
         open: true,
         message: "تم نسخ المحتوى إلى الحافظة",
@@ -37,14 +31,18 @@ function BtnCopyContentTxt({
     }
   };
   return (
-    <button
-      disabled={loading}
-      onClick={handleCopyContent}
-      className="flex items-center gap-2 text-xs not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer"
-    >
-      <Copy className="size-4" /> نسخ النص
-    </button>
+    <>
+      {reply.content && (
+        <button
+          onClick={handleCopyContent}
+          disabled={loading}
+          className="commentBtnAct"
+        >
+          <Copy className="size-4" /> نسخ النص
+        </button>
+      )}
+    </>
   );
 }
 
-export default BtnCopyContentTxt;
+export default CopyContentBtn;

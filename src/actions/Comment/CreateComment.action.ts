@@ -26,6 +26,14 @@ export const CreateCommentAction = async (
         success: false,
         message: "حدث خطأ غير متوقع يتعذر إنشاء تعليقك.",
       };
+    const post = await prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+      select: { commentsDisabled: true },
+    });
+    if (post?.commentsDisabled)
+      return { success: false, message: "لا يمكنك التعليق على هذا المنشور." };
     const validation = CreateCommentSchema.safeParse({
       content,
       imageUrl,
@@ -41,6 +49,7 @@ export const CreateCommentAction = async (
       },
     });
     revalidateTag("posts", "");
+    revalidateTag("videos", "");
     return { success: true };
   } catch (error) {
     console.error(error);

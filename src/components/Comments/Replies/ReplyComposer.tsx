@@ -75,7 +75,7 @@ function ReplyComposer({
         : CreateReplyAction(parentId, content, imageUrl?.url);
       const result = await action;
       if (!result.success) {
-        throw new Error("حدث خطأ أثناء إرسال الرد الخاص بك.");
+        throw new Error(result.message);
       }
     },
     onSuccess: () => {
@@ -93,7 +93,7 @@ function ReplyComposer({
       setCurrentReply(null);
     },
     onError: (err: Error) => {
-      setError(err.message || "حدث خطأ أثناء إرسال الرد الخاص بك.");
+      setError(err.message);
     },
   });
   return (
@@ -103,6 +103,7 @@ function ReplyComposer({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
+          className="space-y-1.5"
         >
           {error && <AlertMessage message={error} type="error" />}
           <div className="flex gap-1.5 w-full">

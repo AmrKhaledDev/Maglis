@@ -7,7 +7,13 @@ import clsx from "clsx";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PostType } from "@/types/Post.type";
 // =================================================================================
-function VideoSaveBtn({ video }: { video: PostType }) {
+function VideoSaveBtn({
+  video,
+  isCommentsModalOpen,
+}: {
+  video: PostType;
+  isCommentsModalOpen?: boolean;
+}) {
   const router = useRouter();
   const { setToast } = useToast();
   const user = useUser();
@@ -40,7 +46,10 @@ function VideoSaveBtn({ video }: { video: PostType }) {
       className="videoBtnActionStyle"
     >
       <Bookmark
-        className={clsx("size-7", isSaved && "fill-green-600 text-green-600")}
+        className={clsx(
+          isSaved && "fill-green-600 text-green-600",
+          isCommentsModalOpen ? "size-5" : "size-7",
+        )}
       />
     </button>
   );

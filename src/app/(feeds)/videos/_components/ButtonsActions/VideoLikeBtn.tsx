@@ -7,7 +7,13 @@ import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 // ====================================================================
-function VideoLikeBtn({ video }: { video: PostType }) {
+function VideoLikeBtn({
+  video,
+  isCommentsModalOpen,
+}: {
+  video: PostType;
+  isCommentsModalOpen?: boolean;
+}) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { setToast } = useToast();
@@ -45,7 +51,7 @@ function VideoLikeBtn({ video }: { video: PostType }) {
       className="videoBtnActionStyle"
     >
       <Heart
-        className={clsx("size-7.5", isLiker && "fill-red-500 text-red-500")}
+        className={clsx( isLiker && "fill-red-500 text-red-500",isCommentsModalOpen?"size-5.5":"size-7")}
       />
     </button>
   );

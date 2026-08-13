@@ -27,6 +27,7 @@ function ButtonEditProfile({ user }: { user: UserWithSocialLinkType }) {
       {showEditProfileModal && (
         <EditProfileModal
           setShowEditProfileModal={setShowEditProfileModal}
+          showEditProfileModal={showEditProfileModal}
           user={user}
         />
       )}
