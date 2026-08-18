@@ -49,9 +49,9 @@ function DeletePostBtn({ post }: { post: PostType }) {
     <button
       onClick={() => handleDeletePost()}
       disabled={loading}
-      className="postBtnAct text-red-700"
+      className="postBtnOpt text-red-700"
     >
-      <Trash2 className="postBtnActIcon" /> حذف
+      <Trash2 className="postBtnOptIcon" /> حذف
     </button>
   );
 }

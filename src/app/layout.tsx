@@ -2,15 +2,7 @@ import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ToastProvider } from "@/providers/ToastProvider";
-import ActiveMenuProvider from "@/providers/ActiveMenuProvider";
-import QueryProvider from "@/providers/QueryProvider";
-import { RepliesStateProvider } from "@/providers/RepliesStateProvider";
-import { UserProvider } from "@/providers/UserProvider";
-import GetSession from "@/auth/GetSession";
-import { PlayingVideoIdProvider } from "@/providers/PlayingVideoIdProvider";
-import ActiveModalProvider from "@/providers/ActiveModalProvider";
+import Providers from "@/app/Providers";
 // ========================================
 const tajawal = Tajawal({
   subsets: ["arabic"],
@@ -28,29 +20,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await GetSession();
   return (
     <html
       dir="rtl"
       lang="en"
       className={cn("h-full", "antialiased", tajawal.className, "font-sans")}
     >
-      <body className="min-h-full flex flex-col bg-[#19191d] text-white">
-        <QueryProvider>
-          <UserProvider user={session}>
-            <RepliesStateProvider>
-              <PlayingVideoIdProvider>
-                <ActiveMenuProvider>
-                  <ActiveModalProvider>
-                    <TooltipProvider>
-                      <ToastProvider> {children}</ToastProvider>
-                    </TooltipProvider>
-                  </ActiveModalProvider>
-                </ActiveMenuProvider>
-              </PlayingVideoIdProvider>
-            </RepliesStateProvider>
-          </UserProvider>
-        </QueryProvider>
+      <body className="min-h-full flex flex-col bg-black text-white">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

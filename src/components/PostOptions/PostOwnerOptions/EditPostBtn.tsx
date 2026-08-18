@@ -11,9 +11,9 @@ function EditPostBtn({ post }: { post: PostType }) {
         onClick={() => {
           setActiveModal("edit_post_modal");
         }}
-        className="postBtnAct"
+        className="postBtnOpt"
       >
-        <Pencil className="postBtnActIcon" /> تعديل
+        <Pencil className="postBtnOptIcon" /> تعديل
       </button>
       {activeModal == "edit_post_modal" && <EditPostModal post={post} />}
     </div>

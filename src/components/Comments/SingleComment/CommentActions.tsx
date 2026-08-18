@@ -49,7 +49,7 @@ function CommentActions({
       >
         <Heart
           strokeWidth={1.5}
-          className={`postBtnActIcon disabled:cursor-default ${isLikerForComment && "fill-red-500 text-red-500"}`}
+          className={`postBtnOptIcon disabled:cursor-default ${isLikerForComment && "fill-red-500 text-red-500"}`}
         />
       </button>
       {!commentsIsDisabled && (
@@ -62,7 +62,7 @@ function CommentActions({
           disabled={loading}
           className="not-disabled:cursor-pointer"
         >
-          <MessageCircleReply strokeWidth={1.5} className="postBtnActIcon" />
+          <MessageCircleReply strokeWidth={1.5} className="postBtnOptIcon" />
         </button>
       )}
     </div>

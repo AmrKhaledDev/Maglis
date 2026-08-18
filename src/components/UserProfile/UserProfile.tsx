@@ -19,11 +19,11 @@ async function UserProfile({ userId }: { userId: string }) {
   if (!user) return null;
   return (
     <div className="pt-5 min-h-screen">
-      <div className="max-w-270 mx-auto flex flex-col gap-20 pb-12">
+      <div className="max-w-220 mx-auto flex flex-col gap-15 pb-12">
         <div className="flex flex-col gap-5">
-          <div className="w-full bg-white/4 overflow-hidden rounded-2xl">
+          <div className="w-full bg-white/5 overflow-hidden rounded-2xl">
             <ProfileCover user={user} />
-            <div className="grid grid-cols-2 p-2 gap-6">
+            <div className="flex gap-20 p-2">
               <div className="flex gap-4">
                 <ProfileAvatar user={user} />
                 <ProfileDetails user={user} />

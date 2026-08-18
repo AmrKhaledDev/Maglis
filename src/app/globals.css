@@ -1,26 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-
-@custom-variant dark (&:is(.dark *));
 /* ========================= */
+@custom-variant dark (&:is(.dark *));
 @utility mycontainer {
   @apply mx-auto max-w-310 px-3;
 }
 @utility mytransition {
   @apply transition-all duration-300;
 }
-@utility postBtnAct {
+@utility postBtnOpt {
   @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:bg-white mytransition;
 }
-@utility commentBtnAct{
-  @apply flex items-center gap-2 text-[11px] not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer
+@utility commentBtnAct {
+  @apply flex items-center gap-2 text-[11px] not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer;
 }
-@utility postBtnActIcon {
+@utility postBtnOptIcon {
   @apply size-4.5;
 }
 @utility bgOptionsBox {
-  @apply p-2 shadow-2xl flex  flex-col gap-2 absolute bg-gray-300 text-slate-900 rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold;
+  @apply p-2 shadow-2xl flex flex-col gap-2 absolute bg-black rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold;
 }
 @utility profileSectionStyle {
   @apply flex flex-col gap-6;
@@ -28,8 +27,12 @@
 @utility profileSectionFieldsStyle {
   @apply flex flex-col gap-4;
 }
+@utility storyBtnOptionStyle {
+  @apply flex items-center disabled:text-gray-500 gap-1.5 font-semibold text-sm not-disabled:cursor-pointer not-disabled:hover:bg-black mytransition py-1 px-2;
+}
 @utility videoBtnActionStyle {
-  @apply not-disabled:cursor-pointer size-fit flex bg-linear-to-t from-white/8 via-black/7 to-white/5 shadow rounded-full p-2.5 items-center gap-1 not-disabled:hover:scale-103;
+  @apply not-disabled:cursor-pointer size-fit flex bg-linear-to-t from-white/8
+  via-black/7 to-white/5 shadow rounded-full p-2.5 items-center gap-1 not-disabled:hover:scale-103;
 }
 @theme inline {
   --font-heading: var(--font-sans);

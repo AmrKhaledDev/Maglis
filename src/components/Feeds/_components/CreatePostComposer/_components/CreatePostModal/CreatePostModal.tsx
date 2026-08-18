@@ -1,6 +1,5 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
 import { CircleAlert, Globe, Images, X } from "lucide-react";
 import { CreatePost_ModalFormType } from "../../_types/CreatePost_ModalForm.type";
 import axios from "axios";

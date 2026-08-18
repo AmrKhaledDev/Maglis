@@ -1,7 +1,7 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { X } from "lucide-react";
 // =======================================
-function StoryModalHeader() {
+function CreateStoryModalHeader() {
   const { setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center justify-between">
@@ -16,4 +16,4 @@ function StoryModalHeader() {
   );
 }
 
-export default StoryModalHeader;
+export default CreateStoryModalHeader;

@@ -35,11 +35,11 @@ function PinnedToProfileBtn({ post }: { post: PostType }) {
     <button
       onClick={() => handlePinnedToProfile()}
       disabled={loading}
-      className={`postBtnAct ${post.isPinnedToProfile && "text-red-500"}`}
+      className={clsx("postBtnOpt", post.isPinnedToProfile && "text-red-500")}
     >
       <Pin
         className={clsx(
-          "postBtnActIcon",
+          "postBtnOptIcon",
           post.isPinnedToProfile && "rotate-45",
         )}
       />

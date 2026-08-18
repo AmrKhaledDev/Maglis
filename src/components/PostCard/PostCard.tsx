@@ -24,7 +24,7 @@ function PostCard({
   return (
     <div
       key={post.id}
-      className="p-3 bg-white/5 relative ring ring-gray-50/8 rounded-lg shadow w-full"
+      className="p-3 bg-white/5 relative ring ring-gray-50/6 rounded-lg w-full"
     >
       {isProfilePage && post.isPinnedToProfile && (
         <p className="mb-4 text-xs font-semibold text-green-600 flex items-center gap-0.5">

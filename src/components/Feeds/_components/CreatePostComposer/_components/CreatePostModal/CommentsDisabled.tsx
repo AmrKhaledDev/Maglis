@@ -6,6 +6,7 @@ import {
 import { MessageSquareOff } from "lucide-react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 import { CreatePost_ModalFormType } from "../../_types/CreatePost_ModalForm.type";
+import clsx from "clsx";
 // =============================================================
 function CommentsDisabled({
   control,
@@ -24,14 +25,17 @@ function CommentsDisabled({
     <Tooltip>
       <TooltipTrigger asChild>
         <button
-        disabled={disabled}
+          disabled={disabled}
           type="button"
           onClick={() => setValue("commentsDisabled", !isCommentsDisabled)}
-          className={`not-disabled:cursor-pointer mytransition
-            ${isCommentsDisabled ? "text-red-500" : "text-gray-500 not-disabled:hover:text-white "}
-            `}
+          className={clsx(
+            "not-disabled:cursor-pointer mytransition",
+            isCommentsDisabled
+              ? "text-red-500"
+              : "text-gray-500 not-disabled:hover:text-white ",
+          )}
         >
-          <MessageSquareOff className="postBtnActIcon" />
+          <MessageSquareOff className="postBtnOptIcon" />
         </button>
       </TooltipTrigger>
       <TooltipContent>

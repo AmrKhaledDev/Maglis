@@ -6,7 +6,7 @@ import { PostType } from "@/types/Post.type";
 function Posts({ posts }: { posts: PostType[] }) {
   const [showComments, setShowComments] = useState("");
   return (
-    <div className="w-full flex flex-col gap-3">
+    <div className="w-full flex flex-col gap-5">
       {posts.map((post) => (
         <PostCard
           key={post.id}

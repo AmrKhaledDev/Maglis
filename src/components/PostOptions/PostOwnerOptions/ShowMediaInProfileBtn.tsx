@@ -41,11 +41,11 @@ function ShowMediaInProfileBtn({ post }: { post: PostType }) {
           onClick={() => mutate()}
           disabled={isPending}
           className={clsx(
-            "postBtnAct",
+            "postBtnOpt",
             post.showMediaInProfile && "text-red-500",
           )}
         >
-          <Images className="postBtnActIcon" />
+          <Images className="postBtnOptIcon" />
           {post.showMediaInProfile ? "إخفاء الوسائط" : "إظهار الوسائط"}
         </button>
       )}

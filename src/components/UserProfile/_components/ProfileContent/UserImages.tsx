@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { useState } from "react";
-import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
 import NoDataMessage from "./NoDataMessage";
 import { useQuery } from "@tanstack/react-query";
 import { GetUserImagesPostsAction } from "@/actions/User/GetUserImagesPosts.action";
 import ProfileLoader from "./ProfileLoader";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 // ===================================================================
-function UserImages({userId}:{userId:string}) {
-  const [showMedia, setShowMedia] = useState({
+function UserImages({ userId }: { userId: string }) {
+  const [showImage, setShowImage] = useState({
     open: false,
-    preview: "",
+    url: "",
   });
   const {
     data: media,
@@ -19,12 +19,10 @@ function UserImages({userId}:{userId:string}) {
     queryFn: async () => {
       const result = await GetUserImagesPostsAction(userId);
       if (!result.success || !result.media)
-        throw new Error(
-          result.message || "حدث خطأ أثناء جلب الصور الخاصة بك.",
-        );
+        throw new Error(result.message || "حدث خطأ أثناء جلب الصور الخاصة بك.");
       return result.media;
     },
-    queryKey: ["user_postsPhotos",userId],
+    queryKey: ["user_postsPhotos", userId],
   });
   if (isPending) return <ProfileLoader />;
   return (
@@ -34,9 +32,9 @@ function UserImages({userId}:{userId:string}) {
           {media.map((img) => (
             <button
               onClick={() =>
-                setShowMedia({
+                setShowImage({
                   open: true,
-                  preview: img.url,
+                  url: img.url,
                 })
               }
               key={img.id}
@@ -56,8 +54,8 @@ function UserImages({userId}:{userId:string}) {
       ) : (
         <NoDataMessage message={error?.message || "حالياً لا يوجد أي صور."} />
       )}
-      {showMedia.open && (
-        <MediaPreviewModal showMedia={showMedia} setShowMedia={setShowMedia} />
+      {showImage.open && (
+        <ImagePreviewModal showMedia={showImage} setShowMedia={setShowImage} />
       )}
     </div>
   );

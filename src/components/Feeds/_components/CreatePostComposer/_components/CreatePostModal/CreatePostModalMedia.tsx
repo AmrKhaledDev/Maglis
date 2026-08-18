@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import { UseFieldArrayRemove } from "react-hook-form";
 import { useState } from "react";
-import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 // ========================================================
 function CreatePostModalMedia({
   media,
@@ -14,9 +14,9 @@ function CreatePostModalMedia({
   remove: UseFieldArrayRemove;
   disabled: boolean;
 }) {
-  const [showMedia, setShowMedia] = useState({
-    preview: "",
+  const [showImage, setShowImage] = useState({
     open: false,
+    url: "",
   });
   return (
     <>
@@ -31,7 +31,7 @@ function CreatePostModalMedia({
                   fill
                   className="rounded object-cover cursor-pointer media"
                   onClick={() =>
-                    setShowMedia({ preview: item.preview, open: true })
+                    setShowImage({ url: item.preview, open: true })
                   }
                 />
               ) : (
@@ -52,10 +52,10 @@ function CreatePostModalMedia({
               >
                 <X className="size-4 cursor-pointer text-white" />
               </button>
-              {showMedia.open && showMedia.preview && (
-                <MediaPreviewModal
-                  showMedia={showMedia}
-                  setShowMedia={setShowMedia}
+              {showImage.open && (
+                <ImagePreviewModal
+                  showImage={showImage}
+                  setShowImage={setShowImage}
                 />
               )}
             </div>

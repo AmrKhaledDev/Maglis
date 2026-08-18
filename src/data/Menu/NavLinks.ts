@@ -1,4 +1,16 @@
-import { Contact, Home, Layers, MessageCircle, Search, Settings, User, Users } from "lucide-react";
+import {
+  Contact,
+  ContactRound,
+  Home,
+  Layers,
+  MessageCircle,
+  Network,
+  Search,
+  Settings,
+  User,
+  Users,
+  UsersRound,
+} from "lucide-react";
 // ===============================================================================================
 export const navLinks = [
   {
@@ -25,28 +37,29 @@ export const navLinks = [
     href: "/u/profile",
     title: "الملف الشخصي",
   },
+
+ {
+  id: "team",
+  icon: Network,
+  href: "",
+  title: "شبكتك",
+},
+{
+  id: "layers",
+  icon: UsersRound,
+  href: "",
+  title: "المجموعات",
+},
+{
+  id: "contact",
+  icon: ContactRound,
+  href: "",
+  title: "مجموعاتي",
+},
   {
     id: "settings",
     icon: Settings,
     href: "",
     title: "الإعدادات",
-  },
-  {
-    id: "team",
-    icon: Users,
-    href: "",
-    title: "شبكتك",
-  },
-  {
-    id: "layers",
-    icon: Layers,
-    href: "",
-    title: "المجموعات",
-  },
-  {
-    id: "contact",
-    icon: Contact,
-    href: "",
-    title: "مجوعاتي",
   },
 ];

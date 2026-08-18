@@ -8,20 +8,20 @@ function PostViewerOptions({ post }: { post: PostType }) {
     <>
       {user.id !== post.authorId && (
         <>
-          <button className="postBtnAct">
-            <UserRound className="postBtnActIcon" /> عرض الملف الشخصي
+          <button className="postBtnOpt">
+            <UserRound className="postBtnOptIcon" /> عرض الملف الشخصي
           </button>
-          <button className="postBtnAct">
-            <EyeOff className="postBtnActIcon" /> إخفاء هذا المنشور
+          <button className="postBtnOpt">
+            <EyeOff className="postBtnOptIcon" /> إخفاء هذا المنشور
           </button>
-          <button className="postBtnAct">
-            <BellOff className="postBtnActIcon" /> كتم المنشورات
+          <button className="postBtnOpt">
+            <BellOff className="postBtnOptIcon" /> كتم المنشورات
           </button>
-          <button className="postBtnAct">
-            <UserPlus className="postBtnActIcon" /> متابعة
+          <button className="postBtnOpt">
+            <UserPlus className="postBtnOptIcon" /> متابعة
           </button>
-          <button className="postBtnAct text-red-600">
-            <Ban className="postBtnActIcon" /> حظر
+          <button className="postBtnOpt text-red-600">
+            <Ban className="postBtnOptIcon" /> حظر
           </button>
         </>
       )}

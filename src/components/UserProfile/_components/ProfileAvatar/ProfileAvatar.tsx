@@ -3,16 +3,16 @@ import Image from "next/image";
 import { useState } from "react";
 import { User } from "@prisma/client";
 import { useUser } from "@/providers/UserProvider";
-import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
 import EditProfileImageModal from "../EditProfileImageModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 // ===========================================
 function ProfileAvatar({ user }: { user: User }) {
   const { activeModal, setActiveModal } = useActiveModal();
   const sessionUser = useUser();
-  const [showAvatarModal, setShowAvatarModal] = useState({
+  const [showAvatar, setShowAvatar] = useState({
     open: false,
-    preview: "",
+    url: "",
   });
   return (
     <div>
@@ -22,12 +22,12 @@ function ProfileAvatar({ user }: { user: User }) {
             setActiveModal("edit_avatar_modal");
             return;
           }
-          setShowAvatarModal({
+          setShowAvatar({
             open: true,
-            preview: user.image || "/user.jpg",
+            url: user.image || "/user.jpg",
           });
         }}
-        className="relative shrink-0 shadow size-35 -mt-10 cursor-pointer rounded-full"
+        className="relative shrink-0 shadow size-25 -mt-12 cursor-pointer rounded-full"
       >
         <Image
           src={user.image || "/user.jpg"}
@@ -43,10 +43,10 @@ function ProfileAvatar({ user }: { user: User }) {
           user={user}
         />
       )}
-      {user.id !== sessionUser.id && showAvatarModal.open && (
-        <MediaPreviewModal
-          showMedia={showAvatarModal}
-          setShowMedia={setShowAvatarModal}
+      {user.id !== sessionUser.id && showAvatar.open && (
+        <ImagePreviewModal
+          showMedia={showAvatar}
+          setShowMedia={setShowAvatar}
         />
       )}
     </div>

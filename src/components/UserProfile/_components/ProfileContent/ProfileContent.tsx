@@ -19,7 +19,7 @@ function ProfileContent({ userId }: { userId: string }) {
     sessionStorage.setItem("ACTIVE_TAB", activeTab);
   }, [activeTab]);
   return (
-    <div className="w-full flex justify-between gap-10">
+    <div className="w-full flex justify-between gap-5">
       {activeTab === "USER_POSTS" && <UserPosts userId={userId} />}
       {activeTab === "USER_SAVED_POSTS" && <UserSavedPosts userId={userId} />}
       {activeTab === "USER_PHOTOS" && <UserImages userId={userId} />}

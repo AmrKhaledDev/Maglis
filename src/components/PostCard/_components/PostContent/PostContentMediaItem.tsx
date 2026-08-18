@@ -8,14 +8,14 @@ import { PostType } from "@/types/Post.type";
 // =========================================================
 function PostContentMediaItem({
   item,
-  setShowMedia,
+  setShowImage,
   post,
 }: {
   item: Media;
-  setShowMedia: Dispatch<
+  setShowImage: Dispatch<
     SetStateAction<{
       open: boolean;
-      preview: string;
+      url: string;
     }>
   >;
   post: PostType;
@@ -40,9 +40,9 @@ function PostContentMediaItem({
         <button
           className="cursor-pointer"
           onClick={() =>
-            setShowMedia({
+            setShowImage({
               open: true,
-              preview: item.url,
+              url: item.url,
             })
           }
         >

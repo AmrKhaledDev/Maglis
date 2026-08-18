@@ -1,63 +1,53 @@
 "use client";
-import { Plus } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import Image from "next/image";
-import StoryModal from "./_components/StoryModal";
+import StoryCard from "./_components/StoryCard";
+import CreateStoryCard from "./_components/CreateStoryCard";
+import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@/providers/UserProvider";
+import { GetActiveStoriesAction } from "@/actions/Story/GetActiveStories.action";
+import CreateStoryModal from "./_components/CreateStoryModal/CreateStoryModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // =============================================================
 function Stories() {
   const user = useUser();
-  const { activeModal, setActiveModal } = useActiveModal();
+  const { activeModal } = useActiveModal();
+  const { data, isPending } = useQuery({
+    queryFn: async () => {
+      const result = await GetActiveStoriesAction(user.id);
+      return result?.stories || [];
+    },
+    queryKey: ["user_stories", user.id],
+  });
   return (
-    <div>
-      <Swiper slidesPerView={"auto"} spaceBetween={6} className="w-full h-30 ">
-        <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-20! justify-center">
-          <button
-            onClick={() => setActiveModal("create_story_modal")}
-            className="relative cursor-pointer"
-          >
-            <Image
-              src={user.image ?? "/user.jpg"}
-              alt="صورتك"
-              width={100}
-              height={100}
-              className="rounded-full shrink-0 size-16 object-cover"
-            />
-            <Plus
-              className="absolute bottom-0.5 left-0.5 text-slate-700 bg-gray-200 rounded-full p-0.5 size-4"
-              strokeWidth={1.5}
-            />
-          </button>
-          <p className=" text-gray-300 text-xs">قصتك</p>
+    <>
+      <Swiper
+        slidesPerView={"auto"}
+        spaceBetween={6}
+        className="w-full h-30 rounded shadow"
+      >
+        <SwiperSlide className="h-full! w-20!">
+          <CreateStoryCard />
         </SwiperSlide>
-        {Array(2)
-          .fill(0)
-          .map((_, i) => (
-            <SwiperSlide className="flex! flex-col items-center gap-2 h-full! w-25! justify-center shrink-0">
-              <div className="p-0.5  size-17 shrink-0 rounded-full bg-linear-to-r from-[#c5ab77] to-purple-600 hover:scale-103 mytransition">
-                <div className="relative size-full rounded-full ">
-                  <Image
-                    src="/my_photo.jpeg"
-                    alt="user image"
-                    fill
-                    priority
-                    className="object-cover rounded-full cursor-pointer"
-                  />
+        {!isPending ? (
+          <SwiperSlide className="h-full! w-25!">
+            <StoryCard stories={data} />
+          </SwiperSlide>
+        ) : (
+          Array(7)
+            .fill(0)
+            .map((_, i) => (
+              <SwiperSlide key={i} className="h-full! w-25!">
+                <div className="flex flex-col items-center animate-pulse gap-2 justify-center shrink-0">
+                  <div className="size-17 rounded-full bg-gray-500/30" />
+                  <span className="w-18 h-1.5 block bg-gray-500/30 rounded-full" />
                 </div>
-              </div>
-              <p
-                dir="auto"
-                className="text-xs text-slate-300 font-semibold line-clamp-1 [word-break:break-word]"
-              >
-                Amr Khaled
-              </p>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ))
+        )}
       </Swiper>
-      {activeModal == "create_story_modal" && <StoryModal />}
-    </div>
+      {activeModal == "create_story_modal" && <CreateStoryModal />}
+    </>
   );
 }
 

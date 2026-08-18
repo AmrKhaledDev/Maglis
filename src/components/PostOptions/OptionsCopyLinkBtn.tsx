@@ -34,8 +34,8 @@ function OptionsCopyLinkBtn({ post }: { post: PostType }) {
     }
   };
   return (
-    <button disabled={loading} onClick={handleCopyLink} className="postBtnAct">
-      <Link2 className="postBtnActIcon" /> نسخ الرابط
+    <button disabled={loading} onClick={handleCopyLink} className="postBtnOpt">
+      <Link2 className="postBtnOptIcon" /> نسخ الرابط
     </button>
   );
 }

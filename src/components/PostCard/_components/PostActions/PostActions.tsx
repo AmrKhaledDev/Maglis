@@ -22,7 +22,7 @@ function PostActions({
           onClick={() => setShowComments(post.id)}
           className="cursor-pointer flex items-center gap-1 text-gray-100"
         >
-          <MessageCircle className="postBtnActIcon" strokeWidth={1} />
+          <MessageCircle className="postBtnOptIcon" strokeWidth={1} />
         </button>
       </div>
       <div className="flex items-center gap-3">

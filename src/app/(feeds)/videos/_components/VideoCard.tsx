@@ -23,7 +23,7 @@ function VideoCard({ video }: { video: PostType }) {
   return (
     <div key={video.id} className="flex items-center gap-15">
       <VideoActions video={video} />
-      <div className="flex-1 flex flex-col gap-1.5">
+      <div className="flex-1 flex flex-col gap-5 bg-white/5 p-4 rounded-2xl ring ring-white/10 shadow">
         <div
           ref={ref}
           className="w-full h-150 rounded-md overflow-hidden bg-black shadow"
@@ -37,7 +37,7 @@ function VideoCard({ video }: { video: PostType }) {
             controls
           />
         </div>
-        <div className="flex flex-col gap-5 bg-black/40 p-3 shadow rounded-lg">
+        <div className="flex flex-col gap-5 shadow rounded-lg">
           <VideoContent video={video} />
           <VideoAuthor video={video} />
         </div>

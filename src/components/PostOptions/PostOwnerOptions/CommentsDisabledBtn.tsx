@@ -38,9 +38,9 @@ function CommentsDisabledBtn({ post }: { post: PostType }) {
     <button
       disabled={loading}
       onClick={() => handleCommentsDisabled()}
-      className={clsx("postBtnAct", post.commentsDisabled && "text-red-500")}
+      className={clsx("postBtnOpt", post.commentsDisabled && "text-red-500")}
     >
-      <MessageSquareOff className="postBtnActIcon" />
+      <MessageSquareOff className="postBtnOptIcon" />
       {post.commentsDisabled ? "السماح بالتعليقات" : "إيقاف التعليقات"}
     </button>
   );

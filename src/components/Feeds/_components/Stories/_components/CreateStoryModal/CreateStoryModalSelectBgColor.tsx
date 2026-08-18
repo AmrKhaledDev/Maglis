@@ -2,7 +2,7 @@ import { bg_colors } from "@/data/StoryModal/bg_colors";
 import { Check, Palette } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 // ================================================================
-function StoryModalSelectBgColor({
+function CreateStoryModalSelectColor({
   selectedColor,
   setSelectedColor,
 }: {
@@ -37,4 +37,4 @@ function StoryModalSelectBgColor({
   );
 }
 
-export default StoryModalSelectBgColor;
+export default CreateStoryModalSelectColor;

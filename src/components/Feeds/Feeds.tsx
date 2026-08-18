@@ -7,16 +7,13 @@ import { PostType } from "@/types/Post.type";
 async function Feeds() {
   const posts: PostType[] = await getPosts();
   return (
-      <div className="flex flex-col max-w-200 gap-7 mx-auto mb-5">
-        <div className="w-full">
-          <Stories />
-          <hr className="border-white opacity-3"/>
-        </div>
-        <div className="flex flex-col gap-5">
-          <CreatePostComposer />
-          <Posts posts={posts} />
-        </div>
+    <div className="flex flex-col max-w-200 gap-7 mx-auto mb-5">
+      <Stories />
+      <div className="flex flex-col gap-5">
+        <CreatePostComposer />
+        <Posts posts={posts} />
       </div>
+    </div>
   );
 }
 

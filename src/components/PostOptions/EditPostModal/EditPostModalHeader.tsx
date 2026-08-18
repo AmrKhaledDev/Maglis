@@ -3,6 +3,7 @@ import { TiPin } from "react-icons/ti";
 import { UseFormSetValue } from "react-hook-form";
 import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
+import clsx from "clsx";
 // ========================================================
 function EditPostModalHeader({
   setValue,
@@ -15,7 +16,7 @@ function EditPostModalHeader({
   commentsDisabled: boolean;
   loading: boolean;
 }) {
-  const { activeModal, setActiveModal } = useActiveModal();
+  const {  setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1.5">
@@ -23,8 +24,12 @@ function EditPostModalHeader({
           disabled={loading}
           onClick={() => setValue("isPinnedToProfile", !isPinnedToProfile)}
           type="button"
-          className={`not-disabled:cursor-pointer mytransition  text-2xl
-               ${isPinnedToProfile ? "text-emerald-500" : "text-gray-500 not-disabled:hover:text-white -rotate-45 "}`}
+          className={clsx(
+            "not-disabled:cursor-pointer mytransition  text-2xl",
+            isPinnedToProfile
+              ? "text-emerald-500"
+              : "text-gray-500 not-disabled:hover:text-white -rotate-45 ",
+          )}
         >
           <TiPin />
         </button>
@@ -32,11 +37,14 @@ function EditPostModalHeader({
           disabled={loading}
           type="button"
           onClick={() => setValue("commentsDisabled", !commentsDisabled)}
-          className={`not-disabled:cursor-pointer mytransition
-               ${commentsDisabled ? "text-red-500" : "text-gray-500 not-disabled:hover:text-white "}
-               `}
+          className={clsx(
+            "not-disabled:cursor-pointer mytransition",
+            commentsDisabled
+              ? "text-red-500"
+              : "text-gray-500 not-disabled:hover:text-white",
+          )}
         >
-          <MessageSquareOff className="postBtnActIcon" />
+          <MessageSquareOff className="postBtnOptIcon" />
         </button>
       </div>
       <button

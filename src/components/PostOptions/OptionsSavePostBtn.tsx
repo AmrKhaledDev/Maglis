@@ -3,6 +3,7 @@ import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { Save } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =====================================================================
@@ -32,14 +33,13 @@ function OptionsSavePostBtn({ post }: { post: PostType }) {
 
   const user = useUser();
   const isSaved = user.savedPosts.some((item) => item.postId == post.id);
-  console.log(isSaved);
   return (
     <button
       onClick={() => handleSavePost()}
       disabled={loading}
-      className={`postBtnAct ${isSaved ? "text-green-600" : ""}`}
+      className={clsx("postBtnOpt",isSaved &&"text-green-600")}
     >
-      <Save className="postBtnActIcon" /> {isSaved ? "محفوظ" : "حفظ"}
+      <Save className="postBtnOptIcon" /> {isSaved ? "محفوظ" : "حفظ"}
     </button>
   );
 }

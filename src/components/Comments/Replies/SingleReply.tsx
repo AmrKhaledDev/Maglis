@@ -4,10 +4,10 @@ import Replies from "./Replies";
 import ReplyHeader from "./ReplyHeader";
 import ReplyAuthor from "./ReplyAuthor";
 import { useState } from "react";
-import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
 import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
 import { Gem } from "lucide-react";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 // ================================================================================
 function SingleReply({
   reply,
@@ -18,9 +18,9 @@ function SingleReply({
   post: PostType;
   topLevelComment: CommentType;
 }) {
-  const [showMedia, setShowMedia] = useState({
+  const [showImage, setShowImage] = useState({
     open: false,
-    preview: "",
+    url: "",
   });
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -37,9 +37,9 @@ function SingleReply({
           {reply.image && (
             <button
               onClick={() =>
-                setShowMedia({
+                setShowImage({
                   open: true,
-                  preview: reply.image as string,
+                  url: reply.image as string,
                 })
               }
               className="relative size-25 cursor-pointer rounded-md overflow-hidden group"
@@ -67,8 +67,8 @@ function SingleReply({
         post={post}
         topLevelComment={topLevelComment}
       />
-      {showMedia.open && (
-        <MediaPreviewModal showMedia={showMedia} setShowMedia={setShowMedia} />
+      {showImage.open && (
+        <ImagePreviewModal showMedia={showImage} setShowMedia={setShowImage} />
       )}
     </div>
   );

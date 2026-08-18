@@ -1,13 +1,13 @@
 import { useState } from "react";
-import MediaPreviewModal from "@/components/MediaPreviewModal/MediaPreviewModal";
 import { PostType } from "@/types/Post.type";
 import PostContentMediaItem from "./PostContentMediaItem";
 import clsx from "clsx";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 // ==============================================
 function PostContentMedia({ post }: { post: PostType }) {
-  const [showMedia, setShowMedia] = useState({
+  const [showImage, setShowImage] = useState({
     open: false,
-    preview: "",
+    url: "",
   });
   return (
     <div
@@ -18,11 +18,11 @@ function PostContentMedia({ post }: { post: PostType }) {
           key={item.id}
           item={item}
           post={post}
-          setShowMedia={setShowMedia}
+          setShowImage={setShowImage}
         />
       ))}
-      {showMedia.open && showMedia.preview && (
-        <MediaPreviewModal setShowMedia={setShowMedia} showMedia={showMedia} />
+      {showImage.open && (
+        <ImagePreviewModal setShowMedia={setShowImage} showMedia={showImage} />
       )}
     </div>
   );
