@@ -14,10 +14,7 @@ function UserPosts({ userId }: { userId: string }) {
   } = useQuery({
     queryFn: async () => {
       const result = await GetUserPostsAction(userId);
-      if (!result.success || !result.posts)
-        throw new Error(
-          result.message || "حدث خطأ أثناء جلب المنشورات الخاصة بك.",
-        );
+      if (!result.success || !result.posts) return;
       return result.posts;
     },
     queryKey: ["user_posts", userId],

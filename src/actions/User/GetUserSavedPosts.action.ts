@@ -7,14 +7,12 @@ export const GetUserSavedPostsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;
-  message?: string;
   savedPosts?: SavePostType[];
 }> => {
   try {
     if (!userId)
       return {
         success: false,
-        message: "حدث خطأ غير متوقع أثناء جلب المنشورات المحفوظة.",
       };
     const savedPosts: SavePostType[] = await prisma.savePost.findMany({
       where: {
@@ -48,7 +46,6 @@ export const GetUserSavedPostsAction = async (
     console.error(error);
     return {
       success: false,
-      message: "حدث خطأ أثناء جلب المنشورات المحفوظة الخاصة بك.",
     };
   }
 };

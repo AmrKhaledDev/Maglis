@@ -22,7 +22,7 @@ function ButtonEditProfile({ user }: { user: UserWithSocialLinkType }) {
         onClick={() => setShowEditProfileModal(true)}
         className="text-gray-400 hover:text-white mytransition cursor-pointer buttonShowEditProfileModal"
       >
-        <Pen className="size-5" strokeWidth={1.5} />
+        <Pen className="size-4" strokeWidth={1.5} />
       </button>
       {showEditProfileModal && (
         <EditProfileModal

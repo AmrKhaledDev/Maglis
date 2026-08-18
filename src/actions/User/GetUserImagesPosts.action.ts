@@ -5,12 +5,11 @@ import { Media } from "@prisma/client";
 // ===============================================
 export const GetUserImagesPostsAction = async (
   userId: string,
-): Promise<{ success: boolean; message?: string; media?: Media[] }> => {
+): Promise<{ success: boolean; media?: Media[] }> => {
   try {
     if (!userId)
       return {
         success: false,
-        message: "حدث خطأ غير متوقع أثناء جلب الصور الخاصة بك.",
       };
     const posts = await prisma.post.findMany({
       where: {
@@ -37,8 +36,6 @@ export const GetUserImagesPostsAction = async (
     console.error(error);
     return {
       success: false,
-      message:
-        "عذراً, حدث خطأ أثناء جلب الصور الخاصة بك تأكد من الإتصال بالإنترنت وأعد تحميل الصفحة.",
     };
   }
 };

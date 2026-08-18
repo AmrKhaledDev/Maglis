@@ -21,7 +21,7 @@ function CreateStoryCard() {
             className="rounded-full shrink-0 size-16 object-cover"
           />
           <Plus
-            className="absolute bottom-0.5 left-0.5 bg-black text-white rounded-full p-1 size-6"
+            className="absolute -bottom-1.5 left-0.5 bg-black text-white rounded-full p-1 size-6"
             strokeWidth={1.5}
           />
         </button>

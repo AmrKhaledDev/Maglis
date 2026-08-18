@@ -17,7 +17,7 @@ function Stories() {
       const result = await GetActiveStoriesAction(user.id);
       return result?.stories || [];
     },
-    queryKey: ["user_stories", user.id],
+    queryKey: ["user_active_stories", user.id],
   });
   return (
     <>

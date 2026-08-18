@@ -22,9 +22,9 @@ function ProfileCover({ user }: { user: User }) {
         <>
           <button
             onClick={() => setActiveModal("edit_cover_modal")}
-            className="absolute cursor-pointer left-3 outline outline-offset-2 mytransition hover:bg-gray-300 hover:outline-gray-300 outline-white flex items-center gap-2 bottom-3 bg-gray-200 shadow rounded text-sm text-black font-semibold py-1 px-2"
+            className="absolute cursor-pointer left-3 outline outline-offset-2 mytransition hover:bg-gray-300 hover:outline-gray-300 outline-white flex items-center gap-2 bottom-3 bg-gray-200 shadow rounded text-xs text-black font-semibold py-1 px-2"
           >
-            <ImageIcon className="size-5" /> تعديل الصورة
+            <ImageIcon className="size-4" /> تعديل الصورة
           </button>
           {activeModal == "edit_cover_modal" && (
             <EditProfileImageModal

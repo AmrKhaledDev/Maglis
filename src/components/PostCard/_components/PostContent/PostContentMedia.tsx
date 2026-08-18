@@ -22,7 +22,7 @@ function PostContentMedia({ post }: { post: PostType }) {
         />
       ))}
       {showImage.open && (
-        <ImagePreviewModal setShowMedia={setShowImage} showMedia={showImage} />
+        <ImagePreviewModal setShowImage={setShowImage} showImage={showImage} />
       )}
     </div>
   );

@@ -14,10 +14,7 @@ function UserVideos({ userId }: { userId: string }) {
   } = useQuery({
     queryFn: async () => {
       const result = await GetUserVideosAction(userId);
-      if (!result.success || !result.media)
-        throw new Error(
-          result.message || "حدث خطأ أثناء جلب الفيديوهات الخاصة بك.",
-        );
+      if (!result.success || !result.media) return;
       return result.media;
     },
     queryKey: ["user_postsVideos", userId],

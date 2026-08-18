@@ -1,22 +1,19 @@
 "use server";
 
-import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
 import { StoryType } from "@/types/StoryType";
-// ======================================================
-export const GetActiveStoriesAction = async (
+// ====================================================
+export const GetUserStoriesAction = async (
   userId: string,
-): Promise<{ stories: StoryType[] } | undefined> => {
+): Promise<{
+  success: boolean;
+  stories?: StoryType[];
+}> => {
   try {
-    if (!userId) return;
-    const validatingSession = await validateSession();
-    if (!validatingSession.success || !validatingSession.session) return;
+    if (!userId) return { success: false };
     const stories: StoryType[] = await prisma.story.findMany({
       where: {
         userId,
-        expiresAt: {
-          gte: new Date(),
-        },
       },
       include: {
         user: {
@@ -32,8 +29,12 @@ export const GetActiveStoriesAction = async (
         createdAt: "desc",
       },
     });
-    return { stories };
+    const storiesFilter = stories.filter(
+      (story) => story.media && !story.contentText,
+    );
+    return { success: true, stories: storiesFilter };
   } catch (error) {
     console.error(error);
+    return { success: false };
   }
 };

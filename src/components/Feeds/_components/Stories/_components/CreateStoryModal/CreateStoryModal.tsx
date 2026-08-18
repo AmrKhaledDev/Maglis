@@ -54,6 +54,9 @@ function CreateStoryModal() {
       setMediaPreview("");
       setMediaFile(null);
       queryClient.invalidateQueries({
+        queryKey: ["user_active_stories", userSession.id],
+      });
+      queryClient.invalidateQueries({
         queryKey: ["user_stories", userSession.id],
       });
     },

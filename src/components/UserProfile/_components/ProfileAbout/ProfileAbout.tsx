@@ -3,11 +3,12 @@ import ButtonEditProfile from "./ButtonEditProfile";
 import { useUser } from "@/providers/UserProvider";
 import { infos } from "@/data/Profile/userInfos";
 import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
+import Linkify from "linkify-react";
 // ======================================================================
 function ProfileAbout({ user }: { user: UserWithSocialLinkType }) {
   const sessionUser = useUser();
   return (
-    <div className="p-2 flex flex-col gap-3">
+    <div className="p-2 flex flex-col gap-3 w-full">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-gray-200 text-sm">معلومات شخصية</h2>
         {user.id === sessionUser.id && <ButtonEditProfile user={user} />}
@@ -15,11 +16,20 @@ function ProfileAbout({ user }: { user: UserWithSocialLinkType }) {
       <div className="flex flex-col gap-5 w-full">
         <p className=" text-gray-400 text-sm">
           نبذة شخصية :
-          <span className="mr-1 text-gray-300 text-xs">
-            {user.bio || "لا يوجد نبذة شخصية حالياً"}
-          </span>
+          <Linkify
+            options={{
+              target: "_blank",
+              attributes: {
+                className: "text-sky-500 hover:underline ",
+              },
+            }}
+          >
+            <span className="mr-1 text-gray-300 text-xs">
+              {user.bio || "لا يوجد نبذة شخصية حالياً"}
+            </span>
+          </Linkify>
         </p>
-        <div className="grid grid-cols-2 gap-y-4">
+        <div className="grid grid-cols-2 gap-y-5">
           {infos(user).map(
             (info) =>
               info.icon &&

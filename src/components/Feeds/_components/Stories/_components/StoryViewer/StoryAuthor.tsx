@@ -3,20 +3,25 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
 import Image from "next/image";
 import { StoryType } from "@/types/StoryType";
+import { useUser } from "@/providers/UserProvider";
+import Link from "next/link";
 // ====================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
 function StoryAuthor({ story }: { story: StoryType }) {
   const user = story.user;
+  const userSession = useUser();
   return (
     <div className="absolute top-5 right-8 z-5 flex items-center gap-2.5">
-      <Image
-        src={user.image || "/user.jpg"}
-        width={70}
-        height={70}
-        alt={user.name}
-        className="rounded-full object-cover shrink-0 size-9"
-      />
+      <Link href={user.id === userSession.id ? "/u/profile" : `/u/${user.id}`}>
+        <Image
+          src={user.image || "/user.jpg"}
+          width={70}
+          height={70}
+          alt={user.name}
+          className="rounded-full object-cover shrink-0 size-9"
+        />
+      </Link>
       <div>
         <div className="flex items-center gap-1.5">
           <h2 className="text-[18px] font-medium">{user.name}</h2>

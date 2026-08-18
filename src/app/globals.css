@@ -10,13 +10,13 @@
   @apply transition-all duration-300;
 }
 @utility postBtnOpt {
-  @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:bg-white mytransition;
+  @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:text-black not-disabled:hover:bg-white mytransition;
 }
 @utility commentBtnAct {
   @apply flex items-center gap-2 text-[11px] not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer;
 }
 @utility postBtnOptIcon {
-  @apply size-4.5;
+  @apply size-4.5 shrink-0;
 }
 @utility bgOptionsBox {
   @apply p-2 shadow-2xl flex flex-col gap-2 absolute bg-black rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold;
@@ -28,7 +28,7 @@
   @apply flex flex-col gap-4;
 }
 @utility storyBtnOptionStyle {
-  @apply flex items-center disabled:text-gray-500 gap-1.5 font-semibold text-sm not-disabled:cursor-pointer not-disabled:hover:bg-black mytransition py-1 px-2;
+  @apply flex items-center rounded w-full disabled:text-gray-500 gap-1.5 font-semibold text-sm not-disabled:cursor-pointer not-disabled:hover:bg-black/10 mytransition py-1 px-2;
 }
 @utility videoBtnActionStyle {
   @apply not-disabled:cursor-pointer size-fit flex bg-linear-to-t from-white/8

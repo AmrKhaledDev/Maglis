@@ -18,8 +18,7 @@ function UserImages({ userId }: { userId: string }) {
   } = useQuery({
     queryFn: async () => {
       const result = await GetUserImagesPostsAction(userId);
-      if (!result.success || !result.media)
-        throw new Error(result.message || "حدث خطأ أثناء جلب الصور الخاصة بك.");
+      if (!result.success || !result.media) return;
       return result.media;
     },
     queryKey: ["user_postsPhotos", userId],
@@ -55,7 +54,7 @@ function UserImages({ userId }: { userId: string }) {
         <NoDataMessage message={error?.message || "حالياً لا يوجد أي صور."} />
       )}
       {showImage.open && (
-        <ImagePreviewModal showMedia={showImage} setShowMedia={setShowImage} />
+        <ImagePreviewModal showImage={showImage} setShowImage={setShowImage} />
       )}
     </div>
   );

@@ -7,32 +7,33 @@ export const GetUserPostsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;
-  message?: string;
   posts?: PostType[];
 }> => {
   try {
     if (!userId)
       return {
         success: false,
-        message: "حدث خطأ غير متوقع أثناء جلب المنشورات الخاصة بك.",
       };
     const posts: PostType[] = await prisma.post.findMany({
       where: {
         authorId: userId,
       },
       include: {
-        author: true,
-        medias: true,
-        savedPosts: {
-          include: {
-            user: {
-              select: {
-                id: true,
-              },
-            },
+        author: {
+          select: {
+            id: true,
+            name: true,
+            professionalMode: true,
+            image: true,
+            username: true,
           },
         },
-        likes: true,
+        medias: true,
+        likes: {
+          select: {
+            userId: true,
+          },
+        },
         comments: {
           orderBy: {
             createdAt: "desc",
@@ -63,6 +64,11 @@ export const GetUserPostsAction = async (
                 replies: true,
               },
             },
+            post: {
+              select: {
+                authorId: true,
+              },
+            },
           },
         },
       },
@@ -80,8 +86,6 @@ export const GetUserPostsAction = async (
     console.error(error);
     return {
       success: false,
-      message:
-        "عذراً, حدث خطأ أثناء جلب المنشورات الخاصة بك يرجى التأكد من الإتصال بالإنترنت أو تواصل مع الدعم.",
     };
   }
 };

@@ -17,13 +17,10 @@ function UserSavedPosts({ userId }: { userId: string }) {
   } = useQuery({
     queryFn: async () => {
       const result = await GetUserSavedPostsAction(userId);
-      if (!result.success || !result.savedPosts)
-        throw new Error(
-          result.message || "حدث خطأ أثناء جلب المنشورات المحفوظة.",
-        );
+      if (!result.success || !result.savedPosts) return;
       return result.savedPosts;
     },
-    queryKey: ["user_savedPosts",userId],
+    queryKey: ["user_savedPosts", userId],
   });
   if (isPending) return <ProfileLoader />;
   return (

@@ -22,6 +22,9 @@ function StoryOptions({ story }: { story: StoryType }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
+        queryKey: ["user_active_stories", userSession.id],
+      });
+      queryClient.invalidateQueries({
         queryKey: ["user_stories", userSession.id],
       });
       setActiveModal(null);
@@ -42,6 +45,9 @@ function StoryOptions({ story }: { story: StoryType }) {
       },
       onSuccess: () => {
         queryClient.invalidateQueries({
+          queryKey: ["user_active_stories", userSession.id],
+        });
+        queryClient.invalidateQueries({
           queryKey: ["user_stories", userSession.id],
         });
       },
@@ -59,25 +65,21 @@ function StoryOptions({ story }: { story: StoryType }) {
       {userSession.id === story.userId && (
         <div className="relative">
           <button
-            onClick={() => setActiveMenu("story_options")}
-            className="cursor-pointer btnActiveMenu"
+            onClick={() => setActiveMenu(story.id)}
+            className={clsx(
+              "cursor-pointer p-2 rounded-full btnActiveMenu",
+              activeMenu === story.id && "bg-white/10 shadow backdrop-blur-2xl",
+            )}
           >
-            <Ellipsis className="size-5" strokeWidth={1.5} />
+            <Ellipsis className="size-5.5" strokeWidth={1.5} />
           </button>
-          {activeMenu === "story_options" && (
-            <div className=" absolute backdrop-blur-3xl left-0 p-2 w-fit shadow-2xl flex flex-col gap-1 bg-white/10 rounded-xl whitespace-nowrap z-9 font-semibold">
-              <button
-                disabled={loadingDelete}
-                onClick={() => handleDeleteStory()}
-                className="storyBtnOptionStyle button"
-              >
-                <Trash2 className="postBtnOptIcon" /> حذف
-              </button>
+          {activeMenu === story.id && (
+            <div className="absolute mt-1.5 backdrop-blur-3xl left-0 p-2 w-35 shadow-2xl flex flex-col gap-1 bg-gray-300 rounded-xl whitespace-nowrap z-9 font-semibold">
               <button
                 disabled={loadingUpdate}
                 onClick={() => handleUpdatePrivacy()}
                 className={clsx(
-                  "storyBtnOptionStyle button",
+                  "storyBtnOptionStyle button text-gray-700",
                   story.isPrivate && "text-yellow-600",
                 )}
               >
@@ -92,6 +94,13 @@ function StoryOptions({ story }: { story: StoryType }) {
                     إخفاء القصة
                   </>
                 )}
+              </button>
+              <button
+                disabled={loadingDelete}
+                onClick={() => handleDeleteStory()}
+                className="storyBtnOptionStyle button text-red-500"
+              >
+                <Trash2 className="postBtnOptIcon" /> حذف
               </button>
             </div>
           )}

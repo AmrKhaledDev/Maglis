@@ -1,6 +1,6 @@
 "use client";
 import { User } from "@prisma/client";
-import { Ban, MessageCircle, UserRoundPlus } from "lucide-react";
+import { MessageCircle, UserRoundPlus } from "lucide-react";
 import { FaUsers } from "react-icons/fa6";
 import { HiUsers } from "react-icons/hi2";
 import dayjs from "dayjs";
