@@ -6,7 +6,13 @@ import { CommentType } from "@/types/Comment.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 // ======================================================
-function DeleteReplayBtn({ reply }: { reply: CommentType }) {
+function DeleteReplayBtn({
+  reply,
+  commentId,
+}: {
+  reply: CommentType;
+  commentId: string;
+}) {
   const { setToast } = useToast();
   const queryClient = useQueryClient();
   const { setActiveMenu } = useActiveMenu();
@@ -22,7 +28,10 @@ function DeleteReplayBtn({ reply }: { reply: CommentType }) {
     onSuccess: () => {
       setActiveMenu("");
       queryClient.invalidateQueries({
-        queryKey: ["replies"],
+        queryKey: ["replies", commentId, userSession.id],
+      });
+       queryClient.invalidateQueries({
+        queryKey: ["comments", userSession.id],
       });
     },
     onError: (err: Error) => {

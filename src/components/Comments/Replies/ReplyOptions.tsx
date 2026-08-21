@@ -37,7 +37,7 @@ function ReplyOptions({
           <EditReplayBtn reply={reply} />
           <CopyContentBtn reply={reply} />
           <FeaturedReplyBtn reply={reply} commentId={commentId} />
-          <DeleteReplayBtn reply={reply} />
+          <DeleteReplayBtn reply={reply} commentId={commentId}/>
         </motion.div>
       )}
     </div>

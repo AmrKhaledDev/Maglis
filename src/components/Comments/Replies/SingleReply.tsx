@@ -8,6 +8,7 @@ import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
 import { Gem } from "lucide-react";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
+import Linkify from "linkify-react";
 // ================================================================================
 function SingleReply({
   reply,
@@ -33,7 +34,18 @@ function SingleReply({
         <ReplyHeader reply={reply} topLevelComment={topLevelComment} />
         <ReplyAuthor post={post} reply={reply} />
         <div className="flex flex-col gap-2">
-          <p className="text-[11px]">{reply.content}</p>
+          <Linkify
+            options={{
+              target: "_blank",
+              attributes: {
+                className: "text-sky-500 hover:underline ",
+              },
+            }}
+          >
+            <p dir="auto" className="text-[11px]">
+              {reply.content}
+            </p>
+          </Linkify>
           {reply.image && (
             <button
               onClick={() =>
@@ -57,6 +69,7 @@ function SingleReply({
         <hr className="border-white opacity-2" />
         <ReplyActions
           reply={reply}
+          topLevelComment={topLevelComment}
           commentsIsDisabled={post.commentsDisabled}
         />
       </div>
@@ -68,7 +81,7 @@ function SingleReply({
         topLevelComment={topLevelComment}
       />
       {showImage.open && (
-        <ImagePreviewModal showMedia={showImage} setShowMedia={setShowImage} />
+        <ImagePreviewModal showImage={showImage} setShowImage={setShowImage} />
       )}
     </div>
   );

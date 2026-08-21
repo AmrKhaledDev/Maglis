@@ -8,11 +8,11 @@ import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 // ==============================================
 function DeletePostBtn({ post }: { post: PostType }) {
-  const user = useUser();
+  const userSession = useUser();
   const { setActiveMenu } = useActiveMenu();
   const router = useRouter();
   const { setToast } = useToast();
-  const queryCLient = useQueryClient();
+  const queryClient = useQueryClient();
   const { mutate: handleDeletePost, isPending: loading } = useMutation({
     mutationFn: async () => {
       const result = await DeletePostAction(post.id);
@@ -24,17 +24,20 @@ function DeletePostBtn({ post }: { post: PostType }) {
     onSuccess: () => {
       setActiveMenu("");
       router.refresh();
-      queryCLient.invalidateQueries({
-        queryKey: ["user_posts", user.id],
+      queryClient.invalidateQueries({
+        queryKey: ["user_posts", userSession.id],
       });
-      queryCLient.invalidateQueries({
-        queryKey: ["user_postsVideos", user.id],
+      queryClient.invalidateQueries({
+        queryKey: ["user_postsVideos", userSession.id],
       });
-      queryCLient.invalidateQueries({
-        queryKey: ["user_postsPhotos", user.id],
+      queryClient.invalidateQueries({
+        queryKey: ["user_postsPhotos", userSession.id],
       });
-      queryCLient.invalidateQueries({
-        queryKey: ["user_savedPosts", user.id],
+      queryClient.invalidateQueries({
+        queryKey: ["user_savedPosts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
     },
     onError: (error: Error) => {

@@ -5,20 +5,33 @@ import EditProfileImageModal from "./EditProfileImageModal";
 import { User } from "@prisma/client";
 import { useUser } from "@/providers/UserProvider";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useState } from "react";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 // ===============================================
 function ProfileCover({ user }: { user: User }) {
-  const sessionUser = useUser();
+  const userSession = useUser();
   const { activeModal, setActiveModal } = useActiveModal();
+  const [showCover, setShowCover] = useState({ open: false, url: "" });
   return (
     <div className="bg-white/5 h-70 shadow relative">
-      <Image
-        src={user.cover || "/cover_default.jpg"}
-        alt="cover"
-        fill
-        className="object-cover"
-      />
-      <span className="absolute inset-0 bg-black/30" />
-      {user.id === sessionUser.id && (
+      <div
+        onClick={() =>
+          setShowCover({
+            open: true,
+            url: user.cover || "/cover_default.jpg",
+          })
+        }
+        className="relative group h-full cursor-pointer"
+      >
+        <Image
+          src={user.cover || "/cover_default.jpg"}
+          alt="cover"
+          fill
+          className="object-cover"
+        />
+        <span className="absolute inset-0 bg-black/30 group-hover:opacity-0 mytransition" />
+      </div>
+      {user.id === userSession.id && (
         <>
           <button
             onClick={() => setActiveModal("edit_cover_modal")}
@@ -34,6 +47,9 @@ function ProfileCover({ user }: { user: User }) {
             />
           )}
         </>
+      )}
+      {showCover.open && (
+        <ImagePreviewModal setShowImage={setShowCover} showImage={showCover} />
       )}
     </div>
   );

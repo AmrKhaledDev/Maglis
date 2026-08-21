@@ -11,7 +11,8 @@ import EditImageModalHeader from "./ProfileAvatar/EditImageModalHeader";
 import ReplaceImageBtn from "./ProfileAvatar/ReplaceImageBtn";
 import DeleteImageBtn from "./ProfileAvatar/DeleteAvatarBtn";
 import { User } from "@prisma/client";
-import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useUser } from "@/providers/UserProvider";
 // ==============================================================
 function EditProfileImageModal({
   typeImage,
@@ -23,42 +24,48 @@ function EditProfileImageModal({
   user: User;
 }) {
   if (!typeImage) return null;
-  const { activeModal, setActiveModal } = useActiveModal();
+  const userSession = useUser();
   const [imagePreview, setImagePreview] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [error, setError] = useState("");
-  const handleUpdateImage = async () => {
-    setLoading(true);
-    setError("");
-    if (!imageFile || !imagePreview) return setError("برجاء رفع صورة أولاً.");
-    const formData = new FormData();
-    formData.append("file", imageFile);
-    try {
-      const res = await axios.post("/api/upload-media", formData);
-      const newAvatar: { url: string } = res.data;
-      const result = await UpdateUserImageAction(
-        newAvatar.url,
-        typeImage,
-        user.id,
-      );
-      if (!result.success) return setError(result.message);
+  const queryClient = useQueryClient();
+  const { mutate: handleUpdateImage, isPending: loading } = useMutation({
+    mutationFn: async () => {
+      if (!imageFile || !imagePreview) return setError("برجاء رفع صورة أولاً.");
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      try {
+        const res = await axios.post("/api/upload-media", formData);
+        const newAvatar: { url: string } = res.data;
+        const result = await UpdateUserImageAction(
+          newAvatar.url,
+          typeImage,
+          user.id,
+        );
+        if (!result.success) return setError(result.message);
+      } catch (error) {
+        console.error(error);
+        if (axios.isAxiosError(error)) {
+          setError(
+            error.response?.data.error ||
+              "حدث خطأ أثناء رفع صورة الملف الشخصي الخاص بك تأكد من الإتصال بالإنترنت.",
+          );
+        }
+      }
+    },
+    onSuccess: () => {
       setImageFile(null);
       setImagePreview("");
       router.refresh();
-    } catch (error) {
-      console.error(error);
-      if (axios.isAxiosError(error)) {
-        setError(
-          error.response?.data.error ||
-            "حدث خطأ أثناء رفع صورة الملف الشخصي الخاص بك تأكد من الإتصال بالإنترنت.",
-        );
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+      queryClient.invalidateQueries({
+        queryKey: ["user_posts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["comments", userSession.id],
+      });
+    },
+  });
   const defaultImage =
     typeImage == "AVATAR" ? "/user.jpg" : "/cover_default.jpg";
   return (
@@ -71,10 +78,8 @@ function EditProfileImageModal({
       <div
         className={clsx(
           "bg-slate-800 flex modalEditAvatar flex-col rounded-xl shadow",
-          {
-            "w-200": typeImage === "AVATAR",
-            "w-270": typeImage === "COVER",
-          },
+          typeImage === "AVATAR" && "w-200",
+          typeImage === "COVER" && "w-270",
         )}
       >
         <EditImageModalHeader typeImage={typeImage} />
@@ -88,7 +93,7 @@ function EditProfileImageModal({
           <div
             className={clsx("relative shrink-0 ", {
               "size-60": typeImage == "AVATAR",
-              "w-full h-80": typeImage == "COVER",
+              "w-full h-110": typeImage == "COVER",
             })}
           >
             <Image

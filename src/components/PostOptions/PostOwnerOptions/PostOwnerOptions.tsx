@@ -7,10 +7,10 @@ import ShowMediaInProfileBtn from "./ShowMediaInProfileBtn";
 import { PostType } from "@/types/Post.type";
 // =============================================================
 function PostOwnerOptions({ post }: { post: PostType }) {
-  const user = useUser();
+  const userSession = useUser();
   return (
     <>
-      {user.id === post.authorId && (
+      {userSession.id === post.authorId && (
         <>
           <EditPostBtn post={post} />
           <PinnedToProfileBtn post={post} />

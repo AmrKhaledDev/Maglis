@@ -2,7 +2,7 @@ import { PostType } from "@/types/Post.type";
 import OptionsCopyLinkBtn from "./OptionsCopyLinkBtn";
 import OptionsSavePostBtn from "./OptionsSavePostBtn";
 import PostOwnerOptions from "./PostOwnerOptions/PostOwnerOptions";
-import PostViewerOptions from "./PostViewerOptions";
+import PostViewerOptions from "./PostViewerOptions/PostViewerOptions";
 import { motion } from "framer-motion";
 // ==============================================================
 function PostOptionsBox({

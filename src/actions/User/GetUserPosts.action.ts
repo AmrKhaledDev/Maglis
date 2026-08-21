@@ -34,41 +34,9 @@ export const GetUserPostsAction = async (
             userId: true,
           },
         },
-        comments: {
-          orderBy: {
-            createdAt: "desc",
-          },
-          include: {
-            parent: {
-              include: {
-                user: {
-                  select: { name: true, id: true },
-                },
-              },
-            },
-            user: {
-              select: {
-                image: true,
-                name: true,
-                username: true,
-                id: true,
-              },
-            },
-            likeForComments: {
-              select: {
-                userId: true,
-              },
-            },
-            _count: {
-              select: {
-                replies: true,
-              },
-            },
-            post: {
-              select: {
-                authorId: true,
-              },
-            },
+        _count: {
+          select: {
+            comments: true,
           },
         },
       },

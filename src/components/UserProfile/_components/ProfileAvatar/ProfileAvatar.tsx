@@ -9,7 +9,7 @@ import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal"
 // ===========================================
 function ProfileAvatar({ user }: { user: User }) {
   const { activeModal, setActiveModal } = useActiveModal();
-  const sessionUser = useUser();
+  const userSession = useUser();
   const [showAvatar, setShowAvatar] = useState({
     open: false,
     url: "",
@@ -18,7 +18,7 @@ function ProfileAvatar({ user }: { user: User }) {
     <div>
       <button
         onClick={() => {
-          if (user.id === sessionUser.id) {
+          if (user.id === userSession.id) {
             setActiveModal("edit_avatar_modal");
             return;
           }
@@ -36,17 +36,17 @@ function ProfileAvatar({ user }: { user: User }) {
           className="object-cover rounded-full"
         />
       </button>
-      {activeModal == "edit_avatar_modal" && user.id === sessionUser.id && (
+      {activeModal == "edit_avatar_modal" && user.id === userSession.id && (
         <EditProfileImageModal
           typeImage="AVATAR"
           image={user.image}
           user={user}
         />
       )}
-      {user.id !== sessionUser.id && showAvatar.open && (
+      {user.id !== userSession.id && showAvatar.open && (
         <ImagePreviewModal
-          showMedia={showAvatar}
-          setShowMedia={setShowAvatar}
+          showImage={showAvatar}
+          setShowImage={setShowAvatar}
         />
       )}
     </div>

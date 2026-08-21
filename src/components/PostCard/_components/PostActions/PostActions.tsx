@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { MessageCircle } from "lucide-react";
 import SavePostBtn from "./SavePostBtn";
 import LikeBtn from "./LikeBtn";
@@ -30,7 +30,7 @@ function PostActions({
           {formatLikes(post.likes.length)}
         </p>
         <p className="font-normal text-xs text-gray-300">
-          {formatComments(post.comments.length)}
+          {formatComments(post._count.comments)}
         </p>
         <SavePostBtn post={post} />
       </div>

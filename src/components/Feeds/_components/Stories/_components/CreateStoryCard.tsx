@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import Image from "next/image";
 // ===================================================================
 function CreateStoryCard() {
-  const user = useUser();
+  const userSession = useUser();
   const { setActiveModal } = useActiveModal();
   return (
     <>
@@ -14,7 +14,7 @@ function CreateStoryCard() {
           className="relative cursor-pointer"
         >
           <Image
-            src={user.image ?? "/user.jpg"}
+            src={userSession.image ?? "/user.jpg"}
             alt="صورتك"
             width={100}
             height={100}

@@ -11,15 +11,18 @@ import { motion } from "framer-motion";
 import { EditCommentAction } from "@/actions/Comment/EditComment.action";
 import ReplyComposerActions from "./ReplyComposerActions";
 import { X } from "lucide-react";
+import { Comment } from "@prisma/client";
 // ===================================================================================
 function ReplyComposer({
   userOwnerCommentName,
   parentId,
   setShowRepliesList,
+  topLevelComment,
 }: {
   userOwnerCommentName: string;
   parentId: string;
   setShowRepliesList: Dispatch<SetStateAction<boolean>>;
+  topLevelComment: Comment;
 }) {
   const {
     showReplyComposer,
@@ -28,7 +31,7 @@ function ReplyComposer({
     setCurrentReply,
   } = useRepliesState();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const user = useUser();
+  const userSession = useUser();
   const queryClient = useQueryClient();
   const [content, setContent] = useState("");
   const [imagePreview, setImagePreview] = useState("");
@@ -70,7 +73,7 @@ function ReplyComposer({
         ? EditCommentAction(
             currentReply.id,
             content,
-            imageUrl ? imageUrl.url : undefined,
+            imageUrl ? imageUrl.url : imagePreview,
           )
         : CreateReplyAction(parentId, content, imageUrl?.url);
       const result = await action;
@@ -80,10 +83,10 @@ function ReplyComposer({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["replies"],
+        queryKey: ["replies", topLevelComment.id, userSession.id],
       });
       queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
+        queryKey: ["comments", userSession.id],
       });
       setContent("");
       setImageFile(null);
@@ -108,7 +111,7 @@ function ReplyComposer({
           {error && <AlertMessage message={error} type="error" />}
           <div className="flex gap-1.5 w-full">
             <Image
-              src={user.image || "/user.jpg"}
+              src={userSession.image || "/user.jpg"}
               alt="صورتك"
               width={50}
               height={50}

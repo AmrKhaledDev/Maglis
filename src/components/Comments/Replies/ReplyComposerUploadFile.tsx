@@ -30,6 +30,7 @@ function ReplyComposerUploadFile({
         type="file"
         id="upload_image_to_reply"
         hidden
+        accept="image/*"
         className="hidden"
       />
     </div>

@@ -9,13 +9,13 @@ import { useRouter } from "next/navigation";
 // ===========================================
 function LikeBtn({ post }: { post: PostType }) {
   const { setToast } = useToast();
-  const user = useUser();
-  const isLiker = post.likes.some((like) => like.userId === user.id);
+  const userSession = useUser();
+  const isLiker = post.likes.some((like) => like.userId === userSession.id);
   const router = useRouter();
   const queryClient = useQueryClient();
   const { mutate: handleLike, isPending: loading } = useMutation({
     mutationFn: async () => {
-      if (!user) throw new Error("برجاء تسجيل الدخول أو التسجيل أولاً.");
+      if (!userSession) throw new Error("برجاء تسجيل الدخول أو التسجيل أولاً.");
       const result = await LikeAction(post.id);
       if (!result.success)
         throw new Error(
@@ -26,6 +26,9 @@ function LikeBtn({ post }: { post: PostType }) {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["user_posts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
       router.refresh();
     },
@@ -46,7 +49,7 @@ function LikeBtn({ post }: { post: PostType }) {
     >
       <Heart
         strokeWidth={1}
-        className={clsx("size-5",isLiker && "fill-red-500 text-red-500")}
+        className={clsx("size-5", isLiker && "fill-red-500 text-red-500")}
       />
     </button>
   );

@@ -1,7 +1,7 @@
 import { Ellipsis } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { motion } from "framer-motion";
-import { Comment } from "@prisma/client";
+import { Comment, Post } from "@prisma/client";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import PinnedCommentBtn from "./ButtonsOptions/PinnedCommentBtn";
 import DeleteCommentBtn from "./ButtonsOptions/DeleteCommentBtn";
@@ -12,11 +12,11 @@ import clsx from "clsx";
 function CommentOptions({
   comment,
   setCurrentComment,
-  postAuthorId
+  post,
 }: {
   comment: Comment;
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
-  postAuthorId:string
+  post: Post;
 }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
   const [publicLoading, setPublicLoading] = useState(false);
@@ -48,7 +48,7 @@ function CommentOptions({
             comment={comment}
             loading={publicLoading}
             setLoading={setPublicLoading}
-            postAuthorId={postAuthorId}
+            post={post}
           />
           <CopyCommentContentBtn
             comment={comment}

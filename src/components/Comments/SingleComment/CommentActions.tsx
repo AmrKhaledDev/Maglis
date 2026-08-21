@@ -5,6 +5,7 @@ import { Heart, MessageCircleReply } from "lucide-react";
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentType } from "@/types/Comment.type";
+import clsx from "clsx";
 // =======================================================
 function CommentActions({
   comment,
@@ -15,7 +16,7 @@ function CommentActions({
 }) {
   const queryClient = useQueryClient();
   const { setShowReplyComposer } = useRepliesState();
-  const user = useUser();
+  const userSession = useUser();
   const { setToast } = useToast();
   const { mutate: handleCreateLikeForComment, isPending: loading } =
     useMutation({
@@ -26,7 +27,10 @@ function CommentActions({
       },
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ["user_posts"],
+          queryKey: ["user_posts", userSession.id],
+        });
+         queryClient.invalidateQueries({
+          queryKey: ["comments", userSession.id],
         });
       },
       onError: (error: Error) => {
@@ -38,7 +42,7 @@ function CommentActions({
       },
     });
   const isLikerForComment = comment.likeForComments.some(
-    (like) => like.userId === user.id,
+    (like) => like.userId === userSession.id,
   );
   return (
     <div className="flex items-center gap-2">
@@ -49,7 +53,10 @@ function CommentActions({
       >
         <Heart
           strokeWidth={1.5}
-          className={`postBtnOptIcon disabled:cursor-default ${isLikerForComment && "fill-red-500 text-red-500"}`}
+          className={clsx(
+            "postBtnOptIcon disabled:cursor-default",
+            isLikerForComment && "fill-red-500 text-red-500",
+          )}
         />
       </button>
       {!commentsIsDisabled && (

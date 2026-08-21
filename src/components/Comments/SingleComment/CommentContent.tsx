@@ -1,5 +1,6 @@
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 import { Comment } from "@prisma/client";
+import Linkify from "linkify-react";
 import Image from "next/image";
 import { useState } from "react";
 // ==================================
@@ -10,9 +11,18 @@ function CommentContent({ comment }: { comment: Comment }) {
   });
   return (
     <div className="flex flex-col gap-3">
-      <p dir="auto" className="text-[12px]">
-        {comment.content}
-      </p>
+      <Linkify
+        options={{
+          target: "_blank",
+          attributes: {
+            className: "text-sky-500 hover:underline ",
+          },
+        }}
+      >
+        <p dir="auto" className="text-[12px] whitespace-pre-line">
+          {comment.content}
+        </p>
+      </Linkify>
       {comment.image && (
         <>
           <button
@@ -34,8 +44,8 @@ function CommentContent({ comment }: { comment: Comment }) {
           </button>
           {showImage.open && (
             <ImagePreviewModal
-              showMedia={showImage}
-              setShowMedia={setShowImage}
+              showImage={showImage}
+              setShowImage={setShowImage}
             />
           )}
         </>

@@ -8,7 +8,7 @@ import { Images } from "lucide-react";
 // ==========================================================================================
 function ShowMediaInProfileBtn({ post }: { post: PostType }) {
   const { setToast } = useToast();
-  const user = useUser();
+  const userSession = useUser();
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
@@ -17,13 +17,16 @@ function ShowMediaInProfileBtn({ post }: { post: PostType }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["user_posts", user.id],
+        queryKey: ["user_posts", userSession.id],
       });
       queryClient.invalidateQueries({
-        queryKey: ["user_postsPhotos", user.id],
+        queryKey: ["user_postsPhotos", userSession.id],
       });
       queryClient.invalidateQueries({
-        queryKey: ["user_postsVideos", user.id],
+        queryKey: ["user_postsVideos", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
     },
     onError: (error: Error) => {

@@ -13,7 +13,7 @@ import { UrlUserProfile } from "@/lib/UrlUserProfile";
 dayjs.extend(relativeTime);
 dayjs.locale(local);
 function VideoAuthor({ video }: { video: PostType }) {
-  const user = useUser();
+  const userSession = useUser();
   return (
     <div className="flex items-center gap-3">
       <Link href={UrlUserProfile(video.authorId)}>
@@ -29,7 +29,7 @@ function VideoAuthor({ video }: { video: PostType }) {
         <div className="flex items-center gap-1.5">
           <Link
             href={
-              user.id === video.authorId ? "/u/profile" : `/u/${video.authorId}`
+              userSession.id === video.authorId ? "/u/profile" : `/u/${video.authorId}`
             }
             className="text-sm font-semibold text-gray-200"
           >

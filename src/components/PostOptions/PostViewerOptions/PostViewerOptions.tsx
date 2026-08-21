@@ -1,25 +1,23 @@
+import { UrlUserProfile } from "@/lib/UrlUserProfile";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
-import { Ban, BellOff, EyeOff, UserPlus, UserRound } from "lucide-react";
+import { Ban, BellOff, EyeOff, UserRound } from "lucide-react";
+import Link from "next/link";
+import FollowBtn from "./FollowBtn";
 // ========================================================
 function PostViewerOptions({ post }: { post: PostType }) {
-  const user = useUser();
+  const userSession = useUser();
   return (
     <>
-      {user.id !== post.authorId && (
+      {userSession.id !== post.authorId && (
         <>
-          <button className="postBtnOpt">
+          <Link href={UrlUserProfile(post.authorId)} className="postBtnOpt">
             <UserRound className="postBtnOptIcon" /> عرض الملف الشخصي
-          </button>
+          </Link>
           <button className="postBtnOpt">
-            <EyeOff className="postBtnOptIcon" /> إخفاء هذا المنشور
+            <EyeOff className="postBtnOptIcon" /> إخفاء المنشور
           </button>
-          <button className="postBtnOpt">
-            <BellOff className="postBtnOptIcon" /> كتم المنشورات
-          </button>
-          <button className="postBtnOpt">
-            <UserPlus className="postBtnOptIcon" /> متابعة
-          </button>
+          <FollowBtn />
           <button className="postBtnOpt text-red-600">
             <Ban className="postBtnOptIcon" /> حظر
           </button>

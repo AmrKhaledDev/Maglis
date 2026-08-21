@@ -6,6 +6,7 @@ import ButtonShowReplies from "./ButtonShowReplies";
 import { useQuery } from "@tanstack/react-query";
 import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
+import { useUser } from "@/providers/UserProvider";
 // ============================================================
 function Replies({
   userOwnerCommentName,
@@ -21,15 +22,17 @@ function Replies({
   topLevelComment: CommentType;
 }) {
   const [showRepliesList, setShowRepliesList] = useState(false);
+  const userSession = useUser();
   const { data: replies = [], isLoading: loading } = useQuery({
-    queryKey: ["replies", comment.id],
     queryFn: async () => {
       const result = await GetCommentRepliesAction(comment.id);
       if (!result.success || !result.data) return [];
       return result.data;
     },
     enabled: showRepliesList,
+    queryKey: ["replies", comment.id, userSession.id],
   });
+
   const handleShowReplies = () => {
     setShowRepliesList((prev) => !prev);
   };
@@ -41,6 +44,7 @@ function Replies({
         parentId={comment.id}
         userOwnerCommentName={userOwnerCommentName}
         setShowRepliesList={setShowRepliesList}
+        topLevelComment={topLevelComment}
       />
       <ButtonShowReplies
         handleShowReplies={handleShowReplies}

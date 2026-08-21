@@ -5,18 +5,21 @@ import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Heart, MessageCircleReply } from "lucide-react";
 // ==========================================================================
 function ReplyActions({
   reply,
   commentsIsDisabled,
+  topLevelComment
 }: {
   reply: CommentType;
   commentsIsDisabled: boolean;
+  topLevelComment:Comment
 }) {
   const { setShowReplyComposer } = useRepliesState();
-  const user = useUser();
+  const userSession = useUser();
   const { setToast } = useToast();
   const queryClient = useQueryClient();
   const { mutate: handleCreateLike, isPending: loading } = useMutation({
@@ -28,18 +31,21 @@ function ReplyActions({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["replies", reply.parentId],
+        queryKey: ["replies", topLevelComment.id,userSession.id],
       });
     },
     onError: (err: Error) => {
       setToast({ type: "error", message: err.message, open: true });
     },
   });
-  const isLiker = reply.likeForComments.some((like) => like.userId === user.id);
+  const isLiker = reply.likeForComments.some(
+    (like) => like.userId === userSession.id,
+  );
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1.5">
         <button
+          type="button"
           onClick={() => handleCreateLike()}
           disabled={loading}
           className="cursor-pointer"

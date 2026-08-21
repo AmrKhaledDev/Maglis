@@ -8,7 +8,7 @@ import { Pin } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =====================================================================================
 function PinnedToProfileBtn({ post }: { post: PostType }) {
-  const user = useUser();
+  const userSession = useUser();
   const router = useRouter();
   const { setToast } = useToast();
   const queryClient = useQueryClient();
@@ -20,7 +20,10 @@ function PinnedToProfileBtn({ post }: { post: PostType }) {
     onSuccess: () => {
       router.refresh();
       queryClient.invalidateQueries({
-        queryKey: ["user_posts", user.id],
+        queryKey: ["user_posts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
     },
     onError: (error: Error) => {

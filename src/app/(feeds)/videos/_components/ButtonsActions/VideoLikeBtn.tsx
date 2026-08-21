@@ -17,7 +17,7 @@ function VideoLikeBtn({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { setToast } = useToast();
-  const user = useUser();
+  const userSession = useUser();
   const handleLike = async () => {
     try {
       setLoading(true);
@@ -43,7 +43,7 @@ function VideoLikeBtn({
       setLoading(false);
     }
   };
-  const isLiker = video.likes.some((like) => like.userId === user.id);
+  const isLiker = video.likes.some((like) => like.userId === userSession.id);
   return (
     <button
       disabled={loading}

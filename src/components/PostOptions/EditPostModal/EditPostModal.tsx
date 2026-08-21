@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 // ==========================================================================================================
 function EditPostModal({ post }: { post: PostType }) {
   const { setActiveModal } = useActiveModal();
-  const user = useUser();
+  const userSession = useUser();
   const postPrivacy: PrivacyType = privacyOptions.find(
     (item) => item.value === post.privacy,
   ) ?? { icon: Globe, label: "عام", value: "PUBLIC" };
@@ -91,7 +91,10 @@ function EditPostModal({ post }: { post: PostType }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["user_posts", user.id],
+        queryKey: ["user_posts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
       setActiveModal(null);
     },

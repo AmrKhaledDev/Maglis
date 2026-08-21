@@ -21,7 +21,7 @@ function EditCommentBtn({
             setActiveMenu("");
             setCurrentComment(comment);
           }}
-          className="flex items-center gap-2 text-xs hover:bg-white mytransition cursor-pointer"
+          className="commentBtnAct"
         >
           <Pencil className="size-4" /> تعديل
         </button>

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 function CommentsDisabledBtn({ post }: { post: PostType }) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const user = useUser();
+  const userSession = useUser();
   const { setToast } = useToast();
   const { mutate: handleCommentsDisabled, isPending: loading } = useMutation({
     mutationFn: async () => {
@@ -23,7 +23,10 @@ function CommentsDisabledBtn({ post }: { post: PostType }) {
     onSuccess: () => {
       router.refresh();
       queryClient.invalidateQueries({
-        queryKey: ["user_posts", user.id],
+        queryKey: ["user_posts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
     },
     onError: (error: Error) => {

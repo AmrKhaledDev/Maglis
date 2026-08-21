@@ -26,7 +26,7 @@ function CommentComposer({
   const [content, setContent] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const user = useUser();
+  const userSession = useUser();
   const currentMessage = currentComment
     ? "حدث خطأ أثناء تعديل تعليقك."
     : "حدث خطأ أثناء إنشاء تعليقك.";
@@ -68,7 +68,13 @@ function CommentComposer({
       setImagePreview("");
       setCurrentComment(null);
       queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
+        queryKey: ["user_posts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["comments", userSession.id],
       });
     },
   });
@@ -80,7 +86,7 @@ function CommentComposer({
           {error && <AlertMessage message={error.message} type="error" />}
           <div className="flex gap-2">
             <Image
-              src={user.image ?? "/user.jpg"}
+              src={userSession.image ?? "/user.jpg"}
               alt="صورتك"
               width={60}
               height={60}
@@ -92,7 +98,7 @@ function CommentComposer({
                 setContent={setContent}
                 setImagePreview={setImagePreview}
                 currentComment={currentComment}
-                user={user}
+                user={userSession}
                 loading={loading}
               />
               <CommentImageUploadedPreview

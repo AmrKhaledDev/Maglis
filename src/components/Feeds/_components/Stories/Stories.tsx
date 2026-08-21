@@ -10,14 +10,14 @@ import CreateStoryModal from "./_components/CreateStoryModal/CreateStoryModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // =============================================================
 function Stories() {
-  const user = useUser();
+  const userSession = useUser();
   const { activeModal } = useActiveModal();
   const { data, isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetActiveStoriesAction(user.id);
+      const result = await GetActiveStoriesAction(userSession.id);
       return result?.stories || [];
     },
-    queryKey: ["user_active_stories", user.id],
+    queryKey: ["user_active_stories", userSession.id],
   });
   return (
     <>
@@ -29,21 +29,21 @@ function Stories() {
         <SwiperSlide className="h-full! w-20!">
           <CreateStoryCard />
         </SwiperSlide>
-        {!isPending ? (
-          <SwiperSlide className="h-full! w-25!">
-            <StoryCard stories={data} />
-          </SwiperSlide>
-        ) : (
-          Array(7)
+        {isPending ? (
+          Array(6)
             .fill(0)
             .map((_, i) => (
               <SwiperSlide key={i} className="h-full! w-25!">
                 <div className="flex flex-col items-center animate-pulse gap-2 justify-center shrink-0">
-                  <div className="size-17 rounded-full bg-gray-500/30" />
-                  <span className="w-18 h-1.5 block bg-gray-500/30 rounded-full" />
+                  <span className="size-17 rounded-full bg-white/15 block shadow" />
+                  <span className="w-18 h-1.5 block bg-white/15 rounded-full shadow" />
                 </div>
               </SwiperSlide>
             ))
+        ) : (
+          <SwiperSlide className="h-full! w-25!">
+            <StoryCard stories={data} />
+          </SwiperSlide>
         )}
       </Swiper>
       {activeModal == "create_story_modal" && <CreateStoryModal />}

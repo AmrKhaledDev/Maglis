@@ -18,7 +18,7 @@ function AlertMessage({
           className={clsx("text-xs font-semibold p-2 flex items-center gap-2", {
             "text-green-200 bg-green-900": type === "success",
             "text-red-200 bg-red-900": type === "error",
-            "text-amber-200 bg-amber-900/40": type === "warn",
+            "text-amber-300 bg-amber-900/10": type === "warn",
             "bg-red-100 py-1 px-2": isServerError,
           })}
         >

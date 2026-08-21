@@ -13,7 +13,7 @@
   @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:text-black not-disabled:hover:bg-white mytransition;
 }
 @utility commentBtnAct {
-  @apply flex items-center gap-2 text-[11px] not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer;
+  @apply flex items-center gap-2 text-[11px] not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer not-disabled:hover:text-black;
 }
 @utility postBtnOptIcon {
   @apply size-4.5 shrink-0;

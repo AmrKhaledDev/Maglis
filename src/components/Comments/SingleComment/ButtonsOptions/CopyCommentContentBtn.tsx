@@ -44,7 +44,7 @@ function CopyCommentContentBtn({
         <button
           disabled={loading}
           onClick={handleCopyContent}
-          className="flex items-center gap-2 text-xs not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer"
+          className="commentBtnAct"
         >
           <Copy className="size-4" /> نسخ النص
         </button>

@@ -2,7 +2,9 @@ import { PinnedCommentAction } from "@/actions/Comment/PinnedComment.action";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { Comment } from "@prisma/client";
+import { Comment, Post } from "@prisma/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { Pin } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 // ============================================
@@ -10,20 +12,20 @@ function PinnedCommentBtn({
   comment,
   loading,
   setLoading,
-  postAuthorId,
+  post,
 }: {
   comment: Comment;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  postAuthorId: string;
+  post: Post;
 }) {
   const userSession = useUser();
   const { setToast } = useToast();
   const { setActiveMenu } = useActiveMenu();
-  const handlePinnedComment = async () => {
-    try {
+  const queryClient = useQueryClient();
+  const { mutate: handlePinnedComment } = useMutation({
+    mutationFn: async () => {
       setLoading(true);
-      setActiveMenu("");
       const result = await PinnedCommentAction(comment.id);
       if (!result.success)
         return setToast({
@@ -31,26 +33,33 @@ function PinnedCommentBtn({
           message: result.message || "حدث خطأ أثناء تثبيت التعليق.",
           type: "error",
         });
-    } catch (error) {
-      console.error(error);
-      setToast({
-        open: true,
-        message: "حدث خطأ أثناء تثبيت التعليق.",
-        type: "error",
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
-    } finally {
+      queryClient.invalidateQueries({
+        queryKey: ["user_posts", userSession.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["comments", userSession.id],
+      });
       setLoading(false);
-    }
-  };
+      setActiveMenu("");
+    },
+  });
   return (
     <>
-      {userSession.id === postAuthorId && (
+      {userSession.id === post.authorId && (
         <button
           disabled={loading}
-          onClick={handlePinnedComment}
-          className={`flex items-center gap-2 text-xs not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer ${comment.isPinned && "text-emerald-600"}`}
+          onClick={() => handlePinnedComment()}
+          className={clsx(
+            "commentBtnAct",
+            comment.isPinned && "text-emerald-600",
+          )}
         >
-          <Pin className={`size-4 ${comment.isPinned && "rotate-45"}`} />{" "}
+          <Pin className={`size-4 ${comment.isPinned && "rotate-45"}`} />
           {comment.isPinned ? "مُثبت" : "تثبيت"}
         </button>
       )}

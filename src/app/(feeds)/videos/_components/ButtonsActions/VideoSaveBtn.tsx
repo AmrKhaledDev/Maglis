@@ -16,7 +16,7 @@ function VideoSaveBtn({
 }) {
   const router = useRouter();
   const { setToast } = useToast();
-  const user = useUser();
+  const userSession = useUser();
   const queryClient = useQueryClient();
   const { mutate: handleSavePost, isPending: loading } = useMutation({
     mutationFn: async () => {
@@ -27,7 +27,7 @@ function VideoSaveBtn({
     onSuccess: () => {
       router.refresh();
       queryClient.invalidateQueries({
-        queryKey: ["user_savedPosts", user.id],
+        queryKey: ["user_savedPosts", userSession.id],
       });
     },
     onError: (error: Error) => {
@@ -38,7 +38,7 @@ function VideoSaveBtn({
       });
     },
   });
-  const isSaved = user.savedPosts.some((item) => item.postId === video.id);
+  const isSaved = userSession.savedPosts.some((item) => item.postId === video.id);
   return (
     <button
       disabled={loading}

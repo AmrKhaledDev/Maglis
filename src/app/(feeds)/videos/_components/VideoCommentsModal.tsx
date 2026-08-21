@@ -14,10 +14,10 @@ import { useActiveModal } from "@/providers/ActiveModalProvider";
 function VideoCommentsModal({ video }: { video: PostType }) {
   const { activeModal, setActiveModal } = useActiveModal();
   const [currentComment, setCurrentComment] = useState<Comment | null>(null);
-  const user = useUser();
+  const userSession = useUser();
   const comments = video.comments.sort((a, b) => {
-    if (a.userId === user.id) return -1;
-    if (b.userId === user.id) return 1;
+    if (a.userId === userSession.id) return -1;
+    if (b.userId === userSession.id) return 1;
     return 0;
   });
   return (

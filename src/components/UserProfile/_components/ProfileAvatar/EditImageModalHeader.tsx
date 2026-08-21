@@ -12,7 +12,7 @@ function EditImageModalHeader({
       <h2>
         {typeImage == "AVATAR" ? "تعديل الصورة الشخصية" : "تعديل صورة الغلاف"}
       </h2>
-      <button onClick={() => setActiveModal(null)} className="cursor-pointer">
+      <button onClick={() => setActiveModal(null)} className="cursor-pointer text-gray-400 hover:text-white">
         <X strokeWidth={1.5} className="size-5" />
       </button>
     </div>

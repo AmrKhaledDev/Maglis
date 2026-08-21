@@ -29,7 +29,7 @@ function SingleComment({
           <CommentOptions
             comment={comment}
             setCurrentComment={setCurrentComment}
-            postAuthorId={post.authorId}
+            post={post}
           />
         </div>
         <CommentContent comment={comment} />

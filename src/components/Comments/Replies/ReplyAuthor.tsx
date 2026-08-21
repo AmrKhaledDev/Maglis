@@ -1,7 +1,6 @@
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
 // =======================================================================
@@ -14,11 +13,10 @@ function ReplyAuthor({
   reply: CommentType;
   post: PostType;
 }) {
-  const user = useUser();
   return (
     <div className="flex items-center gap-2">
       <Image
-        src={reply.user.image || "/user.jpg"}
+        src={reply.user.image ?? "/user.jpg"}
         alt="صورة المستخدم"
         width={40}
         height={40}

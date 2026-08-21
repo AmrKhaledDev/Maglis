@@ -2,20 +2,34 @@
 import { useState } from "react";
 import PostCard from "@/components/PostCard/PostCard";
 import { PostType } from "@/types/Post.type";
+import PostsSkeleton from "./PostsSkeleton";
 // ===================================================================
-function Posts({ posts }: { posts: PostType[] }) {
+function Posts({
+  posts,
+  isPending,
+}: {
+  posts: PostType[] | undefined;
+  isPending: boolean;
+}) {
   const [showComments, setShowComments] = useState("");
   return (
-    <div className="w-full flex flex-col gap-5">
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          post={post}
-          setShowComments={setShowComments}
-          showComments={showComments}
-        />
-      ))}
-    </div>
+    <>
+      {isPending ? (
+        <PostsSkeleton />
+      ) : (
+        <div className="w-full flex flex-col gap-5">
+          {posts &&
+            posts.map((post) => (
+              <PostCard
+                key={post.id}
+                post={post}
+                setShowComments={setShowComments}
+                showComments={showComments}
+              />
+            ))}
+        </div>
+      )}
+    </>
   );
 }
 

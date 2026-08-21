@@ -7,6 +7,7 @@ import UserImages from "./UserImages";
 import UserVideos from "./UserVideos";
 import UserSavedPosts from "./UserSavedPosts/UserSavedPosts";
 import UserStories from "./UserStories/UserStories";
+import { useUser } from "@/providers/UserProvider";
 // =============================================
 function ProfileContent({ userId }: { userId: string }) {
   const [activeTab, setActiveTab] = useState<ActiveTab>("USER_POSTS");
@@ -19,10 +20,13 @@ function ProfileContent({ userId }: { userId: string }) {
   useEffect(() => {
     sessionStorage.setItem("ACTIVE_TAB", activeTab);
   }, [activeTab]);
+  const userSession = useUser();
   return (
     <div className="w-full flex justify-between gap-5">
       {activeTab === "USER_POSTS" && <UserPosts userId={userId} />}
-      {activeTab === "USER_SAVED_POSTS" && <UserSavedPosts userId={userId} />}
+      {activeTab === "USER_SAVED_POSTS" && userSession.id === userId && (
+        <UserSavedPosts userId={userId} />
+      )}
       {activeTab === "USER_STORIES" && <UserStories userId={userId} />}
       {activeTab === "USER_PHOTOS" && <UserImages userId={userId} />}
       {activeTab === "USER_VIDEOS" && <UserVideos userId={userId} />}

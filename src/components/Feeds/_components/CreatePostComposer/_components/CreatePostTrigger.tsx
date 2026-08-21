@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 // ================================================================
 function CreatePostTrigger() {
-  const user = useUser();
+  const userSession = useUser();
   const { setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center gap-2 w-full">
       <Link href={"/u/profile"}>
         <Image
-          src={user.image || "/user.jpg"}
+          src={userSession.image || "/user.jpg"}
           alt="صورتك"
           width={50}
           height={50}
@@ -21,7 +21,7 @@ function CreatePostTrigger() {
         onClick={() => setActiveModal("create_post_modal")}
         className="p-3.5 flex-1 text-sm hover:border-gray-50/40 mytransition rounded-full border border-gray-50/20 text-gray-400 cursor-pointer text-start"
       >
-        {`أهلًا ${user.name}، بماذا تفكر اليوم؟`}
+        {`أهلًا ${userSession.name}، بماذا تفكر اليوم؟`}
       </button>
     </div>
   );

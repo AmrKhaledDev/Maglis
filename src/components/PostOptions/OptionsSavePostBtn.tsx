@@ -31,8 +31,8 @@ function OptionsSavePostBtn({ post }: { post: PostType }) {
     },
   });
 
-  const user = useUser();
-  const isSaved = user.savedPosts.some((item) => item.postId == post.id);
+  const userSession = useUser();
+  const isSaved = userSession.savedPosts.some((item) => item.postId == post.id);
   return (
     <button
       onClick={() => handleSavePost()}
