@@ -1,27 +1,20 @@
-import { useUser } from "@/providers/UserProvider";
-import { User } from "@prisma/client";
-import clsx from "clsx";
-import { FaUsers } from "react-icons/fa";
-import { HiUsers } from "react-icons/hi2";
+import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
 // ==========================================
-function ProfileStats({user}:{user:User}) {
-    const userSession = useUser()
+function ProfileStats({ user }: { user: UserWithSocialLinkType }) {
   return (
     <>
-      <div
-        className={clsx(
-          "flex items-center gap-4",
-          user.id === userSession.id ? "mt-4" : "mt-2",
-        )}
-      >
-        <p className="text-[13px] text-gray-300 flex items-center gap-1.5 font-semibold">
-          <FaUsers className="text-[17px] text-gray-300" />
+      <div className="flex items-center gap-3 mt-1">
+        <p className="text-[13px] text-gray-300 flex items-center gap-1.5">
           {user.followersCount} {user.professionalMode ? "متابعين" : "أصدقاء"}
         </p>
-        <p className="text-[13px] text-gray-300 flex items-center gap-1.5 font-semibold">
-          <HiUsers className="text-[17px] text-gray-300" />
+        <p className="text-[13px] text-gray-300 flex items-center gap-1.5">
           {user.followingCount} متابعات
         </p>
+        {user.professionalMode && user.friendsCount > 0 && (
+          <p className="text-[13px] text-gray-300 flex items-center gap-1.5">
+            {user.friendsCount}
+          </p>
+        )}
       </div>
     </>
   );

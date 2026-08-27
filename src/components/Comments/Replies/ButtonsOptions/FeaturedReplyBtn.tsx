@@ -1,4 +1,5 @@
 import { ToggleFeaturedReplyAction } from "@/actions/Reply/ToggleFeaturedReply.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { CommentType } from "@/types/Comment.type";
@@ -25,12 +26,7 @@ function FeaturedReplyBtn({
         );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["replies", commentId],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
     onError: (error: Error) => {
       setToast({

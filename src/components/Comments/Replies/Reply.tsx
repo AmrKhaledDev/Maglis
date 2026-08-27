@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ReplyActions from "./ReplyActions";
 import Replies from "./Replies";
 import ReplyHeader from "./ReplyHeader";
@@ -8,9 +7,9 @@ import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
 import { Gem } from "lucide-react";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
-import Linkify from "linkify-react";
+import ReplyContent from "./ReplyContent";
 // ================================================================================
-function SingleReply({
+function Reply({
   reply,
   post,
   topLevelComment,
@@ -33,39 +32,7 @@ function SingleReply({
         )}
         <ReplyHeader reply={reply} topLevelComment={topLevelComment} />
         <ReplyAuthor post={post} reply={reply} />
-        <div className="flex flex-col gap-2">
-          <Linkify
-            options={{
-              target: "_blank",
-              attributes: {
-                className: "text-sky-500 hover:underline ",
-              },
-            }}
-          >
-            <p dir="auto" className="text-[11px]">
-              {reply.content}
-            </p>
-          </Linkify>
-          {reply.image && (
-            <button
-              onClick={() =>
-                setShowImage({
-                  open: true,
-                  url: reply.image as string,
-                })
-              }
-              className="relative size-25 cursor-pointer rounded-md overflow-hidden group"
-            >
-              <Image
-                src={reply.image}
-                alt="صورة للرد"
-                fill
-                className="object-cover shrink-0"
-              />
-              <span className="inset-0 absolute bg-black/15 group-hover:opacity-0 mytransition" />
-            </button>
-          )}
-        </div>
+        <ReplyContent reply={reply} setShowImage={setShowImage} />
         <hr className="border-white opacity-2" />
         <ReplyActions
           reply={reply}
@@ -87,4 +54,4 @@ function SingleReply({
   );
 }
 
-export default SingleReply;
+export default Reply;

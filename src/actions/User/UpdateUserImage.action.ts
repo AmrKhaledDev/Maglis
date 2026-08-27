@@ -18,23 +18,23 @@ export const UpdateUserImageAction = async (
         success: false,
         message: "حدث خطأ غير متوقع أثناء تحديث صورة ملفك الشخصي.",
       };
-    const session = await GetSession();
-    if (!session)
+    const userSession = await GetSession();
+    if (!userSession)
       return {
         success: false,
         message: "برجاء تسجيل الدخول لتنفيذ هذا الإجراء.",
       };
-    if (userId !== session.id)
+    if (userId !== userSession.id)
       return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
     if (!newImage) return { success: false, message: "برجاء رفع صورة." };
 
     await prisma.user.update({
       where: {
-        id: session.id,
+        id: userSession.id,
       },
       data: {
-        image: typeImage === "AVATAR" ? newImage : session.image,
-        cover: typeImage === "COVER" ? newImage : session.cover,
+        image: typeImage === "AVATAR" ? newImage : userSession.image,
+        cover: typeImage === "COVER" ? newImage : userSession.cover,
       },
     });
     revalidateTag("posts", "");

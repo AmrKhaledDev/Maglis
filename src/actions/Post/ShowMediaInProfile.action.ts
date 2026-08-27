@@ -9,8 +9,8 @@ export const ShowMediaInProfileAction = async (
   try {
     if (!postId)
       return { success: false, message: "حدث غير متوقع حاول مرة أخرى." };
-    const user = await GetSession();
-    if (!user) return { success: false, message: "برجاء تسجيل الدخول أولاً." };
+    const userSession = await GetSession();
+    if (!userSession) return { success: false, message: "برجاء تسجيل الدخول أولاً." };
     const post = await prisma.post.findUnique({
       where: {
         id: postId,
@@ -23,7 +23,7 @@ export const ShowMediaInProfileAction = async (
         message:
           "تعذر العثور على هذا المنشور. قد يكون تم حذفه أو لم يعد متاحًا.",
       };
-    if (post.authorId !== user.id)
+    if (post.authorId !== userSession.id)
       return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
     if (post.medias.length < 1)
       return { success: false, message: "لا يوجد وسائط لعرضها." };

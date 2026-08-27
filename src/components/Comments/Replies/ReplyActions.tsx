@@ -1,6 +1,7 @@
 import { CreateLikeForComentAction } from "@/actions/LikeForComment/CreateLikeForComment.action";
 import { formatLikes } from "@/formats/formatLikes";
 import { formatReplies } from "@/formats/formatReplies";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -12,11 +13,11 @@ import { Heart, MessageCircleReply } from "lucide-react";
 function ReplyActions({
   reply,
   commentsIsDisabled,
-  topLevelComment
+  topLevelComment,
 }: {
   reply: CommentType;
   commentsIsDisabled: boolean;
-  topLevelComment:Comment
+  topLevelComment: Comment;
 }) {
   const { setShowReplyComposer } = useRepliesState();
   const userSession = useUser();
@@ -30,9 +31,7 @@ function ReplyActions({
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["replies", topLevelComment.id,userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
     onError: (err: Error) => {
       setToast({ type: "error", message: err.message, open: true });

@@ -10,23 +10,23 @@ const validateSession = async (): Promise<{
   message?: string;
 }> => {
   try {
-    const session = await GetSession();
-    if (!session)
+    const userSession = await GetSession();
+    if (!userSession)
       return {
         success: false,
         message: "برجاء تسجيل الدخول أو التسجيل.",
       };
-    if (session.isPermanentlyBanned)
+    if (userSession.isPermanentlyBanned)
       return {
         success: false,
         message: "تم إيقاف حسابك بشكل دائم لا يمكنك التفاعل.",
       };
-    if (session.banExpiresAt && session.banExpiresAt > new Date())
+    if (userSession.banExpiresAt && userSession.banExpiresAt > new Date())
       return {
         success: false,
-        message: `تم إيقاف حسابك مؤقتاً حتى ${dayjs(session.banExpiresAt).format("D MMMM YYYY - h:mm A")}`,
+        message: `تم إيقاف حسابك مؤقتاً حتى ${dayjs(userSession.banExpiresAt).format("D MMMM YYYY - h:mm A")}`,
       };
-    return { success: true, session };
+    return { success: true, session: userSession };
   } catch (error) {
     console.error(error);
     return { success: false, message: "حدث خطأ أثناء التحقق من حسابك." };

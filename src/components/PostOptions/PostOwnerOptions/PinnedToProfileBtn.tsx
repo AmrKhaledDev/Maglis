@@ -1,4 +1,5 @@
 import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
@@ -19,12 +20,7 @@ function PinnedToProfileBtn({ post }: { post: PostType }) {
     },
     onSuccess: () => {
       router.refresh();
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
     onError: (error: Error) => {
       setToast({

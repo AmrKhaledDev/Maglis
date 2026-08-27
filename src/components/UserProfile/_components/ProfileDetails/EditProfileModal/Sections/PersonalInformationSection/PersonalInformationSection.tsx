@@ -1,7 +1,7 @@
 import EditProfileTitleSection from "../../EditProfileTitleSection";
 import Gender from "./Gender";
 import { Control, UseFormSetValue } from "react-hook-form";
-import { FormHookValues } from "../../../../_types/FormHookValues.type";
+import { FormHookValues } from "../../../../../_types/FormHookValues.type";
 import City from "./City";
 // ================================================================================
 function PersonalInformationSection({

@@ -1,7 +1,7 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import EditProfileTitleSection from "../EditProfileTitleSection";
 import ProfileFormField from "../ProfileFormField";
-import { FormHookValues } from "../../../_types/FormHookValues.type";
+import { FormHookValues } from "../../../../_types/FormHookValues.type";
 // ===============================================
 function BasicInfoSection({
   register,

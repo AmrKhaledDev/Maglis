@@ -1,4 +1,5 @@
 import { ShowMediaInProfileAction } from "@/actions/Post/ShowMediaInProfile.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
@@ -16,18 +17,7 @@ function ShowMediaInProfileBtn({ post }: { post: PostType }) {
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsPhotos", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsVideos", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
     onError: (error: Error) => {
       setToast({

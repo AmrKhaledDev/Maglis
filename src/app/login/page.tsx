@@ -14,7 +14,7 @@ async function Login({
         <LoginHeader />
         <div className="h-[89vh] flex items-center justify-between">
           <LoginHero />
-          <LoginForm errorAuthWithGoogle={error} />
+          <LoginForm error={error} />
         </div>
       </div>
     </main>

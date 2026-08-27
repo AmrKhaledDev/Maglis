@@ -14,7 +14,7 @@ import LoginFormBtnSub from "./LoginFormBtnSub";
 import LoginFormFooter from "./LoginFormFooter";
 import LoginFormHeader from "./LoginFormHeader";
 // =========================================================================
-function LoginForm({ errorAuthWithGoogle }: { errorAuthWithGoogle?: string }) {
+function LoginForm({ error }: { error?: string }) {
   const {
     register,
     handleSubmit,
@@ -22,11 +22,24 @@ function LoginForm({ errorAuthWithGoogle }: { errorAuthWithGoogle?: string }) {
   } = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
   });
+  let errorMessage;
+  switch (error) {
+    case "OAuthAccountNotLinked":
+      errorMessage = "برجاء تسجيل الدخول بالإيميل وكلمة المرور";
+      break;
+    default:
+      errorMessage =
+        "حدث خطأ أثناء تسجيل الدخول برجاء التأكد من الإنترنت وإعادة المحاولة.";
+  }
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showBlur, setShowBlur] = useState(false);
   const [serverError, setServerError] = useState(
-    errorAuthWithGoogle ? "برجاء تسجيل الدخول بالإيميل وكلمة المرور" : "",
+    error
+      ? error === "OAuthAccountNotLinked"
+        ? "برجاء تسجيل الدخول بالإيميل وكلمة المرور"
+        : "حدث خطأ أثناء تسجيل الدخول برجاء التأكد من الإنترنت وإعادة المحاولة."
+      : "",
   );
   const [serverSuccess, setServerSuccess] = useState("");
   const router = useRouter();

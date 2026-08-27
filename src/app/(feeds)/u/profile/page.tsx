@@ -3,11 +3,11 @@ import UserProfile from "@/components/UserProfile/UserProfile";
 import { redirect } from "next/navigation";
 // =====================================================================
 async function Profile() {
-  const user = await GetSession();
-  if (!user) return redirect("/login");
+  const userSession = await GetSession();
+  if (!userSession) return redirect("/login");
   return (
     <main>
-      <UserProfile userId={user.id} />
+      <UserProfile userId={userSession.id} />
     </main>
   );
 }

@@ -48,7 +48,9 @@ function Comments({ post }: { post: PostType }) {
         <p className="text-slate-300 flex items-center gap-1">
           التعليقات <span>({sortedComments.length})</span>
         </p>
-        {isPending ? (
+        {post.commentsDisabled ? (
+          ""
+        ) : isPending ? (
           <CommentsSkeleton />
         ) : (
           sortedComments.map((comment) => (

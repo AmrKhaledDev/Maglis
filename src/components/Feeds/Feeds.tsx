@@ -10,13 +10,13 @@ function Feeds() {
   const userSession = useUser();
   const { data: posts, isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetPostsAction();
+      const result = await GetPostsAction(userSession.id);
       return result.posts || [];
     },
     queryKey: ["posts", userSession.id],
   });
   return (
-    <div className="flex flex-col max-w-200 gap-7 mx-auto mb-5">
+    <div>
       <Stories />
       <div className="flex flex-col gap-5">
         <CreatePostComposer />

@@ -29,7 +29,9 @@ function VideoAuthor({ video }: { video: PostType }) {
         <div className="flex items-center gap-1.5">
           <Link
             href={
-              userSession.id === video.authorId ? "/u/profile" : `/u/${video.authorId}`
+              userSession.id === video.authorId
+                ? "/u/profile"
+                : `/u/${video.authorId}`
             }
             className="text-sm font-semibold text-gray-200"
           >
@@ -53,7 +55,7 @@ function VideoAuthor({ video }: { video: PostType }) {
               {formatLikes(video.likes.length)}
             </span>
             <span className="text-[11px] text-gray-300">
-              {formatComments(video.comments.length)}
+              {formatComments(video._count.comments)}
             </span>
           </div>
         </div>

@@ -13,7 +13,7 @@ function ReplyHeader({
   if (!reply.parent) return null;
   return (
     <div className="flex justify-between">
-      <div className="flex items-center gap-5 mb-1">
+      <div className="flex items-center gap-5">
         <p className="text-[10px] text-gray-400 flex items-center gap-1">
           رداً على
           <Link

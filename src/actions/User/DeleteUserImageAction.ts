@@ -17,21 +17,21 @@ export const DeleteUserImageAction = async (
         success: false,
         message: "حدث خطأ غير متوقع أثناء حذف صورة الملف الشخصي.",
       };
-    const session = await GetSession();
-    if (!session)
+    const userSession = await GetSession();
+    if (!userSession)
       return {
         success: false,
         message: "برجاء تسجيل الدخول لتنفيذ هذا الإجراء.",
       };
-    if (userId !== session.id)
+    if (userId !== userSession.id)
       return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
     await prisma.user.update({
       where: {
         id: userId,
       },
       data: {
-        image: typeImage === "AVATAR" ? null : session.image,
-        cover: typeImage === "COVER" ? null : session.cover,
+        image: typeImage === "AVATAR" ? null : userSession.image,
+        cover: typeImage === "COVER" ? null : userSession.cover,
       },
     });
     revalidateTag("posts", "");

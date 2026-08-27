@@ -18,6 +18,7 @@ import { useUser } from "@/providers/UserProvider";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // ==========================================================================================================
 function EditPostModal({ post }: { post: PostType }) {
   const { setActiveModal } = useActiveModal();
@@ -90,12 +91,7 @@ function EditPostModal({ post }: { post: PostType }) {
         throw new Error(result.message ?? "حدث خطأ أثناء تعديل منشورك.");
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
       setActiveModal(null);
     },
   });

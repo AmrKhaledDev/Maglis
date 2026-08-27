@@ -1,4 +1,5 @@
 import { DeleteCommentAction } from "@/actions/Comment/DeleteComment.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -34,26 +35,18 @@ function DeleteCommentBtn({
     onSuccess: () => {
       setActiveMenu("");
       setLoading(false);
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["comments", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
   });
   return (
     <>
       {userSession.id == comment.userId && (
         <>
-          <hr className=" border-zinc-700 opacity-5" />
+          <hr className="border-white opacity-5" />
           <button
             disabled={loading}
             onClick={() => handleDeleteComment()}
-            className="commentBtnAct"
+            className="commentBtnAct text-red-600 hover:text-red-600!"
           >
             <Trash2 className="size-4" /> حذف
           </button>

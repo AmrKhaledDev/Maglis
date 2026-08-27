@@ -13,8 +13,10 @@ import CreatePostModalMedia from "./CreatePostModalMedia";
 import CreatePostModalFooter from "./CreatePostModalFooter";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useUser } from "@/providers/UserProvider";
 // ===========================================================
 function CreatePostModal() {
+  const userSession = useUser();
   const { setActiveModal } = useActiveModal();
   const { control, register, handleSubmit, watch, setValue } =
     useForm<CreatePost_ModalFormType>({
@@ -79,13 +81,16 @@ function CreatePostModal() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
+        queryKey: ["user_posts", userSession.id],
       });
       queryClient.invalidateQueries({
-        queryKey: ["user_postsPhotos"],
+        queryKey: ["user_postsPhotos", userSession.id],
       });
       queryClient.invalidateQueries({
-        queryKey: ["user_postsVideos"],
+        queryKey: ["user_postsVideos", userSession.id],
+      });
+       queryClient.invalidateQueries({
+        queryKey: ["posts", userSession.id],
       });
       setActiveModal(null);
     },

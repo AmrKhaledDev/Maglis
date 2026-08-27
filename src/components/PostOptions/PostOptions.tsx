@@ -8,7 +8,7 @@ import PostOptionsBox from "./PostOptionsBox";
 function PostOptions({ post }: { post: PostType }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
   return (
-    <div className="absolute top-1 left-1 ">
+    <div className="h-fit relative">
       <button
         onClick={() =>
           setActiveMenu((prev) => (prev == post.id ? "" : post.id))

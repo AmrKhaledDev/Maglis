@@ -1,7 +1,7 @@
 import ProfileFormField from "../ProfileFormField";
 import EditProfileTitleSection from "../EditProfileTitleSection";
 import { FieldErrors, Path, UseFormRegister } from "react-hook-form";
-import { FormHookValues } from "../../../_types/FormHookValues.type";
+import { FormHookValues } from "../../../../_types/FormHookValues.type";
 // ==================================================================
 function SocialConnectionsSection({
   register,

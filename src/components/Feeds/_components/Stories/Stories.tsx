@@ -35,8 +35,8 @@ function Stories() {
             .map((_, i) => (
               <SwiperSlide key={i} className="h-full! w-25!">
                 <div className="flex flex-col items-center animate-pulse gap-2 justify-center shrink-0">
-                  <span className="size-17 rounded-full bg-white/15 block shadow" />
-                  <span className="w-18 h-1.5 block bg-white/15 rounded-full shadow" />
+                  <span className="size-17 rounded-full bg-white/5 block shadow" />
+                  <span className="w-18 h-1.5 block bg-white/5 rounded-full shadow" />
                 </div>
               </SwiperSlide>
             ))

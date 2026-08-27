@@ -1,4 +1,5 @@
 import { LikeAction } from "@/actions/Like/Like.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
@@ -24,12 +25,7 @@ function LikeBtn({ post }: { post: PostType }) {
         );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
       router.refresh();
     },
     onError: (error: Error) => {

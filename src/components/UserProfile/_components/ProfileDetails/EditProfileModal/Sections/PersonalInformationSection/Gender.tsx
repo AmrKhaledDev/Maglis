@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import EditProfileLable from "../../EditProfileLable";
-import { SelectedGenderType } from "../../../../_types/SelectedGender.type";
+import { SelectedGenderType } from "../../../../../_types/SelectedGender.type";
 import { IoMdArrowDropdown } from "react-icons/io";
 import SelectGender from "./SelectGender";
 import { User } from "lucide-react";
 import clsx from "clsx";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
-import { FormHookValues } from "../../../../_types/FormHookValues.type";
+import { FormHookValues } from "../../../../../_types/FormHookValues.type";
 import { genderMap } from "@/data/genderMap";
 // =======================================================
 function Gender({

@@ -13,7 +13,7 @@ function ProfileSocialLinks({ user }: { user: UserWithSocialLinkType }) {
       )}
     >
       <h2 className="font-bold text-xl text-gray-200">روابط التواصل</h2>
-      <div className="grid grid-cols-5 gap-5 cursor-pointer w-full">
+      <div className="grid grid-cols-5 gap-3 cursor-pointer w-full">
         {user.socialLinks.length > 0 ? (
           user.socialLinks.map((platform) => {
             const PLATFORM = SOCIAL_PLATFORMS_MAP[platform.platform];

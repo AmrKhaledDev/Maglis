@@ -20,7 +20,7 @@ function PostPrivacy({ privacy }: { privacy: Privacy }) {
           <Users className="size-3.5 text-gray-300" strokeWidth={1.5}/>
         )}
       </TooltipTrigger>
-      <TooltipContent side="left">
+      <TooltipContent side="top">
         {privacy == "PUBLIC" && "عام"}
         {privacy == "PRIVATE" && "خاص"}
         {privacy == "FRIENDS" && "للأصدقاء"}

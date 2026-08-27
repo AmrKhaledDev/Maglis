@@ -6,6 +6,7 @@ import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentType } from "@/types/Comment.type";
 import clsx from "clsx";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // =======================================================
 function CommentActions({
   comment,
@@ -26,12 +27,7 @@ function CommentActions({
           throw new Error(result.message || "حدث خطأ غير متوقع.");
       },
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["user_posts", userSession.id],
-        });
-         queryClient.invalidateQueries({
-          queryKey: ["comments", userSession.id],
-        });
+        invalidateUserCaches(queryClient, userSession);
       },
       onError: (error: Error) => {
         setToast({

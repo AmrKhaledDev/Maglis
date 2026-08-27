@@ -17,7 +17,7 @@ function Posts({
       {isPending ? (
         <PostsSkeleton />
       ) : (
-        <div className="w-full flex flex-col gap-5">
+        <div className="w-full flex flex-col gap-3">
           {posts &&
             posts.map((post) => (
               <PostCard

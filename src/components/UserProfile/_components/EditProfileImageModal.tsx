@@ -13,6 +13,7 @@ import DeleteImageBtn from "./ProfileAvatar/DeleteAvatarBtn";
 import { User } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useUser } from "@/providers/UserProvider";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // ==============================================================
 function EditProfileImageModal({
   typeImage,
@@ -58,12 +59,7 @@ function EditProfileImageModal({
       setImageFile(null);
       setImagePreview("");
       router.refresh();
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["comments", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
   });
   const defaultImage =

@@ -1,12 +1,13 @@
 import ReplyComposer from "./ReplyComposer";
 import { useState } from "react";
 import { GetCommentRepliesAction } from "@/actions/Reply/GetCommentReplies.action";
-import SingleReply from "./SingleReply";
+import SingleReply from "./Reply";
 import ButtonShowReplies from "./ButtonShowReplies";
 import { useQuery } from "@tanstack/react-query";
 import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
 import { useUser } from "@/providers/UserProvider";
+import Reply from "./Reply";
 // ============================================================
 function Replies({
   userOwnerCommentName,
@@ -55,7 +56,7 @@ function Replies({
       {showRepliesList && replies.length > 0 && (
         <div className="w-full flex flex-col items-end">
           {replies.map((reply) => (
-            <SingleReply
+            <Reply
               key={reply.id}
               reply={reply}
               post={post}

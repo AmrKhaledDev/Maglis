@@ -2,7 +2,7 @@ import { genderOptions } from "@/data/Profile/genderOptions";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { UseFormSetValue } from "react-hook-form";
-import { FormHookValues } from "../../../../_types/FormHookValues.type";
+import { FormHookValues } from "../../../../../_types/FormHookValues.type";
 import { Gender } from "@prisma/client";
 // ========================================================================
 function SelectGender({

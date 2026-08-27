@@ -1,4 +1,5 @@
 import { SavePostAction } from "@/actions/SavePost/SavePost.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
@@ -18,9 +19,7 @@ function OptionsSavePostBtn({ post }: { post: PostType }) {
     },
     onSuccess: () => {
       router.refresh();
-      queryClient.invalidateQueries({
-        queryKey:["user_savedPosts"]
-      })
+      invalidateUserCaches(queryClient, userSession);
     },
     onError: (error: Error) => {
       setToast({
@@ -37,7 +36,7 @@ function OptionsSavePostBtn({ post }: { post: PostType }) {
     <button
       onClick={() => handleSavePost()}
       disabled={loading}
-      className={clsx("postBtnOpt",isSaved &&"text-green-600")}
+      className={clsx("postBtnOpt", isSaved && "text-green-600")}
     >
       <Save className="postBtnOptIcon" /> {isSaved ? "محفوظ" : "حفظ"}
     </button>

@@ -22,7 +22,7 @@ function ProfileContent({ userId }: { userId: string }) {
   }, [activeTab]);
   const userSession = useUser();
   return (
-    <div className="w-full flex justify-between gap-5">
+    <div className="w-full flex justify-between gap-3">
       {activeTab === "USER_POSTS" && <UserPosts userId={userId} />}
       {activeTab === "USER_SAVED_POSTS" && userSession.id === userId && (
         <UserSavedPosts userId={userId} />
@@ -31,7 +31,11 @@ function ProfileContent({ userId }: { userId: string }) {
       {activeTab === "USER_PHOTOS" && <UserImages userId={userId} />}
       {activeTab === "USER_VIDEOS" && <UserVideos userId={userId} />}
       <span />
-      <TabsButtons setActiveTab={setActiveTab} activeTab={activeTab} />
+      <TabsButtons
+        userId={userId}
+        setActiveTab={setActiveTab}
+        activeTab={activeTab}
+      />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { EditCommentAction } from "@/actions/Comment/EditComment.action";
 import ReplyComposerActions from "./ReplyComposerActions";
 import { X } from "lucide-react";
 import { Comment } from "@prisma/client";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // ===================================================================================
 function ReplyComposer({
   userOwnerCommentName,
@@ -82,12 +83,7 @@ function ReplyComposer({
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["replies", topLevelComment.id, userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["comments", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
       setContent("");
       setImageFile(null);
       setImagePreview("");

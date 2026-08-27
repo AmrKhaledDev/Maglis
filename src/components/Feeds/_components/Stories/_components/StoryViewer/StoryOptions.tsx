@@ -1,5 +1,6 @@
 import { DeleteStoryAction } from "@/actions/Story/DeleteStory.action";
 import { EditStoryPrivacyAction } from "@/actions/Story/EditStoryPrivacy.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useToast } from "@/providers/ToastProvider";
@@ -21,12 +22,7 @@ function StoryOptions({ story }: { story: StoryType }) {
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_active_stories", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_stories", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
       setActiveModal(null);
     },
     onError: (err: Error) => {

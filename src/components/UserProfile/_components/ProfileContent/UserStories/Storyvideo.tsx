@@ -9,7 +9,7 @@ function Storyvideo({ story }: { story: StoryType }) {
   return (
     <>
       {story.media && story.mediaType === "VIDEO" && (
-        <div onClick={() => {}} className="w-full h-full relative bg-gray-900">
+        <div onClick={() => {}} className="w-full h-full relative bg-gray-950 group">
           <ReactPlayer
             playing={playingVideoId == story.id}
             src={story.media}
@@ -33,7 +33,7 @@ function Storyvideo({ story }: { story: StoryType }) {
               <Play className="size-5" strokeWidth={1.5} />
             )}
           </button>
-          <span className="absolute inset-0 z-1 bg-black/20" />
+          <span className="absolute inset-0 z-1 bg-black/24 group-hover:opacity-0 mytransition" />
         </div>
       )}
     </>

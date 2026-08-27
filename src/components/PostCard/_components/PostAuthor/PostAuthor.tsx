@@ -18,7 +18,7 @@ function PostAuthor({ post }: { post: PostType }) {
         alt="صورة المستخدم"
         width={50}
         height={50}
-        className="rounded-full object-cover shrink-0 size-9"
+        className="rounded-full object-cover shrink-0 size-10"
       />
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-4">

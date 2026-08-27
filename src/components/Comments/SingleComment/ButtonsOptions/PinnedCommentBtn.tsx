@@ -1,4 +1,5 @@
 import { PinnedCommentAction } from "@/actions/Comment/PinnedComment.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -35,15 +36,7 @@ function PinnedCommentBtn({
         });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["comments", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
       setLoading(false);
       setActiveMenu("");
     },

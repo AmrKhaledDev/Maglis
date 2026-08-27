@@ -4,7 +4,7 @@ import PostContentText from "./PostContentText";
 // ====================================================
 function PostContent({ post }: { post: PostType }) {
   return (
-    <div className="flex flex-col mt-4">
+    <div className="flex flex-col mt-6">
       <PostContentText post={post} />
       {post.medias.length > 0 && <PostContentMedia post={post} />}
     </div>

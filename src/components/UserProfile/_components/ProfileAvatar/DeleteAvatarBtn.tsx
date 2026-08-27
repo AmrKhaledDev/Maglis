@@ -1,4 +1,5 @@
 import { DeleteUserImageAction } from "@/actions/User/DeleteUserImageAction";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -29,12 +30,7 @@ function DeleteImageBtn({
       setActiveModal(null);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["comments", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
   });
   return (

@@ -1,5 +1,6 @@
 "use server";
 
+import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 import { SavePostType } from "@/types/SavePost.type";
 // ==========================================
@@ -14,6 +15,9 @@ export const GetUserSavedPostsAction = async (
       return {
         success: false,
       };
+    const userSession = await GetSession();
+    if (!userSession) return { success: false };
+    if (userId !== userSession.id) return { success: false };
     const savedPosts: SavePostType[] = await prisma.savePost.findMany({
       where: {
         userId,

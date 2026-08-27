@@ -2,7 +2,7 @@ import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import EditProfileLable from "../EditProfileLable";
 import EditProfileTitleSection from "../EditProfileTitleSection";
 import ProfileFormField from "../ProfileFormField";
-import { FormHookValues } from "../../../_types/FormHookValues.type";
+import { FormHookValues } from "../../../../_types/FormHookValues.type";
 // ====================================================
 function CareerInfoSection({
   register,

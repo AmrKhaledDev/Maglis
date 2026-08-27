@@ -2,7 +2,7 @@ import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type"
 import { auth } from "../lib/auth";
 import { prisma } from "../lib/prisma";
 // =====================================
-const GetSession = async ():Promise<SessionWithoutPasswordType | null> => {
+const GetSession = async (): Promise<SessionWithoutPasswordType | null> => {
   try {
     const session = await auth();
     if (!session || !session.user) return null;
@@ -11,7 +11,22 @@ const GetSession = async ():Promise<SessionWithoutPasswordType | null> => {
         id: session.user.id,
       },
       include: {
-        savedPosts: true,
+        savedPosts: {
+          select: {
+            postId: true,
+          },
+        },
+        sender: {
+          select: {
+            id: true,
+            receiverId: true,
+          },
+        },
+        followings: {
+          select: {
+            followingId: true,
+          },
+        },
       },
     });
     if (!existingUser) return null;

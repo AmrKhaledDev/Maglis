@@ -27,12 +27,12 @@ function SelectCitySearchbar({
         }}
         placeholder="أبحث عن محافظتك.."
         type="text"
-        className="flex-1 font-semibold text-white outline-none h-full pr-3 placeholder:text-gray-300 text-sm"
+        className="flex-1 text-white outline-none h-full pr-3 placeholder:text-gray-300 text-sm"
       />
       <button
         onClick={handleSearchCity}
         type="button"
-        className="h-full text-sm hover:shadow bg-slate-700 mytransition hover:bg-slate-900 font-bold w-20 cursor-pointer text-white"
+        className="h-full text-sm hover:shadow hover:bg-slate-800 mytransition bg-slate-900 w-20 cursor-pointer text-white"
       >
         بحث
       </button>

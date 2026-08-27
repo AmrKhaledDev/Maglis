@@ -26,7 +26,7 @@ export default async function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", tajawal.className, "font-sans")}
     >
-      <body className="min-h-full flex flex-col bg-black text-white">
+      <body className="min-h-full flex flex-col bg-[#0F0F0F] text-white">
         <Providers>{children}</Providers>
       </body>
     </html>

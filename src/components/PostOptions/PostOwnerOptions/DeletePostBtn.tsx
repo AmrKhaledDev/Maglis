@@ -1,4 +1,5 @@
 import { DeletePostAction } from "@/actions/Post/DeletePost.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -24,21 +25,7 @@ function DeletePostBtn({ post }: { post: PostType }) {
     onSuccess: () => {
       setActiveMenu("");
       router.refresh();
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsVideos", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsPhotos", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_savedPosts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
     onError: (error: Error) => {
       setToast({

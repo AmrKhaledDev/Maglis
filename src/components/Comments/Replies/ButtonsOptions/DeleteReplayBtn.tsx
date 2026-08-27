@@ -1,4 +1,5 @@
 import { DeleteCommentAction } from "@/actions/Comment/DeleteComment.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -8,10 +9,8 @@ import { Trash2 } from "lucide-react";
 // ======================================================
 function DeleteReplayBtn({
   reply,
-  commentId,
 }: {
   reply: CommentType;
-  commentId: string;
 }) {
   const { setToast } = useToast();
   const queryClient = useQueryClient();
@@ -27,12 +26,7 @@ function DeleteReplayBtn({
     },
     onSuccess: () => {
       setActiveMenu("");
-      queryClient.invalidateQueries({
-        queryKey: ["replies", commentId, userSession.id],
-      });
-       queryClient.invalidateQueries({
-        queryKey: ["comments", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
     onError: (err: Error) => {
       setToast({
@@ -50,7 +44,7 @@ function DeleteReplayBtn({
           <button
             onClick={() => handleDeleteReply()}
             disabled={isPending}
-            className="commentBtnAct text-red-700"
+            className="commentBtnAct text-red-700 hover:text-red-700!"
           >
             <Trash2 className="size-4" /> حذف
           </button>

@@ -12,6 +12,7 @@ import CommentTextarea from "./CommentTextarea";
 import CommentSubmitButton from "./CommentSubmitButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PostType } from "@/types/Post.type";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // =====================================================
 function CommentComposer({
   post,
@@ -67,15 +68,7 @@ function CommentComposer({
       setImageFile(null);
       setImagePreview("");
       setCurrentComment(null);
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["comments", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
   });
 
@@ -129,7 +122,10 @@ function CommentComposer({
           </div>
         </div>
       ) : (
-        <AlertMessage type="warn" message="تم إيقاف ميزة التعليقات." />
+        <AlertMessage
+          type="warn"
+          message="تم إيقاف ميزة التعليقات على هذا المنشور."
+        />
       )}
     </>
   );

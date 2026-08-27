@@ -12,6 +12,7 @@ import CreateStoryModalUloadText from "./CreateStoryModalUloadText";
 import CreateStoryModalSelectColor from "./CreateStoryModalSelectBgColor";
 import CreateStoryModalFooter from "./CreateStoryModalFooter";
 import CreateStoryModalUploadMedia from "./CreateStoryModalUploadMedia";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // =================================================================
 function CreateStoryModal() {
   const [selectedColor, setSelectedColor] = useState("#4f46e5");
@@ -53,12 +54,7 @@ function CreateStoryModal() {
       setContentText("");
       setMediaPreview("");
       setMediaFile(null);
-      queryClient.invalidateQueries({
-        queryKey: ["user_active_stories", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_stories", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
   });
   const [mounted, setMounted] = useState(false);

@@ -5,27 +5,46 @@ import { PostType } from "@/types/Post.type";
 import { Comment } from "@prisma/client";
 import { useState } from "react";
 import VideoLikeBtn from "./ButtonsActions/VideoLikeBtn";
-import VideoSaveBtn from "./ButtonsActions/VideoSaveBtn";
 import PostCard from "@/components/PostCard/PostCard";
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useQuery } from "@tanstack/react-query";
+import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action";
+import { useToast } from "@/providers/ToastProvider";
+import SavePostBtn from "@/components/PostCard/_components/PostActions/SavePostBtn";
 // ============================================================
 function VideoCommentsModal({ video }: { video: PostType }) {
-  const { activeModal, setActiveModal } = useActiveModal();
+  const { setActiveModal } = useActiveModal();
+  const { setToast } = useToast();
   const [currentComment, setCurrentComment] = useState<Comment | null>(null);
   const userSession = useUser();
-  const comments = video.comments.sort((a, b) => {
-    if (a.userId === userSession.id) return -1;
-    if (b.userId === userSession.id) return 1;
-    return 0;
+  const { data: comments = [], isPending } = useQuery({
+    queryFn: async () => {
+      const result = await GetPostCommentsAction(video.id);
+      if (!result.success)
+        return setToast({
+          open: true,
+          message: result.message || "حدث خطأ أثناء جلب تعليقات المنشور.",
+          type: "error",
+        });
+      return result.comments || [];
+    },
+    queryKey: ["comments", userSession.id],
   });
+  const commentsSorted = comments
+    ? comments.sort((a, b) => {
+        if (a.userId === video.authorId) return -1;
+        if (b.userId === video.authorId) return 1;
+        return 0;
+      })
+    : [];
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="fixed inset-0 bg-black pt-6  flex items-center justify-center z-40 backdrop-blur-4xl"
+      className="fixed inset-0 bg-[#0F0F0F] pt-6  flex items-center justify-center z-40 backdrop-blur-4xl"
     >
       <button
         onClick={() => setActiveModal(null)}
@@ -46,10 +65,10 @@ function VideoCommentsModal({ video }: { video: PostType }) {
             />
             <div className="flex flex-col pl-5 mt-4 gap-5 h-125 overflow-y-auto">
               <h3 className=" text-gray-200 text-[17px]">
-                التعليقات ({video.comments.length})
+                التعليقات ({video._count.comments})
               </h3>
               <div className="flex flex-col gap-2">
-                {comments.map((comment) => (
+                {commentsSorted.map((comment) => (
                   <SingleComment
                     key={comment.id}
                     setCurrentComment={setCurrentComment}
@@ -63,7 +82,11 @@ function VideoCommentsModal({ video }: { video: PostType }) {
           <div className="w-[55%] flex items-center gap-3">
             <div className="flex flex-col gap-3">
               <VideoLikeBtn video={video} isCommentsModalOpen={true} />
-              <VideoSaveBtn video={video} isCommentsModalOpen={true} />
+              <SavePostBtn
+                post={video}
+                isCommentsModalOpen={true}
+                isVideosPage={true}
+              />
             </div>
             <PostCard post={video} isVideosPage={true} />
           </div>

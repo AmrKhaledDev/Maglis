@@ -9,7 +9,7 @@ import Google from "next-auth/providers/google";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 5 },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -56,7 +56,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   pages: {
-    error:"/login",
-    signIn:"/login"
+    error: "/login",
+    signIn: "/login",
   },
 });

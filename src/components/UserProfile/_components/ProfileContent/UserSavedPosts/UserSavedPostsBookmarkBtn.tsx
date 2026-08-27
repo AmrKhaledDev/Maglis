@@ -1,11 +1,14 @@
 import { SavePostAction } from "@/actions/SavePost/SavePost.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
+import { useUser } from "@/providers/UserProvider";
 import { SavePostType } from "@/types/SavePost.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
 // ========================================
 function UserSavedPostsBookmarkBtn({ saveItem }: { saveItem: SavePostType }) {
+  const userSession = useUser();
   const router = useRouter();
   const { setToast } = useToast();
   const queryClient = useQueryClient();
@@ -20,9 +23,7 @@ function UserSavedPostsBookmarkBtn({ saveItem }: { saveItem: SavePostType }) {
         });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_savedPosts"],
-      });
+      invalidateUserCaches(queryClient, userSession);
       router.refresh();
     },
     onError: () => {},

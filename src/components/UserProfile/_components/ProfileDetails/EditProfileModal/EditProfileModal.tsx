@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import EditProfileHeader from "./EditProfileHeader";
 import BasicInfoSection from "./Sections/BasicInfoSection";
 import CareerInfoSection from "./Sections/CareerInfoSection";
@@ -8,12 +8,14 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
-import { FormHookValues } from "../../_types/FormHookValues.type";
-import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
+import { FormHookValues } from "../../../_types/FormHookValues.type";
+import { UserWithSocialLinkType } from "../../../_types/UserWithSocialLink.type";
 import { SOCIAL_PLATFORMS } from "@/data/Profile/socialPlatforms";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditUserProfileAction } from "@/actions/User/EditUserProfile.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useUser } from "@/providers/UserProvider";
 // =================================================================================
 function EditProfileModal({
   setShowEditProfileModal,
@@ -56,6 +58,7 @@ function EditProfileModal({
     },
   });
   const professionalMode = watch("professionalMode");
+  const userSession = useUser();
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (data: FormHookValues) => {
@@ -64,18 +67,7 @@ function EditProfileModal({
     },
     onSuccess: () => {
       setShowEditProfileModal(false);
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_savedPosts"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsPhotos"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsVideos"],
-      });
+      invalidateUserCaches(queryClient, userSession);
     },
   });
   useEffect(() => {

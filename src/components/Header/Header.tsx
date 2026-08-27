@@ -6,7 +6,7 @@ import Link from "next/link";
 // ========================================
 function Header() {
   return (
-    <header className="border-b sticky top-0 bg-black z-30 border-b-white/2 py-1">
+    <header className="sticky top-0 bg-[#0F0F0F] z-30 py-1 mb-3">
       <div className="mycontainer flex items-center justify-between">
         <Logo />
         <SearchBar />

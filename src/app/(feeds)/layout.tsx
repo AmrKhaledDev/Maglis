@@ -8,8 +8,10 @@ function FeedsLayout({ children }: { children: ReactNode }) {
     <div>
       <Header />
       <Toast />
-      <Menu />
-      {children}
+      <div className="flex gap-20 w-full mycontainer">
+        <Menu />
+        <div className="w-[55%] mb-5">{children}</div>
+      </div>
     </div>
   );
 }
