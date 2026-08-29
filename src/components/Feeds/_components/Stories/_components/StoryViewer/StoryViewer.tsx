@@ -1,4 +1,3 @@
-import { StoryType } from "@/types/StoryType";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
@@ -10,8 +9,16 @@ import StoryViewers from "./StoryViewers/StoryViewers";
 import StoryOptions from "./StoryOptions";
 import StoryAuthor from "./StoryAuthor";
 import Image from "next/image";
+import { Story } from "@prisma/client";
+import { UserStoryType } from "@/types/UserStoryType";
 // =======================================================
-function StoryViewer({ stories }: { stories: StoryType[] }) {
+function StoryViewer({
+  user,
+  stories,
+}: {
+  user: UserStoryType;
+  stories: Story[];
+}) {
   if (stories.length < 1) return redirect("/");
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentStory = stories[currentIndex] ?? stories[0];
@@ -25,7 +32,7 @@ function StoryViewer({ stories }: { stories: StoryType[] }) {
     <div className="fixed bg-black z-50 inset-0 backdrop-blur-3xl">
       <div className="absolute inset-0 backdrop-blur-xl z-2 bg-black/40 flex items-center justify-center">
         <div className="w-130 h-full relative">
-          <StoryAuthor story={currentStory} />
+          <StoryAuthor story={currentStory} user={user} />
           <StoryViewerStories
             stories={stories}
             setCurrentIndex={setCurrentIndex}

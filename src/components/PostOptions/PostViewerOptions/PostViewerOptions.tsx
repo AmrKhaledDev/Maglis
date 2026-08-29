@@ -1,11 +1,11 @@
 import { UrlUserProfile } from "@/lib/UrlUserProfile";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
-import {UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import Link from "next/link";
-import FollowBtn from "./FollowBtn";
 import HiddenPostBtn from "./HiddenPostBtn";
 import BlockBtn from "./BlockBtn";
+import FollowBtn from "@/components/FollowBtn/FollowBtn";
 // ========================================================
 function PostViewerOptions({ post }: { post: PostType }) {
   const userSession = useUser();
@@ -17,7 +17,14 @@ function PostViewerOptions({ post }: { post: PostType }) {
             <UserRound className="postBtnOptIcon" /> عرض الملف الشخصي
           </Link>
           <HiddenPostBtn post={post} />
-          <FollowBtn />
+          {post.author.professionalMode && (
+            <FollowBtn
+              followingId={post.authorId}
+              textColor="postBtnOpt"
+              followColor=""
+              unfollowColor="text-red-500!"
+            />
+          )}
           <BlockBtn authorId={post.authorId} />
         </>
       )}

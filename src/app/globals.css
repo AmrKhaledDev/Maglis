@@ -4,7 +4,7 @@
 /* ========================= */
 @custom-variant dark (&:is(.dark *));
 @utility mycontainer {
-  @apply mx-auto max-w-360 px-3;
+  @apply mx-auto max-w-380 px-3;
 }
 @utility mytransition {
   @apply transition-all duration-300;

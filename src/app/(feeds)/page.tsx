@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Feeds from "@/components/Feeds/Feeds";
 // ==============================================
 function page() {

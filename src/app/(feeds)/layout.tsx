@@ -1,4 +1,5 @@
 import Header from "@/components/Header/Header";
+import LeftSide from "@/components/LeftSide/LeftSide";
 import Menu from "@/components/Menu/Menu";
 import Toast from "@/components/Toast/Toast";
 import { ReactNode } from "react";
@@ -8,9 +9,10 @@ function FeedsLayout({ children }: { children: ReactNode }) {
     <div>
       <Header />
       <Toast />
-      <div className="flex gap-20 w-full mycontainer">
+      <div className="flex gap-10 mycontainer items-start">
         <Menu />
-        <div className="w-[55%] mb-5">{children}</div>
+        <div className="mb-5 flex-1">{children}</div>
+        <LeftSide />
       </div>
     </div>
   );

@@ -45,7 +45,7 @@ function FeaturedReplyBtn({
             disabled={isPending}
             className={clsx(
               "commentBtnAct",
-              reply.isFeatured && "text-yellow-600",
+              reply.isFeatured && "text-yellow-600!",
             )}
           >
             <Gem strokeWidth={1.5} className="size-4" />

@@ -37,7 +37,7 @@ function VideoCard({ video }: { video: PostType }) {
             controls
           />
         </div>
-        <div className="flex flex-col gap-5 shadow rounded-lg">
+        <div className="flex flex-col gap-5 rounded-lg">
           <VideoContent video={video} />
           <VideoAuthor video={video} />
         </div>

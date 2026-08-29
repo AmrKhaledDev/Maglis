@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import VideosContainer from "./_components/VideosContainer";
 // ===================================================================================
 function Videos() {

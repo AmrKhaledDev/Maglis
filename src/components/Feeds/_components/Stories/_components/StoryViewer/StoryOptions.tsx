@@ -5,12 +5,12 @@ import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { StoryType } from "@/types/StoryType";
+import { Story } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Ellipsis, Eye, EyeOff, Trash2 } from "lucide-react";
 // ===================================================
-function StoryOptions({ story }: { story: StoryType }) {
+function StoryOptions({ story }: { story: Story }) {
   const userSession = useUser();
   const { activeMenu, setActiveMenu } = useActiveMenu();
   const { setActiveModal } = useActiveModal();
@@ -40,12 +40,7 @@ function StoryOptions({ story }: { story: StoryType }) {
         if (!result.success) throw new Error(result.message);
       },
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["user_active_stories", userSession.id],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ["user_stories", userSession.id],
-        });
+        invalidateUserCaches(queryClient, userSession);
       },
       onError: (err: Error) => {
         setToast({

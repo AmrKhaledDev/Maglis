@@ -11,7 +11,7 @@ export const GetPostsVideosAction = async (): Promise<PostType[]> => {
         },
       },
       author: {
-        professionalMode: false,
+        professionalMode: true,
       },
       privacy: "PUBLIC",
     },

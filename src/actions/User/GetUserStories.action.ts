@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { StoryType } from "@/types/StoryType";
+import { StoryType } from "@/types/StoryType.type";
 // ====================================================
 export const GetUserStoriesAction = async (
   userId: string,

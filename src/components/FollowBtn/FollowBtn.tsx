@@ -1,31 +1,39 @@
 import { FollowAction } from "@/actions/Follow/Follow.action";
+import { useFollow } from "@/hooks/useFollow";
 import { useToast } from "@/providers/ToastProvider";
-import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
 import clsx from "clsx";
 import { Plus, UserMinus } from "lucide-react";
 import { useState } from "react";
-// =======================================================
-function PostAuthorFollowBtn({ post }: { post: PostType }) {
-  const userSession = useUser();
+import { useQueryClient } from "@tanstack/react-query";
+// =============================================================
+function FollowBtn({
+  followingId,
+  followColor,
+  unfollowColor,
+  textColor,
+}: {
+  followingId: string;
+  followColor: string;
+  unfollowColor: string;
+  textColor: string;
+}) {
+  const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
-  const [follow, setFollow] = useState(
-    !!userSession.followings.find((user) => user.followingId === post.authorId),
-  );
+  const { data: follow } = useFollow(followingId);
   const { setToast } = useToast();
   const handleFollow = async () => {
     try {
       setLoading(true);
-      const result = await FollowAction(post.authorId);
+      const result = await FollowAction(followingId);
       if (!result.success)
         return setToast({
           open: true,
           message: result.message || "حدث خطأ أثناء المتابعة.",
           type: "error",
         });
-      setFollow(!follow);
       if (result.message)
         setToast({ open: true, message: result.message, type: "success" });
+      queryClient.setQueryData(["follow", followingId], !follow);
     } catch (error) {
       console.error(error);
       setToast({
@@ -41,12 +49,7 @@ function PostAuthorFollowBtn({ post }: { post: PostType }) {
     <button
       onClick={handleFollow}
       disabled={loading}
-      className={clsx(
-        "shadow flex items-center gap-1 mytransition active:scale-98 cursor-pointer text-[12px] disabled:cursor-default py-1 px-2 rounded ",
-        follow
-          ? "bg-white/10 not-disabled:hover:bg-white/15"
-          : "bg-gray-200 hover:bg-gray-300 text-blue-700 ",
-      )}
+      className={clsx(textColor, follow ? unfollowColor : followColor)}
     >
       {follow ? (
         <>
@@ -62,5 +65,4 @@ function PostAuthorFollowBtn({ post }: { post: PostType }) {
     </button>
   );
 }
-
-export default PostAuthorFollowBtn;
+export default FollowBtn;

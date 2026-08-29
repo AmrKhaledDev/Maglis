@@ -1,5 +1,5 @@
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
-import { StoryType } from "@/types/StoryType";
+import { StoryType } from "@/types/StoryType.type";
 import clsx from "clsx";
 import { Pause, Play } from "lucide-react";
 import ReactPlayer from "react-player";
@@ -9,7 +9,10 @@ function Storyvideo({ story }: { story: StoryType }) {
   return (
     <>
       {story.media && story.mediaType === "VIDEO" && (
-        <div onClick={() => {}} className="w-full h-full relative bg-gray-950 group">
+        <div
+          onClick={() => {}}
+          className="w-full h-full relative bg-gray-950 group"
+        >
           <ReactPlayer
             playing={playingVideoId == story.id}
             src={story.media}

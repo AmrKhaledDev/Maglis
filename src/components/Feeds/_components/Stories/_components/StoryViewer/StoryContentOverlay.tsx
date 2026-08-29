@@ -1,8 +1,8 @@
-import { StoryType } from "@/types/StoryType";
+import { Story } from "@prisma/client";
 import clsx from "clsx";
 import { useState } from "react";
 // =======================================================
-function StoryContentOverlay({ currentStory }: { currentStory: StoryType }) {
+function StoryContentOverlay({ currentStory }: { currentStory: Story }) {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <>

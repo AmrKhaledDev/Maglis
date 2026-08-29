@@ -14,6 +14,7 @@ import CreatePostModalFooter from "./CreatePostModalFooter";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // ===========================================================
 function CreatePostModal() {
   const userSession = useUser();
@@ -80,18 +81,7 @@ function CreatePostModal() {
         );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user_posts", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsPhotos", userSession.id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["user_postsVideos", userSession.id],
-      });
-       queryClient.invalidateQueries({
-        queryKey: ["posts", userSession.id],
-      });
+      invalidateUserCaches(queryClient, userSession);
       setActiveModal(null);
     },
   });

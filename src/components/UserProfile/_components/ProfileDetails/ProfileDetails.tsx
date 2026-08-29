@@ -1,6 +1,6 @@
 "use client";
 import "dayjs/locale/ar";
-import ProfileDetailsFooter from "./ProfileDetailsFooter";
+import ProfileDetailsFooter from "./ProfileDetailsFooter/ProfileDetailsFooter";
 import ProfileStats from "./ProfileStats";
 import ProfileIdentity from "./ProfileIdentity";
 import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";

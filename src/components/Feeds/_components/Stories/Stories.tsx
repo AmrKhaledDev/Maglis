@@ -12,10 +12,9 @@ import { useActiveModal } from "@/providers/ActiveModalProvider";
 function Stories() {
   const userSession = useUser();
   const { activeModal } = useActiveModal();
-  const { data, isPending } = useQuery({
+  const { data: userWithStories, isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetActiveStoriesAction(userSession.id);
-      return result?.stories || [];
+      return await GetActiveStoriesAction(userSession.id);
     },
     queryKey: ["user_active_stories", userSession.id],
   });
@@ -41,9 +40,21 @@ function Stories() {
               </SwiperSlide>
             ))
         ) : (
-          <SwiperSlide className="h-full! w-25!">
-            <StoryCard stories={data} />
-          </SwiperSlide>
+          <>
+            {userWithStories && (
+              <SwiperSlide key={userWithStories.id} className="h-full! w-25!">
+                <StoryCard userWithStories={userWithStories} />
+              </SwiperSlide>
+            )}
+            {userWithStories?.followings.map((following) => (
+              <SwiperSlide
+                key={following.following.id}
+                className="h-full! w-25!"
+              >
+                <StoryCard userWithStories={following.following} />
+              </SwiperSlide>
+            ))}
+          </>
         )}
       </Swiper>
       {activeModal == "create_story_modal" && <CreateStoryModal />}

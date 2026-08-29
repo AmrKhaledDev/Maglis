@@ -1,14 +1,14 @@
-import { StoryType } from "@/types/StoryType";
 import Stories from "react-insta-stories";
 import StoryViewerTextStory from "./StoryViewerTextStory";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { Dispatch, SetStateAction } from "react";
+import { Story } from "@prisma/client";
 // =======================================
 function StoryViewerStories({
   stories,
   setCurrentIndex,
 }: {
-  stories: StoryType[];
+  stories: Story[];
   setCurrentIndex: Dispatch<SetStateAction<number>>;
 }) {
   const storyItems = stories.map((story) => {
@@ -61,7 +61,7 @@ function StoryViewerStories({
           setActiveModal(null);
         }}
       />
-      <span className="absolute z-2 bg-black/15 inset-0 pointer-events-none"/>
+      <span className="absolute z-2 bg-black/15 inset-0 pointer-events-none" />
     </div>
   );
 }

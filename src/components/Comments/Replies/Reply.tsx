@@ -26,8 +26,8 @@ function Reply({
     <div className="flex flex-col gap-2 w-full">
       <div className="bg-white/3 p-3 ring ring-gray-50/10 rounded-xl shadow w-full mt-2 flex flex-col gap-3">
         {reply.isFeatured && (
-          <p className="flex items-center gap-1 text-[11px] text-yellow-600">
-            <Gem strokeWidth={1.5} className="size-3.5" /> رد مميز
+          <p className="flex items-center rounded gap-1 text-[10px] text-[#A9A9A9] py-0.5 px-2 bg-[#3E3E3E] w-fit">
+            <Gem className="size-3" /> رد مميز
           </p>
         )}
         <ReplyHeader reply={reply} topLevelComment={topLevelComment} />

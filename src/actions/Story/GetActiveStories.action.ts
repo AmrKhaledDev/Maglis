@@ -2,37 +2,58 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import { StoryType } from "@/types/StoryType";
+import { UserStoriesWithFollowingsType } from "@/types/UserStoriesWithFollowingsType";
 // ======================================================
-export const GetActiveStoriesAction = async (
-  userId: string,
-): Promise<{ stories: StoryType[] } | undefined> => {
+export const GetActiveStoriesAction = async (userId: string) => {
   try {
     if (!userId) return;
     const validatingSession = await validateSession();
     if (!validatingSession.success || !validatingSession.session) return;
-    const stories: StoryType[] = await prisma.story.findMany({
-      where: {
-        userId,
-        expiresAt: {
-          gte: new Date(),
+    const user: UserStoriesWithFollowingsType | null =
+      await prisma.user.findUnique({
+        where: {
+          id: userId,
         },
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            image: true,
-            name: true,
-            username: true,
+        select: {
+          id: true,
+          image: true,
+          name: true,
+          username: true,
+          stories: {
+            where: {
+              expiresAt: {
+                gte: new Date(),
+              },
+            },
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
+          followings: {
+            select: {
+              following: {
+                select: {
+                  id: true,
+                  image: true,
+                  name: true,
+                  username: true,
+                  stories: {
+                    where: {
+                      expiresAt: {
+                        gte: new Date(),
+                      },
+                    },
+                    orderBy: {
+                      createdAt: "desc",
+                    },
+                  },
+                },
+              },
+            },
           },
         },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    return { stories };
+      });
+    return user;
   } catch (error) {
     console.error(error);
   }

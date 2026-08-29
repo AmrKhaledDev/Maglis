@@ -1,5 +1,5 @@
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
-import { StoryType } from "@/types/StoryType";
+import { StoryType } from "@/types/StoryType.type";
 import Image from "next/image";
 import { useState } from "react";
 // ================================================

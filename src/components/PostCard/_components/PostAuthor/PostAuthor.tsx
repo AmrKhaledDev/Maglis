@@ -13,13 +13,18 @@ dayjs.locale(local);
 function PostAuthor({ post }: { post: PostType }) {
   return (
     <div className="flex gap-2 items-center">
-      <Image
-        src={post.author.image || "/user.jpg"}
-        alt="صورة المستخدم"
-        width={50}
-        height={50}
-        className="rounded-full object-cover shrink-0 size-10"
-      />
+      <Link
+        href={UrlUserProfile(post.authorId)}
+        className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
+      >
+        <Image
+          src={post.author.image || "/user.jpg"}
+          alt="صورة المستخدم"
+          width={50}
+          height={50}
+          className="rounded-full object-cover shrink-0 size-10"
+        />
+      </Link>
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">

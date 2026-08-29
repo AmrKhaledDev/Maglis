@@ -1,8 +1,8 @@
-import { StoryType } from "@/types/StoryType";
+import { Story } from "@prisma/client";
 import clsx from "clsx";
 import { Eye } from "lucide-react";
 // =====================================
-function StoryViewers({ story }: { story: StoryType }) {
+function StoryViewers({ story }: { story: Story }) {
   return (
     <button
       className={clsx(

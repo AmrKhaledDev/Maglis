@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // ===========================================
-type UserWithSavedPosts = Prisma.UserGetPayload<{
+type User = Prisma.UserGetPayload<{
   include: {
     savedPosts: {
       select: { postId: true };
@@ -18,4 +18,4 @@ type UserWithSavedPosts = Prisma.UserGetPayload<{
     };
   };
 }>;
-export type SessionWithoutPasswordType = Omit<UserWithSavedPosts, "password">;
+export type SessionWithoutPasswordType = Omit<User, "password">;

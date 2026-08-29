@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import LoginForm from "./_components/LoginForm";
 import LoginHeader from "./_components/LoginHeader";
 import LoginHero from "./_components/LoginHero";

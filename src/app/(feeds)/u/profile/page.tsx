@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import GetSession from "@/auth/GetSession";
 import UserProfile from "@/components/UserProfile/UserProfile";
 import { redirect } from "next/navigation";

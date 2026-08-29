@@ -1,4 +1,5 @@
-import { StoryType } from "@/types/StoryType";
+import { StoryType } from "@/types/StoryType.type";
+
 // ==========================================================
 function StoryViewerTextStory({ story }: { story: StoryType }) {
   return (

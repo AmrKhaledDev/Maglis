@@ -1,0 +1,48 @@
+"use client";
+import { usePathname } from "next/navigation";
+import FollowBtn from "@/components/FollowBtn/FollowBtn";
+import UserDetails from "./UserDetails";
+import { useQuery } from "@tanstack/react-query";
+import { GetSuggestedPeopleAction } from "@/actions/User/GetSuggestedPeople.action";
+import { useUser } from "@/providers/UserProvider";
+import SuggestedPeopleSkeleton from "./SuggestedPeopleSkeleton";
+import SuggestedPeopleHeader from "./SuggestedPeopleHeader";
+// ==================================
+function SuggestedPeople() {
+  const pathname = usePathname();
+  if (pathname === "/videos") return null;
+  const userSession = useUser();
+  const { data = [], isPending } = useQuery({
+    queryFn: async () => {
+      const result = await GetSuggestedPeopleAction();
+      if (!result.success && result.message) throw new Error(result.message);
+      return result.suggestedPeople;
+    },
+    queryKey: ["suggestedPeople", userSession.id],
+  });
+  return (
+    <div className=" p-4 shadow rounded-2xl overflow-hidden flex flex-col gap-5">
+      <SuggestedPeopleHeader dataLenght={data.length} isPending={isPending} />
+      <div className="flex flex-col gap-2">
+        {isPending ? (
+          <SuggestedPeopleSkeleton />
+        ) : (
+          data.length > 0 &&
+          data.map((user) => (
+            <div key={user.id} className="flex items-center justify-between">
+              <UserDetails user={user} />
+              <FollowBtn
+                followingId={user.id}
+                followColor=""
+                unfollowColor="text-red-500!"
+                textColor="text-[11px] py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5"
+              />
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default SuggestedPeople;
