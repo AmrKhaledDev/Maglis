@@ -1,5 +1,5 @@
 import { useUser } from "@/providers/UserProvider";
-import { ClockFading, UserRoundPlus } from "lucide-react";
+import { ClockFading } from "lucide-react";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -9,6 +9,7 @@ import { formatComments } from "@/formats/formatComments";
 import Image from "next/image";
 import { PostType } from "@/types/Post.type";
 import { UrlUserProfile } from "@/lib/UrlUserProfile";
+import FollowBtn from "@/components/FollowBtn/FollowBtn";
 // ===============================================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
@@ -40,10 +41,17 @@ function VideoAuthor({ video }: { video: PostType }) {
           <h3 className="text-xs text-gray-400 font-semibold">
             {video.author.username}@
           </h3>
-          <span className="size-[3.5px] bg-white/5 block rounded-full" />
-          <button className="text-[10px] mytransition active:scale-95 flex font-semibold items-center gap-2 cursor-pointer border border-blue-500/10 text-blue-400 bg-blue-900/30 py-1 px-3 rounded-md shadow">
-            <UserRoundPlus className="size-3.5" /> متابعة
-          </button>
+          {userSession.id !== video.authorId && (
+            <>
+              <span className="size-[3.5px] bg-white/5 block rounded-full" />
+              <FollowBtn
+                followingId={video.authorId}
+                followColor="bg-blue-900/30 text-blue-400 border-blue-500/10 border shadow"
+                unfollowColor="hover:text-gray-400"
+                textColor="text-[10px] active:scale-95 flex font-semibold items-center gap-2 cursor-pointer py-1 px-3 rounded-md "
+              />
+            </>
+          )}
         </div>
         <div className="flex items-center justify-between w-full">
           <p className="text-xs text-gray-400 flex items-center gap-1">

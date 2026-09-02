@@ -27,6 +27,20 @@ const GetSession = async (): Promise<SessionWithoutPasswordType | null> => {
             followingId: true,
           },
         },
+        _count: {
+          select: {
+            receiver: true,
+          },
+        },
+        myFriends: {
+          select: {
+            friend: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        },
       },
     });
     if (!existingUser) return null;

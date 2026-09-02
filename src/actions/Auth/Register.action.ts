@@ -46,17 +46,20 @@ export const RegisterAction = async (
       });
     } catch (error) {
       console.log(error);
-      return { success: false, message: "حدث خطأ أثناء حفظ البيانات" };
+      return {
+        success: false,
+        message: "حدث خطأ أثناء حفظ البيانات تأكد من الإتصال بالإنترنت.",
+      };
     }
     return {
       success: true,
-      message: "تم إرسال رابط التحقق إلى البريد الإلكتروني",
+      message: "تم إرسال رابط التحقق إلى البريد الإلكتروني الخاص بك.",
     };
   } catch (error) {
     console.log(error);
     return {
       success: false,
-      message: "حدث خطأ أثناء انشاء حسابك حاول مره أُخرى",
+      message: "حدث خطأ أثناء انشاء حسابك حاول مره أُخرى.",
     };
   }
 };

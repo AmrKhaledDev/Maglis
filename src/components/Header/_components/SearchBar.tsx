@@ -10,7 +10,7 @@ import UsersSearchResult from "./UsersSearchResult";
 function SearchBar() {
   const userSession = useUser();
   const [searchValue, setSearchValue] = useState("");
-  const [data, setData] = useState<UserSearchResult[] | null>(null);
+  const [data, setData] = useState<UserSearchResult[]>([]);
   const { setToast } = useToast();
   useEffect(() => {
     const FETCH_DATA = async () => {
@@ -55,7 +55,9 @@ function SearchBar() {
           <Search className="size-8 p-2 mr-1 rounded-full ring ring-gray-50/10 bg-[#c5ab77]/10 mytransition shadow hover:scale-105" />
         </button>
       </div>
-      <UsersSearchResult data={data} searchValue={searchValue} />
+      {data.length > 0 && (
+        <UsersSearchResult data={data} searchValue={searchValue} />
+      )}
     </div>
   );
 }

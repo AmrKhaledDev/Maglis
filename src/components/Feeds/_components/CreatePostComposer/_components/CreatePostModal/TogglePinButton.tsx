@@ -6,6 +6,7 @@ import {
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 import { CreatePost_ModalFormType } from "../../_types/CreatePost_ModalForm.type";
 import { TiPin } from "react-icons/ti";
+import clsx from "clsx";
 // ==================================================
 function TogglePinButton({
   control,
@@ -27,8 +28,10 @@ function TogglePinButton({
           disabled={disabled}
           type="button"
           onClick={() => setValue("isPinnedToProfile", !isPinnedToProfile)}
-          className={`not-disabled:cursor-pointer mytransition  text-2xl
-            ${isPinnedToProfile ? "text-emerald-500" : "text-gray-500 not-disabled:hover:text-white -rotate-45 "}`}
+          className={clsx(
+            "not-disabled:cursor-pointer mytransition text-2xl not-disabled:hover:text-white -rotate-45 ",
+            isPinnedToProfile ? "text-emerald-500" : "text-gray-500 ",
+          )}
         >
           <TiPin />
         </button>

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ChangeEvent } from "react";
 import { GoVideo } from "react-icons/go";
 // ====================================
@@ -12,10 +13,12 @@ function AddVideo({
     <div>
       <label
         htmlFor="upload_video"
-        className={`text-2xl block mytransition 
-          
-          ${loading ? "text-gray-500 " : "hover:text-white cursor-pointer active:scale-90 text-gray-400 "}
-          `}
+        className={clsx(
+          "text-2xl block mytransition",
+          loading
+            ? "text-gray-500 "
+            : "hover:text-white cursor-pointer active:scale-90 text-gray-400 ",
+        )}
       >
         <GoVideo />
       </label>
@@ -30,5 +33,4 @@ function AddVideo({
     </div>
   );
 }
-
 export default AddVideo;

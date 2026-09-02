@@ -21,6 +21,7 @@ function RegisterForm() {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
   });
@@ -41,7 +42,12 @@ function RegisterForm() {
     if (!result.success)
       return setServerError(result.message || "حدث خطأ أثناء انشاء حسابك");
     setServerSuccess(result.message);
-    reset();
+    setTimeout(() => {
+      setServerSuccess("");
+    }, 3000);
+    setValue("name", "");
+    setValue("email", "");
+    setValue("password", "");
     router.refresh();
   };
   return (

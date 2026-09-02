@@ -1,12 +1,13 @@
 import { UseFormRegister } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
+import clsx from "clsx";
 // =======================================================
 function EditPostModalContent({
   register,
   content,
 }: {
-  register:UseFormRegister<EditPostModalFormType>
+  register: UseFormRegister<EditPostModalFormType>;
   content: string;
 }) {
   return (
@@ -21,7 +22,9 @@ function EditPostModalContent({
       <p className="text-sm flex items-center gap-1 text-gray-200 font-normal">
         5000 /
         <span
-          className={`${content.length > 5000 ? "text-red-400" : "text-green-400"}`}
+          className={clsx(
+            content.length > 5000 ? "text-red-400" : "text-green-400",
+          )}
         >
           {content.length}
         </span>

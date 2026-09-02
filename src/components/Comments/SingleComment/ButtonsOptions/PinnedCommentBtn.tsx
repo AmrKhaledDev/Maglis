@@ -52,7 +52,7 @@ function PinnedCommentBtn({
             comment.isPinned && "text-emerald-600",
           )}
         >
-          <Pin className={`size-4 ${comment.isPinned && "rotate-45"}`} />
+          <Pin className={clsx("size-4", comment.isPinned && "rotate-45")} />
           {comment.isPinned ? "مُثبت" : "تثبيت"}
         </button>
       )}

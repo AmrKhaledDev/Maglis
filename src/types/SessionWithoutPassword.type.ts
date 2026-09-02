@@ -16,6 +16,20 @@ type User = Prisma.UserGetPayload<{
         followingId: true;
       };
     };
+    _count: {
+      select: {
+        receiver: true;
+      };
+    };
+    myFriends: {
+      select: {
+        friend: {
+          select: {
+            id: true;
+          };
+        };
+      };
+    };
   };
 }>;
 export type SessionWithoutPasswordType = Omit<User, "password">;

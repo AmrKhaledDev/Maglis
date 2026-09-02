@@ -35,4 +35,7 @@ export const invalidateUserCaches = (
   queryClient.invalidateQueries({
     queryKey: ["user_postsPhotos", userSession.id],
   });
+  queryClient.invalidateQueries({
+    queryKey: ["user_friendRequests", userSession.id],
+  });
 };

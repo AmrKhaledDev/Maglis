@@ -2,6 +2,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import SelectPrivacy from "./SelectPrivacy";
 import { useWatch } from "react-hook-form";
 import { CreatePost_Modal_CenterPropsType } from "../../_types/CreatePost_Modal_CenterProps.type";
+import clsx from "clsx";
 // ==========================================================
 function CreatePostModalCenter({
   register,
@@ -28,7 +29,9 @@ function CreatePostModalCenter({
         <p className="text-sm flex items-center gap-1">
           5000 /
           <span
-            className={`${content.length > 5000 ? "text-red-400" : "text-green-400"}`}
+            className={clsx(
+              content.length > 5000 ? "text-red-400" : "text-green-400",
+            )}
           >
             {content.length}
           </span>

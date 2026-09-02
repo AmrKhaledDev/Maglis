@@ -16,7 +16,7 @@ function VideoActions({ video }: { video: PostType }) {
     <div className="flex items-center flex-col gap-3">
       <VideoLikeBtn video={video} />
       <button
-        onClick={() => setActiveModal(video.id)}
+        onClick={() => setActiveModal(video.authorId)}
         className="videoBtnActionStyle"
       >
         <MessageCircle className="size-7" />
@@ -27,7 +27,7 @@ function VideoActions({ video }: { video: PostType }) {
         isVideosPage={true}
       />
       <VideoOptions video={video} />
-      {activeModal == video.id && <VideoCommentsModal video={video} />}
+      {activeModal == video.authorId && <VideoCommentsModal video={video} />}
     </div>
   );
 }

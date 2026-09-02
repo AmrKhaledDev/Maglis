@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import { UseFormSetValue } from "react-hook-form";
 import { EditPostModalFormType } from "../PostCard/_types/EditPostModalForm.type";
 import { PrivacyType } from "@/types/Privacy.type";
+import clsx from "clsx";
 // ================================================================================
 function SelectPrivacyOptions({
   setValue,
-  privacy
+  privacy,
 }: {
   setValue: UseFormSetValue<EditPostModalFormType>;
-  privacy:PrivacyType
+  privacy: PrivacyType;
 }) {
   return (
     <motion.div
@@ -22,9 +23,12 @@ function SelectPrivacyOptions({
         <button
           type="button"
           onClick={() => setValue("privacy", item)}
-          className={`flex items-center gap-1 text-xs rounded p-1 mytransition
-            ${privacy.value == item.value ?"bg-black text-white" :"hover:bg-black hover:text-white cursor-pointer"}
-            `}
+          className={clsx(
+            "flex items-center gap-1 text-xs rounded p-1 mytransition",
+            privacy.value == item.value
+              ? "bg-black text-white"
+              : "hover:bg-black hover:text-white cursor-pointer",
+          )}
           key={item.value}
         >
           <item.icon className="size-4" />

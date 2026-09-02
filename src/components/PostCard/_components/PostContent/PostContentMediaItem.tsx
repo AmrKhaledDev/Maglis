@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { useInView } from "react-intersection-observer";
 import { PostType } from "@/types/Post.type";
+import clsx from "clsx";
 // =========================================================
 function PostContentMediaItem({
   item,
@@ -34,7 +35,10 @@ function PostContentMediaItem({
   return (
     <div
       ref={ref}
-      className={`w-full overflow-hidden bg-black rounded-lg relative ${post.medias.length > 1 ? "h-80" : "h-110"} `}
+      className={clsx(
+        "w-full overflow-hidden bg-black rounded-lg relative",
+        post.medias.length > 1 ? "h-80" : "h-110",
+      )}
     >
       {item.type == "IMAGE" && (
         <button

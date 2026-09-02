@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { Plus, UserMinus } from "lucide-react";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 // =============================================================
 function FollowBtn({
   followingId,
@@ -21,6 +22,7 @@ function FollowBtn({
   const [loading, setLoading] = useState(false);
   const { data: follow } = useFollow(followingId);
   const { setToast } = useToast();
+  const router = useRouter();
   const handleFollow = async () => {
     try {
       setLoading(true);
@@ -33,6 +35,7 @@ function FollowBtn({
         });
       if (result.message)
         setToast({ open: true, message: result.message, type: "success" });
+      router.refresh();
       queryClient.setQueryData(["follow", followingId], !follow);
     } catch (error) {
       console.error(error);

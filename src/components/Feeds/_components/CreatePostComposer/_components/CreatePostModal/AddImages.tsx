@@ -1,15 +1,17 @@
 "use client";
 import { FaRegImages } from "react-icons/fa6";
 import { AddMediaPropsType } from "../../_types/AddMediaProps.type";
+import clsx from "clsx";
 // ======================================================================================
 function AddImages({ append, fields, disabled }: AddMediaPropsType) {
   return (
     <div>
       <label
         htmlFor="upload_image"
-        className={`text-2xl text-gray-400 block mytransition 
-          ${disabled?"" :"hover:text-white cursor-pointer active:scale-90 "}
-          `}
+        className={clsx(
+          "text-2xl text-gray-400 block mytransition ",
+          !disabled && "hover:text-white cursor-pointer active:scale-90 ",
+        )}
       >
         <FaRegImages />
       </label>

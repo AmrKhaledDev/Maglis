@@ -2,7 +2,6 @@ import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
 import { SavePostType } from "@/types/SavePost.type";
 import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
 import ReactPlayer from "react-player";
 // ===========================================================================
 function UserSavedPostsMedia({ saveItem }: { saveItem: SavePostType }) {
@@ -16,7 +15,10 @@ function UserSavedPostsMedia({ saveItem }: { saveItem: SavePostType }) {
       {saveItem.post.medias.map((item) => (
         <button
           key={item.id}
-          className={`w-full overflow-hidden bg-black rounded-lg relative ${saveItem.post.medias.length > 1 ? "h-30" : "h-60"}`}
+          className={clsx(
+            "w-full overflow-hidden bg-black rounded-lg relative",
+            saveItem.post.medias.length > 1 ? "h-30" : "h-60",
+          )}
         >
           {item.type == "IMAGE" && (
             <>

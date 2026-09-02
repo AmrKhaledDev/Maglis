@@ -37,7 +37,7 @@ export const navLinks = [
   {
     id: "friendRequest",
     icon: UserRoundPlus,
-    href: "",
+    href: "/friend-requests",
     title: "طلبات الصداقة",
   },
   {

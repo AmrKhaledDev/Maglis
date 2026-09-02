@@ -1,31 +1,41 @@
-import { FriendRequestAction } from "@/actions/FriendRequest/FriendRequest.action";
+import { CreateFriendRequestAction } from "@/actions/FriendRequest/CreateFriendRequest.action";
+import useAddFriend from "@/hooks/useAddFriend";
 import { useToast } from "@/providers/ToastProvider";
-import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Check, UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 // =======================================
-function PostAuthorFriendRequestBtn({ post }: { post: PostType }) {
-  const userSession = useUser();
+function AddFriendBtn({
+  userId,
+  sentStyle,
+  unsentStyle,
+  textStyle,
+}: {
+  userId: string;
+  sentStyle: string;
+  unsentStyle: string;
+  textStyle: string;
+}) {
   const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(
-    !!userSession.sender.find((user) => user.receiverId === post.authorId),
-  );
+  const queryClient = useQueryClient();
+  const { data: isSent } = useAddFriend(userId);
   const router = useRouter();
   const { setToast } = useToast();
   const handleFrientRequest = async () => {
     try {
       setLoading(true);
-      const result = await FriendRequestAction(post.authorId);
+      const result = await CreateFriendRequestAction(userId);
       if (!result.success)
         return setToast({
           open: true,
           message: result.message || "حدث خطأ أثناء إرسال طلب الصداقة.",
           type: "error",
         });
-        setSent(!sent)
+      queryClient.setQueryData(["friend", userId], !isSent);
+      router.refresh();
       if (result.message)
         setToast({ open: true, message: result.message, type: "success" });
     } catch (error) {
@@ -43,14 +53,9 @@ function PostAuthorFriendRequestBtn({ post }: { post: PostType }) {
     <button
       onClick={handleFrientRequest}
       disabled={loading}
-      className={clsx(
-        "shadow text-[11px] flex items-center gap-1 mytransition active:scale-98 px-2 rounded cursor-pointer disabled:cursor-default py-1.5",
-        sent
-          ? "bg-white/5 text-xs not-disabled:hover:bg-white/10"
-          : "not-disabled:hover:bg-blue-700/40  bg-blue-700/50",
-      )}
+      className={clsx(textStyle, isSent ?  unsentStyle : sentStyle)}
     >
-      {sent ? (
+      {isSent ? (
         <>
           <Check className="size-4" strokeWidth={1.5} />
           تم إرسال الطلب
@@ -65,4 +70,4 @@ function PostAuthorFriendRequestBtn({ post }: { post: PostType }) {
   );
 }
 
-export default PostAuthorFriendRequestBtn;
+export default AddFriendBtn;

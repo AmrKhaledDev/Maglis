@@ -14,6 +14,7 @@ import { User } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useUser } from "@/providers/UserProvider";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useToast } from "@/providers/ToastProvider";
 // ==============================================================
 function EditProfileImageModal({
   typeImage,
@@ -26,6 +27,7 @@ function EditProfileImageModal({
 }) {
   if (!typeImage) return null;
   const userSession = useUser();
+  const { setToast } = useToast();
   const [imagePreview, setImagePreview] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const router = useRouter();
@@ -56,6 +58,11 @@ function EditProfileImageModal({
       }
     },
     onSuccess: () => {
+      setToast({
+        open: true,
+        message: "تم تغيير الصورة بنجاح.",
+        type: "success",
+      });
       setImageFile(null);
       setImagePreview("");
       router.refresh();

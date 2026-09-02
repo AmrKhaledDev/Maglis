@@ -2,6 +2,7 @@
 import { FieldValues } from "react-hook-form";
 import AlertMessage from "../AlertMessage/AlertMessage";
 import { AuthFormFieldType } from "./AuthFormField.type";
+import clsx from "clsx";
 // ======================================================================
 function AuthFormFiled<T extends FieldValues>({
   placeholder,
@@ -27,9 +28,12 @@ function AuthFormFiled<T extends FieldValues>({
           id={id}
           placeholder={placeholder}
           disabled={disabled}
-          className={`border disabled:border-gray-500 disabled:bg-gray-500 w-full text-sm py-1 px-2 outline-none focus:placeholder:text-gray-200 focus:bg-slate-500 mytransition rounded-lg bg-slate-700 not-disabled:cursor-pointer border-slate-600
-            ${error ? "focus:border-red-300 bg-red-50" : "focus:border-slate-200 "}
-            `}
+          className={clsx(
+            "border disabled:border-gray-500 disabled:bg-gray-500 w-full text-sm py-1 px-2 outline-none focus:placeholder:text-gray-200 focus:bg-slate-500 mytransition rounded-lg bg-slate-700 not-disabled:cursor-pointer border-slate-600",
+            error
+              ? "focus:border-red-300 bg-red-50"
+              : "focus:border-slate-200 ",
+          )}
         />
         <AlertMessage message={error} type="error" />
         {isPasswordFiled == true && setShowPassword && (

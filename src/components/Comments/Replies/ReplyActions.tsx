@@ -8,6 +8,7 @@ import { useUser } from "@/providers/UserProvider";
 import { CommentType } from "@/types/Comment.type";
 import { Comment } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { Heart, MessageCircleReply } from "lucide-react";
 // ==========================================================================
 function ReplyActions({
@@ -51,7 +52,10 @@ function ReplyActions({
         >
           <Heart
             strokeWidth={1.5}
-            className={`size-3.5 disabled:cursor-default ${isLiker && "fill-red-500 text-red-500"}`}
+            className={clsx(
+              "size-3.5 disabled:cursor-default",
+              isLiker && "fill-red-500 text-red-500",
+            )}
           />
         </button>
         {!commentsIsDisabled && (

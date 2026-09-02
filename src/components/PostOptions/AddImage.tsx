@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ChangeEvent } from "react";
 import { FaRegImages } from "react-icons/fa6";
 // ================================================
@@ -12,10 +13,12 @@ function AddImage({
     <div>
       <label
         htmlFor="upload_image"
-        className={`text-2xl block mytransition 
-          
-          ${loading?"text-gray-500 " :"hover:text-white cursor-pointer active:scale-90 text-gray-400 "}
-          `}
+        className={clsx(
+          "text-2xl block mytransition",
+          loading
+            ? "text-gray-500 "
+            : "hover:text-white cursor-pointer active:scale-90 text-gray-400 ",
+        )}
       >
         <FaRegImages />
       </label>
