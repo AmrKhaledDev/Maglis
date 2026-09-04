@@ -1,13 +1,12 @@
 import { GetUserStoriesAction } from "@/actions/User/GetUserStories.action";
 import { useQuery } from "@tanstack/react-query";
-import ProfileLoader from "../ProfileLoader";
 import NoDataMessage from "../NoDataMessage";
 import StoryOptions from "@/components/Feeds/_components/Stories/_components/StoryViewer/StoryOptions";
 import StoryImage from "./StoryImage";
 import Storyvideo from "./Storyvideo";
 // ==============================================================
 function UserStories({ userId }: { userId: string }) {
-  const { data, isPending } = useQuery({
+  const { data = [], isPending } = useQuery({
     queryFn: async () => {
       const result = await GetUserStoriesAction(userId);
       if (!result.success) return;
@@ -15,10 +14,20 @@ function UserStories({ userId }: { userId: string }) {
     },
     queryKey: ["user_stories", userId],
   });
-  if (isPending) return <ProfileLoader />;
   return (
     <div className="w-full flex items-center justify-center">
-      {data && data.length > 0 ? (
+      {isPending ? (
+        <div className="grid grid-cols-3 gap-3 w-full">
+          {Array(6)
+            .fill(0)
+            .map((_, i) => (
+              <span
+                key={i}
+                className="h-100 rounded-xl shadow bg-white/7 animate-pulse"
+              />
+            ))}
+        </div>
+      ) : data.length > 0 ? (
         <div className="grid grid-cols-3 gap-3 w-full">
           {data.map((story) => (
             <div

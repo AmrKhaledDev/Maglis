@@ -9,9 +9,9 @@ function FeedsLayout({ children }: { children: ReactNode }) {
     <div>
       <Header />
       <Toast />
-      <div className="flex gap-10 mycontainer items-start">
+      <div className="flex gap-2 mycontainer items-start">
         <Menu />
-        <div className="mb-5 flex-1">{children}</div>
+        <div className="flex-1">{children}</div>
         <LeftSide />
       </div>
     </div>

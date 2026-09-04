@@ -33,7 +33,7 @@ function SuggestedPeople() {
               <UserDetails user={user} />
               <FollowBtn
                 followingId={user.id}
-                followColor=""
+                followColor="hover:bg-white/10"
                 unfollowColor="text-red-500!"
                 textColor="text-[11px] py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5"
               />
