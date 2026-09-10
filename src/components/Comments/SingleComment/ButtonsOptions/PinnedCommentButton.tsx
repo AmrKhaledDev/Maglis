@@ -1,0 +1,63 @@
+import { PinnedCommentAction } from "@/actions/Comment/PinnedComment.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
+import { useToast } from "@/providers/ToastProvider";
+import { useUser } from "@/providers/UserProvider";
+import { Comment, Post } from "@prisma/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
+import { Pin } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
+// ============================================
+function PinnedCommentButton({
+  comment,
+  loading,
+  setLoading,
+  post,
+}: {
+  comment: Comment;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  post: Post;
+}) {
+  const userSession = useUser();
+  const { setToast } = useToast();
+  const { setActiveMenu } = useActiveMenu();
+  const queryClient = useQueryClient();
+  const { mutate: handlePinnedComment } = useMutation({
+    mutationFn: async () => {
+      setLoading(true);
+      const result = await PinnedCommentAction(comment.id);
+      if (!result.success)
+        return setToast({
+          open: true,
+          message: result.message || "حدث خطأ أثناء تثبيت التعليق.",
+          type: "error",
+        });
+    },
+    onSuccess: () => {
+      invalidateUserCaches(queryClient, userSession);
+      setLoading(false);
+      setActiveMenu("");
+    },
+  });
+  return (
+    <>
+      {userSession.id === post.authorId && (
+        <button
+          disabled={loading}
+          onClick={() => handlePinnedComment()}
+          className={clsx(
+            "commentBtnAct",
+            comment.isPinned && "text-emerald-600",
+          )}
+        >
+          <Pin className={clsx("size-4", comment.isPinned && "rotate-45")} />
+          {comment.isPinned ? "مُثبت" : "تثبيت"}
+        </button>
+      )}
+    </>
+  );
+}
+
+export default PinnedCommentButton;

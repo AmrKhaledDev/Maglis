@@ -1,13 +1,17 @@
-import ChatWindowHeader from "./ChatWindowHeader";
-import ChatWindowFooter from "./ChatWindowFooter";
-import ChatWindowMessages from "./ChatWindowMessages";
+import { User } from "@prisma/client";
+import Header from "./Header";
+import Messages from "./Messages";
+import Footer from "./Footer";
 // ===================================================
-function ChatWindow() {
+function ChatWindow({ receiver }: { receiver: User }) {
   return (
-    <div className="flex-1 flex flex-col border-r border-r-white/1">
-      <ChatWindowHeader />
-      <ChatWindowMessages />
-      <ChatWindowFooter />
+    <div
+      style={{ backgroundImage: "url('/chat_bg.png')" }}
+      className="flex-1 flex flex-col"
+    >
+      <Header receiver={receiver} />
+      <Messages receiverId={receiver.id} />
+      <Footer receiverId={receiver.id} />
     </div>
   );
 }

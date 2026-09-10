@@ -1,0 +1,43 @@
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
+import { useToast } from "@/providers/ToastProvider";
+import { PostType } from "@/types/Post.type";
+import { Link2 } from "lucide-react";
+import { useState } from "react";
+// ====================================================
+function CopyPostLinkButton({ post }: { post: PostType }) {
+  const [loading, setLoading] = useState(false);
+  const { setActiveMenu } = useActiveMenu();
+  const { setToast } = useToast();
+  const handleCopyLink = async () => {
+    try {
+      setLoading(true);
+
+      await navigator.clipboard.writeText(
+        `${window.location.origin}/posts/${post.id}`,
+      );
+
+      setToast({
+        open: true,
+        message: "تم نسخ الرابط إلى الحافظة.",
+        type: "success",
+        duration: 2000,
+      });
+    } catch {
+      setToast({
+        open: true,
+        message: "تعذر نسخ الرابط، حاول مرة أخرى.",
+        type: "error",
+      });
+    } finally {
+      setLoading(false);
+      setActiveMenu("");
+    }
+  };
+  return (
+    <button disabled={loading} onClick={handleCopyLink} className="btnOptBox">
+      <Link2 className="btnOptIcon" /> نسخ الرابط
+    </button>
+  );
+}
+
+export default CopyPostLinkButton;

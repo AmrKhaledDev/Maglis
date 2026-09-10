@@ -5,11 +5,11 @@ export type CreatePost_Modal_FooterType = {
   fields: ({
     preview: string;
     file: File;
-    type: "video" | "image";
+    type: "video" | "image" | "pdf" | null;
   } & Record<"id", string> & {
       disabled?: boolean;
     })[];
   append: UseFieldArrayAppend<CreatePost_ModalFormType, "media">;
   content: string;
-  loading:boolean
+  loading: boolean;
 };

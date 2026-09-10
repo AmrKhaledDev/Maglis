@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { MessageCircle } from "lucide-react";
 import Image from "next/image";
-import ActionButton from "../ActionButton";
-import SectionHeader from "../SectionHeader";
+import ButtonAction from "../ButtonAction";
 import NameDescription from "../NameDescription";
+import SectionHeader from "../SectionHeader";
 // ===================================
 function RecentContacts() {
   return (
@@ -30,7 +30,7 @@ function RecentContacts() {
                     السيبراني لحمايتها."
                 />
               </div>
-              <ActionButton
+              <ButtonAction
                 icon={MessageCircle}
                 name="تواصل"
                 textStyle="text-green-600"

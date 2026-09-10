@@ -1,9 +1,9 @@
 "use client";
-import { Ellipsis } from "lucide-react";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { clsx } from "clsx";
 import { PostType } from "@/types/Post.type";
-import PostOptionsBox from "./PostOptionsBox";
+import { clsx } from "clsx";
+import { Ellipsis } from "lucide-react";
+import PostOptionsMenu from "./PostOptionsMenu";
 // ===========================================================
 function PostOptions({ post }: { post: PostType }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
@@ -20,7 +20,7 @@ function PostOptions({ post }: { post: PostType }) {
       >
         <Ellipsis strokeWidth={0.5} className="size-5" />
       </button>
-      <PostOptionsBox activeMenu={activeMenu} post={post} />
+      <PostOptionsMenu activeMenu={activeMenu} post={post} />
     </div>
   );
 }

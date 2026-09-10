@@ -14,11 +14,9 @@ import { Heart, MessageCircleReply } from "lucide-react";
 function ReplyActions({
   reply,
   commentsIsDisabled,
-  topLevelComment,
 }: {
   reply: CommentType;
   commentsIsDisabled: boolean;
-  topLevelComment: Comment;
 }) {
   const { setShowReplyComposer } = useRepliesState();
   const userSession = useUser();

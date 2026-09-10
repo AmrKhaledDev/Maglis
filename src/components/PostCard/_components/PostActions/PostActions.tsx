@@ -1,11 +1,11 @@
 "use client";
-import { MessageCircle } from "lucide-react";
-import SavePostBtn from "./SavePostBtn";
-import LikeBtn from "./LikeBtn";
-import { formatLikes } from "@/formats/formatLikes";
 import { formatComments } from "@/formats/formatComments";
-import { Dispatch, SetStateAction } from "react";
+import { formatLikes } from "@/formats/formatLikes";
 import { PostType } from "@/types/Post.type";
+import { MessageCircle } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
+import LikeButton from "./LikeButton";
+import SavePostButton from "./SavePostButton";
 // =============================================
 function PostActions({
   post,
@@ -17,12 +17,12 @@ function PostActions({
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <LikeBtn post={post} />
+        <LikeButton post={post} />
         <button
           onClick={() => setShowComments(post.id)}
           className="cursor-pointer flex items-center gap-1 text-gray-100"
         >
-          <MessageCircle className="postBtnOptIcon" strokeWidth={1} />
+          <MessageCircle className="btnOptIcon size-5" strokeWidth={1} />
         </button>
       </div>
       <div className="flex items-center gap-3">
@@ -32,7 +32,7 @@ function PostActions({
         <p className="font-normal text-xs text-gray-300">
           {formatComments(post._count.comments)}
         </p>
-        <SavePostBtn post={post} />
+        <SavePostButton post={post} />
       </div>
     </div>
   );

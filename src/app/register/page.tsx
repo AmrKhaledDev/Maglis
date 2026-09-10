@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import Image from "next/image";
-import RegisterForm from "./_components/RegisterForm";
+import Form from "./_components/Form";
 // =====================================================================================
 function Register() {
   return (
@@ -10,7 +10,7 @@ function Register() {
           <Image src={"/logo.png"} alt="logo" priority fill />
         </div>
         <div className="h-[75vh] flex items-center justify-center">
-          <RegisterForm />
+          <Form />
         </div>
       </div>
     </main>

@@ -35,7 +35,7 @@ function ReplyHeader({
           </Link>
         </p>
       </div>
-      <ReplyOptions reply={reply} commentId={topLevelComment.id} />
+      <ReplyOptions reply={reply} />
     </div>
   );
 }

@@ -9,17 +9,18 @@
 @utility mytransition {
   @apply transition-all duration-300;
 }
-@utility postBtnOpt {
-  @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:text-black not-disabled:hover:bg-white mytransition font-medium!;
-}
+
 @utility commentBtnAct {
   @apply flex items-center gap-2 text-[11px] not-disabled:hover:bg-white mytransition not-disabled:cursor-pointer not-disabled:hover:text-black;
 }
-@utility postBtnOptIcon {
-  @apply size-4.5 shrink-0;
+@utility btnOptIcon {
+  @apply size-4 shrink-0;
+}
+@utility btnOptBox {
+  @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:bg-white/5 mytransition font-medium!;
 }
 @utility bgOptionsBox {
-  @apply mt-0.5 p-2 shadow flex flex-col ring ring-white/5 gap-2 absolute bg-black/30 backdrop-blur-3xl rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold;
+  @apply mt-0.5 p-2 shadow flex flex-col ring ring-white/5 gap-2 absolute bg-black backdrop-blur-3xl rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold;
 }
 @utility profileSectionStyle {
   @apply flex flex-col gap-6;
@@ -158,13 +159,13 @@
   }
 }
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #6d6d6d87;
+  background-color: #6d6d6d26;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {

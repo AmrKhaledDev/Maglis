@@ -10,7 +10,11 @@ function CreatePostModalMedia({
   remove,
   disabled,
 }: {
-  media: { preview: string; file: File; type: "video" | "image" }[];
+  media: {
+    preview: string;
+    file: File;
+    type: "video" | "image" | "pdf" | null;
+  }[];
   remove: UseFieldArrayRemove;
   disabled: boolean;
 }) {
@@ -24,7 +28,7 @@ function CreatePostModalMedia({
         <div className="flex items-center gap-2">
           {media.map((item, i) => (
             <div key={i} className="relative size-20 ">
-              {item.type == "image" ? (
+              {item.type == "image" && (
                 <Image
                   src={item.preview}
                   alt="صورة للمنشور"
@@ -34,7 +38,8 @@ function CreatePostModalMedia({
                     setShowImage({ url: item.preview, open: true })
                   }
                 />
-              ) : (
+              )}
+              {item.type === "video" && (
                 <video
                   src={item.preview}
                   controls

@@ -1,18 +1,18 @@
+import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action";
 import CommentComposer from "@/components/Comments/CommentComposer/CommentComposer";
 import SingleComment from "@/components/Comments/SingleComment/SingleComment";
+import SavePostButton from "@/components/PostCard/_components/PostActions/SavePostButton";
+import PostCard from "@/components/PostCard/PostCard";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
 import { Comment } from "@prisma/client";
-import { useState } from "react";
-import VideoLikeBtn from "./ButtonsActions/VideoLikeBtn";
-import PostCard from "@/components/PostCard/PostCard";
-import { X } from "lucide-react";
-import { motion } from "framer-motion";
-import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useQuery } from "@tanstack/react-query";
-import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action";
-import { useToast } from "@/providers/ToastProvider";
-import SavePostBtn from "@/components/PostCard/_components/PostActions/SavePostBtn";
+import { motion } from "framer-motion";
+import { X } from "lucide-react";
+import { useState } from "react";
+import VideoLikeButton from "./ButtonsActions/VideoLikeButton";
 // ============================================================
 function VideoCommentsModal({ video }: { video: PostType }) {
   const { setActiveModal } = useActiveModal();
@@ -81,8 +81,8 @@ function VideoCommentsModal({ video }: { video: PostType }) {
           </div>
           <div className="w-[55%] flex items-center gap-3">
             <div className="flex flex-col gap-3">
-              <VideoLikeBtn video={video} isCommentsModalOpen={true} />
-              <SavePostBtn
+              <VideoLikeButton video={video} isCommentsModalOpen={true} />
+              <SavePostButton
                 post={video}
                 isCommentsModalOpen={true}
                 isVideosPage={true}

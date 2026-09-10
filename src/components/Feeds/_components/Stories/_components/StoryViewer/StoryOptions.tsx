@@ -76,12 +76,12 @@ function StoryOptions({ story }: { story: Story }) {
               >
                 {story.isPrivate ? (
                   <>
-                    <Eye className="postBtnOptIcon" />
+                    <Eye className="btnOptIcon" />
                     إظهار القصة
                   </>
                 ) : (
                   <>
-                    <EyeOff className="postBtnOptIcon" />
+                    <EyeOff className="btnOptIcon" />
                     إخفاء القصة
                   </>
                 )}
@@ -91,7 +91,7 @@ function StoryOptions({ story }: { story: Story }) {
                 onClick={() => handleDeleteStory()}
                 className="storyBtnOptionStyle button text-red-500"
               >
-                <Trash2 className="postBtnOptIcon" /> حذف
+                <Trash2 className="btnOptIcon" /> حذف
               </button>
             </div>
           )}

@@ -1,13 +1,13 @@
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
+import { Comment, Post } from "@prisma/client";
+import clsx from "clsx";
+import { motion } from "framer-motion";
 import { Ellipsis } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
-import { motion } from "framer-motion";
-import { Comment, Post } from "@prisma/client";
-import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import PinnedCommentBtn from "./ButtonsOptions/PinnedCommentBtn";
-import DeleteCommentBtn from "./ButtonsOptions/DeleteCommentBtn";
-import CopyCommentContentBtn from "./ButtonsOptions/CopyCommentContentBtn";
-import EditCommentBtn from "./ButtonsOptions/EditCommentBtn";
-import clsx from "clsx";
+import CopyCommentContentButton from "./ButtonsOptions/CopyCommentContentButton";
+import DeleteCommentButton from "./ButtonsOptions/DeleteCommentButton";
+import EditCommentButton from "./ButtonsOptions/EditCommentButton";
+import PinnedCommentButton from "./ButtonsOptions/PinnedCommentButton";
 // ===============================================================================
 function CommentOptions({
   comment,
@@ -35,27 +35,26 @@ function CommentOptions({
       </button>
       {activeMenu === comment.id && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
           className="bgOptionsBox boxMenu rounded-lg w-30"
         >
-          <EditCommentBtn
+          <EditCommentButton
             comment={comment}
             setCurrentComment={setCurrentComment}
           />
-          <PinnedCommentBtn
+          <PinnedCommentButton
             comment={comment}
             loading={publicLoading}
             setLoading={setPublicLoading}
             post={post}
           />
-          <CopyCommentContentBtn
+          <CopyCommentContentButton
             comment={comment}
             loading={publicLoading}
             setLoading={setPublicLoading}
           />
-          <DeleteCommentBtn
+          <DeleteCommentButton
             loading={publicLoading}
             setLoading={setPublicLoading}
             comment={comment}

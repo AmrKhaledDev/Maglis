@@ -1,12 +1,12 @@
 "use client";
-import { usePathname } from "next/navigation";
-import FollowBtn from "@/components/FollowBtn/FollowBtn";
-import UserDetails from "./UserDetails";
-import { useQuery } from "@tanstack/react-query";
 import { GetSuggestedPeopleAction } from "@/actions/User/GetSuggestedPeople.action";
+import FollowButton from "@/components/FollowButton/FollowButton";
 import { useUser } from "@/providers/UserProvider";
-import SuggestedPeopleSkeleton from "./SuggestedPeopleSkeleton";
-import SuggestedPeopleHeader from "./SuggestedPeopleHeader";
+import { useQuery } from "@tanstack/react-query";
+import { usePathname } from "next/navigation";
+import SuggestedPeopleHeader from "./Header";
+import SuggestedPeopleSkeleton from "./Skeleton";
+import UserDetails from "./UserDetails";
 // ==================================
 function SuggestedPeople() {
   const pathname = usePathname();
@@ -31,7 +31,7 @@ function SuggestedPeople() {
           data.map((user) => (
             <div key={user.id} className="flex items-center justify-between">
               <UserDetails user={user} />
-              <FollowBtn
+              <FollowButton
                 followingId={user.id}
                 followColor="hover:bg-white/10"
                 unfollowColor="text-red-500!"

@@ -1,24 +1,25 @@
+import { EditPostAction } from "@/actions/Post/EditPost.action";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
+import { PrivacyType } from "@/types/Privacy.type";
+import { MediaType, Privacy } from "@prisma/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { Globe } from "lucide-react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
-import { PrivacyType } from "@/types/Privacy.type";
-import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
-import { CircleAlert, Globe } from "lucide-react";
-import { motion } from "framer-motion";
-import axios from "axios";
-import { MediaType, Privacy } from "@prisma/client";
-import { EditPostAction } from "@/actions/Post/EditPost.action";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import EditPostMedia from "./EditPostMedia";
 import EditPostModalAuthor from "./EditPostModalAuthor";
-import EditPostModalHeader from "./EditPostModalHeader";
 import EditPostModalContent from "./EditPostModalContent";
 import EditPostModalFooter from "./EditPostModalFooter";
-import EditPostModalMedia from "./EditPostModalMedia";
-import { useUser } from "@/providers/UserProvider";
-import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { createPortal } from "react-dom";
-import { useEffect, useState } from "react";
-import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import EditPostModalHeader from "./EditPostModalHeader";
 // ==========================================================================================================
 function EditPostModal({ post }: { post: PostType }) {
   const { setActiveModal } = useActiveModal();
@@ -120,12 +121,7 @@ function EditPostModal({ post }: { post: PostType }) {
           isPinnedToProfile={isPinnedToProfile}
         />
         <hr className="border-white opacity-3 my-2" />
-        {error && (
-          <p className="text-sm text-red-500 mb-2 bg-red-100 p-1 font-semibold flex items-center gap-2">
-            <CircleAlert className="size-4" />
-            {error.message}
-          </p>
-        )}
+        {error && <AlertMessage type="error" message={error.message} />}
         <EditPostModalAuthor
           post={post}
           setValue={setValue}
@@ -134,7 +130,7 @@ function EditPostModal({ post }: { post: PostType }) {
         />
         <EditPostModalContent content={content} register={register} />
         {fields && fields.length > 0 && (
-          <EditPostModalMedia
+          <EditPostMedia
             loading={loading}
             fields={fields}
             remove={remove}

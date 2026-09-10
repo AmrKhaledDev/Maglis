@@ -1,7 +1,7 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { PostType } from "@/types/Post.type";
 import Linkify from "linkify-react";
-import ContentTextModal from "./ContentTextModal";
+import PostContentTextModal from "./PostContentTextModal";
 // =======================================
 function PostContentText({ post }: { post: PostType }) {
   const { activeModal, setActiveModal } = useActiveModal();
@@ -24,7 +24,7 @@ function PostContentText({ post }: { post: PostType }) {
           {post.content}
         </p>
       </Linkify>
-      {activeModal === post.id && <ContentTextModal post={post} />}
+      {activeModal === post.id && <PostContentTextModal post={post} />}
     </div>
   );
 }

@@ -1,11 +1,11 @@
-import MyConversationsHeader from "./MyConversationsHeader";
-import MyConversationsUsers from "./MyConversationsUsers";
+import Header from "./Header";
+import Users from "./Users";
 // ============================================
 function MyConversations() {
   return (
     <aside className="w-[320px] gap-2 flex flex-col">
-      <MyConversationsHeader />
-      <MyConversationsUsers />
+      <Header />
+      <Users />
     </aside>
   );
 }

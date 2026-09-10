@@ -50,7 +50,7 @@ function CommentActions({
         <Heart
           strokeWidth={1.5}
           className={clsx(
-            "postBtnOptIcon disabled:cursor-default",
+            "btnOptIcon disabled:cursor-default",
             isLikerForComment && "fill-red-500 text-red-500",
           )}
         />
@@ -65,7 +65,7 @@ function CommentActions({
           disabled={loading}
           className="not-disabled:cursor-pointer"
         >
-          <MessageCircleReply strokeWidth={1.5} className="postBtnOptIcon" />
+          <MessageCircleReply strokeWidth={1.5} className="btnOptIcon" />
         </button>
       )}
     </div>

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
-import EditProfileHeader from "./EditProfileHeader";
+import EditProfileHeader from "./Header";
 import BasicInfoSection from "./Sections/BasicInfoSection";
 import CareerInfoSection from "./Sections/CareerInfoSection";
 import PersonalInformationSection from "./Sections/PersonalInformationSection/PersonalInformationSection";
@@ -16,6 +16,7 @@ import { EditUserProfileAction } from "@/actions/User/EditUserProfile.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useUser } from "@/providers/UserProvider";
+import Header from "./Header";
 // =================================================================================
 function EditProfileModal({
   setShowEditProfileModal,
@@ -90,7 +91,7 @@ function EditProfileModal({
         className="overflow-hidden rounded-2xl editProfileModal"
       >
         <div className="w-220 flex flex-col gap-10 bg-slate-800 max-h-170 overflow-y-auto shadow-2xl rounded-2xl p-5">
-          <EditProfileHeader
+          <Header
             setShowEditProfileModal={setShowEditProfileModal}
           />
           <div className="flex flex-col gap-10">

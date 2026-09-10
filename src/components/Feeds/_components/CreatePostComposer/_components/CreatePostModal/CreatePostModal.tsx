@@ -1,12 +1,10 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { CircleAlert, Globe, Images, X } from "lucide-react";
+import { Globe, Images } from "lucide-react";
 import { CreatePost_ModalFormType } from "../../_types/CreatePost_ModalForm.type";
 import axios from "axios";
 import { CreatePostAction } from "@/actions/Post/CreatePost.action";
 import { Privacy } from "@prisma/client";
-import TogglePinButton from "./TogglePinButton";
-import CommentsDisabled from "./CommentsDisabled";
 import CreatePostModalAuthor from "./CreatePostModalAuthor";
 import CreatePostModalCenter from "./CreatePostModalCenter";
 import CreatePostModalMedia from "./CreatePostModalMedia";
@@ -15,6 +13,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import CreatePostModalHeader from "./CreatePostModalHeader";
 // ===========================================================
 function CreatePostModal() {
   const userSession = useUser();
@@ -29,6 +29,7 @@ function CreatePostModal() {
         },
         commentsDisabled: false,
         isPinnedToProfile: false,
+        media: [],
         content: "",
       },
     });
@@ -97,34 +98,14 @@ function CreatePostModal() {
     >
       <form
         onSubmit={handleSubmit(handleCreatePost)}
-        className="bg-slate-800 ring ring-gray-50/5 text-white shadow-2xl p-3 rounded-xl w-200 max-h-170 overflow-y-auto"
+        className="bg-slate-800 ring ring-gray-50/5 text-white shadow-2xl p-3 rounded-xl w-200 max-h-170 overflow-y-auto space-y-3"
       >
-        <div className="flex justify-between">
-          <div className="mb-5 flex items-center gap-2">
-            <TogglePinButton
-              disabled={loading}
-              control={control}
-              setValue={setValue}
-            />
-            <CommentsDisabled
-              control={control}
-              setValue={setValue}
-              disabled={loading}
-            />
-          </div>
-          <button
-            onClick={() => setActiveModal(null)}
-            className="cursor-pointer text-gray-300 h-fit hover:text-white mytransition"
-          >
-            <X className="size-5" />
-          </button>
-        </div>
-        {error && (
-          <p className="text-sm text-red-500 mb-2 bg-red-100 p-1 font-semibold flex items-center gap-2">
-            <CircleAlert className="size-4" />
-            {error.message}
-          </p>
-        )}
+        <CreatePostModalHeader
+          control={control}
+          setValue={setValue}
+          loading={loading}
+        />
+        {error && <AlertMessage type="error" message={error.message} />}
         <CreatePostModalAuthor />
         <span className="w-full bg-white opacity-2 h-px rounded-full block mt-2 mb-5" />
         <CreatePostModalCenter

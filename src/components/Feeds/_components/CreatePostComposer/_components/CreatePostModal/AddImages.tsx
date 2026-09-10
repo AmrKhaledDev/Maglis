@@ -2,6 +2,7 @@
 import { FaRegImages } from "react-icons/fa6";
 import { AddMediaPropsType } from "../../_types/AddMediaProps.type";
 import clsx from "clsx";
+import handleFileUploadCreatePost from "@/lib/helpers/handleFileUploadCreatePost";
 // ======================================================================================
 function AddImages({ append, fields, disabled }: AddMediaPropsType) {
   return (
@@ -18,17 +19,7 @@ function AddImages({ append, fields, disabled }: AddMediaPropsType) {
       <input
         disabled={disabled}
         onChange={(e) => {
-          if (fields.length >= 4) return;
-          const file = e.target.files?.[0];
-          if (file) {
-            const url = URL.createObjectURL(file);
-            append({
-              file,
-              preview: url,
-              type: "image",
-            });
-            e.target.value = "";
-          }
+          handleFileUploadCreatePost(e, fields, append);
         }}
         type="file"
         accept="image/*"

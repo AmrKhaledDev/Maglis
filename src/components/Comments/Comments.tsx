@@ -7,8 +7,8 @@ import { PostType } from "@/types/Post.type";
 import { useQuery } from "@tanstack/react-query";
 import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action";
 import { useToast } from "@/providers/ToastProvider";
-import CommentsSkeleton from "./CommentsSkeleton";
 import { useUser } from "@/providers/UserProvider";
+import Skeleton from "./Skeleton";
 // ==================================================================
 function Comments({ post }: { post: PostType }) {
   const { setToast } = useToast();
@@ -51,7 +51,7 @@ function Comments({ post }: { post: PostType }) {
         {post.commentsDisabled ? (
           ""
         ) : isPending ? (
-          <CommentsSkeleton />
+          <Skeleton />
         ) : (
           sortedComments.map((comment) => (
             <SingleComment

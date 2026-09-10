@@ -1,20 +1,14 @@
-import { Ellipsis } from "lucide-react";
-import { motion } from "framer-motion";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { CommentType } from "@/types/Comment.type";
-import DeleteReplayBtn from "./ButtonsOptions/DeleteReplayBtn";
-import CopyContentBtn from "./ButtonsOptions/CopyContentBtn";
-import FeaturedReplyBtn from "./ButtonsOptions/FeaturedReplyBtn";
-import EditReplayBtn from "./ButtonsOptions/EditReplayBtn";
 import clsx from "clsx";
+import { motion } from "framer-motion";
+import { Ellipsis } from "lucide-react";
+import CopyReplyContentButton from "./ButtonsOptions/CopyReplyContentButton";
+import DeleteReplayButton from "./ButtonsOptions/DeleteReplayButton";
+import EditReplayButton from "./ButtonsOptions/EditReplayButton";
+import FeaturedReplyButton from "./ButtonsOptions/FeaturedReplyButton";
 // ==================================================================
-function ReplyOptions({
-  reply,
-  commentId,
-}: {
-  reply: CommentType;
-  commentId: string;
-}) {
+function ReplyOptions({ reply }: { reply: CommentType }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
   return (
     <div className="relative">
@@ -29,15 +23,14 @@ function ReplyOptions({
       </button>
       {activeMenu == reply.id && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
           className="bgOptionsBox rounded-lg w-28 boxMenu"
         >
-          <EditReplayBtn reply={reply} />
-          <CopyContentBtn reply={reply} />
-          <FeaturedReplyBtn reply={reply} commentId={commentId} />
-          <DeleteReplayBtn reply={reply} />
+          <EditReplayButton reply={reply} />
+          <CopyReplyContentButton reply={reply} />
+          <FeaturedReplyButton reply={reply} />
+          <DeleteReplayButton reply={reply} />
         </motion.div>
       )}
     </div>

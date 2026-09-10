@@ -2,6 +2,7 @@
 import { GoVideo } from "react-icons/go";
 import { AddMediaPropsType } from "../../_types/AddMediaProps.type";
 import clsx from "clsx";
+import handleFileUploadCreatePost from "@/lib/helpers/handleFileUploadCreatePost";
 // =============================================================
 function AddVideos({ append, fields, disabled }: AddMediaPropsType) {
   return (
@@ -18,16 +19,7 @@ function AddVideos({ append, fields, disabled }: AddMediaPropsType) {
       <input
         disabled={disabled}
         onChange={(e) => {
-          if (fields.length >= 4) return;
-          const file = e.target.files?.[0];
-          if (file) {
-            const url = URL.createObjectURL(file);
-            append({
-              preview: url,
-              file,
-              type: "video",
-            });
-          }
+          handleFileUploadCreatePost(e, fields, append);
         }}
         type="file"
         id="upload_video"

@@ -16,7 +16,7 @@ function Feeds() {
     queryKey: ["posts", userSession.id],
   });
   return (
-    <div>
+    <div className="pb-4">
       <Stories />
       <div className="flex flex-col gap-5">
         <CreatePostComposer />

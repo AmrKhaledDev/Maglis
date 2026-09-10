@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
-import LoginForm from "./_components/LoginForm";
-import LoginHeader from "./_components/LoginHeader";
-import LoginHero from "./_components/LoginHero";
+import Form from "./_components/Form";
+import Header from "./_components/Header";
+import Hero from "./_components/Hero";
 // ==========================================
 async function Login({
   searchParams,
@@ -12,10 +12,10 @@ async function Login({
   return (
     <main>
       <div className="mycontainer p-1">
-        <LoginHeader />
+        <Header />
         <div className="h-[89vh] flex items-center justify-between">
-          <LoginHero />
-          <LoginForm error={error} />
+          <Hero />
+          <Form error={error} />
         </div>
       </div>
     </main>

@@ -1,10 +1,10 @@
-import EditPostBtn from "./EditPostBtn";
-import CommentsDisabledBtn from "./CommentsDisabledBtn";
 import { useUser } from "@/providers/UserProvider";
-import DeletePostBtn from "./DeletePostBtn";
-import PinnedToProfileBtn from "./PinnedToProfileBtn";
-import ShowMediaInProfileBtn from "./ShowMediaInProfileBtn";
 import { PostType } from "@/types/Post.type";
+import CommentsDisabledButton from "./CommentsDisabledButton";
+import DeletePostButton from "./DeletePostButton";
+import EditPostButton from "./EditPostButton";
+import PinnedToProfileButton from "./PinnedToProfileButton";
+import ShowMediaInProfileButton from "./ShowMediaInProfileButton";
 // =============================================================
 function PostOwnerOptions({ post }: { post: PostType }) {
   const userSession = useUser();
@@ -12,11 +12,11 @@ function PostOwnerOptions({ post }: { post: PostType }) {
     <>
       {userSession.id === post.authorId && (
         <>
-          <EditPostBtn post={post} />
-          <PinnedToProfileBtn post={post} />
-          <CommentsDisabledBtn post={post} />
-          <ShowMediaInProfileBtn post={post} />
-          <DeletePostBtn post={post} />
+          <EditPostButton post={post} />
+          <PinnedToProfileButton post={post} />
+          <CommentsDisabledButton post={post} />
+          <ShowMediaInProfileButton post={post} />
+          <DeletePostButton post={post} />
         </>
       )}
     </>

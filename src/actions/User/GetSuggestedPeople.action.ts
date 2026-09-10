@@ -51,6 +51,20 @@ export const GetSuggestedPeopleAction = async (): Promise<{
             followingId: true,
           },
         },
+        _count: {
+          select: {
+            receiver: true,
+          },
+        },
+        myFriends: {
+          select: {
+            friend: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        },
       },
     });
     return { success: true, suggestedPeople: suggestedPeople };

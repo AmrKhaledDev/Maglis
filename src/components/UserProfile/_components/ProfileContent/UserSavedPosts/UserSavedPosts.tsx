@@ -1,13 +1,13 @@
-import NoDataMessage from "../NoDataMessage";
-import "dayjs/locale/ar";
-import { useQuery } from "@tanstack/react-query";
 import { GetUserSavedPostsAction } from "@/actions/User/GetUserSavedPosts.action";
-import ProfileLoader from "../ProfileLoader";
-import UserSavedPostsContent from "./UserSavedPostsContent";
-import UserSavedPostsAuthor from "./UserSavedPostsAuthor";
-import UserSavedPostsBookmarkBtn from "./UserSavedPostsBookmarkBtn";
+import { useQuery } from "@tanstack/react-query";
+import "dayjs/locale/ar";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import NoDataMessage from "../NoDataMessage";
+import ProfileLoader from "../ProfileLoader";
+import SavedPostAuthor from "./SavedPostAuthor";
+import SavedPostBookmarkButton from "./SavedPostBookmarkButton";
+import SavedPostContent from "./SavedPostContent";
 // ============================================================================
 function UserSavedPosts({ userId }: { userId: string }) {
   const {
@@ -33,7 +33,7 @@ function UserSavedPosts({ userId }: { userId: string }) {
               className="p-3 shadow h-fit overflow-hidden bg-white/5 ring ring-gray-50/8 rounded-lg"
             >
               <div className="flex justify-between">
-                <UserSavedPostsAuthor saveItem={saveItem} />
+                <SavedPostAuthor saveItem={saveItem} />
                 <div className="flex items-center gap-1">
                   <Link
                     target="_blank"
@@ -45,10 +45,10 @@ function UserSavedPosts({ userId }: { userId: string }) {
                       className="size-4 group-disabled:fill-gray-400"
                     />
                   </Link>
-                  <UserSavedPostsBookmarkBtn saveItem={saveItem} />
+                  <SavedPostBookmarkButton saveItem={saveItem} />
                 </div>
               </div>
-              <UserSavedPostsContent saveItem={saveItem} />
+              <SavedPostContent saveItem={saveItem} />
             </div>
           ))}
         </div>

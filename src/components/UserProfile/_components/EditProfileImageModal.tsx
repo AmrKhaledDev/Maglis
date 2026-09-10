@@ -1,20 +1,20 @@
+import { UpdateUserImageAction } from "@/actions/User/UpdateUserImage.action";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useToast } from "@/providers/ToastProvider";
+import { useUser } from "@/providers/UserProvider";
+import { User } from "@prisma/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Save } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import AlertMessage from "@/components/AlertMessage/AlertMessage";
-import clsx from "clsx";
-import { UpdateUserImageAction } from "@/actions/User/UpdateUserImage.action";
+import { useState } from "react";
+import DeleteImageButton from "./ProfileAvatar/DeleteImageButton";
 import EditImageModalHeader from "./ProfileAvatar/EditImageModalHeader";
-import ReplaceImageBtn from "./ProfileAvatar/ReplaceImageBtn";
-import DeleteImageBtn from "./ProfileAvatar/DeleteAvatarBtn";
-import { User } from "@prisma/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useUser } from "@/providers/UserProvider";
-import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
-import { useToast } from "@/providers/ToastProvider";
+import ReplaceImageButton from "./ProfileAvatar/ReplaceImageButton";
 // ==============================================================
 function EditProfileImageModal({
   typeImage,
@@ -112,7 +112,7 @@ function EditProfileImageModal({
         {error && <AlertMessage message={error} type="error" />}
         <div className="p-2 flex items-center gap-2 justify-between">
           <div className="flex items-center gap-2">
-            <ReplaceImageBtn
+            <ReplaceImageButton
               setAvatarFile={setImageFile}
               setAvatarPreview={setImagePreview}
             />
@@ -124,7 +124,7 @@ function EditProfileImageModal({
               <Save strokeWidth={1.5} /> حفظ
             </button>
           </div>
-          <DeleteImageBtn setError={setError} typeImage={typeImage} />
+          <DeleteImageButton setError={setError} typeImage={typeImage} />
         </div>
       </div>
     </motion.div>

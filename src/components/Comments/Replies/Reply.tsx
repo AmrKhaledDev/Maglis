@@ -36,7 +36,6 @@ function Reply({
         <hr className="border-white opacity-2" />
         <ReplyActions
           reply={reply}
-          topLevelComment={topLevelComment}
           commentsIsDisabled={post.commentsDisabled}
         />
       </div>

@@ -1,15 +1,15 @@
-import { useUser } from "@/providers/UserProvider";
-import { ClockFading } from "lucide-react";
-import Link from "next/link";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import local from "dayjs/locale/ar";
-import { formatLikes } from "@/formats/formatLikes";
+import FollowButton from "@/components/FollowButton/FollowButton";
 import { formatComments } from "@/formats/formatComments";
-import Image from "next/image";
-import { PostType } from "@/types/Post.type";
+import { formatLikes } from "@/formats/formatLikes";
 import { UrlUserProfile } from "@/lib/UrlUserProfile";
-import FollowBtn from "@/components/FollowBtn/FollowBtn";
+import { useUser } from "@/providers/UserProvider";
+import { PostType } from "@/types/Post.type";
+import dayjs from "dayjs";
+import local from "dayjs/locale/ar";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { ClockFading } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 // ===============================================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
@@ -44,7 +44,7 @@ function VideoAuthor({ video }: { video: PostType }) {
           {userSession.id !== video.authorId && (
             <>
               <span className="size-[3.5px] bg-white/5 block rounded-full" />
-              <FollowBtn
+              <FollowButton
                 followingId={video.authorId}
                 followColor="bg-blue-900/30 text-blue-400 border-blue-500/10 border shadow"
                 unfollowColor="hover:text-gray-400"

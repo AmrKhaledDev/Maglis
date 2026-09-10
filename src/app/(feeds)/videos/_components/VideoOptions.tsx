@@ -1,4 +1,4 @@
-import PostOptionsBox from "@/components/PostOptions/PostOptionsBox";
+import PostOptionsBox from "@/components/PostOptions/PostOptionsMenu";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { PostType } from "@/types/Post.type";
 import clsx from "clsx";

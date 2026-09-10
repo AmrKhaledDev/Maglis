@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import { UserPlus } from "lucide-react";
 import Image from "next/image";
-import ActionButton from "../ActionButton";
-import SectionHeader from "../SectionHeader";
-import NameDescription from "../NameDescription";
 import { usePathname } from "next/navigation";
+import ButtonAction from "../ButtonAction";
+import NameDescription from "../NameDescription";
+import SectionHeader from "../SectionHeader";
 // ========================================
 function SuggestedGroups() {
   const pathname = usePathname();
@@ -28,7 +28,7 @@ function SuggestedGroups() {
                 </div>
                 <NameDescription name="مطورين ويب العرب" description="20 عضو" />
               </div>
-              <ActionButton
+              <ButtonAction
                 icon={UserPlus}
                 name="إنضمام"
                 textStyle="text-white"

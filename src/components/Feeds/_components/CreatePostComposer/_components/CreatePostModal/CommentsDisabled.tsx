@@ -35,7 +35,7 @@ function CommentsDisabled({
               : "text-gray-500 not-disabled:hover:text-white ",
           )}
         >
-          <MessageSquareOff className="postBtnOptIcon" />
+          <MessageSquareOff className="btnOptIcon" />
         </button>
       </TooltipTrigger>
       <TooltipContent>

@@ -1,5 +1,5 @@
 export const dynamic = "force-dynamic";
-import VideosContainer from "./_components/VideosContainer";
+import VideosContainer from "./_components/VideosList";
 // ===================================================================================
 function Videos() {
   return (
