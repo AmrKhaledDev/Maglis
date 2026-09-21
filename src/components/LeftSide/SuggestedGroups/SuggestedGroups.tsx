@@ -26,7 +26,7 @@ function SuggestedGroups() {
                     className="object-cover"
                   />
                 </div>
-                <NameDescription name="مطورين ويب العرب" description="20 عضو" />
+                <NameDescription userId="" name="مطورين ويب العرب" description="20 عضو" />
               </div>
               <ButtonAction
                 icon={UserPlus}

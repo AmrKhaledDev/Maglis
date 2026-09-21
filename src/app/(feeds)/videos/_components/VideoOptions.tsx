@@ -17,7 +17,7 @@ function VideoOptions({ video }: { video: PostType }) {
       >
         <Ellipsis strokeWidth={1.5} />
       </button>
-      <PostOptionsBox activeMenu={activeMenu} post={video} />
+      <PostOptionsBox post={video} />
     </div>
   );
 }

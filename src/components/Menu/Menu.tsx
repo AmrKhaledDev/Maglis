@@ -17,7 +17,7 @@ function Menu() {
   );
   if (pathname.startsWith("/messages")) return null;
   return (
-    <nav className="sticky top-22 menu z-40 h-fit flex-col flex justify-between gap-2 p-3 w-70">
+    <nav className="sticky top-24 menu z-40 h-fit flex-col flex justify-between gap-2 p-3 w-70">
       {filteredLinks.map((link) => (
         <Link
           key={link.id}

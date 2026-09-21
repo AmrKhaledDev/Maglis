@@ -9,10 +9,10 @@ import { Heart } from "lucide-react";
 // ====================================================================
 function VideoLikeButton({
   video,
-  isCommentsModalOpen,
+  variant = "default",
 }: {
   video: PostType;
-  isCommentsModalOpen?: boolean;
+  variant: "default" | "comments_modal";
 }) {
   const { setToast } = useToast();
   const userSession = useUser();
@@ -47,7 +47,7 @@ function VideoLikeButton({
       <Heart
         className={clsx(
           isLiker && "fill-red-500 text-red-500",
-          isCommentsModalOpen ? "size-5.5" : "size-7",
+          variant === "comments_modal" ? "size-5.5" : "size-7",
         )}
       />
     </button>

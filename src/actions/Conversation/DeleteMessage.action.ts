@@ -22,7 +22,7 @@ export const DeleteMessageAction = async (
       where: {
         id: messageId,
       },
-      select: { senderId: true, deletedBySender: true },
+      select: { senderId: true, deletedBySender: true, createdAt: true },
     });
     if (!message)
       return {
@@ -43,6 +43,12 @@ export const DeleteMessageAction = async (
         },
       });
     } else if (deleteType === "DELETE FOR ALL") {
+      if (
+        new Date(message.createdAt) <=
+        new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      ) {
+        return { success: false, message: "يتعذر حذف الرسالة." };
+      }
       await prisma.message.delete({
         where: {
           id: messageId,

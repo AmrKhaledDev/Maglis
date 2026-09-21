@@ -1,0 +1,150 @@
+import { EditPostAction } from "@/actions/Post/EditPost.action";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useUser } from "@/providers/UserProvider";
+import { PostType } from "@/types/Post.type";
+import { PrivacyType } from "@/types/Privacy.type";
+import { MediaType, Privacy } from "@prisma/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { Globe } from "lucide-react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { useFieldArray, useForm } from "react-hook-form";
+import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
+import EditPostMedia from "./EditPostMedia";
+import EditPostModalAuthor from "./EditPostModalAuthor";
+import EditPostModalContent from "./EditPostModalContent";
+import EditPostModalFooter from "./EditPostModalFooter";
+import EditPostModalHeader from "./EditPostModalHeader";
+// ==========================================================================================================
+function EditPostModal({ post }: { post: PostType }) {
+  const { setActiveModal } = useActiveModal();
+  const userSession = useUser();
+  const postPrivacy: PrivacyType = privacyOptions.find(
+    (item) => item.value === post.privacy,
+  ) ?? { icon: Globe, label: "عام", value: "PUBLIC" };
+  const queryClient = useQueryClient();
+  const { register, handleSubmit, setValue, watch, control } =
+    useForm<EditPostModalFormType>({
+      defaultValues: {
+        content: post.content ?? "",
+        privacy: postPrivacy,
+        commentsDisabled: post.commentsDisabled,
+        isPinnedToProfile: post.isPinnedToProfile,
+        media:
+          post.medias.map((item) => ({
+            preview: item.url,
+            type: item.type,
+            file: null,
+          })) || [],
+      },
+    });
+  const { append, remove, fields } = useFieldArray({
+    control,
+    name: "media",
+  });
+  const content = watch("content");
+  const isPinnedToProfile = watch("isPinnedToProfile");
+  const commentsDisabled = watch("commentsDisabled");
+  const privacy = watch("privacy");
+  const {
+    mutate,
+    isPending: loading,
+    error,
+  } = useMutation({
+    mutationFn: async (data: EditPostModalFormType) => {
+      if (!content.trim() && data.media.length === 0)
+        throw new Error("لا يمكنك نشر منشور فارغ.");
+      const media = data.media.filter((item) => !item.file);
+      const files = data.media.filter((item) => item.file);
+      if (files.length > 0) {
+        for (const mediaItem of files) {
+          try {
+            if (!mediaItem.file) continue;
+            const formData = new FormData();
+            formData.append("file", mediaItem.file);
+            const res = await axios.post("/api/upload-media", formData);
+            const result: { url: string; type: MediaType } = res.data;
+            media.push({
+              preview: result.url,
+              type: result.type,
+              file: null,
+            });
+          } catch (error) {
+            console.error(error);
+            continue;
+          }
+        }
+      }
+      const result = await EditPostAction(
+        post.id,
+        data.privacy.value as Privacy,
+        data.commentsDisabled,
+        data.isPinnedToProfile,
+        data.content,
+        media.map((item) => ({ url: item.preview, type: item.type })),
+      );
+      if (!result.success)
+        throw new Error(result.message ?? "حدث خطأ أثناء تعديل منشورك.");
+    },
+    onSuccess: () => {
+      invalidateUserCaches(queryClient, userSession);
+      setActiveModal(null);
+    },
+  });
+  const handleEditPost = async (data: EditPostModalFormType) => {
+    mutate(data);
+  };
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+  return createPortal(
+    <div className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur z-50 menuKeepOpen">
+      <motion.form
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.1 }}
+        onSubmit={handleSubmit(handleEditPost)}
+        className="boxEditPostModal w-200 p-3 max-h-150 overflow-y-auto ring ring-gray-50/10 bg-slate-800 rounded-2xl shadow-2xl text-white"
+      >
+        <EditPostModalHeader
+          setValue={setValue}
+          commentsDisabled={commentsDisabled}
+          loading={loading}
+          isPinnedToProfile={isPinnedToProfile}
+        />
+        <hr className="border-white opacity-3 my-2" />
+        {error && <AlertMessage type="error" message={error.message} />}
+        <EditPostModalAuthor
+          post={post}
+          setValue={setValue}
+          privacy={privacy}
+          loading={loading}
+        />
+        <EditPostModalContent content={content} register={register} />
+        {fields && fields.length > 0 && (
+          <EditPostMedia
+            loading={loading}
+            fields={fields}
+            remove={remove}
+          />
+        )}
+        <EditPostModalFooter
+          fields={fields}
+          append={append}
+          loading={loading}
+        />
+      </motion.form>
+    </div>,
+    document.body,
+  );
+}
+
+export default EditPostModal;

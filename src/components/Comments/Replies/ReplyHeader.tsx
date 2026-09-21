@@ -1,7 +1,7 @@
+import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
+import { CommentType } from "@/types/Comment.type";
 import Link from "next/link";
 import ReplyOptions from "./ReplyOptions";
-import { CommentType } from "@/types/Comment.type";
-import { UrlUserProfile } from "@/lib/UrlUserProfile";
 // ===============================================================
 function ReplyHeader({
   reply,
@@ -18,7 +18,7 @@ function ReplyHeader({
           رداً على
           <Link
             target="_blank"
-            href={UrlUserProfile(reply.parent.userId)}
+            href={useUrlUserProfile(reply.parent.userId)}
             className="text-blue-400 block hover:underline"
           >
             {reply.parent?.user.name}
@@ -28,7 +28,7 @@ function ReplyHeader({
           في تعليق
           <Link
             target="_blank"
-            href={UrlUserProfile(topLevelComment.userId)}
+            href={useUrlUserProfile(topLevelComment.userId)}
             className="text-blue-400 block hover:underline"
           >
             {topLevelComment.user.name}

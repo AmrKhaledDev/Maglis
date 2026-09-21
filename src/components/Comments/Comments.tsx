@@ -24,7 +24,7 @@ function Comments({ post }: { post: PostType }) {
         });
       return result.comments || [];
     },
-    queryKey: ["comments", userSession.id],
+    queryKey: ["comments", userSession.id, post.id],
   });
   const [showMoreComments, setShowMoreComments] = useState(false);
   const sortedComments = comments

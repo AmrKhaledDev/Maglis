@@ -1,16 +1,17 @@
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import clsx from "clsx";
 import { Ellipsis } from "lucide-react";
-import MessageDeleteAlert from "./DeleteMessageAlert";
-import EditMessageModal from "./EditMessageModal";
-import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { useActiveMenu } from "@/providers/ActiveMenuProvider";
+import EditMessageModal from "../../../../../../components/modals/EditMessageModal";
+import DeleteMessageModal from "../../../../../../components/modals/DeleteMessageModal";
 import MessageOptionsMenu from "./MessageOptionsMenu";
+import { Message } from "@prisma/client";
 // =========================================================
 function MessageOptions({
-  messageId,
+  message,
   receiverId,
 }: {
-  messageId: string;
+  message: Message;
   receiverId: string;
 }) {
   const { activeModal } = useActiveModal();
@@ -18,17 +19,19 @@ function MessageOptions({
   return (
     <div className="relative">
       <button
-        onClick={() => setActiveMenu(messageId)}
+        onClick={() => setActiveMenu(message.id)}
         className={clsx(
           "cursor-pointer mytransition hover:bg-white/5 p-1 rounded-full z-10 text-gray-500 h-fit backdrop-blur-3xl btnOpt btnActiveMenu",
-          activeMenu === messageId ? "block" : "group-hover:block hidden",
+          activeMenu === message.id ? "block" : "group-hover:block hidden",
         )}
       >
         <Ellipsis strokeWidth={1} className="size-4" />
       </button>
-      {activeMenu === messageId && <MessageOptionsMenu />}
-      {activeModal === "show_alertDelete_box" && (
-        <MessageDeleteAlert messageId={messageId} receiverId={receiverId} />
+      {activeMenu === message.id && (
+        <MessageOptionsMenu messageId={message.id} />
+      )}
+      {activeModal === message.id && (
+        <DeleteMessageModal message={message} receiverId={receiverId} />
       )}
       {activeModal === "edit_message" && <EditMessageModal />}
     </div>

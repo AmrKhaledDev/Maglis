@@ -6,8 +6,8 @@ import z from "zod";
 const handleFileUploadChatActions = (
   e: ChangeEvent<HTMLInputElement>,
   fields: ({
-    mediaType: "IMAGE" | "VIDEO" | "PDF";
-    mediaUrl: string;
+    type: "IMAGE" | "VIDEO" | "PDF";
+    url: string;
   } & Record<"id", string>)[],
   append: UseFieldArrayAppend<z.infer<typeof CreateMessageSchema>, "media">,
 ) => {
@@ -25,8 +25,10 @@ const handleFileUploadChatActions = (
     if (!type) return;
     append({
       file,
-      mediaUrl: url,
-      mediaType: type.toUpperCase() as "IMAGE" | "VIDEO" | "PDF",
+      url: url,
+      type: type.toUpperCase() as "IMAGE" | "VIDEO" | "PDF",
+      size: file.size,
+      name: file.name,
     });
     e.target.value = "";
   }

@@ -11,6 +11,7 @@ type ConversationType = Prisma.ConversationGetPayload<{
             image: true;
           };
         };
+        messageMedia: true;
       };
     };
   };

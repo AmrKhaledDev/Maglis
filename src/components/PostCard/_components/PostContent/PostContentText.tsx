@@ -1,7 +1,7 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { PostType } from "@/types/Post.type";
 import Linkify from "linkify-react";
-import PostContentTextModal from "./PostContentTextModal";
+import PostContentTextModal from "../../../modals/PostContentTextModal";
 // =======================================
 function PostContentText({ post }: { post: PostType }) {
   const { activeModal, setActiveModal } = useActiveModal();
@@ -17,14 +17,14 @@ function PostContentText({ post }: { post: PostType }) {
         }}
       >
         <p
-          onClick={() => setActiveModal(post.id)}
+          onClick={() => setActiveModal(post.authorId)}
           dir="auto"
           className="whitespace-pre-line leading-7 hover:bg-white/1 cursor-pointer mytransition [word-break:break-word] line-clamp-5"
         >
           {post.content}
         </p>
       </Linkify>
-      {activeModal === post.id && <PostContentTextModal post={post} />}
+      {activeModal === post.authorId && <PostContentTextModal post={post} />}
     </div>
   );
 }

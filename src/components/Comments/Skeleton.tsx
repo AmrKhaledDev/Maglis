@@ -6,7 +6,7 @@ function Skeleton() {
         .map((_, i) => (
           <div
             key={i}
-            className="bg-white/10 animate-pulse h-fit flex flex-col gap-4 rounded-xl p-3 overflow-hidden"
+            className="bg-white/5 animate-pulse h-fit flex flex-col gap-4 rounded-xl p-3 overflow-hidden"
           >
             <div className="flex items-center gap-2">
               <span className="shrink-0 size-8 rounded-full block bg-white/10" />

@@ -32,6 +32,14 @@ export const GetUserPostsAction = async (
         likes: {
           select: {
             userId: true,
+            user: {
+              select: {
+                name: true,
+                bio: true,
+                professionalMode: true,
+                image: true,
+              },
+            },
           },
         },
         _count: {

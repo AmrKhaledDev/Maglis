@@ -1,34 +1,31 @@
 "use client";
+import { PostType } from "@/types/Post.type";
+import { Pin } from "lucide-react";
+import { useState } from "react";
+import Comments from "../Comments/Comments";
 import PostOptions from "../PostOptions/PostOptions";
+import PostActions from "./_components/PostActions/PostActions";
 import PostAuthor from "./_components/PostAuthor/PostAuthor";
 import PostContent from "./_components/PostContent/PostContent";
-import PostActions from "./_components/PostActions/PostActions";
-import Comments from "../Comments/Comments";
-import { Dispatch, SetStateAction } from "react";
-import { Pin } from "lucide-react";
-import { PostType } from "@/types/Post.type";
 // ========================================================
 function PostCard({
   post,
-  showComments,
-  setShowComments,
-  isProfilePage,
-  isVideosPage,
+  variant,
 }: {
   post: PostType;
-  showComments?: string;
-  setShowComments?: Dispatch<SetStateAction<string>>;
-  isProfilePage?: boolean;
-  isVideosPage?: boolean;
+  variant: "default" | "profile" | "videos" | "single";
 }) {
+  const [showComments, setShowComments] = useState(
+    variant === "single" ? post.id : "",
+  );
   return (
     <div
       key={post.id}
       className="p-3 bg-black/20 relative ring ring-white/1 shadow rounded-lg w-full"
     >
-      {isProfilePage && post.isPinnedToProfile && (
-        <p className="mb-4 text-xs font-semibold text-green-600 flex items-center gap-0.5">
-          <Pin className="size-4" /> مُثبت
+      {variant === "profile" && post.isPinnedToProfile && (
+        <p className="mb-4 text-xs text-gray-500 flex items-center gap-0.5">
+          <Pin strokeWidth={1.5} className="size-4" /> مُثبت
         </p>
       )}
       <div className="flex justify-between">
@@ -36,7 +33,7 @@ function PostCard({
         <PostOptions post={post} />
       </div>
       <PostContent post={post} />
-      {!isVideosPage && setShowComments && (
+      {variant !== "videos" && (
         <>
           <span className="w-full h-px rounded-full bg-white opacity-1.5 block my-2" />
           <PostActions setShowComments={setShowComments} post={post} />

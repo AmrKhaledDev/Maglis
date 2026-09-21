@@ -15,43 +15,57 @@ export const GetDirectConversationAction = async (
     const userSession = await GetSession();
     if (!userSession) return { success: false, message: "برجاء تسجيل الدخول." };
     const directKey = [userSession.id, receiverId].sort().join("_");
-    const conversation: ConversationType | null =
-      await prisma.conversation.findFirst({
-        where: {
-          directKey,
-          type: "DIRECT",
+    const conversation = await prisma.conversation.findFirst({
+      where: {
+        directKey,
+        type: "DIRECT",
+      },
+    });
+    if (!conversation) return { success: true, conversation: null };
+    const conversationMember = await prisma.conversationMember.findUnique({
+      where: {
+        userId_conversationId: {
+          userId: userSession.id,
+          conversationId: conversation.id,
         },
-        include: {
-          messages: {
-            where: {
-              OR: [
-                {
-                  senderId: {
-                    not: userSession.id,
-                  },
-                },
-                {
-                  senderId: userSession.id,
-                  deletedBySender: false,
-                },
-              ],
-            },
-            include: {
-              sender: {
-                select: {
-                  id: true,
-                  name: true,
-                  image: true,
-                },
-              },
-            },
-            orderBy: {
-              createdAt: "asc",
+      },
+    });
+    const clearedAt = conversationMember?.clearedAt;
+    const messages = await prisma.message.findMany({
+      where: {
+        conversationId: conversation.id,
+        ...(clearedAt && {
+          createdAt: {
+            gt: clearedAt,
+          },
+        }),
+        OR: [
+          {
+            senderId: {
+              not: userSession.id,
             },
           },
+          {
+            senderId: userSession.id,
+            deletedBySender: false,
+          },
+        ],
+      },
+      include: {
+        sender: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+          },
         },
-      });
-    return { success: true, conversation };
+        messageMedia: true,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+    return { success: true, conversation: { ...conversation, messages } };
   } catch (error) {
     console.error(error);
     return { success: false };

@@ -17,6 +17,7 @@ function UserDetails({ user }: { user: SessionWithoutPasswordType }) {
       <NameDescription
         name={user.name}
         description={formatFollowers(user.followersCount)}
+        userId={user.id}
       />
     </div>
   );

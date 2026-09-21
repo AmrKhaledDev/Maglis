@@ -24,8 +24,9 @@ function RecentContacts() {
                   />
                 </div>
                 <NameDescription
+                  userId=""
                   name="Yaser Tarek"
-                  description="      محمد خالد، مطور Full-Stack مهتم بالتعلم والنمو المستمر. أبني
+                  description="محمد خالد، مطور Full-Stack مهتم بالتعلم والنمو المستمر. أبني
                     تطبيقات متطورة بـ Next.js وTypeScript، مع التركيز على الأمن
                     السيبراني لحمايتها."
                 />

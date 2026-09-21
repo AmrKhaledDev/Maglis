@@ -1,22 +1,34 @@
 import { UserBlockAction } from "@/actions/UserBlock/UserBlock.action";
+import useIsBlocked from "@/hooks/useIsBlocked";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Ban } from "lucide-react";
+import { useRouter } from "next/navigation";
 // ================================================================
-function BlockButton({ authorId }: { authorId: string }) {
+function BlockButton({
+  userId,
+  style,
+  iconSize,
+}: {
+  userId: string;
+  style?: string;
+  iconSize?: string;
+}) {
   const { setToast } = useToast();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const userSession = useUser();
   const { mutate: handleUserBlock, isPending } = useMutation({
     mutationFn: async () => {
-      if (authorId === userSession.id) throw new Error("لا يمكنك حظر نفسك.");
-      const result = await UserBlockAction(authorId);
+      if (userId === userSession.id) throw new Error("لا يمكنك حظر نفسك.");
+      const result = await UserBlockAction(userId);
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {
       invalidateUserCaches(queryClient, userSession);
+      router.refresh();
     },
     onError: (err: Error) => {
       setToast({
@@ -26,13 +38,14 @@ function BlockButton({ authorId }: { authorId: string }) {
       });
     },
   });
+  const isBlocked = useIsBlocked(userId);
   return (
     <button
       onClick={() => handleUserBlock()}
       disabled={isPending}
-      className="btnOptBox text-red-700 hover:text-red-700!"
+      className={style}
     >
-      <Ban className="btnOptIcon" /> حظر
+      <Ban className={iconSize} /> {isBlocked ? "فك الحظر" : "حظر"}
     </button>
   );
 }

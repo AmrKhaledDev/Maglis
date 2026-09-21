@@ -4,9 +4,10 @@ import { QueryClient } from "@tanstack/react-query";
 export const invalidateUserCaches = (
   queryClient: QueryClient,
   userSession: SessionWithoutPasswordType,
+  ...args: unknown[]
 ) => {
   queryClient.invalidateQueries({
-    queryKey: ["user_posts", userSession.id],
+    queryKey: ["user_posts", userSession.id, ...args],
   });
   queryClient.invalidateQueries({
     queryKey: ["posts", userSession.id],
@@ -22,6 +23,9 @@ export const invalidateUserCaches = (
   });
   queryClient.invalidateQueries({
     queryKey: ["user_active_stories", userSession.id],
+  });
+  queryClient.invalidateQueries({
+    queryKey: ["conversation", userSession.id, ...args],
   });
   queryClient.invalidateQueries({
     queryKey: ["user_stories", userSession.id],

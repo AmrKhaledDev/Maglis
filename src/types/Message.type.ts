@@ -9,6 +9,7 @@ type MessageType = Prisma.MessageGetPayload<{
         image: true;
       };
     };
+    messageMedia: true;
   };
 }>;
 export default MessageType;

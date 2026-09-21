@@ -6,7 +6,7 @@ import CreateStoryCard from "./_components/CreateStoryCard";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@/providers/UserProvider";
 import { GetActiveStoriesAction } from "@/actions/Story/GetActiveStories.action";
-import CreateStoryModal from "./_components/CreateStoryModal/CreateStoryModal";
+import CreateStoryModal from "../../../modals/CreateStoryModal/CreateStoryModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // =============================================================
 function Stories() {

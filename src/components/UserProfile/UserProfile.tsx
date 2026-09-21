@@ -1,5 +1,5 @@
 import ProfileAbout from "@/components/UserProfile/_components/ProfileAbout/ProfileAbout";
-import ProfileAvatar from "@/components/UserProfile/_components/ProfileAvatar/ProfileAvatar";
+import ProfileAvatar from "@/components/UserProfile/_components/ProfileAvatar";
 import ProfileContent from "@/components/UserProfile/_components/ProfileContent/ProfileContent";
 import ProfileCover from "@/components/UserProfile/_components/ProfileCover";
 import ProfileDetails from "@/components/UserProfile/_components/ProfileDetails/ProfileDetails";

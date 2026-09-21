@@ -1,11 +1,11 @@
 import { User } from "@prisma/client";
 import Image from "next/image";
-import ChatWindowOptions from "./Options";
 import Link from "next/link";
+import Options from "./Options/Options";
 // ================================================
 function Header({ receiver }: { receiver: User }) {
   return (
-    <div className="flex items-center gap-3 p-3 bg-[#161717]">
+    <div className="flex items-center gap-3 p-2 bg-[#161717]">
       <div className="relative size-11 shrink-0 rounded-full overflow-hidden">
         <Image
           src={receiver.image || "/user.jpg"}
@@ -27,7 +27,7 @@ function Header({ receiver }: { receiver: User }) {
             {receiver.bio}
           </p>
         </div>
-        <ChatWindowOptions receiver={receiver} />
+        <Options receiver={receiver} />
       </div>
     </div>
   );

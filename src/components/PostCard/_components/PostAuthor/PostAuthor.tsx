@@ -6,7 +6,7 @@ import local from "dayjs/locale/ar";
 import PostAuthorActions from "./PostAuthorAction";
 import PostPrivacy from "../../../PostPrivacy/PostPrivacy";
 import { PostType } from "@/types/Post.type";
-import { UrlUserProfile } from "@/lib/UrlUserProfile";
+import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
 // =========================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
@@ -14,7 +14,7 @@ function PostAuthor({ post }: { post: PostType }) {
   return (
     <div className="flex gap-2 items-center">
       <Link
-        href={UrlUserProfile(post.authorId)}
+        href={useUrlUserProfile(post.authorId)}
         className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
       >
         <Image
@@ -29,7 +29,7 @@ function PostAuthor({ post }: { post: PostType }) {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">
             <Link
-              href={UrlUserProfile(post.authorId)}
+              href={useUrlUserProfile(post.authorId)}
               className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
             >
               {post.author.name}

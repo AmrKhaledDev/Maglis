@@ -15,9 +15,9 @@ function AddFriendButton({
   textStyle,
 }: {
   userId: string;
-  sentStyle: string;
-  unsentStyle: string;
-  textStyle: string;
+  sentStyle?: string;
+  unsentStyle?: string;
+  textStyle?: string;
 }) {
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -53,7 +53,11 @@ function AddFriendButton({
     <button
       onClick={handleFrientRequest}
       disabled={loading}
-      className={clsx(textStyle, isSent ?  unsentStyle : sentStyle)}
+      className={clsx(
+        "cursor-pointer",
+        textStyle,
+        isSent ? unsentStyle : sentStyle,
+      )}
     >
       {isSent ? (
         <>

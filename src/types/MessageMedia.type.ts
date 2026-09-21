@@ -1,7 +1,7 @@
-import { MediaType } from "@prisma/client";
-// ====================================
 type MessageMediaType = {
-  mediaType: "IMAGE" | "VIDEO" | "PDF";
-  mediaUrl: string;
+  url: string;
+  type: "IMAGE" | "VIDEO" | "PDF";
+  name: string;
+  size: number;
 };
 export default MessageMediaType;

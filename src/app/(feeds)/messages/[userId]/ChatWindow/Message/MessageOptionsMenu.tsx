@@ -2,7 +2,7 @@ import { Pen, Trash } from "lucide-react";
 import { motion } from "framer-motion";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ===============================================================
-function MessageOptionsMenu() {
+function MessageOptionsMenu({messageId}:{messageId:string}) {
   const { setActiveModal } = useActiveModal();
   return (
     <motion.div
@@ -17,7 +17,7 @@ function MessageOptionsMenu() {
         <Pen className="btnOptIcon" /> تعديل
       </button>
       <button
-        onClick={() => setActiveModal("show_alertDelete_box")}
+        onClick={() => setActiveModal(messageId)}
         className="btnOptBox text-red-600!"
       >
         <Trash className="btnOptIcon" /> حذف

@@ -6,7 +6,7 @@ import ProfileIdentity from "./ProfileIdentity";
 import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
 import { useEffect, useState } from "react";
 import { useUser } from "@/providers/UserProvider";
-import EditProfileModal from "./EditProfileModal/EditProfileModal";
+import EditProfileModal from "../../../modals/EditProfileModal/EditProfileModal";
 // ====================================================
 function ProfileDetails({ user }: { user: UserWithSocialLinkType }) {
   const [showEditProfileModal, setShowEditProfileModal] = useState(false);

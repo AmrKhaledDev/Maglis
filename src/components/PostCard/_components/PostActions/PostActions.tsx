@@ -1,11 +1,13 @@
 "use client";
+import PostLikersModal from "@/components/modals/PostLikersModal";
 import { formatComments } from "@/formats/formatComments";
 import { formatLikes } from "@/formats/formatLikes";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { PostType } from "@/types/Post.type";
 import { MessageCircle } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import LikeButton from "./LikeButton";
-import SavePostButton from "./SavePostButton";
+import SavePostButton from "../../../SavePostButton/SavePostButton";
 // =============================================
 function PostActions({
   post,
@@ -14,6 +16,8 @@ function PostActions({
   post: PostType;
   setShowComments: Dispatch<SetStateAction<string>>;
 }) {
+  const { activeModal, setActiveModal } = useActiveModal();
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
@@ -26,9 +30,13 @@ function PostActions({
         </button>
       </div>
       <div className="flex items-center gap-3">
-        <p className="font-normal text-xs text-gray-300">
+        <button
+          onClick={() => setActiveModal(post.id)}
+          className="font-normal text-xs text-gray-300 hover:underline cursor-pointer showLikersButton"
+        >
           {formatLikes(post.likes.length)}
-        </p>
+        </button>
+        {activeModal === post.id && <PostLikersModal post={post} />}
         <p className="font-normal text-xs text-gray-300">
           {formatComments(post._count.comments)}
         </p>

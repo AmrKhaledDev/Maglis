@@ -1,6 +1,6 @@
 import { Pencil } from "lucide-react";
 import { PostType } from "@/types/Post.type";
-import EditPostModal from "../EditPostModal/EditPostModal";
+import EditPostModal from "../../modals/EditPostModal/EditPostModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ================================================================
 function EditPostButton({ post }: { post: PostType }) {

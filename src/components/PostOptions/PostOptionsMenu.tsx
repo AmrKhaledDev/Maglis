@@ -1,3 +1,4 @@
+import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { PostType } from "@/types/Post.type";
 import { motion } from "framer-motion";
 import CopyPostLinkButton from "./CopyPostLinkButton";
@@ -6,12 +7,11 @@ import PostViewerOptions from "./PostViewerOptions/PostViewerOptions";
 import SavePostButton from "./SavePostButton";
 // ==============================================================
 function PostOptionsMenu({
-  activeMenu,
   post,
 }: {
-  activeMenu: string;
   post: PostType;
 }) {
+  const {activeMenu} = useActiveMenu()
   return (
     <>
       {activeMenu === post.id && (

@@ -30,6 +30,11 @@ type User = Prisma.UserGetPayload<{
         };
       };
     };
+    blocks: {
+      select: {
+        blockedId: true;
+      };
+    };
   };
 }>;
 export type SessionWithoutPasswordType = Omit<User, "password">;

@@ -11,11 +11,9 @@ function CopyPostLinkButton({ post }: { post: PostType }) {
   const handleCopyLink = async () => {
     try {
       setLoading(true);
-
       await navigator.clipboard.writeText(
-        `${window.location.origin}/posts/${post.id}`,
+        `${window.location.origin}/post/${post.id}`,
       );
-
       setToast({
         open: true,
         message: "تم نسخ الرابط إلى الحافظة.",

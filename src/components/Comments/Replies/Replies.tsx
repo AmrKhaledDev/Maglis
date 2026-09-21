@@ -30,7 +30,7 @@ function Replies({
       return result.data;
     },
     enabled: showRepliesList,
-    queryKey: ["replies", comment.id, userSession.id],
+    queryKey: ["replies", userSession.id, comment.id],
   });
 
   const handleShowReplies = () => {

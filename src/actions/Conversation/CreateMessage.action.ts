@@ -4,7 +4,7 @@ import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
 import MessageMediaType from "@/types/MessageMedia.type";
 import { CreateMessageSchema } from "@/ZodSchemas/Message/CreateMessage.schema";
-// =======================================
+// ======================================================================
 export const CreateMessageAction = async (
   conversationId: string,
   content?: string,
@@ -36,10 +36,13 @@ export const CreateMessageAction = async (
         },
       });
       if (data.media && data.media.length > 0) {
-        await prisma.messageMedia.createMany({
+        await tx.messageMedia.createMany({
           data: data.media.map((media) => ({
             messageId: message.id,
-            ...media,
+            mediaUrl: media.url,
+            mediaType: media.type,
+            mediaName: media.name,
+            mediaSize: media.size,
           })),
         });
       }

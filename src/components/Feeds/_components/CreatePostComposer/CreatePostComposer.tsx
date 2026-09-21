@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MediaPicker from "./_components/MediaPicker";
 import MediaPreview from "./_components/MediaPreview/MediaPreview";
 import CreatePostTrigger from "./_components/CreatePostTrigger";
-import CreatePostModal from "./_components/CreatePostModal/CreatePostModal";
+import CreatePostModal from "../../../modals/CreatePostModal/CreatePostModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // ==============================================
 function CreatePostComposer() {
@@ -17,7 +17,7 @@ function CreatePostComposer() {
     }
   }, [activeModal == "create_post_modal"]);
   return (
-    <div>
+    <>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-7 w-full">
           <CreatePostTrigger />
@@ -31,7 +31,7 @@ function CreatePostComposer() {
         />
       </div>
       {activeModal == "create_post_modal" && <CreatePostModal />}
-    </div>
+    </>
   );
 }
 

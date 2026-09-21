@@ -7,8 +7,10 @@ const allowedFileTypes = [
   "image/webp",
   "video/mp4",
   "video/webm",
+  "application/pdf",
 ];
 const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
+const MAX_PDF_SIZE = 10 * 1024 * 1024;
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024;
 export async function POST(req: NextRequest) {
   try {
@@ -21,10 +23,14 @@ export async function POST(req: NextRequest) {
       );
     if (!allowedFileTypes.includes(file.type))
       return NextResponse.json(
-        { error: "عذراً هناك ملف غير مدعوم" },
+        { error: "عذراً هناك ملف غير مدعوم." },
         { status: 400 },
       );
-    const fileType = file.type.startsWith("video/") ? "video" : "image";
+    const fileType = file.type.startsWith("video/")
+      ? "video"
+      : file.type.startsWith("image/")
+        ? "image"
+        : "pdf";
     if (fileType === "video" && file.size > MAX_VIDEO_SIZE)
       return NextResponse.json(
         {
@@ -35,7 +41,14 @@ export async function POST(req: NextRequest) {
     if (fileType === "image" && file.size > MAX_IMAGE_SIZE)
       return NextResponse.json(
         {
-          error: "لا يمكنك رفع صورة تتخطى حجم 5 ميجابايت",
+          error: "لا يمكنك رفع صورة يتجاوز حجمها 10 ميجابايت.",
+        },
+        { status: 400 },
+      );
+    if (fileType === "pdf" && file.size > MAX_PDF_SIZE)
+      return NextResponse.json(
+        {
+          error: "لا يمكنك رفع ملف يتجاوز حجمه 10 ميجابايت.",
         },
         { status: 400 },
       );
@@ -44,10 +57,17 @@ export async function POST(req: NextRequest) {
     const fileUri = `data:${file.type};base64,${base64Data}`;
     const uploader = await cloudinary.uploader.upload(fileUri, {
       folder: "maglis-media",
-      resource_type: "auto",
+      resource_type:
+        fileType === "image" ? "image" : fileType === "video" ? "video" : "raw",
+      timeout: 120000,
     });
     return NextResponse.json(
-      { url: uploader.secure_url, type: fileType.toUpperCase() },
+      {
+        url: uploader.secure_url,
+        type: fileType.toUpperCase(),
+        name: file.name,
+        size: file.size,
+      },
       { status: 200 },
     );
   } catch (error) {

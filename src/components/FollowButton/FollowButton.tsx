@@ -14,9 +14,9 @@ function FollowButton({
   textColor,
 }: {
   followingId: string;
-  followColor: string;
-  unfollowColor: string;
-  textColor: string;
+  followColor?: string;
+  unfollowColor?: string;
+  textColor?: string;
 }) {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
@@ -52,7 +52,11 @@ function FollowButton({
     <button
       onClick={handleFollow}
       disabled={loading}
-      className={clsx(textColor, follow ? unfollowColor : followColor)}
+      className={clsx(
+        "cursor-pointer",
+        textColor,
+        follow ? unfollowColor : followColor,
+      )}
     >
       {follow ? (
         <>

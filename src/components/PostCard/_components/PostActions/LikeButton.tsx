@@ -25,7 +25,7 @@ function LikeButton({ post }: { post: PostType }) {
         );
     },
     onSuccess: () => {
-      invalidateUserCaches(queryClient, userSession);
+      invalidateUserCaches(queryClient, userSession, post.authorId);
       router.refresh();
     },
     onError: (error: Error) => {

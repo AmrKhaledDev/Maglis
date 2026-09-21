@@ -1,7 +1,9 @@
 import FollowButton from "@/components/FollowButton/FollowButton";
+import PostLikersModal from "@/components/modals/PostLikersModal";
 import { formatComments } from "@/formats/formatComments";
 import { formatLikes } from "@/formats/formatLikes";
-import { UrlUserProfile } from "@/lib/UrlUserProfile";
+import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
 import dayjs from "dayjs";
@@ -15,9 +17,10 @@ dayjs.extend(relativeTime);
 dayjs.locale(local);
 function VideoAuthor({ video }: { video: PostType }) {
   const userSession = useUser();
+  const { activeModal, setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center gap-3">
-      <Link href={UrlUserProfile(video.authorId)}>
+      <Link href={useUrlUserProfile(video.authorId)}>
         <Image
           src={video.author.image || "/user.jpg"}
           alt="صورة المستخدم"
@@ -59,9 +62,17 @@ function VideoAuthor({ video }: { video: PostType }) {
             {dayjs(video.createdAt).fromNow()}
           </p>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-gray-300">
-              {formatLikes(video.likes.length)}
-            </span>
+            {video.likes.length > 0 ? (
+              <button
+                onClick={() => setActiveModal(video.id)}
+                className="text-[11px] text-gray-300 cursor-pointer hover:underline"
+              >
+                {formatLikes(video.likes.length)}
+              </button>
+            ) : (
+              <span className="text-[11px] text-gray-300">لا توجد إعجابات</span>
+            )}
+            {activeModal === video.id && <PostLikersModal post={video} />}
             <span className="text-[11px] text-gray-300">
               {formatComments(video._count.comments)}
             </span>

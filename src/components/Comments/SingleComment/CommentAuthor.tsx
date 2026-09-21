@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { Comment, Prisma } from "@prisma/client";
 import { PostType } from "@/types/Post.type";
 import Link from "next/link";
-import { UrlUserProfile } from "@/lib/UrlUserProfile";
+import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
 // =========================================================================
 dayjs.locale("ar");
 dayjs.extend(relativeTime);
@@ -38,7 +38,7 @@ function CommentAuthor({
         <div className="flex items-center gap-1">
           <Link
             target="_blank"
-            href={UrlUserProfile(comment.userId)}
+            href={useUrlUserProfile(comment.userId)}
             className="text-sm font-semibold"
           >
             {user.name}

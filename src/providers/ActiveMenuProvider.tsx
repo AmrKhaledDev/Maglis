@@ -10,16 +10,17 @@ import {
 } from "react";
 // ===========================================================================
 type ActiveMenu = {
-  activeMenu: string;
-  setActiveMenu: Dispatch<SetStateAction<string>>;
+  activeMenu: string | null;
+  setActiveMenu: Dispatch<SetStateAction<string | null>>;
 };
 const ActiveMenuContext = createContext<ActiveMenu | null>(null);
 export function ActiveMenuProvider({ children }: { children: ReactNode }) {
-  const [activeMenu, setActiveMenu] = useState("");
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (e.target instanceof Element) {
-        if (!e.target.closest(".btnActiveMenu, .boxMenu, .button, .boxEditPostModal")) setActiveMenu("");
+        if (!e.target.closest(".btnActiveMenu, .boxMenu, .menuKeepOpen"))
+          setActiveMenu(null);
       }
     };
     document.addEventListener("click", handle);

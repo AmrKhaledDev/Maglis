@@ -1,4 +1,3 @@
-import { MediaType } from "@prisma/client";
 import z from "zod";
 // =========================================
 export const CreateMessageSchema = z
@@ -7,9 +6,11 @@ export const CreateMessageSchema = z
     media: z
       .array(
         z.object({
-          mediaType: z.enum(["IMAGE", "VIDEO", "PDF"]),
-          mediaUrl: z.string().url(),
-          file: z.file(),
+          type: z.enum(["IMAGE", "VIDEO", "PDF"]),
+          url: z.string().url(),
+          name: z.string(),
+          size: z.number(),
+          file: z.file().optional().nullable(),
         }),
       )
       .nullable()

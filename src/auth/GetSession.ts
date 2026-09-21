@@ -41,6 +41,11 @@ const GetSession = async (): Promise<SessionWithoutPasswordType | null> => {
             },
           },
         },
+        blocks: {
+          select: {
+            blockedId: true,
+          },
+        },
       },
     });
     if (!existingUser) return null;

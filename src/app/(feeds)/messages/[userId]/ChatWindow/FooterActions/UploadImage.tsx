@@ -1,21 +1,9 @@
 import CustomImageIcon from "@/components/CustomIcons/CustomImageIcon";
-import Label from "./Label";
-import { UseFieldArrayAppend } from "react-hook-form";
-import z from "zod";
-import { CreateMessageSchema } from "@/ZodSchemas/Message/CreateMessage.schema";
 import handleFileUploadChatActions from "@/lib/helpers/handleFileUploadChatActions";
+import UploadMediaPropsType from "../../_types/UploadMediaProps.type";
+import Label from "./Label";
 // ====================================================================
-function UploadImage({
-  fields,
-  append,
-}: {
-  fields: ({
-    mediaType: "IMAGE" | "VIDEO" | "PDF";
-    mediaUrl: string;
-    file: z.core.File;
-  } & Record<"id", string>)[];
-  append: UseFieldArrayAppend<z.infer<typeof CreateMessageSchema>, "media">;
-}) {
+function UploadImage({ fields, append }: UploadMediaPropsType) {
   return (
     <div>
       <Label htmlFor="upload_image" icon={CustomImageIcon} text="الصور" />

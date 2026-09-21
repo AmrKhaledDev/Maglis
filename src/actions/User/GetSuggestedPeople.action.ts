@@ -65,6 +65,11 @@ export const GetSuggestedPeopleAction = async (): Promise<{
             },
           },
         },
+        blocks: {
+          select: {
+            blockedId: true,
+          },
+        },
       },
     });
     return { success: true, suggestedPeople: suggestedPeople };

@@ -13,7 +13,7 @@ async function Chat({ params }: { params: Promise<{ userId: string }> }) {
   });
   if (!receiver) return redirect("/");
   return (
-    <main className="h-[88.5vh] flex gap-10">
+    <main className="h-screen flex gap-5">
       <MyConversations />
       <ChatWindow receiver={receiver} />
     </main>

@@ -15,6 +15,14 @@ export type PostType = Prisma.PostGetPayload<{
     likes: {
       select: {
         userId: true;
+        user: {
+          select: {
+            image: true;
+            name: true;
+            professionalMode: true;
+            bio: true;
+          };
+        };
       };
     };
     _count: {

@@ -1,7 +1,7 @@
 "use client";
 import { ImageIcon } from "lucide-react";
 import Image from "next/image";
-import EditProfileImageModal from "./EditProfileImageModal";
+import EditProfileImageModal from "../../modals/EditProfileImageModal/EditProfileImageModal";
 import { User } from "@prisma/client";
 import { useUser } from "@/providers/UserProvider";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
