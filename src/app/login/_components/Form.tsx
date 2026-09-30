@@ -13,6 +13,7 @@ import z from "zod";
 import FormHeader from "./FormHeader";
 import LoginSubmitButton from "./LoginSubmitButton";
 import FormFooter from "./FormFooter";
+import { motion } from "framer-motion";
 // =========================================================================
 function Form({ error }: { error?: string }) {
   const {
@@ -59,10 +60,14 @@ function Form({ error }: { error?: string }) {
     router.refresh();
   };
   return (
-    <div className="bg-[#a28b5d] rounded shadow-2xl ring ring-[#a28b5d]/50 overflow-hidden relative">
+    <motion.div
+      initial={{ opacity: 0, x: -40 }}
+      animate={{ opacity: 1, x: 0 }}
+      className="bg-[#a28b5d] rounded shadow-2xl ring ring-[#a28b5d]/50 relative md:mb-0 mb-3 sm:w-fit w-full"
+    >
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="p-5 bg-slate-800 rounded-3xl space-y-5 w-110 h-fit"
+        className="p-5 bg-slate-800 rounded-3xl space-y-5 lg:w-110 md:w-90 sm:w-120 w-full h-fit"
       >
         <FormHeader loading={loading} setShowBlur={setShowBlur} />
         <div className="flex flex-col gap-3">
@@ -96,7 +101,7 @@ function Form({ error }: { error?: string }) {
         <FormFooter />
       </form>
       {showBlur && <AuthBlur />}
-    </div>
+    </motion.div>
   );
 }
 

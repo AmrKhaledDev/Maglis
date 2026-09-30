@@ -12,7 +12,13 @@ function VideoCard({
   return (
     <>
       {media.mediaType === "VIDEO" && (
-        <div className={clsx("", mediaLength > 1 ? "size-80" : "w-full h-full")}>
+        <div
+          className={clsx(
+            mediaLength > 1
+              ? "xl:size-80 md:size-58 sm:size-80 size-70"
+              : "w-full h-full",
+          )}
+        >
           <ReactPlayer
             src={media.mediaUrl}
             width="100%"

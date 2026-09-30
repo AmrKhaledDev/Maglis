@@ -6,7 +6,7 @@ import Options from "./Options/Options";
 function Header({ receiver }: { receiver: User }) {
   return (
     <div className="flex items-center gap-3 p-2 bg-[#161717]">
-      <div className="relative size-11 shrink-0 rounded-full overflow-hidden">
+      <div className="relative sm:size-11 size-9 shrink-0 rounded-full overflow-hidden">
         <Image
           src={receiver.image || "/user.jpg"}
           alt="صورة المستخدم"
@@ -14,16 +14,16 @@ function Header({ receiver }: { receiver: User }) {
           fill
         />
       </div>
-      <div className="flex items-center justify-between w-full gap-10">
+      <div className="flex items-center justify-between w-full sm:gap-10 gap-5">
         <div>
           <Link
             href={`/u/${receiver.id}`}
-            className="text-[18px] font-medium text-gray-300"
+            className="sm:text-[18px] font-medium text-gray-300"
           >
             {receiver.name}
           </Link>
           <p className="text-xs text-green-700 font-medium">آخر ظهور الآن</p>
-          <p className="text-gray-400 line-clamp-1 text-sm">
+          <p className="text-gray-400 line-clamp-1 sm:text-sm text-xs">
             {receiver.bio}
           </p>
         </div>

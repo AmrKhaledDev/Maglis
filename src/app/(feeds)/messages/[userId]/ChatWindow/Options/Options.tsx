@@ -24,7 +24,7 @@ function Options({ receiver }: { receiver: User }) {
             : "hover:bg-white/3 hover:ring ring-white/5",
         )}
       >
-        <EllipsisVertical strokeWidth={1} className="size-5" />
+        <EllipsisVertical strokeWidth={1} className="sm:size-5 size-4" />
       </motion.button>
       {activeMenu === "options" && (
         <motion.div

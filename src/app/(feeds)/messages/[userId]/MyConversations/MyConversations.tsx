@@ -33,7 +33,7 @@ function MyConversations({ receiver }: { receiver: User }) {
     });
   const [searchData, setSearchData] = useState<UserConversation[] | null>(null);
   return (
-    <aside className="w-83 gap-5 flex flex-col pt-5">
+    <aside className="xl:w-83 w-75 gap-5 flex-col pt-5 lg:flex hidden">
       <div className="flex items-center gap-3">
         <Header />
         <SearhBar data={data} setSearchData={setSearchData} />

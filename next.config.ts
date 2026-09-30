@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  allowedDevOrigins:["concerning-illustration-specs-types.trycloudflare.com"],
+  allowedDevOrigins: ["muslim-joseph-bufing-hire.trycloudflare.com"],
   experimental: {
     proxyClientMaxBodySize: "200mb",
   },

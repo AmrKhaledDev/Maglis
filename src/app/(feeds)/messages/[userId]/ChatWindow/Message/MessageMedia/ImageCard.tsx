@@ -22,7 +22,7 @@ function ImageCard({
           onClick={() => setShowImage({ open: true, url: media.mediaUrl })}
           className={clsx(
             "relative rounded-md overflow-hidden cursor-pointer group/button",
-            mediaLength > 1 ? "size-80" : "size-100",
+            mediaLength > 1 ? "xl:size-80 md:size-58 sm:size-80 size-70" : "md:size-100 sm:size-80 size-70",
           )}
         >
           <Image

@@ -38,17 +38,16 @@ function AddEmoji({
         type="button"
         className="p-2 rounded-full shadow bg-white/5 text-gray-400 text-xl cursor-pointer hover:scale-102 active:bg-white/10 buttonShowEmojiPicker"
       >
-        <BsEmojiGrin />
+        <BsEmojiGrin className="sm:size-5 size-4"/>
       </button>
       {showEmojiPicker && (
         <div
-        
           className="absolute bottom-11 left-0 emojiPicker"
         >
           <EmojiPicker
             onEmojiClick={onEmojiClick}
             searchPlaceHolder="ابحث عن ملصقات"
-            className="bg-black/23! rounded-2xl! backdrop-blur-2xl! border-white/5!"
+            className="bg-black/23! rounded-2xl! backdrop-blur-2xl! border-white/5! w-full!"
           />
         </div>
       )}

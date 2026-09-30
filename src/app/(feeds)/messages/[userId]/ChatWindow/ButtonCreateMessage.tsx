@@ -11,9 +11,9 @@ function ButtonCreateMessage({
     <button
       disabled={!content?.trim() || isPending}
       type="submit"
-      className="flex items-center gap-2 py-2 px-4 rounded-full disabled:bg-white/5 disabled:text-gray-400 not-disabled:bg-blue-800 not-disabled:hover:bg-blue-700 shadow text-sm not-disabled:cursor-pointer font-medium backdrop-blur-3xl"
+      className="flex items-center gap-2 py-2 sm:px-4 px-3 rounded-full disabled:bg-white/5 disabled:text-gray-400 not-disabled:bg-blue-800 not-disabled:hover:bg-blue-700 shadow sm:text-sm not-disabled:cursor-pointer backdrop-blur-3xl text-xs"
     >
-      <IoSend />
+      <IoSend className="size-5 sm:block hidden" strokeWidth={1} />
       أرسل
     </button>
   );

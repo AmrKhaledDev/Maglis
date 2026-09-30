@@ -14,7 +14,7 @@ function CloseModal({
       type="button"
       className="absolute top-5 left-5 cursor-pointer text-gray-300 hover:text-white"
     >
-      <X strokeWidth={1.5} />
+      <X strokeWidth={1} className="sm:size-6 size-5" />
     </button>
   );
 }

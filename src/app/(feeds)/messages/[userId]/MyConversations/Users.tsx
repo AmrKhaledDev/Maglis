@@ -52,7 +52,7 @@ function Users({
                       : " hover:bg-white/10",
                 )}
               >
-                <div className="relative size-10 rounded-full overflow-hidden shrink-0">
+                <div className="relative xl:size-10 size-8 rounded-full overflow-hidden shrink-0">
                   <Image
                     src={member.user.image || "/user.jpg"}
                     alt="صورة المستخدم"

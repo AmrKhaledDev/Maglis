@@ -1,13 +1,13 @@
 import { useFormContext } from "react-hook-form";
-import AddEmoji from "../AddEmoji";
 import { useRef } from "react";
+import AddEmoji from "@/app/(feeds)/messages/[userId]/ChatWindow/FooterActions/AddEmoji";
 // ================================================
 function MessageInput() {
   const { register } = useFormContext();
   const messageInputRef = useRef<HTMLInputElement | null>(null);
   const { ref, ...contentRegister } = register("content");
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-5 w-full justify-center">
       <input
         {...contentRegister}
         ref={(element) => {
@@ -16,7 +16,7 @@ function MessageInput() {
         }}
         type="text"
         placeholder="أكتب رسالتك..."
-        className="bg-zinc-800/30 w-180 py-2.5 ring ring-white/5 px-4 rounded-md shadow outline-none"
+        className="bg-zinc-800/30 md:w-180 w-[80%] py-2.5 ring ring-white/5 px-4 rounded-md shadow outline-none"
       />
       <AddEmoji messageInputRef={messageInputRef} />
     </div>

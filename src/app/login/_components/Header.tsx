@@ -1,29 +1,33 @@
-import { CircleUserRound } from "lucide-react";
+"use client";
+import { UserRoundPlus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 // ===========================================================
 function Header() {
   return (
-    <div className="flex items-center justify-between">
-      <div className="relative h-17 w-22">
-        <Image src={"/logo.png"} alt="logo" priority fill />
+    <motion.header
+      initial={{ opacity: 0, y: -80 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex items-center justify-between"
+    >
+      <div className="relative md:size-20 size-15 mt-0.5">
+        <Image
+          src="/logo.png"
+          alt="logo"
+          priority
+          fill
+          className="object-contain"
+        />
       </div>
-      <div className="flex items-center gap-5">
-        <Link
-          href={"/"}
-          className="font-semibold hover:text-gray-200 mytransition text-sm hover:scale-105"
-        >
-          تسجيل الدخول
-        </Link>
-        <Link
-          href={"/"}
-          className=" group hover:bg-[#a08b5f] mytransition bg-[#c5ab77]  flex items-center gap-2 py-2 px-6 font-semibold text-sm rounded-full shadow-[0_0_25px_rgba(197,171,119,0.5)] hover:shadow-none"
-        >
-          <CircleUserRound className="size-5 group-hover:-translate-y-px mytransition" />
-          إنشاء حساب
-        </Link>
-      </div>
-    </div>
+      <Link
+        href="/register"
+        className="hover:bg-gray-200 mytransition bg-gray-50 text-black flex items-center gap-2 md:py-3 py-2 px-6 font-medium md:text-sm text-xs rounded-lg hover:shadow-lg"
+      >
+        <UserRoundPlus strokeWidth={1} className="size-5 mytransition" />
+        إنشاء حساب
+      </Link>
+    </motion.header>
   );
 }
 

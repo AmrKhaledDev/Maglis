@@ -1,4 +1,3 @@
-import PdfViewer from "@/components/modals/PdfViewer";
 import PdfThumbnail from "@/components/PdfThumbnail/PdfThumbnail";
 import formatFileSize from "@/formats/formatFileSize";
 import { MessageMedia } from "@prisma/client";
@@ -21,7 +20,9 @@ function PdfCard({
         <div
           className={clsx(
             "relative overflow-hidden",
-            mediaLength > 1 ? "size-80" : "w-100 h-70",
+            mediaLength > 1
+              ? "xl:size-80 md:size-58 sm:size-80 size-70"
+              : "xl:w-100 xl:h-70 sm:size-80 size-70",
           )}
         >
           <PdfThumbnail setNumPages={setNumPages} pdfUrl={media.mediaUrl} />
@@ -32,7 +33,7 @@ function PdfCard({
                 <h3 className="text-[17px] font-semibold [word-break:break-word] line-clamp-1">
                   {media.mediaName.split(".")[0]}
                 </h3>
-                <div className="flex items-center gap-2 justify-between w-full">
+                <div className="flex items-center gap-2 justify-between w-full flex-wrap">
                   <div className="flex items-center gap-2">
                     <p className="text-xs text-gray-300">{numPages} صفحات</p>
                     <p className="text-xs text-gray-300">PDF</p>
@@ -42,7 +43,7 @@ function PdfCard({
                   </div>
                   <a
                     href={media.mediaUrl}
-                    className="mr-4 cursor-pointer text-gray-400 hover:text-white"
+                    className="cursor-pointer text-gray-400 hover:text-white"
                   >
                     <Download strokeWidth={1.5} className="size-5" />
                   </a>
@@ -50,7 +51,6 @@ function PdfCard({
               </div>
             </div>
           </div>
-          {/* {showPdf && <PdfViewer pdfUrl={media.mediaUrl} />} */}
         </div>
       )}
     </>

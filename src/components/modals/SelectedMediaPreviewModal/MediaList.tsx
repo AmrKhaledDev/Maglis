@@ -1,10 +1,10 @@
 import PdfThumbnail from "@/components/PdfThumbnail/PdfThumbnail";
 import clsx from "clsx";
-import MediaListProps from "../../../_types/MediaListProps.type";
 import AddMedia from "./AddMedia";
 import DeleteField from "./DeleteField";
 import ImageMedia from "./ImageMedia";
 import VideoMedia from "./VideoMedia";
+import MediaListProps from "@/app/(feeds)/messages/[userId]/_types/MediaListProps.type";
 // ======================================================================
 function MediaList({
   fields,
@@ -26,7 +26,7 @@ function MediaList({
           }
           key={field.id}
           className={clsx(
-            "relative size-15 rounded-md overflow-hidden",
+            "relative sm:size-15 size-12 rounded-md overflow-hidden",
             currentMedia.id === field.id
               ? "border-3 border-green-600 scale-115"
               : "cursor-pointer",
@@ -35,9 +35,7 @@ function MediaList({
           <ImageMedia field={field} />
           <VideoMedia field={field} />
           {/* ===== PDF ===== */}
-          {field.type === "PDF" && (
-            <PdfThumbnail pdfUrl={field.url} />
-          )}
+          {field.type === "PDF" && <PdfThumbnail pdfUrl={field.url} />}
           {/* ===== PDF ===== */}
           <DeleteField index={i} remove={remove} />
           <span className="absolute inset-0 bg-black/20" />

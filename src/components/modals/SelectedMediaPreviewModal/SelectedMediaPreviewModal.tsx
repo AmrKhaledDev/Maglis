@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import SelectedMediaPreviewPropsType from "../../../_types/SelectedMediaPreviewProps.type";
-import ButtonCreateMessage from "./ButtonCreateMessage";
+import SelectedMediaPreviewPropsType from "../../../app/(feeds)/messages/[userId]/_types/SelectedMediaPreviewProps.type";
+import DiscardMediaModal from "./DiscardMediaModal";
 import CloseModal from "./CloseModal";
+import ButtonCreateMessage from "./ButtonCreateMessage";
 import CurrentMedia from "./CurrentMedia";
-import DiscardMediaModal from "../../../../../../../components/modals/DiscardMediaModal";
 import MediaList from "./MediaList";
 import MessageInput from "./MessageInput";
+
 // =====================================================================
-function SelectedMediaPreview({
+function SelectedMediaPreviewModal({
   fields,
   append,
   remove,
@@ -29,7 +30,7 @@ function SelectedMediaPreview({
   }, [fields]);
   const [showDiscardMediaModal, setShowDiscardMediaModal] = useState(false);
   return (
-    <div className="fixed justify-center inset-0 bg-[#161717] backdrop-blur-[10px] flex flex-col gap-5 z-100 pt-15 items-center">
+    <div className="fixed justify-center inset-0 bg-[#161717] backdrop-blur-[10px] flex flex-col gap-5 z-100 pt-15 items-center pb-3">
       {showDiscardMediaModal && (
         <DiscardMediaModal
           setShowDiscardMediaModal={setShowDiscardMediaModal}
@@ -37,10 +38,7 @@ function SelectedMediaPreview({
         />
       )}
       <CloseModal setShowDiscardMediaModal={setShowDiscardMediaModal} />
-      <ButtonCreateMessage
-        fields={fields}
-        isPending={isPending}
-      />
+      <ButtonCreateMessage fields={fields} isPending={isPending} />
       <CurrentMedia currentMedia={currentMedia} />
       <MessageInput />
       <MediaList
@@ -54,4 +52,4 @@ function SelectedMediaPreview({
   );
 }
 
-export default SelectedMediaPreview;
+export default SelectedMediaPreviewModal;

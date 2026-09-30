@@ -4,15 +4,17 @@ import Form from "./_components/Form";
 // =====================================================================================
 function Register() {
   return (
-    <main>
-      <div className="mycontainer p-3">
-        <div className="relative h-25 w-30">
-          <Image src={"/logo.png"} alt="logo" priority fill />
-        </div>
-        <div className="h-[75vh] flex items-center justify-center">
-          <Form />
-        </div>
+    <main className="relative">
+      <div className="mycontainer h-screen flex items-center justify-center">
+        <Form />
       </div>
+      <Image
+        src="/bg.png"
+        alt="backgound"
+        priority
+        fill
+        className="-z-1 opacity-50 blur-[5px]"
+      />
     </main>
   );
 }

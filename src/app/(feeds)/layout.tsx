@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 // ===============================================================================
 function FeedsLayout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <div className="bg-[#0F0F0F]">
       <Header />
       <Toast />
       <div className="flex gap-2 mycontainer items-start">

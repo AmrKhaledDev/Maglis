@@ -17,14 +17,16 @@ function PostContentText({ post }: { post: PostType }) {
         }}
       >
         <p
-          onClick={() => setActiveModal(post.authorId)}
+          onClick={() => setActiveModal("post_content_text" + post.authorId)}
           dir="auto"
           className="whitespace-pre-line leading-7 hover:bg-white/1 cursor-pointer mytransition [word-break:break-word] line-clamp-5"
         >
           {post.content}
         </p>
       </Linkify>
-      {activeModal === post.authorId && <PostContentTextModal post={post} />}
+      {activeModal === "post_content_text" + post.authorId && (
+        <PostContentTextModal post={post} />
+      )}
     </div>
   );
 }

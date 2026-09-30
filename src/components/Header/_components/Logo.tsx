@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 // ================================
 function Logo() {
   return (
-    <div className="relative h-17 w-20 shrink-0">
+    <Link href={"/"} className="relative h-13 w-15 shrink-0">
       <Image src={"/logo.png"} alt="logo" priority fill />
-    </div>
+    </Link>
   );
 }
 

@@ -3,7 +3,7 @@ import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { FiPlus } from "react-icons/fi";
 import FooterActionPropsType from "../../_types/FooterActionsProps.type";
 import AddEmoji from "./AddEmoji";
-import SelectedMediaPreview from "./SelectedMediaPreview/SelectedMediaPreview";
+import SelectedMediaPreviewModal from "../../../../../../components/modals/SelectedMediaPreviewModal/SelectedMediaPreviewModal";
 import UploadFiles from "./UploadFiles";
 // =================================================================
 function FooterActions({
@@ -15,7 +15,7 @@ function FooterActions({
 }: FooterActionPropsType) {
   const { setActiveMenu } = useActiveMenu();
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-center sm:gap-2.5 gap-1">
       <AddEmoji messageInputRef={messageInputRef} />
       <div className="relative">
         <button
@@ -23,12 +23,12 @@ function FooterActions({
           onClick={() => setActiveMenu((prev) => (prev ? "" : "upload_files"))}
           className="p-2 rounded-full shadow bg-white/5 text-gray-400 text-xl cursor-pointer btnActiveMenu"
         >
-          <FiPlus />
+          <FiPlus className="sm:size-5 size-4" />
         </button>
         <UploadFiles fields={fields} append={append} />
       </div>
       {fields.length > 0 && (
-        <SelectedMediaPreview
+        <SelectedMediaPreviewModal
           append={append}
           fields={fields}
           remove={remove}

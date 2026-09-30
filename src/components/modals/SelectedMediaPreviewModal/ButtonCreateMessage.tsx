@@ -16,17 +16,17 @@ function ButtonCreateMessage({
     <button
       disabled={isPending}
       type="submit"
-      className="bg-[#88754f] p-3 rounded-full shadow not-disabled:cursor-pointer absolute top-5 right-5 w-fit"
+      className="bg-[#88754f] sm:p-3 p-2 rounded-full shadow not-disabled:cursor-pointer absolute top-5 right-5 w-fit"
     >
       {isPending ? (
         <Loader
-          className="animate-[spin_1.5s_linear_infinite] text-gray-300"
-          strokeWidth={1.5}
+          className="animate-[spin_1.5s_linear_infinite]"
+          strokeWidth={1}
         />
       ) : (
-        <SendHorizontal className="size-6" />
+        <SendHorizontal className="sm:size-6 size-5" />
       )}
-      <span className="absolute p-1 bg-white rounded-full shadow text-black shrink-0 size-6 text-sm -top-2 -right-1 flex items-center justify-center">
+      <span className="absolute p-1 bg-white rounded-full shadow text-black shrink-0 sm:size-6 size-5 text-sm -top-2 -right-1 flex items-center justify-center">
         {fields.length}
       </span>
     </button>

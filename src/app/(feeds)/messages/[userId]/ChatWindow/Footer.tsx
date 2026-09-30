@@ -82,7 +82,7 @@ function Footer({ receiverId }: { receiverId: string }) {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(handleCreateMessage)}
-        className="py-2 flex items-center gap-3 justify-center px-2"
+        className="py-2 flex items-center sm:gap-3 gap-1 justify-center px-2"
       >
         <ButtonCreateMessage content={content} isPending={isPending} />
         {fields.length < 1 && (
@@ -93,7 +93,7 @@ function Footer({ receiverId }: { receiverId: string }) {
               ref(element);
               messageInputRef.current = element;
             }}
-            className="border border-white/3 shadow bg-[#242626] py-3 rounded-full flex-1 px-5 outline-none"
+            className="border border-white/3 shadow bg-[#242626] sm:py-3 py-2 rounded-full flex-1 px-5 outline-none sm:text-[15px] text-sm"
             type="text"
             placeholder="أكتب رسالتك هنا. . ."
           />

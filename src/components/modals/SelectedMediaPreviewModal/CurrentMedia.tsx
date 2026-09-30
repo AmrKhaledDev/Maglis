@@ -14,7 +14,7 @@ function CurrentMedia({
   return (
     <>
       {currentMedia.mediaType === "IMAGE" && (
-        <div className="relative size-135">
+        <div className="relative sm:size-135 w-[95%] h-full">
           <Image
             src={currentMedia.mediaUrl}
             alt=""
@@ -35,7 +35,7 @@ function CurrentMedia({
         </div>
       )}
       {currentMedia.mediaType === "PDF" && (
-        <div className="w-100 h-135 rounded-xl overflow-hidden shadow">
+        <div className="sm:w-100 sm:h-135 w-[95%] h-full rounded-xl overflow-hidden shadow">
           <PdfViewer pdfUrl={currentMedia.mediaUrl} />
         </div>
       )}

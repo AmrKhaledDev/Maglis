@@ -26,7 +26,7 @@ function ChatWindow({ receiver }: { receiver: User }) {
       ) : isBlocked ? (
         <div className="flex flex-col items-center justify-center gap-1.5 backdrop-blur-3xl bg-[#1d1f1f3f] p-3 border-t border-t-white/3">
           <IoLockClosedSharp className="text-3xl text-gray-600 mb-1!" />
-          <p className="font-medium text-[18px]">
+          <p className="font-medium sm:text-[18px]">
             لا يمكنك مراسلة هذا المستخدم
           </p>
           <p className="text-sm text-gray-300">قام هذا المستخدم بحظرك</p>

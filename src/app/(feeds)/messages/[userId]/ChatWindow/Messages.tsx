@@ -39,7 +39,7 @@ function Messages({ receiverId }: { receiverId: string }) {
   }, [conversation?.id]);
   const isReceiverBlocked = useIsUserBlocked(receiverId);
   return (
-    <div className="w-full p-7 flex-1  flex flex-col gap-2 overflow-y-auto relative">
+    <div className="w-full sm:p-7 p-2 flex-1 flex flex-col gap-2 overflow-y-auto relative">
       {isPending ? (
         <div className="w-full h-full flex items-center  justify-center ">
           <TbLoader4 className="size-12 animate-[spin_1.5s_linear_infinite]" />
@@ -55,9 +55,9 @@ function Messages({ receiverId }: { receiverId: string }) {
               />
             ))}
           {isReceiverBlocked && (
-            <p className="w-fit mx-auto mt-5 flex items-center gap-2 justify-center py-1 px-5 rounded-full bg-black/50 backdrop-blur-2xl text-white/70">
+            <p className="w-fit mx-auto mt-5 flex items-center gap-2 justify-center py-1 px-5 rounded-full text-white/70 sm:text-[15px] text-xs flex-wrap">
               لقد حظرت هذا المستخدم. لفك الحظر إضغط على
-              <button className="font-medium text-white/90">فك الحظر</button>
+              <span className="font-medium text-white/90">فك الحظر</span>
             </p>
           )}
         </>

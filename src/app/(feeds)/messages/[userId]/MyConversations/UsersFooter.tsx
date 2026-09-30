@@ -20,9 +20,9 @@ function UsersFooter({
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
-        <h2 className="font-medium text-gray-200">{user.name}</h2>
+        <h2 className="font-medium text-gray-200 xl:text-[15px] text-sm">{user.name}</h2>
         {message && (
-          <p className="text-xs text-gray-400">
+          <p className="xl:text-xs text-[10px] text-gray-400">
             {dayjs(message.createdAt).fromNow()}
           </p>
         )}

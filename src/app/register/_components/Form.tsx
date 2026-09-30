@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import AuthBlur from "@/components/AuthBlur/AuthBlur";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import RegisterSubmitButton from "./RegisterSubmitButton";
+import Image from "next/image";
+import { motion } from "framer-motion";
 // ====================================================================
 function Form() {
   const {
@@ -51,11 +53,18 @@ function Form() {
     router.refresh();
   };
   return (
-    <div className="bg-[#a28b5d] rounded shadow-2xl ring ring-[#a28b5d]/50 overflow-hidden relative">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-[#a28b5d] rounded shadow-2xl ring ring-[#a28b5d]/50 relative w-fit"
+    >
       <form
         onSubmit={handleSubmit(handleRegister)}
-        className="p-5 bg-slate-800 rounded-3xl space-y-3 w-110 h-fit"
+        className="p-5 bg-slate-800 rounded-3xl space-y-3 sm:w-110 w-90 h-fit"
       >
+        <div className="relative h-17 w-20 mx-auto mb-6">
+          <Image src={"/logo.png"} alt="logo" priority fill />
+        </div>
         <OAuthWithGoogleBtn
           disabled={loading}
           setShowBlur={setShowBlur}
@@ -94,7 +103,7 @@ function Form() {
         />
       </form>
       {showBlur && <AuthBlur />}
-    </div>
+    </motion.div>
   );
 }
 

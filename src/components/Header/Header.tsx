@@ -10,7 +10,7 @@ function Header() {
   const pathname = usePathname();
   if (pathname.startsWith("/messages/")) return null;
   return (
-    <header className="sticky top-0 bg-[#0c0b0b] z-30 py-1 mb-5 px-25 backdrop-blur-3xl">
+    <header className="sticky top-0 bg-[#0c0c0c] z-30 py-1.5 mb-5 px-25 backdrop-blur-3xl">
       <div className="mycontainer flex items-center justify-between">
         <Logo />
         <SearchBar />

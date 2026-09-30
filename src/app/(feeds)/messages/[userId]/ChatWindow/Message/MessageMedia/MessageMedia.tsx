@@ -12,8 +12,8 @@ function MessageMedia({
   return (
     <div
       className={clsx(
-        "w-fit",
-        messageMedia.length > 1 && "flex items-center gap-1 flex-wrap",
+        "max-w-full",
+        messageMedia.length > 1 && "flex items-center gap-1 flex-wrap justify-center",
       )}
     >
       {messageMedia.map((media) => (
