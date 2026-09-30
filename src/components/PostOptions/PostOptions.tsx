@@ -20,7 +20,7 @@ function PostOptions({ post }: { post: PostType }) {
       >
         <Ellipsis strokeWidth={0.5} className="size-5" />
       </button>
-      <PostOptionsMenu activeMenu={activeMenu} post={post} />
+      <PostOptionsMenu post={post} />
     </div>
   );
 }

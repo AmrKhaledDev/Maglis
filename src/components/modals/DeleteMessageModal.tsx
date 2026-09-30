@@ -1,4 +1,5 @@
 import { DeleteMessageAction } from "@/actions/Conversation/DeleteMessage.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -23,9 +24,7 @@ function DeleteMessageModal({
       return result.message;
     },
     onSuccess: (resultMessage) => {
-      queryClient.invalidateQueries({
-        queryKey: ["conversation", userSession.id, receiverId],
-      });
+      invalidateUserCaches(queryClient, userSession, receiverId);
       setToast({
         open: true,
         message: resultMessage,
@@ -42,7 +41,7 @@ function DeleteMessageModal({
   });
   return (
     <div className="fixed inset-0 bg-black/20 backdrop-blur-[3px] z-100 flex items-center justify-center">
-      <div className="bg-slate-800 w-120 flex flex-col items-center justify-center p-5 rounded-2xl gap-10">
+      <div className="modalStyle flex flex-col items-center justify-center gap-10">
         <h2 className="text-xl">هل أنت متأكد من حذف الرسالة؟</h2>
         <div className="flex flex-col gap-2 w-full">
           <button

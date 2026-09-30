@@ -10,8 +10,8 @@ function LeftSide() {
   return (
     <aside className="w-90 flex flex-col gap-2 sticky! top-24 mytransition mr-3">
       <SuggestedPeople />
-      {/* <SuggestedGroups />
-      <RecentContacts /> */}
+      {/* <SuggestedGroups />*/}
+      <RecentContacts />
     </aside>
   );
 }

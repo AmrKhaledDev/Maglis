@@ -22,6 +22,12 @@ export const invalidateUserCaches = (
     queryKey: ["replies"],
   });
   queryClient.invalidateQueries({
+    queryKey: ["user_conversations", userSession.id],
+  });
+  queryClient.invalidateQueries({
+    queryKey: ["user_recent_contacts", userSession.id],
+  });
+  queryClient.invalidateQueries({
     queryKey: ["user_active_stories", userSession.id],
   });
   queryClient.invalidateQueries({

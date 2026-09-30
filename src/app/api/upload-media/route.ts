@@ -1,72 +1,44 @@
 import cloudinary from "@/lib/cloudinary";
 import { NextRequest, NextResponse } from "next/server";
+import fileValidation from "./fileValidation";
 // ===================================================
-const allowedFileTypes = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "video/mp4",
-  "video/webm",
-  "application/pdf",
-];
-const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
-const MAX_PDF_SIZE = 10 * 1024 * 1024;
-const MAX_VIDEO_SIZE = 100 * 1024 * 1024;
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
     const file = formData.get("file");
-    if (!file || !(file instanceof File))
-      return NextResponse.json(
-        { error: "برجاء رفع ملف صالح" },
-        { status: 400 },
-      );
-    if (!allowedFileTypes.includes(file.type))
-      return NextResponse.json(
-        { error: "عذراً هناك ملف غير مدعوم." },
-        { status: 400 },
-      );
-    const fileType = file.type.startsWith("video/")
-      ? "video"
-      : file.type.startsWith("image/")
-        ? "image"
-        : "pdf";
-    if (fileType === "video" && file.size > MAX_VIDEO_SIZE)
+    const result = fileValidation(file);
+    if (!result.success || !result.fileType || !result.file)
       return NextResponse.json(
         {
-          error: "لا يمكنك رفع فيديو يتخطى 100 ميجابايت",
+          error: result.message || "حدث خطأ غير متوقع أثناء الرفع.",
         },
         { status: 400 },
       );
-    if (fileType === "image" && file.size > MAX_IMAGE_SIZE)
-      return NextResponse.json(
-        {
-          error: "لا يمكنك رفع صورة يتجاوز حجمها 10 ميجابايت.",
-        },
-        { status: 400 },
-      );
-    if (fileType === "pdf" && file.size > MAX_PDF_SIZE)
-      return NextResponse.json(
-        {
-          error: "لا يمكنك رفع ملف يتجاوز حجمه 10 ميجابايت.",
-        },
-        { status: 400 },
-      );
-    const fileBuffer = await file.arrayBuffer();
+    const validFile = result.file;
+    const fileType = result.fileType;
+    const fileBuffer = await validFile.arrayBuffer();
     const base64Data = Buffer.from(fileBuffer).toString("base64");
-    const fileUri = `data:${file.type};base64,${base64Data}`;
+    const fileUri = `data:${validFile.type};base64,${base64Data}`;
     const uploader = await cloudinary.uploader.upload(fileUri, {
       folder: "maglis-media",
       resource_type:
-        fileType === "image" ? "image" : fileType === "video" ? "video" : "raw",
+        fileType === "image"
+          ? "image"
+          : fileType === "video"
+            ? "video"
+            : "image",
       timeout: 120000,
+      format: fileType === "pdf" ? "pdf" : undefined,
+      flags: fileType === "pdf" ? "attachment" : undefined,
+      use_filename: true,
+      public_id: validFile.name.split(".")[0],
     });
     return NextResponse.json(
       {
         url: uploader.secure_url,
         type: fileType.toUpperCase(),
-        name: file.name,
-        size: file.size,
+        name: validFile.name,
+        size: validFile.size,
       },
       { status: 200 },
     );
@@ -75,7 +47,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error:
-          "حدث خطأ أثناء رفع الملفات الخاصه بك برجاء التأكد من الإتصال بالإنترنت.",
+          "حدث خطأ أثناء رفع الملفات الخاصه بك برجاء التأكد من الإتصال بالإنترنت أو التأكد من حجم الملف.",
       },
       { status: 500 },
     );

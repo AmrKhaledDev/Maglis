@@ -27,7 +27,7 @@ function ProfileAvatar({ user }: { user: User }) {
             url: user.image || "/user.jpg",
           });
         }}
-        className="relative shrink-0 shadow size-25 -mt-12 cursor-pointer rounded-full"
+        className="relative shrink-0 shadow size-25 -mt-12 cursor-pointer rounded-full bg-black/20 backdrop-blur-2xl"
       >
         <Image
           src={user.image || "/user.jpg"}

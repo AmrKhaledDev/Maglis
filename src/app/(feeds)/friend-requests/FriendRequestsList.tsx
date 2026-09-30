@@ -5,7 +5,7 @@ import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
 import RequestUser from "./RequestUser/RequestUser";
-import Skeleton from "./Skeleton";
+import Skeleton from "../../../components/Skeletons/FriendRequests/Skeleton";
 // =====================================================
 function FriendRequestsList() {
   const userSession = useUser();

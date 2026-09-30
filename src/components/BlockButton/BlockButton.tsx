@@ -1,12 +1,14 @@
-import { UserBlockAction } from "@/actions/UserBlock/UserBlock.action";
-import useIsBlocked from "@/hooks/useIsBlocked";
-import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
-import { useToast } from "@/providers/ToastProvider";
-import { useUser } from "@/providers/UserProvider";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useIsUserBlocked from "@/hooks/useIsUserBlocked";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { Ban } from "lucide-react";
+import BlockModal from "../modals/BlockModal";
+import { useToast } from "@/providers/ToastProvider";
 import { useRouter } from "next/navigation";
-// ================================================================
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useUser } from "@/providers/UserProvider";
+import { UserBlockAction } from "@/actions/UserBlock/UserBlock.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+// =====================================================================
 function BlockButton({
   userId,
   style,
@@ -38,15 +40,23 @@ function BlockButton({
       });
     },
   });
-  const isBlocked = useIsBlocked(userId);
+  const isBlocked = useIsUserBlocked(userId);
+  const { activeModal, setActiveModal } = useActiveModal();
   return (
-    <button
-      onClick={() => handleUserBlock()}
-      disabled={isPending}
-      className={style}
-    >
-      <Ban className={iconSize} /> {isBlocked ? "فك الحظر" : "حظر"}
-    </button>
+    <>
+      <button
+        onClick={() => {
+          setActiveModal(isBlocked ? null : "block_modal");
+          if (isBlocked) handleUserBlock();
+        }}
+        className={style}
+      >
+        <Ban className={iconSize} /> {isBlocked ? "فك الحظر" : "حظر"}
+      </button>
+      {activeModal === "block_modal" && (
+        <BlockModal handleUserBlock={handleUserBlock} isPending={isPending} />
+      )}
+    </>
   );
 }
 

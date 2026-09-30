@@ -19,6 +19,11 @@ export const GetPostsAction = async (
             blockerId: userSessionId,
           },
         },
+        blocks: {
+          none: {
+            blockedId: userSessionId,
+          },
+        },
       },
     },
     include: {

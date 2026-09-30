@@ -4,7 +4,7 @@ import VideoCard from "./VideoCard";
 import { PostType } from "@/types/Post.type";
 import { useUser } from "@/providers/UserProvider";
 import { GetPostsVideosAction } from "@/actions/Post/GetPostsVideos.action";
-import VideosSkeleton from "./Skeleton";
+import VideosSkeleton from "../../../../components/Skeletons/Videos/Skeleton";
 // ======================================================
 function VideosList() {
   const userSession = useUser();

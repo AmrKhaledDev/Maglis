@@ -14,7 +14,7 @@ function Header({ receiver }: { receiver: User }) {
           fill
         />
       </div>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between w-full gap-10">
         <div>
           <Link
             href={`/u/${receiver.id}`}
@@ -23,7 +23,7 @@ function Header({ receiver }: { receiver: User }) {
             {receiver.name}
           </Link>
           <p className="text-xs text-green-700 font-medium">آخر ظهور الآن</p>
-          <p className="text-gray-400 max-w-[70%] line-clamp-1 text-sm">
+          <p className="text-gray-400 line-clamp-1 text-sm">
             {receiver.bio}
           </p>
         </div>

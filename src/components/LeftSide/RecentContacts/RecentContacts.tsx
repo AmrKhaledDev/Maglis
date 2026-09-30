@@ -1,43 +1,67 @@
 "use client";
+import { GetRecentContactsAction } from "@/actions/User/GetRecentContacts.action";
+import { useUser } from "@/providers/UserProvider";
+import { useQuery } from "@tanstack/react-query";
 import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import ButtonAction from "../ButtonAction";
 import NameDescription from "../NameDescription";
 import SectionHeader from "../SectionHeader";
-// ===================================
+import Skeleton from "@/components/Skeletons/SuggestedPeople/Skeleton";
+// =================================================================================
 function RecentContacts() {
+  const userSession = useUser();
+  const { data = [], isPending } = useQuery({
+    queryFn: async () => {
+      const result = await GetRecentContactsAction();
+      if (!result.success) throw new Error(result.message);
+      return result.conversations;
+    },
+    queryKey: ["user_recent_contacts", userSession.id],
+  });
   return (
     <div className="p-4 shadow flex flex-col gap-5">
-      <SectionHeader title="آخر التواصل" linkUrl="/" />
+      <SectionHeader
+        title="آخر التواصل"
+        linkUrl="/"
+        isPending={isPending}
+        dataLength={data.length}
+      />
       <div className="flex flex-col gap-3">
-        {Array(3)
-          .fill(0)
-          .map((_, i) => (
-            <div key={i} className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className="relative size-11 shrink-0 rounded-full overflow-hidden">
-                  <Image
-                    src="https://imgs.search.brave.com/QRfdjW7R0SbyO8UfhVg2RYBDywb0357gXab2rHFyNtM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/bWFnbmlmaWMuY29t/L2ZyZWUtcGhvdG8v/d2ViLWhvc3Rpbmct/ZGV2ZWxvcG1lbnQt/Y29ubmVjdGlvbi1u/ZXR3b3JraW5nLWNv/bmNlcHRfNTM4NzYt/MTY1MjU2LmpwZz9z/ZW10PWFpc19oeWJy/aWQmdz03NDAmcT04/MA"
-                    alt="صورة المستخدم"
-                    fill
-                    className="object-cover"
+        {isPending ? (
+          <Skeleton />
+        ) : (
+          data.map((conversation) =>
+            conversation.conversationMembers.map((member) => (
+              <div
+                key={member.user.id}
+                className="flex items-center justify-between gap-3"
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="relative size-11 shrink-0 rounded-full overflow-hidden">
+                    <Image
+                      src={member.user.image || "/user.jpg"}
+                      alt="صورة المستخدم"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <NameDescription
+                    userId={member.user.id}
+                    name={member.user.name}
+                    description={member.user.bio}
                   />
                 </div>
-                <NameDescription
-                  userId=""
-                  name="Yaser Tarek"
-                  description="محمد خالد، مطور Full-Stack مهتم بالتعلم والنمو المستمر. أبني
-                    تطبيقات متطورة بـ Next.js وTypeScript، مع التركيز على الأمن
-                    السيبراني لحمايتها."
+                <ButtonAction
+                  icon={MessageCircle}
+                  name="تواصل"
+                  textStyle="text-green-600"
+                  id={member.user.id}
                 />
               </div>
-              <ButtonAction
-                icon={MessageCircle}
-                name="تواصل"
-                textStyle="text-green-600"
-              />
-            </div>
-          ))}
+            )),
+          )
+        )}
       </div>
     </div>
   );

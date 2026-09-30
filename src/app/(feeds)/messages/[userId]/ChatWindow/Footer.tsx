@@ -12,6 +12,7 @@ import z from "zod";
 import FooterMediaType from "../_types/FooterMedia.type";
 import ButtonCreateMessage from "./ButtonCreateMessage";
 import FooterActions from "./FooterActions/FooterActions";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 // =======================================================================
 function Footer({ receiverId }: { receiverId: string }) {
   const { setToast } = useToast();
@@ -60,9 +61,7 @@ function Footer({ receiverId }: { receiverId: string }) {
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["conversation", userSession.id, receiverId],
-      });
+      invalidateUserCaches(queryClient, userSession, receiverId);
       setValue("content", "");
       remove();
     },

@@ -1,8 +1,8 @@
 import { useUser } from "@/providers/UserProvider";
 // =================================================
-function useIsBlocked(userId: string) {
+function useIsUserBlocked(userId: string) {
   const userSession = useUser();
   return userSession.blocks.some((blocked) => blocked.blockedId === userId);
 }
 
-export default useIsBlocked;
+export default useIsUserBlocked;

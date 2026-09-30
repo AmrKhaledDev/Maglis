@@ -1,4 +1,4 @@
-function PostsSkeleton() {
+function Skeleton() {
   return (
     <div className="flex flex-col h-full">
       {Array(4)
@@ -28,4 +28,4 @@ function PostsSkeleton() {
   );
 }
 
-export default PostsSkeleton;
+export default Skeleton;

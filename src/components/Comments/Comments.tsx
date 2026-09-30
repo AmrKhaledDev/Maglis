@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import Skeleton from "./Skeleton";
+import Skeleton from "../Skeletons/Comments/Skeleton";
 // ==================================================================
 function Comments({ post }: { post: PostType }) {
   const { setToast } = useToast();

@@ -4,10 +4,10 @@ import FollowButton from "@/components/FollowButton/FollowButton";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
-import SuggestedPeopleHeader from "./Header";
-import SuggestedPeopleSkeleton from "./Skeleton";
+import Skeleton from "../../Skeletons/SuggestedPeople/Skeleton";
+import SectionHeader from "../SectionHeader";
 import UserDetails from "./UserDetails";
-// ==================================
+// =======================================================================================
 function SuggestedPeople() {
   const pathname = usePathname();
   if (pathname === "/videos") return null;
@@ -22,10 +22,15 @@ function SuggestedPeople() {
   });
   return (
     <div className=" p-4 shadow rounded-2xl overflow-hidden flex flex-col gap-5">
-      <SuggestedPeopleHeader dataLenght={data.length} isPending={isPending} />
+      <SectionHeader
+        title="أشخاص مقترحون"
+        linkUrl="/"
+        isPending={isPending}
+        dataLength={data.length}
+      />
       <div className="flex flex-col gap-2">
         {isPending ? (
-          <SuggestedPeopleSkeleton />
+          <Skeleton />
         ) : (
           data.length > 0 &&
           data.map((user) => (

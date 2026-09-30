@@ -37,7 +37,7 @@ function ClearingMessagesModal({ receiverId }: { receiverId: string }) {
   });
   return createPortal(
     <div className="fixed inset-0 bg-black/10 backdrop-blur-[3px] z-100 flex items-center justify-center menuKeepOpen">
-      <div className="w-120 p-5 rounded-2xl shadow-lg bg-slate-800 flex flex-col gap-10">
+      <div className="modalStyle flex flex-col gap-10">
         <div className="flex flex-col items-center">
           <h1 className="text-xl">هل أنت متأكد من حذف هذه الرسائل؟</h1>
           <p className="text-gray-300 text-sm">
@@ -52,13 +52,13 @@ function ClearingMessagesModal({ receiverId }: { receiverId: string }) {
               setActiveModal(null);
               setActiveMenu(null);
             }}
-            className="bg-red-900/40 not-disabled:hover:bg-red-900/60 mytransition w-full py-3 rounded-full not-disabled:cursor-pointer shadow"
+            className="text-red-400 ring ring-white/8 mytransition w-full py-3 rounded-full not-disabled:cursor-pointer shadow"
           >
             مسح الرسائل
           </button>
           <button
             onClick={() => setActiveModal(null)}
-            className="hover:bg-black/20 mytransition w-full py-3 rounded-full cursor-pointer hover:shadow"
+            className="bg-black/20 hover:bg-black/30 mytransition w-full py-3 rounded-full cursor-pointer hover:shadow"
           >
             إلغاء
           </button>

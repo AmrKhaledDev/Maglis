@@ -26,6 +26,20 @@ export const CreateDirectConversationAction = async (
           "لا يمكنك إرسال رسالة, تعذر التحقق من حسابك.",
       };
     const userSession = validatingSession.session;
+    const isReceiverBlocked = userSession.blocks.some(
+      (block) => block.blockedId === receiverId,
+    );
+    if (isReceiverBlocked)
+      return { success: false, message: "لا يمكنك مراسلة هذا المستخدم." };
+    const isUserBlocked = userSession.blocked.some(
+      (block) => block.blockerId === receiverId,
+    );
+    if (isUserBlocked)
+      return {
+        success: false,
+        message: "لا يمكنك مراسلة هذا المستخدم لقد قام بحظرك.",
+      };
+
     const directKey = [userSession.id, receiverId].sort().join("_");
     const conversation = await prisma.conversation.findFirst({
       where: {
@@ -33,7 +47,7 @@ export const CreateDirectConversationAction = async (
       },
       select: { id: true },
     });
-    let conversationId: string ;
+    let conversationId: string;
     if (!conversation) {
       const newConversation = await prisma.conversation.create({
         data: {
@@ -48,6 +62,14 @@ export const CreateDirectConversationAction = async (
       });
       conversationId = newConversation.id;
     } else {
+      await prisma.conversation.update({
+        where: {
+          id: conversation.id,
+        },
+        data: {
+          updatedAt: new Date(),
+        },
+      });
       conversationId = conversation.id;
     }
     const createMessageResult = await CreateMessageAction(

@@ -1,6 +1,6 @@
 import PostCard from "@/components/PostCard/PostCard";
 import { PostType } from "@/types/Post.type";
-import PostsSkeleton from "./PostsSkeleton";
+import Skeleton from "../Skeletons/Posts/Skeleton";
 // ===================================================================
 function Posts({
   posts,
@@ -14,7 +14,7 @@ function Posts({
   return (
     <>
       {isPending ? (
-        <PostsSkeleton />
+        <Skeleton />
       ) : (
         <div className="w-full flex flex-col gap-3">
           {posts &&

@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins:["concerning-illustration-specs-types.trycloudflare.com"],
   experimental: {
     proxyClientMaxBodySize: "200mb",
   },

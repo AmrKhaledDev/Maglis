@@ -1,12 +1,14 @@
 import BlockButton from "@/components/BlockButton/BlockButton";
-import { Trash } from "lucide-react";
+import ClearingMessagesButton from "./ClearingMessagesButton";
 // =============================================================
-function ChatActions({ receiverId }: { receiverId: string }) {
+function BlockedUserChatActions({ receiverId }: { receiverId: string }) {
   return (
     <div className="h-15 bg-[#1D1F1F] flex items-center justify-center gap-7">
-      <button className="flex cursor-pointer items-center gap-2 ring shadow ring-white/5 rounded-full py-1 px-6 text-red-500/70">
-        <Trash className="size-5" strokeWidth={1.5} /> حذف الدردشة
-      </button>
+      <ClearingMessagesButton
+        buttonStyle="flex cursor-pointer items-center gap-2 ring shadow ring-white/5 rounded-full py-1 px-6 text-red-500/70 hover:bg-white/6 mytransition"
+        iconSize="size-5"
+        receiverId={receiverId}
+      />
       <BlockButton
         userId={receiverId}
         style="flex cursor-pointer items-center gap-2 ring shadow ring-white/5 rounded-full py-1 px-6 text-green-500/70 hover:bg-white/6 mytransition"
@@ -16,4 +18,4 @@ function ChatActions({ receiverId }: { receiverId: string }) {
   );
 }
 
-export default ChatActions;
+export default BlockedUserChatActions;

@@ -2,15 +2,23 @@ import ClearingMessagesModal from "@/components/modals/ClearingMessagesModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { Eraser } from "lucide-react";
 // ======================================================================
-function ClearingMessagesButton({ receiverId }: { receiverId: string }) {
+function ClearingMessagesButton({
+  receiverId,
+  buttonStyle,
+  iconSize,
+}: {
+  receiverId: string;
+  buttonStyle: string;
+  iconSize: string;
+}) {
   const { activeModal, setActiveModal } = useActiveModal();
   return (
     <>
       <button
         onClick={() => setActiveModal("clearing_messages_modal")}
-        className="btnOptBox"
+        className={buttonStyle}
       >
-        <Eraser className="btnOptIcon" />
+        <Eraser className={iconSize} />
         مسح الرسائل
       </button>
       {activeModal === "clearing_messages_modal" && (

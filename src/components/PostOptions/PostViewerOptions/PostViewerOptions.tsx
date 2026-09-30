@@ -5,12 +5,12 @@ import { UserRound } from "lucide-react";
 import Link from "next/link";
 import BlockButton from "../../BlockButton/BlockButton";
 import HiddenPostButton from "./HiddenPostButton";
-import useIsBlocked from "@/hooks/useIsBlocked";
 import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
+import useIsUserBlocked from "@/hooks/useIsUserBlocked";
 // ========================================================
 function PostViewerOptions({ post }: { post: PostType }) {
   const userSession = useUser();
-  const isBlocked = useIsBlocked(post.authorId);
+  const isBlocked = useIsUserBlocked(post.authorId);
   return (
     <>
       {userSession.id !== post.authorId && (
