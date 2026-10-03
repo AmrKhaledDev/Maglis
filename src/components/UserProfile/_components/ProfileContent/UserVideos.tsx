@@ -1,9 +1,9 @@
 import ReactPlayer from "react-player";
 import NoDataMessage from "./NoDataMessage";
 import { useQuery } from "@tanstack/react-query";
-import { GetUserVideosAction } from "@/actions/User/GetUserVideos.action";
 import ProfileLoader from "./ProfileLoader";
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
+import { GetVideosAction } from "@/actions/User/GetVideos.action";
 // ==========================================================
 function UserVideos({ userId }: { userId: string }) {
   const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
@@ -13,7 +13,7 @@ function UserVideos({ userId }: { userId: string }) {
     error,
   } = useQuery({
     queryFn: async () => {
-      const result = await GetUserVideosAction(userId);
+      const result = await GetVideosAction(userId);
       if (!result.success || !result.media) return;
       return result.media;
     },

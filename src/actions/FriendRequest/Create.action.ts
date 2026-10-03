@@ -3,7 +3,7 @@
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
 // ================================================
-export const CreateFriendRequestAction = async (
+export const CreateAction = async (
   receiverId: string,
 ): Promise<{
   success: boolean;

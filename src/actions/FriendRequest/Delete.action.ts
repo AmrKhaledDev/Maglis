@@ -3,7 +3,7 @@
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
 // ======================================================
-export const DeleteFriendRequestAction = async (
+export const DeleteAction = async (
   senderId: string,
 ): Promise<{
   success: boolean;

@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Globe, Images } from "lucide-react";
 import { CreatePost_ModalFormType } from "../../Feeds/_components/CreatePostComposer/_types/CreatePost_ModalForm.type";
 import axios from "axios";
-import { CreatePostAction } from "@/actions/Post/CreatePost.action";
 import { Privacy } from "@prisma/client";
 import CreatePostModalAuthor from "./CreatePostModalAuthor";
 import CreatePostModalCenter from "./CreatePostModalCenter";
@@ -15,6 +14,7 @@ import { useUser } from "@/providers/UserProvider";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import CreatePostModalHeader from "./CreatePostModalHeader";
+import { CreateAction } from "@/actions/Post/Create.action";
 // ===========================================================
 function CreatePostModal() {
   const userSession = useUser();
@@ -69,7 +69,7 @@ function CreatePostModal() {
           throw new Error("حدث خطأ أثناء إنشاء منشورك.");
         }
       }
-      const result = await CreatePostAction(
+      const result = await CreateAction(
         data.privacy.value as Privacy,
         data.commentsDisabled,
         data.isPinnedToProfile,

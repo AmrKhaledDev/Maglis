@@ -4,7 +4,7 @@ import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 import { SavePostType } from "@/types/SavePost.type";
 // ==========================================
-export const GetUserSavedPostsAction = async (
+export const GetSavedPostsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;

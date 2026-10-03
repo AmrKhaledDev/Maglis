@@ -7,7 +7,7 @@ import { SocialPlatform } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 import z from "zod";
 // ==============================================================================
-export const EditUserProfileAction = async (
+export const EditProfileAction = async (
   userId: string,
   data: z.infer<typeof EditProfileSchema>,
 ): Promise<{

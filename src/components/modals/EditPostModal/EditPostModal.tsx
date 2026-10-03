@@ -1,4 +1,3 @@
-import { EditPostAction } from "@/actions/Post/EditPost.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
@@ -20,6 +19,7 @@ import EditPostModalAuthor from "./EditPostModalAuthor";
 import EditPostModalContent from "./EditPostModalContent";
 import EditPostModalFooter from "./EditPostModalFooter";
 import EditPostModalHeader from "./EditPostModalHeader";
+import { EditAction } from "@/actions/Post/Edit.action";
 // ==========================================================================================================
 function EditPostModal({ post }: { post: PostType }) {
   const { setActiveModal } = useActiveModal();
@@ -80,7 +80,7 @@ function EditPostModal({ post }: { post: PostType }) {
           }
         }
       }
-      const result = await EditPostAction(
+      const result = await EditAction(
         post.id,
         data.privacy.value as Privacy,
         data.commentsDisabled,

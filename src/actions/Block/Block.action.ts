@@ -3,7 +3,7 @@
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 // ====================================================
-export const UserBlockAction = async (
+export const BlockAction = async (
   blockedId: string,
 ): Promise<{
   success: boolean;

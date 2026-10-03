@@ -3,7 +3,7 @@
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 // ===========================================================
-export const EditStoryPrivacyAction = async (
+export const EditPrivacyAction = async (
   storyId: string,
 ): Promise<{
   success: boolean;

@@ -1,4 +1,4 @@
-import { CreateFriendRequestAction } from "@/actions/FriendRequest/CreateFriendRequest.action";
+import { CreateAction } from "@/actions/FriendRequest/Create.action";
 import useAddFriend from "@/hooks/useAddFriend";
 import { useToast } from "@/providers/ToastProvider";
 import { useQueryClient } from "@tanstack/react-query";
@@ -27,7 +27,7 @@ function AddFriendButton({
   const handleFrientRequest = async () => {
     try {
       setLoading(true);
-      const result = await CreateFriendRequestAction(userId);
+      const result = await CreateAction(userId);
       if (!result.success)
         return setToast({
           open: true,

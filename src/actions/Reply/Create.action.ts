@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { CreateCommentSchema } from "@/ZodSchemas/Comment/CreateComment.schema";
 import { revalidateTag } from "next/cache";
 // =============================================
-export const CreateReplyAction = async (
+export const CreateAction = async (
   parentId: string,
   content?: string,
   imageUrl?: string,

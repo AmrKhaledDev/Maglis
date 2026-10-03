@@ -1,4 +1,4 @@
-import { CreatePostAction } from "@/actions/Post/CreatePost.action";
+import { CreateAction } from "@/actions/Post/Create.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import axios from "axios";
 import { Trash } from "lucide-react";
@@ -24,7 +24,7 @@ function MediaPreviewActions({
       const formData = new FormData();
       formData.append("file", mediaFile);
       const { data } = await axios.post("/api/upload-media", formData);
-      const result = await CreatePostAction("PUBLIC", false, false, undefined, [
+      const result = await CreateAction("PUBLIC", false, false, undefined, [
         data,
       ]);
       if (!result.success)

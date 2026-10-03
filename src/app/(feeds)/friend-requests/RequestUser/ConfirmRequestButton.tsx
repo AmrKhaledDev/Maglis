@@ -1,4 +1,4 @@
-import { ConfirmFriendRequestAction } from "@/actions/FriendRequest/ConfirmFriendRequest.action";
+import { ConfirmAction } from "@/actions/FriendRequest/Confirm.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -13,7 +13,7 @@ function ConfirmRequestButton({ request }: { request: FriendRequestType }) {
   const router = useRouter();
   const { mutate: handleConfirmRequest, isPending } = useMutation({
     mutationFn: async () => {
-      const result = await ConfirmFriendRequestAction(request.senderId);
+      const result = await ConfirmAction(request.senderId);
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {

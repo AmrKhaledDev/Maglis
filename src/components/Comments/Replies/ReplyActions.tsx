@@ -1,4 +1,4 @@
-import { CreateLikeForComentAction } from "@/actions/LikeForComment/CreateLikeForComment.action";
+import { CreateAction } from "@/actions/LikeForComment/Create.action";
 import { formatLikes } from "@/formats/formatLikes";
 import { formatReplies } from "@/formats/formatReplies";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
@@ -24,7 +24,7 @@ function ReplyActions({
   const queryClient = useQueryClient();
   const { mutate: handleCreateLike, isPending: loading } = useMutation({
     mutationFn: async () => {
-      const result = await CreateLikeForComentAction(reply.id);
+      const result = await CreateAction(reply.id);
       if (!result.success) {
         throw new Error(result.message);
       }

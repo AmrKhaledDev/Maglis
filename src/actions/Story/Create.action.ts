@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { CreateStorySchema } from "@/ZodSchemas/Story/CreateStory.schema";
 import { MediaType } from "@prisma/client";
 // =========================================================
-export const CreateStoryAction = async (
+export const CreateAction = async (
   media?: string,
   contentText?: string,
   mediaType?: MediaType,

@@ -4,7 +4,7 @@ import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 // ====================================================
-export const DeletePostAction = async (
+export const DeleteAction = async (
   postId: string,
 ): Promise<{
   success: boolean;

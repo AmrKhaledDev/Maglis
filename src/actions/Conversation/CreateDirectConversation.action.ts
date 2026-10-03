@@ -2,8 +2,8 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import { CreateMessageAction } from "./CreateMessage.action";
 import MessageMediaType from "@/types/MessageMedia.type";
+import { CreateMessageAction } from "../Message/CreateMessage.action";
 // ==================================================
 
 export const CreateDirectConversationAction = async (

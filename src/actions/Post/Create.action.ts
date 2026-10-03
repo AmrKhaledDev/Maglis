@@ -5,7 +5,7 @@ import { MediaType, Privacy } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 import validateSession from "@/auth/validateSession";
 // ====================================================
-export const CreatePostAction = async (
+export const CreateAction = async (
   privacy: Privacy = "PUBLIC",
   commentsDisabled: boolean = false,
   isPinnedToProfile: boolean = false,

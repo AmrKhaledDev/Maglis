@@ -12,11 +12,11 @@ import { FormHookValues } from "../../UserProfile/_types/FormHookValues.type";
 import { UserWithSocialLinkType } from "../../UserProfile/_types/UserWithSocialLink.type";
 import { SOCIAL_PLATFORMS } from "@/data/Profile/socialPlatforms";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { EditUserProfileAction } from "@/actions/User/EditUserProfile.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useUser } from "@/providers/UserProvider";
 import Header from "./Header";
+import { EditProfileAction } from "@/actions/User/EditProfile.action";
 // =================================================================================
 function EditProfileModal({
   setShowEditProfileModal,
@@ -63,7 +63,7 @@ function EditProfileModal({
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (data: FormHookValues) => {
-      const result = await EditUserProfileAction(user.id, data);
+      const result = await EditProfileAction(user.id, data);
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {

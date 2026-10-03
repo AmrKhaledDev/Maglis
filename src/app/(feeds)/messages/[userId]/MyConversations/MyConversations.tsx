@@ -1,5 +1,4 @@
 "use client";
-import { GetUserConversations } from "@/actions/User/GetUserConversations";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { User } from "@prisma/client";
@@ -9,6 +8,7 @@ import SearhBar from "./SearhBar";
 import Users from "./Users";
 import { useState } from "react";
 import UserConversation from "../_types/UserConversations.type";
+import { GetConversations } from "@/actions/User/GetConversations.action";
 // ==========================================================================================
 function MyConversations({ receiver }: { receiver: User }) {
   const userSession = useUser();
@@ -19,7 +19,7 @@ function MyConversations({ receiver }: { receiver: User }) {
     error,
   } = useQuery({
     queryFn: async () => {
-      const result = await GetUserConversations();
+      const result = await GetConversations();
       if (!result.success) throw new Error(result.message);
       return result.conversations;
     },

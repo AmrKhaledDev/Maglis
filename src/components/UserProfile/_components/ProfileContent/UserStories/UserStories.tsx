@@ -1,14 +1,14 @@
-import { GetUserStoriesAction } from "@/actions/User/GetUserStories.action";
 import { useQuery } from "@tanstack/react-query";
 import NoDataMessage from "../NoDataMessage";
 import StoryOptions from "@/components/Feeds/_components/Stories/_components/StoryViewer/StoryOptions";
 import StoryImage from "./StoryImage";
 import Storyvideo from "./Storyvideo";
+import { GetStoriesAction } from "@/actions/User/GetStories.action";
 // ==============================================================
 function UserStories({ userId }: { userId: string }) {
   const { data = [], isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetUserStoriesAction(userId);
+      const result = await GetStoriesAction(userId);
       if (!result.success) return;
       return result.stories || [];
     },

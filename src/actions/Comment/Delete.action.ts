@@ -3,8 +3,8 @@
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
-// ========================================
-export const CreateLikeForComentAction = async (
+// =============================================================
+export const DeleteAction = async (
   commentId: string,
 ): Promise<{
   success: boolean;
@@ -19,38 +19,31 @@ export const CreateLikeForComentAction = async (
         message: validatingSession.message || "حدث خطأ أثناء التحقق من حسابك.",
       };
     const session = validatingSession.session;
-    const existingLike = await prisma.likeForComment.findUnique({
+    const comment = await prisma.comment.findUnique({
       where: {
-        userId_commentId: {
-          userId: session.id,
-          commentId: commentId,
-        },
+        id: commentId,
+      },
+      select: { userId: true },
+    });
+    if (!comment)
+      return {
+        success: false,
+        message:
+          "تعذر العثور على هذا التعليق. قد يكون تم حذفه أو لم يعد متاحًا.",
+      };
+    if (comment.userId !== session.id)
+      return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
+    await prisma.comment.delete({
+      where: {
+        id: commentId,
       },
     });
-    if (existingLike) {
-      await prisma.likeForComment.delete({
-        where: {
-          userId_commentId: {
-            userId: session.id,
-            commentId: commentId,
-          },
-        },
-      });
-    } else {
-      await prisma.likeForComment.create({
-        data: {
-          commentId: commentId,
-          userId: session.id,
-        },
-      });
-    }
     revalidateTag("posts", "");
     revalidateTag("videos", "");
-    return {
-      success: true,
-    };
+
+    return { success: true };
   } catch (error) {
     console.error(error);
-    return { success: false, message: "حدث خطأ غير متوقع." };
+    return { success: false, message: "حدث خطأ ما عند حذف تعليقك." };
   }
 };

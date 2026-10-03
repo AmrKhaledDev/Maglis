@@ -4,7 +4,7 @@ import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 // ============================================================
-export const UpdateUserImageAction = async (
+export const UpdateImageAction = async (
   newImage: string,
   typeImage: "AVATAR" | "COVER",
   userId: string,

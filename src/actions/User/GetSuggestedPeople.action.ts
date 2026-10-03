@@ -70,6 +70,11 @@ export const GetSuggestedPeopleAction = async (): Promise<{
             blockedId: true,
           },
         },
+        blocked: {
+          select: {
+            blockerId: true,
+          },
+        },
       },
     });
     return { success: true, suggestedPeople: suggestedPeople };

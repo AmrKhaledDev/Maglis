@@ -1,4 +1,4 @@
-import { DeleteUserImageAction } from "@/actions/User/DeleteUserImageAction";
+import { DeleteImageAction } from "@/actions/User/DeleteImage.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -21,7 +21,7 @@ function DeleteImageButton({
   const { mutate: handleDeleteAvatar, isPending: loading } = useMutation({
     mutationFn: async () => {
       setError("");
-      const result = await DeleteUserImageAction(userSession.id, typeImage);
+      const result = await DeleteImageAction(userSession.id, typeImage);
       if (!result.success)
         return setError(
           result.message || "حدث خطأ أثناء حذف صورة الملف الشخصي.",

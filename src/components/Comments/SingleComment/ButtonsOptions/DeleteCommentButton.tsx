@@ -1,4 +1,4 @@
-import { DeleteCommentAction } from "@/actions/Comment/DeleteComment.action";
+import { DeleteAction } from "@/actions/Comment/Delete.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
@@ -24,7 +24,7 @@ function DeleteCommentButton({
   const { mutate: handleDeleteComment } = useMutation({
     mutationFn: async () => {
       setLoading(true);
-      const result = await DeleteCommentAction(comment.id);
+      const result = await DeleteAction(comment.id);
       if (!result.success)
         return setToast({
           open: true,

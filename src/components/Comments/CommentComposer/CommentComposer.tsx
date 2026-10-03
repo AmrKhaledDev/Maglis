@@ -4,15 +4,15 @@ import { Dispatch, SetStateAction, useState } from "react";
 import CommentUploadImage from "./CommentUploadImage";
 import CommentImageUploadedPreview from "./CommentImageUploadedPreview";
 import axios from "axios";
-import { CreateCommentAction } from "@/actions/Comment/CreateComment.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { Comment } from "@prisma/client";
-import { EditCommentAction } from "@/actions/Comment/EditComment.action";
 import CommentTextarea from "./CommentTextarea";
 import CommentSubmitButton from "./CommentSubmitButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PostType } from "@/types/Post.type";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { CreateAction } from "@/actions/Comment/Create.action";
+import { EditAction } from "@/actions/Comment/Edit.action";
 // =====================================================
 function CommentComposer({
   post,
@@ -58,8 +58,8 @@ function CommentComposer({
       if (imageUrl && "error" in imageUrl)
         throw new Error("حدث خطأ أثناء رفع الصورة.");
       const action = currentComment
-        ? EditCommentAction(currentComment.id, content, imagePreview)
-        : CreateCommentAction(post.id, content, imageUrl?.url);
+        ? EditAction(currentComment.id, content, imagePreview)
+        : CreateAction(post.id, content, imageUrl?.url);
       const result = await action;
       if (!result.success) throw new Error(result.message || currentMessage);
     },

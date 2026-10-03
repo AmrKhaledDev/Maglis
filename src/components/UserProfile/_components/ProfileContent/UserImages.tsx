@@ -2,9 +2,9 @@ import Image from "next/image";
 import { useState } from "react";
 import NoDataMessage from "./NoDataMessage";
 import { useQuery } from "@tanstack/react-query";
-import { GetUserImagesPostsAction } from "@/actions/User/GetUserImagesPosts.action";
 import ProfileLoader from "./ProfileLoader";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
+import { GetImagesPostsAction } from "@/actions/User/GetImagesPosts.action";
 // ===================================================================
 function UserImages({ userId }: { userId: string }) {
   const [showImage, setShowImage] = useState({
@@ -17,7 +17,7 @@ function UserImages({ userId }: { userId: string }) {
     error,
   } = useQuery({
     queryFn: async () => {
-      const result = await GetUserImagesPostsAction(userId);
+      const result = await GetImagesPostsAction(userId);
       if (!result.success || !result.media) return;
       return result.media;
     },

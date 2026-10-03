@@ -3,7 +3,7 @@
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 // ==============================================
-export const DeleteFriendShipAction = async (
+export const DeleteAction = async (
   friendId: string,
 ): Promise<{
   success: boolean;

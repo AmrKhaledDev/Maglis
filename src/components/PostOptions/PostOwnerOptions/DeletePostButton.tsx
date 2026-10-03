@@ -1,4 +1,4 @@
-import { DeletePostAction } from "@/actions/Post/DeletePost.action";
+import { DeleteAction } from "@/actions/Post/Delete.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
@@ -16,7 +16,7 @@ function DeletePostButton({ post }: { post: PostType }) {
   const queryClient = useQueryClient();
   const { mutate: handleDeletePost, isPending: loading } = useMutation({
     mutationFn: async () => {
-      const result = await DeletePostAction(post.id);
+      const result = await DeleteAction(post.id);
       if (!result.success)
         throw new Error(
           result.message ?? "حدث خطأ أثناء حذف المنشور حاول مرة أخرى.",

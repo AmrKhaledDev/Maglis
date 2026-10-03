@@ -1,4 +1,3 @@
-import { GetUserSavedPostsAction } from "@/actions/User/GetUserSavedPosts.action";
 import { useQuery } from "@tanstack/react-query";
 import "dayjs/locale/ar";
 import { ExternalLink } from "lucide-react";
@@ -8,6 +7,7 @@ import ProfileLoader from "../ProfileLoader";
 import SavedPostAuthor from "./SavedPostAuthor";
 import SavedPostBookmarkButton from "./SavedPostBookmarkButton";
 import SavedPostContent from "./SavedPostContent";
+import { GetSavedPostsAction } from "@/actions/User/GetSavedPosts.action";
 // ============================================================================
 function UserSavedPosts({ userId }: { userId: string }) {
   const {
@@ -16,7 +16,7 @@ function UserSavedPosts({ userId }: { userId: string }) {
     error,
   } = useQuery({
     queryFn: async () => {
-      const result = await GetUserSavedPostsAction(userId);
+      const result = await GetSavedPostsAction(userId);
       if (!result.success || !result.savedPosts) return;
       return result.savedPosts;
     },

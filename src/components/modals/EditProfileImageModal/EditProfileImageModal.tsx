@@ -1,4 +1,3 @@
-import { UpdateUserImageAction } from "@/actions/User/UpdateUserImage.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
@@ -15,6 +14,7 @@ import { useState } from "react";
 import DeleteImageButton from "./DeleteImageButton";
 import ReplaceImageButton from "./ReplaceImageButton";
 import Header from "./Header";
+import { UpdateImageAction } from "@/actions/User/UpdateImage.action";
 // ==============================================================
 function EditProfileImageModal({
   typeImage,
@@ -41,7 +41,7 @@ function EditProfileImageModal({
       try {
         const res = await axios.post("/api/upload-media", formData);
         const newAvatar: { url: string } = res.data;
-        const result = await UpdateUserImageAction(
+        const result = await UpdateImageAction(
           newAvatar.url,
           typeImage,
           user.id,

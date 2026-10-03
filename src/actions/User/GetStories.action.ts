@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { StoryType } from "@/types/StoryType.type";
 // ====================================================
-export const GetUserStoriesAction = async (
+export const GetStoriesAction = async (
   userId: string,
 ): Promise<{
   success: boolean;

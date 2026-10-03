@@ -4,7 +4,7 @@ import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 // ====================================================
-export const DeleteUserImageAction = async (
+export const DeleteImageAction = async (
   userId: string,
   typeImage: "AVATAR" | "COVER",
 ): Promise<{

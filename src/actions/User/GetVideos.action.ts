@@ -2,10 +2,13 @@
 
 import { prisma } from "@/lib/prisma";
 import { Media } from "@prisma/client";
-// ===============================================
-export const GetUserImagesPostsAction = async (
+// ============================================
+export const GetVideosAction = async (
   userId: string,
-): Promise<{ success: boolean; media?: Media[] }> => {
+): Promise<{
+  success: boolean;
+  media?: Media[];
+}> => {
   try {
     if (!userId)
       return {
@@ -16,20 +19,19 @@ export const GetUserImagesPostsAction = async (
         authorId: userId,
         medias: {
           some: {
-            type: "IMAGE",
+            type: "VIDEO",
           },
         },
         showMediaInProfile: true,
-      },
-      orderBy: {
-        createdAt: "desc",
       },
       select: {
         id: true,
         medias: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
-    if (!posts) return { success: true };
     const media = posts.map((post) => post.medias).flat();
     return { success: true, media };
   } catch (error) {

@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetUserPostsAction } from "@/actions/User/GetUserPosts.action";
 import Posts from "@/components/Posts/Posts";
 import { useUser } from "@/providers/UserProvider";
+import { GetPostsAction } from "@/actions/User/GetPosts.action";
 // ======================================================
 function UserPosts({ userId }: { userId: string }) {
   const userSession = useUser();
   const { data: posts, isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetUserPostsAction(userId);
+      const result = await GetPostsAction(userId);
       if (!result.success || !result.posts) return;
       return result.posts;
     },

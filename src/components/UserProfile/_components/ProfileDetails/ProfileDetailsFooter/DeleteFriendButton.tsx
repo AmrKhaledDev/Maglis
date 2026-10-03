@@ -1,4 +1,4 @@
-import { DeleteFriendShipAction } from "@/actions/FriendShip/DeleteFriendShip.action";
+import { DeleteAction } from "@/actions/FriendShip/Delete.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -20,7 +20,7 @@ function DeleteFriendButton({
   const userSession = useUser();
   const { mutate: handleDeleteFriendShip, isPending } = useMutation({
     mutationFn: async () => {
-      const result = await DeleteFriendShipAction(userId);
+      const result = await DeleteAction(userId);
       if (!result.success)
         throw new Error(result.message || "حدث خطأ أثناء إلغاء الصداقة");
     },

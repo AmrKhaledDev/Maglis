@@ -1,5 +1,5 @@
-import { DeleteStoryAction } from "@/actions/Story/DeleteStory.action";
-import { EditStoryPrivacyAction } from "@/actions/Story/EditStoryPrivacy.action";
+import { DeleteAction } from "@/actions/Story/Delete.action";
+import { EditPrivacyAction } from "@/actions/Story/EditPrivacy.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
@@ -18,7 +18,7 @@ function StoryOptions({ story }: { story: Story }) {
   const queryClient = useQueryClient();
   const { mutate: handleDeleteStory, isPending: loadingDelete } = useMutation({
     mutationFn: async () => {
-      const result = await DeleteStoryAction(story.id);
+      const result = await DeleteAction(story.id);
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {
@@ -36,7 +36,7 @@ function StoryOptions({ story }: { story: Story }) {
   const { mutate: handleUpdatePrivacy, isPending: loadingUpdate } = useMutation(
     {
       mutationFn: async () => {
-        const result = await EditStoryPrivacyAction(story.id);
+        const result = await EditPrivacyAction(story.id);
         if (!result.success) throw new Error(result.message);
       },
       onSuccess: () => {

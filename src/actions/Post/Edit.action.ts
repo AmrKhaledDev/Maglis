@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { MediaType, Privacy } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 // =======================================================
-export const EditPostAction = async (
+export const EditAction = async (
   postId: string,
   privacy: Privacy = "PUBLIC",
   commentsDisabled: boolean = false,

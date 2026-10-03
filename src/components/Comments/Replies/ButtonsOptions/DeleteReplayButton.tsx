@@ -1,4 +1,4 @@
-import { DeleteCommentAction } from "@/actions/Comment/DeleteComment.action";
+import { DeleteAction } from "@/actions/Comment/Delete.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
@@ -7,18 +7,14 @@ import { CommentType } from "@/types/Comment.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 // ======================================================
-function DeleteReplayButton({
-  reply,
-}: {
-  reply: CommentType;
-}) {
+function DeleteReplayButton({ reply }: { reply: CommentType }) {
   const { setToast } = useToast();
   const queryClient = useQueryClient();
   const { setActiveMenu } = useActiveMenu();
   const userSession = useUser();
   const { mutate: handleDeleteReply, isPending } = useMutation({
     mutationFn: async () => {
-      const result = await DeleteCommentAction(reply.id);
+      const result = await DeleteAction(reply.id);
       if (!result.success)
         throw new Error(
           result.message || "حدث خطأ أثناء حذف التعليق الخاص بك.",

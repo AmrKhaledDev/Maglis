@@ -1,4 +1,3 @@
-import { CreateLikeForComentAction } from "@/actions/LikeForComment/CreateLikeForComment.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { Heart, MessageCircleReply } from "lucide-react";
@@ -7,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentType } from "@/types/Comment.type";
 import clsx from "clsx";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { CreateAction } from "@/actions/LikeForComment/Create.action";
 // =======================================================
 function CommentActions({
   comment,
@@ -22,7 +22,7 @@ function CommentActions({
   const { mutate: handleCreateLikeForComment, isPending: loading } =
     useMutation({
       mutationFn: async () => {
-        const result = await CreateLikeForComentAction(comment.id);
+        const result = await CreateAction(comment.id);
         if (!result.success)
           throw new Error(result.message || "حدث خطأ غير متوقع.");
       },

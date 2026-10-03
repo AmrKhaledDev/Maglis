@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { PostType } from "@/types/Post.type";
 // =================================================
-export const GetUserPostsAction = async (
+export const GetPostsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;

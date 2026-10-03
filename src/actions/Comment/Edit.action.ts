@@ -3,15 +3,21 @@
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
-// =============================================================
-export const DeleteCommentAction = async (
+// ===================================================
+export const EditAction = async (
   commentId: string,
+  content: string,
+  imageUrl?: string,
 ): Promise<{
   success: boolean;
   message?: string;
 }> => {
   try {
-    if (!commentId) return { success: false, message: "حدث خطأ غير متوقع." };
+    if (!commentId)
+      return {
+        success: false,
+        message: "حدث خطأ غير متوقع أثناء تعديل تعليقك.",
+      };
     const validatingSession = await validateSession();
     if (!validatingSession.success || !validatingSession.session)
       return {
@@ -28,22 +34,25 @@ export const DeleteCommentAction = async (
     if (!comment)
       return {
         success: false,
-        message:
-          "تعذر العثور على هذا التعليق. قد يكون تم حذفه أو لم يعد متاحًا.",
+        message: "تعذر تعديل التعليق . قد يكون تم حذفه أو لم يعد متاحًا.",
       };
     if (comment.userId !== session.id)
       return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
-    await prisma.comment.delete({
+    await prisma.comment.update({
       where: {
         id: commentId,
+      },
+      data: {
+        content,
+        image: imageUrl || null,
+        isEdited: true,
       },
     });
     revalidateTag("posts", "");
     revalidateTag("videos", "");
-
     return { success: true };
   } catch (error) {
     console.error(error);
-    return { success: false, message: "حدث خطأ ما عند حذف تعليقك." };
+    return { success: false, message: "حدث خطأ أثناء تعديل تعليقك." };
   }
 };

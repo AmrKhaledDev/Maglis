@@ -1,4 +1,4 @@
-import { DeleteFriendRequestAction } from "@/actions/FriendRequest/DeleteFriendRequest";
+import { DeleteAction } from "@/actions/FriendRequest/Delete.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -13,7 +13,7 @@ function RejectRequestButton({ request }: { request: FriendRequestType }) {
   const queryClient = useQueryClient();
   const { mutate: handleDeleteRequest, isPending } = useMutation({
     mutationFn: async () => {
-      const result = await DeleteFriendRequestAction(request.senderId);
+      const result = await DeleteAction(request.senderId);
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {

@@ -2,17 +2,17 @@ import Image from "next/image";
 import TextareaAutoResize from "react-textarea-autosize";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { useUser } from "@/providers/UserProvider";
-import { CreateReplyAction } from "@/actions/Reply/CreateReply.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { motion } from "framer-motion";
-import { EditCommentAction } from "@/actions/Comment/EditComment.action";
 import ReplyComposerActions from "./ReplyComposerActions";
 import { X } from "lucide-react";
 import { Comment } from "@prisma/client";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { CreateAction } from "@/actions/Reply/Create.action";
+import { EditAction } from "@/actions/Comment/Edit.action";
 // ===================================================================================
 function ReplyComposer({
   userOwnerCommentName,
@@ -71,12 +71,12 @@ function ReplyComposer({
         }
       }
       const action = currentReply
-        ? EditCommentAction(
+        ? EditAction(
             currentReply.id,
             content,
             imageUrl ? imageUrl.url : imagePreview,
           )
-        : CreateReplyAction(parentId, content, imageUrl?.url);
+        : CreateAction(parentId, content, imageUrl?.url);
       const result = await action;
       if (!result.success) {
         throw new Error(result.message);

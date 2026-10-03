@@ -6,8 +6,8 @@ import { useToast } from "@/providers/ToastProvider";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useUser } from "@/providers/UserProvider";
-import { UserBlockAction } from "@/actions/UserBlock/UserBlock.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { BlockAction } from "@/actions/Block/Block.action";
 // =====================================================================
 function BlockButton({
   userId,
@@ -25,7 +25,7 @@ function BlockButton({
   const { mutate: handleUserBlock, isPending } = useMutation({
     mutationFn: async () => {
       if (userId === userSession.id) throw new Error("لا يمكنك حظر نفسك.");
-      const result = await UserBlockAction(userId);
+      const result = await BlockAction(userId);
       if (!result.success) throw new Error(result.message);
     },
     onSuccess: () => {

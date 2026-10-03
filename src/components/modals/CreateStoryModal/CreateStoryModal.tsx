@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MediaType } from "@prisma/client";
 import axios from "axios";
-import { CreateStoryAction } from "@/actions/Story/CreateStory.action";
 import { useUser } from "@/providers/UserProvider";
 import CreateStoryModalHeader from "./CreateStoryModalHeader";
 import CreateStoryModalUloadText from "./CreateStoryModalUloadText";
@@ -13,6 +12,7 @@ import CreateStoryModalSelectColor from "./CreateStoryModalSelectBgColor";
 import CreateStoryModalFooter from "./CreateStoryModalFooter";
 import CreateStoryModalUploadMedia from "./CreateStoryModalUploadMedia";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { CreateAction } from "@/actions/Story/Create.action";
 // =================================================================
 function CreateStoryModal() {
   const [selectedColor, setSelectedColor] = useState("#4f46e5");
@@ -42,7 +42,7 @@ function CreateStoryModal() {
             throw new Error("حدث خطأ أثناء رفع الصورة / الفيديو الخاص بك.");
         }
       }
-      const result = await CreateStoryAction(
+      const result = await CreateAction(
         mediaUrl?.url,
         contentText,
         mediaUrl?.type,

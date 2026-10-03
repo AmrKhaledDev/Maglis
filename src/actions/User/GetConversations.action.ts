@@ -4,7 +4,7 @@ import UserConversation from "@/app/(feeds)/messages/[userId]/_types/UserConvers
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 // ==================================================
-export const GetUserConversations = async (): Promise<{
+export const GetConversations = async (): Promise<{
   success: boolean;
   message?: string;
   conversations?: UserConversation[];
