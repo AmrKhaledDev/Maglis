@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import {
   createContext,
   Dispatch,
@@ -15,6 +16,7 @@ const ActiveModalContext = createContext<{
 } | null>(null);
 function ActiveModalProvider({ children }: { children: ReactNode }) {
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const pathname = usePathname();
   useEffect(() => {
     if (activeModal) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
@@ -22,6 +24,11 @@ function ActiveModalProvider({ children }: { children: ReactNode }) {
       document.body.style.overflow = "";
     };
   }, [activeModal]);
+  useEffect(() => {
+    if (activeModal) {
+      setActiveModal(null);
+    }
+  }, [pathname]);
   return (
     <ActiveModalContext.Provider value={{ activeModal, setActiveModal }}>
       {children}

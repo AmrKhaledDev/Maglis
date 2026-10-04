@@ -1,7 +1,7 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { PostType } from "@/types/Post.type";
 import Linkify from "linkify-react";
-import PostContentTextModal from "../../../modals/PostContentTextModal";
+import PostContentTextModal from "../../../modals/PostContentTextModal/PostContentTextModal";
 // =======================================
 function PostContentText({ post }: { post: PostType }) {
   const { activeModal, setActiveModal } = useActiveModal();

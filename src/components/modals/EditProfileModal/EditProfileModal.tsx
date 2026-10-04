@@ -17,6 +17,7 @@ import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useUser } from "@/providers/UserProvider";
 import Header from "./Header";
 import { EditProfileAction } from "@/actions/User/EditProfile.action";
+import ButtonSubmit from "./ButtonSubmit";
 // =================================================================================
 function EditProfileModal({
   setShowEditProfileModal,
@@ -90,7 +91,7 @@ function EditProfileModal({
         onSubmit={handleSubmit(onSubmit)}
         className="overflow-hidden rounded-2xl editProfileModal"
       >
-        <div className="w-220 flex flex-col gap-10 bg-slate-800 max-h-170 overflow-y-auto shadow-2xl rounded-2xl p-5">
+        <div className="w-220 flex flex-col gap-10 bg-slate-900 max-h-170 overflow-y-auto shadow-2xl rounded-2xl p-5">
           <Header setShowEditProfileModal={setShowEditProfileModal} />
           <div className="flex flex-col gap-10">
             <BasicInfoSection register={register} errors={errors} />
@@ -104,12 +105,7 @@ function EditProfileModal({
             <SocialConnectionsSection register={register} errors={errors} />
           </div>
           {error && <AlertMessage type="error" message={error.message} />}
-          <button
-            disabled={isPending}
-            className="py-3 px-10 rounded-full text-sm w-fit not-disabled:hover:outline-2 outline-slate-950 outline-offset-2 not-disabled:active:scale-95 mytransition shadow disabled:bg-gray-600 bg-slate-950 font-semibold not-disabled:cursor-pointer"
-          >
-            {isPending ? "برجاء الإنتظار..." : "تعديل الملف الشخصي"}
-          </button>
+          <ButtonSubmit isPending={isPending} />
         </div>
       </form>
     </motion.div>
