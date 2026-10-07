@@ -1,4 +1,4 @@
-import { DeleteMessageAction } from "@/actions/Conversation/DeleteMessage.action";
+import { DeleteMessageAction } from "@/actions/Message/DeleteMessage.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useToast } from "@/providers/ToastProvider";

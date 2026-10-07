@@ -33,7 +33,7 @@ function ProfileDetailsFooter({ user }: { user: User }) {
         />
       )}
       <Link
-        href={`/messages/${user.id}`}
+        href={`/conversations/${user.id}`}
         className="flex text-xs items-center hover:outline hover:outline-green-950 outline-offset-2 gap-2 cursor-pointer text-gray-200 font-semibold bg-green-950 shadow py-2 px-3 rounded-full"
       >
         <MessageCircle className="size-4" />

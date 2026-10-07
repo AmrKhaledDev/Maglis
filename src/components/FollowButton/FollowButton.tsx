@@ -12,11 +12,13 @@ function FollowButton({
   followColor,
   unfollowColor,
   textColor,
+  iconSize,
 }: {
   followingId: string;
   followColor?: string;
   unfollowColor?: string;
   textColor?: string;
+  iconSize?: string;
 }) {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
@@ -60,12 +62,12 @@ function FollowButton({
     >
       {follow ? (
         <>
-          <UserMinus className="size-4" strokeWidth={1.5} />
+          <UserMinus className={clsx(iconSize ?? "size-4")} strokeWidth={1.5} />
           إلغاء المتابعة
         </>
       ) : (
         <>
-          <Plus className="size-4" strokeWidth={1.5} />
+          <Plus className={clsx(iconSize ?? "size-4")} strokeWidth={1.5} />
           متابعة
         </>
       )}

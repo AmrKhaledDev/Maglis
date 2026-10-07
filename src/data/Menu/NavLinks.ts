@@ -50,8 +50,8 @@ export const navLinks = [
   {
     id: "chat",
     icon: MessageCircle,
-    href: "",
-    title: "الرسائل",
+    href: "/conversations",
+    title: "المحادثات",
   },
   {
     id: "layers",

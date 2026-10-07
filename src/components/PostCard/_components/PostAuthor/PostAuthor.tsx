@@ -1,12 +1,12 @@
-import dayjs from "dayjs";
-import Image from "next/image";
-import Link from "next/link";
-import relativeTime from "dayjs/plugin/relativeTime";
-import local from "dayjs/locale/ar";
-import PostAuthorActions from "./PostAuthorAction";
-import PostPrivacy from "../../../PostPrivacy/PostPrivacy";
-import { PostType } from "@/types/Post.type";
+import UserImage from "@/components/UserImage/UserImage";
 import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
+import { PostType } from "@/types/Post.type";
+import dayjs from "dayjs";
+import local from "dayjs/locale/ar";
+import relativeTime from "dayjs/plugin/relativeTime";
+import Link from "next/link";
+import PostPrivacy from "../../../PostPrivacy/PostPrivacy";
+import PostAuthorActions from "./PostAuthorAction";
 // =========================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
@@ -17,24 +17,17 @@ function PostAuthor({ post }: { post: PostType }) {
         href={useUrlUserProfile(post.authorId)}
         className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
       >
-        <Image
-          src={post.author.image || "/user.jpg"}
-          alt="صورة المستخدم"
-          width={50}
-          height={50}
-          className="rounded-full object-cover shrink-0 size-10"
-        />
+        <UserImage imageUrl={post.author.image} size="size-10" />
       </Link>
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-3">
             <Link
               href={useUrlUserProfile(post.authorId)}
-              className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
+              className="text-gray-100 line-clamp-1 [word-break:break-word] hover:underline hover:decoration-1 font-semibold"
             >
               {post.author.name}
             </Link>
-            <span className="size-[3.5px] rounded-full bg-white block opacity-5 shrink-0" />
             <PostPrivacy privacy={post.privacy} />
           </div>
           <PostAuthorActions post={post} />

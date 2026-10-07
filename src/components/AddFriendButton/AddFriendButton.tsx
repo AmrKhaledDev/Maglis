@@ -6,18 +6,19 @@ import clsx from "clsx";
 import { Check, UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-// =======================================
+// ===========================================================================
 function AddFriendButton({
   userId,
   sentStyle,
   unsentStyle,
   textStyle,
+  iconSize,
 }: {
   userId: string;
   sentStyle?: string;
   unsentStyle?: string;
   textStyle?: string;
+  iconSize?: string;
 }) {
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -61,12 +62,12 @@ function AddFriendButton({
     >
       {isSent ? (
         <>
-          <Check className="size-4" strokeWidth={1.5} />
+          <Check className={clsx(iconSize ?? "size-4")} strokeWidth={1} />
           تم إرسال الطلب
         </>
       ) : (
         <>
-          <UserPlus className="size-4" strokeWidth={1.5} />
+          <UserPlus className={clsx(iconSize ?? "size-4")} strokeWidth={1} />
           إضافة صديق
         </>
       )}

@@ -3,10 +3,10 @@ import LeftSide from "@/components/LeftSide/LeftSide";
 import Menu from "@/components/Menu/Menu";
 import Toast from "@/components/Toast/Toast";
 import { ReactNode } from "react";
-// ===============================================================================
+// ========================================================================
 function FeedsLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-[#0F0F0F]">
+    <div className="bg-[#0F0F0F] min-h-screen">
       <Header />
       <Toast />
       <div className="flex gap-2 mycontainer items-start">

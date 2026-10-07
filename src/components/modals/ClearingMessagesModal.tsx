@@ -1,4 +1,4 @@
-import { ClearingMessagesAction } from "@/actions/Conversation/ClearingMessages.action";
+import { ClearingMessagesAction } from "@/actions/Message/ClearingMessages.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useActiveModal } from "@/providers/ActiveModalProvider";

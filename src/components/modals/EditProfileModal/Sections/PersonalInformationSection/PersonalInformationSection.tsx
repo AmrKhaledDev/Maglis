@@ -1,22 +1,14 @@
 import EditProfileTitleSection from "../../EditProfileTitleSection";
-import Gender from "./Gender";
-import { Control, UseFormSetValue } from "react-hook-form";
-import { FormHookValues } from "../../../../UserProfile/_types/FormHookValues.type";
 import City from "./City";
+import Gender from "./Gender";
 // ================================================================================
-function PersonalInformationSection({
-  setValue,
-  control,
-}: {
-  setValue: UseFormSetValue<FormHookValues>;
-  control: Control<FormHookValues>;
-}) {
+function PersonalInformationSection() {
   return (
     <div className="profileSectionStyle">
       <EditProfileTitleSection title="المعلومات الشخصية" />
       <div className="profileSectionFieldsStyle">
-        <Gender setValue={setValue} control={control} />
-        <City setValue={setValue} control={control} />
+        <Gender />
+        <City />
       </div>
     </div>
   );

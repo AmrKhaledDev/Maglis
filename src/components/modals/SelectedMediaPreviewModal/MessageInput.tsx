@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { useRef } from "react";
-import AddEmoji from "@/app/(feeds)/messages/[userId]/ChatWindow/FooterActions/AddEmoji";
+import AddEmoji from "@/app/(feeds)/conversations/[userId]/ChatWindow/FooterActions/AddEmoji";
 // ================================================
 function MessageInput() {
   const { register } = useFormContext();

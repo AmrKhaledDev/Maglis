@@ -31,7 +31,10 @@ export const invalidateUserCaches = (
     queryKey: ["user_active_stories", userSession.id],
   });
   queryClient.invalidateQueries({
-    queryKey: ["conversation", userSession.id, ...args],
+    queryKey: ["conversations", userSession.id, ...args],
+  });
+  queryClient.invalidateQueries({
+    queryKey: ["conversations", userSession.id],
   });
   queryClient.invalidateQueries({
     queryKey: ["user_stories", userSession.id],

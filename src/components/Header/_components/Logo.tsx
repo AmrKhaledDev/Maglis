@@ -3,8 +3,8 @@ import Link from "next/link";
 // ================================
 function Logo() {
   return (
-    <Link href={"/"} className="relative h-13 w-15 shrink-0">
-      <Image src={"/logo.png"} alt="logo" priority fill />
+    <Link href={"/"} className="relative size-15  shrink-0">
+      <Image src={"/logo.png"} alt="logo" priority fill className="object-contain"/>
     </Link>
   );
 }

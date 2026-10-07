@@ -1,4 +1,4 @@
-import MediaFieldType from "@/app/(feeds)/messages/[userId]/_types/MediaFileld.type";
+import MediaFieldType from "@/app/(feeds)/conversations/_types/MediaFileld.type";
 import Image from "next/image";
 // ===============================
 function ImageMedia({ field }: { field: MediaFieldType }) {

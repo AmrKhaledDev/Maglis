@@ -13,9 +13,9 @@ function CreatePostModalHeader({ loading }: { loading: boolean }) {
       </div>
       <button
         onClick={() => setActiveModal(null)}
-        className="cursor-pointer text-gray-300 h-fit hover:text-white mytransition"
+        className="cursor-pointer text-gray-400 h-fit hover:text-white mytransition"
       >
-        <X className="size-5" />
+        <X className="size-6" strokeWidth={1}/>
       </button>
     </div>
   );

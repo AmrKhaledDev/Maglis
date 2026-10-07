@@ -1,21 +1,14 @@
-import PostPrivacy from "@/components/PostPrivacy/PostPrivacy";
-import dayjs from "dayjs";
-import Image from "next/image";
-import relativeTime from "dayjs/plugin/relativeTime";
+import UserImage from "@/components/UserImage/UserImage";
 import { SavePostType } from "@/types/SavePost.type";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 // =====================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
 function SavedPostAuthor({ saveItem }: { saveItem: SavePostType }) {
   return (
     <div className="flex items-center gap-2">
-      <Image
-        src={saveItem.post.author.image || "/user.jpg"}
-        alt="صورة المستخدم"
-        width={50}
-        height={50}
-        className="size-9 rounded-full shrink-0 object-cover"
-      />
+      <UserImage imageUrl={saveItem.post.author.image} size="size-9" />
       <div>
         <div className="flex items-center gap-1.5">
           <h2 className="font-semibold text-sm text-gray-100 line-clamp-1 [word-break:break-word]">

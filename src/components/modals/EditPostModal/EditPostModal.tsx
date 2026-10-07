@@ -1,3 +1,4 @@
+import { EditAction } from "@/actions/Post/Edit.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
@@ -18,9 +19,8 @@ import EditPostMedia from "./EditPostMedia";
 import EditPostModalAuthor from "./EditPostModalAuthor";
 import EditPostModalContent from "./EditPostModalContent";
 import EditPostModalFooter from "./EditPostModalFooter";
-import EditPostModalHeader from "./EditPostModalHeader";
-import { EditAction } from "@/actions/Post/Edit.action";
-// ==========================================================================================================
+import Header from "./Header";
+// ==========================================================
 function EditPostModal({ post }: { post: PostType }) {
   const { setActiveModal } = useActiveModal();
   const userSession = useUser();
@@ -114,7 +114,7 @@ function EditPostModal({ post }: { post: PostType }) {
         onSubmit={handleSubmit(handleEditPost)}
         className="boxEditPostModal w-200 p-3 max-h-150 overflow-y-auto ring ring-gray-50/10 bg-slate-800 rounded-2xl shadow-2xl text-white"
       >
-        <EditPostModalHeader
+        <Header
           setValue={setValue}
           commentsDisabled={commentsDisabled}
           loading={loading}
@@ -130,11 +130,7 @@ function EditPostModal({ post }: { post: PostType }) {
         />
         <EditPostModalContent content={content} register={register} />
         {fields && fields.length > 0 && (
-          <EditPostMedia
-            loading={loading}
-            fields={fields}
-            remove={remove}
-          />
+          <EditPostMedia loading={loading} fields={fields} remove={remove} />
         )}
         <EditPostModalFooter
           fields={fields}

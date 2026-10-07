@@ -1,15 +1,18 @@
-import ProfileFormField from "../ProfileFormField";
-import EditProfileTitleSection from "../EditProfileTitleSection";
-import { FieldErrors, Path, UseFormRegister } from "react-hook-form";
+import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import {
+  Path,
+  useFormContext
+} from "react-hook-form";
+import z from "zod";
 import { FormHookValues } from "../../../UserProfile/_types/FormHookValues.type";
+import EditProfileTitleSection from "../EditProfileTitleSection";
+import ProfileFormField from "../ProfileFormField";
 // ==================================================================
-function SocialConnectionsSection({
-  register,
-  errors,
-}: {
-  register: UseFormRegister<FormHookValues>;
-  errors: FieldErrors<FormHookValues>;
-}) {
+function SocialConnectionsSection() {
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext<z.infer<typeof EditProfileSchema>>();
   const socialPlatforms = [
     { id: "facebook", label: "Facebook", error: errors.facebook?.message },
     { id: "x", label: "X", error: errors.x?.message },

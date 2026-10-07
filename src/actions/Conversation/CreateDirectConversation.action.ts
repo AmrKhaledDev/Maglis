@@ -26,6 +26,8 @@ export const CreateDirectConversationAction = async (
           "لا يمكنك إرسال رسالة, تعذر التحقق من حسابك.",
       };
     const userSession = validatingSession.session;
+    if (userSession.id === receiverId)
+      return { success: false, message: "لا يمكنك إنشاء محادثة مع نفسك." };
     const isReceiverBlocked = userSession.blocks.some(
       (block) => block.blockedId === receiverId,
     );

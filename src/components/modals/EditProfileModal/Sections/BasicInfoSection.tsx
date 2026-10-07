@@ -1,15 +1,14 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import EditProfileTitleSection from "../EditProfileTitleSection";
 import ProfileFormField from "../ProfileFormField";
-import { FormHookValues } from "../../../UserProfile/_types/FormHookValues.type";
+import z from "zod";
+import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
 // ===============================================
-function BasicInfoSection({
-  register,
-  errors,
-}: {
-  register: UseFormRegister<FormHookValues>;
-  errors: FieldErrors<FormHookValues>;
-}) {
+function BasicInfoSection() {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<z.infer<typeof EditProfileSchema>>();
   return (
     <div className="profileSectionStyle">
       <EditProfileTitleSection title="المعلومات الأساسية" />

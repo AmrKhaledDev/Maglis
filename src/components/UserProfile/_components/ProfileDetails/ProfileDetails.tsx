@@ -1,29 +1,15 @@
 "use client";
-import "dayjs/locale/ar";
-import ProfileDetailsFooter from "./ProfileDetailsFooter/ProfileDetailsFooter";
-import ProfileStats from "./ProfileStats";
-import ProfileIdentity from "./ProfileIdentity";
-import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
-import { useEffect, useState } from "react";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
+import "dayjs/locale/ar";
 import EditProfileModal from "../../../modals/EditProfileModal/EditProfileModal";
+import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
+import ProfileDetailsFooter from "./ProfileDetailsFooter/ProfileDetailsFooter";
+import ProfileIdentity from "./ProfileIdentity";
+import ProfileStats from "./ProfileStats";
 // ====================================================
 function ProfileDetails({ user }: { user: UserWithSocialLinkType }) {
-  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
-  useEffect(() => {
-    const handle = (e: MouseEvent) => {
-      if (e.target instanceof Element) {
-        if (
-          !e.target.closest(
-            ".buttonShowEditProfileModal, .editProfileModal, .buttonCloseSelectCity",
-          )
-        )
-          setShowEditProfileModal(false);
-      }
-    };
-    document.addEventListener("click", handle);
-    return () => removeEventListener("click", handle);
-  }, []);
+  const { setActiveModal, activeModal } = useActiveModal();
   const userSession = useUser();
   return (
     <div className="flex flex-col gap-2 mb-2 ">
@@ -33,17 +19,13 @@ function ProfileDetails({ user }: { user: UserWithSocialLinkType }) {
       {userSession.id === user.id && (
         <>
           <button
-            onClick={() => setShowEditProfileModal(true)}
+            onClick={() => setActiveModal("edit_profile")}
             className="text-xs w-fit mt-2 flex items-center gap-2 py-2.5 px-6 bg-gray-300 text-black rounded-md shadow cursor-pointer font-medium buttonShowEditProfileModal hover:bg-gray-400 mytransition"
           >
             تعديل الملف الشخصي
           </button>
-          {showEditProfileModal && userSession.id === user.id && (
-            <EditProfileModal
-              setShowEditProfileModal={setShowEditProfileModal}
-              showEditProfileModal={showEditProfileModal}
-              user={user}
-            />
+          {activeModal === "edit_profile" && userSession.id === user.id && (
+            <EditProfileModal user={user} />
           )}
         </>
       )}

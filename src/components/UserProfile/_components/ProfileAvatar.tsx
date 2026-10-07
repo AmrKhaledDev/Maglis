@@ -1,11 +1,11 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import { User } from "@prisma/client";
-import { useUser } from "@/providers/UserProvider";
-import EditProfileImageModal from "../../modals/EditProfileImageModal/EditProfileImageModal";
-import { useActiveModal } from "@/providers/ActiveModalProvider";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
+import UserImage from "@/components/UserImage/UserImage";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useUser } from "@/providers/UserProvider";
+import { User } from "@prisma/client";
+import { useState } from "react";
+import EditProfileImageModal from "../../modals/EditProfileImageModal/EditProfileImageModal";
 // ===========================================
 function ProfileAvatar({ user }: { user: User }) {
   const { activeModal, setActiveModal } = useActiveModal();
@@ -27,14 +27,9 @@ function ProfileAvatar({ user }: { user: User }) {
             url: user.image || "/user.jpg",
           });
         }}
-        className="relative shrink-0 shadow size-25 -mt-12 cursor-pointer rounded-full bg-black/20 backdrop-blur-2xl"
+        className="relative shrink-0 shadow -mt-12 cursor-pointer rounded-full bg-black/20 backdrop-blur-2xl"
       >
-        <Image
-          src={user.image || "/user.jpg"}
-          alt="الصورة الشخصية"
-          fill
-          className="object-cover rounded-full"
-        />
+        <UserImage imageUrl={user.image} size="size-25" />
       </button>
       {activeModal == "edit_avatar_modal" && user.id === userSession.id && (
         <EditProfileImageModal

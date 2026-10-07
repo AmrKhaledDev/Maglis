@@ -14,10 +14,12 @@ function NotificationLink() {
         <TooltipTrigger>
           <Link
             href={"/notification"}
-            className="bg-white/10 shadow bac hover:scale-105 mytransition active:scale-95 ring ring-gray-50/15 relative size-10 rounded-full flex items-center justify-center"
+            className="hover:scale-105 mytransition active:scale-95 relative size-10 rounded-full flex items-center justify-center"
           >
-            <Bell className="size-6" strokeWidth={1.5}/>
-            <span className="absolute -top-px -right-px size-3 bg-cyan-300 rounded-full shadow" />
+            <Bell className="size-6" strokeWidth={1} />
+            <span className="absolute top-0.5 right-1 size-4 bg-red-700 rounded-full flex items-center justify-center text-xs shadow-lg">
+              1
+            </span>
           </Link>
         </TooltipTrigger>
         <TooltipContent>

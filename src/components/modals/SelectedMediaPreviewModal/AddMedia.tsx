@@ -1,4 +1,4 @@
-import UploadMediaPropsType from "@/app/(feeds)/messages/[userId]/_types/UploadMediaProps.type";
+import UploadMediaPropsType from "@/app/(feeds)/conversations/_types/UploadMediaProps.type";
 import handleFileUploadChatActions from "@/lib/helpers/handleFileUploadChatActions";
 import { motion } from "framer-motion";
 import { Plus } from "lucide-react";

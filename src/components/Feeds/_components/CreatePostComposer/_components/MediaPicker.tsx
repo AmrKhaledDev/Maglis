@@ -1,5 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { Upload } from "lucide-react";
+import { ImagePlay, Upload } from "lucide-react";
+import Image from "next/image";
+import { IoMdPhotos } from "react-icons/io";
 // ================================================================
 function MediaPicker({
   setMedia,
@@ -21,9 +23,9 @@ function MediaPicker({
     <div>
       <label
         htmlFor="upload_media"
-        className="text-2xl block rounded-full hover:text-white mytransition cursor-pointer text-gray-400"
+        className="text-2xl shadow block text-gray-200 mytransition cursor-pointer p-2.5 hover:bg-white/6 bg-white/4 rounded-full"
       >
-        <Upload strokeWidth={1.5} />
+        <IoMdPhotos />
       </label>
       <input
         onChange={handleChange}

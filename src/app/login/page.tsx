@@ -11,7 +11,7 @@ async function Login({
 }) {
   const { error } = await searchParams;
   return (
-    <main className="relative px-4 overflow-x-hidden">
+    <main className="relative px-4 overflow-x-hidden ">
       <div className="max-w-350 mx-auto p-1 flex flex-col h-screen md:gap-0 gap-10">
         <Header />
         <div className="flex md:flex-row flex-col items-center justify-between flex-1 relative lg:gap-10 md:gap-5 gap-10">

@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 function Header() {
   const { setActiveModal } = useActiveModal();
   return (
-    <div className="flex items-center justify-between">
+    <header className="flex items-center justify-between">
       <h2 className="text-gray-200 font-light">المحتوى النصي</h2>
       <button
         onClick={() => setActiveModal(null)}
@@ -12,7 +12,7 @@ function Header() {
       >
         <X className="size-5" strokeWidth={1} />
       </button>
-    </div>
+    </header>
   );
 }
 

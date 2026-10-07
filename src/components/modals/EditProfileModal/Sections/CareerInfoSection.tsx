@@ -1,20 +1,22 @@
-import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import {
+  useFormContext
+} from "react-hook-form";
+import z from "zod";
 import EditProfileLable from "../EditProfileLable";
 import EditProfileTitleSection from "../EditProfileTitleSection";
 import ProfileFormField from "../ProfileFormField";
-import { FormHookValues } from "../../../UserProfile/_types/FormHookValues.type";
 // ====================================================
 function CareerInfoSection({
-  register,
-  errors,
   professionalMode,
-  setValue,
 }: {
-  register: UseFormRegister<FormHookValues>;
-  errors: FieldErrors<FormHookValues>;
   professionalMode: boolean;
-  setValue: UseFormSetValue<FormHookValues>;
 }) {
+  const {
+    register,
+    setValue,
+    formState: { errors },
+  } = useFormContext<z.infer<typeof EditProfileSchema>>();
   return (
     <div className="profileSectionStyle">
       <EditProfileTitleSection title="المعلومات المهنية" />

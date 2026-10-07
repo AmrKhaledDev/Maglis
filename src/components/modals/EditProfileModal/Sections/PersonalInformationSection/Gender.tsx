@@ -1,23 +1,16 @@
-import { useEffect, useState } from "react";
-import EditProfileLable from "../../EditProfileLable";
-import { SelectedGenderType } from "../../../../UserProfile/_types/SelectedGender.type";
-import { IoMdArrowDropdown } from "react-icons/io";
-import SelectGender from "./SelectGender";
-import { User } from "lucide-react";
-import clsx from "clsx";
-import { Control, UseFormSetValue, useWatch } from "react-hook-form";
-import { FormHookValues } from "../../../../UserProfile/_types/FormHookValues.type";
 import { genderMap } from "@/data/genderMap";
+import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import clsx from "clsx";
+import { User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
+import { IoMdArrowDropdown } from "react-icons/io";
+import z from "zod";
+import EditProfileLable from "../../EditProfileLable";
+import SelectGender from "./SelectGender";
 // =======================================================
-function Gender({
-  setValue,
-  control,
-}: {
-  setValue: UseFormSetValue<FormHookValues>;
-  control: Control<FormHookValues>;
-}) {
-  const [selectedGender, setSelectedGender] =
-    useState<SelectedGenderType | null>(null);
+function Gender() {
+  const { control } = useFormContext<z.infer<typeof EditProfileSchema>>();
   const [showSelectGender, setShowSelectGender] = useState(false);
   useEffect(() => {
     const handle = (e: MouseEvent) => {
@@ -42,12 +35,12 @@ function Gender({
         <button
           type="button"
           onClick={() => setShowSelectGender(!showSelectGender)}
-          className="buttonShowSelectGender flex button hover:bg-slate-950 mytransition w-full items-center gap-5 justify-between rounded-lg p-2 bg-slate-900 shadow cursor-pointer"
+          className="buttonShowSelectGender flex button mytransition w-full items-center gap-5 justify-between rounded-lg p-4 bg-[#252628] hover:bg-[#313235] shadow cursor-pointer"
         >
-          <span className="flex items-center gap-2 text-sm">
+          <span className="flex items-center gap-2 font-medium">
             {genderPreview ? (
               <>
-                <genderPreview.icon className="size-5" strokeWidth={1.5} />
+                <genderPreview.icon className="size-5" strokeWidth={1} />
                 {genderPreview.label}
               </>
             ) : (
@@ -57,12 +50,10 @@ function Gender({
             )}
           </span>
           <IoMdArrowDropdown
-            className={clsx(showSelectGender && "rotate-180 mytransition")}
+            className={clsx(showSelectGender && "rotate-180")}
           />
         </button>
-        {showSelectGender && (
-          <SelectGender setValue={setValue} gender={gender} />
-        )}
+        {showSelectGender && <SelectGender gender={gender} />}
       </div>
     </div>
   );

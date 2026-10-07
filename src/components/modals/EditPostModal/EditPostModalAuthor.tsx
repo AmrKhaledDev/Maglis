@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 import { EditPostModalFormType } from "../../PostCard/_types/EditPostModalForm.type";
 import SelectPrivacyOptions from "../../PostOptions/SelectPrivacyOptions";
 import { PostType } from "@/types/Post.type";
-// ====================================================
+import { useUser } from "@/providers/UserProvider";
+import UserImage from "@/components/UserImage/UserImage";
+// =====================================================================================
 function EditPostModalAuthor({
   post,
   setValue,
@@ -19,6 +21,7 @@ function EditPostModalAuthor({
   privacy: PrivacyType;
   loading: boolean;
 }) {
+  const userSession = useUser();
   const [showPrivacyOptions, setShowPrivacyOptions] = useState(false);
   useEffect(() => {
     const handle = (e: MouseEvent) => {
@@ -32,13 +35,7 @@ function EditPostModalAuthor({
   }, []);
   return (
     <div className="flex items-center gap-2 my-5">
-      <Image
-        src={post.author.image ?? "/user.jpg"}
-        alt="صورتك"
-        width={50}
-        height={50}
-        className="rounded-full size-11 shrink-0 object-cover"
-      />
+      <UserImage imageUrl={post.author.image} size="size-10" />
       <div className="flex flex-col gap-1">
         <h2 className="font-semibold text-gray-100">{post.author.name}</h2>
         <div className="relative">

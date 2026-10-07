@@ -16,7 +16,7 @@ function PostContentTextModal({ post }: { post: PostType }) {
         <Header />
         <div className="flex flex-col gap-3">
           <h2 className="flex items-center gap-2 text-xs text-gray-200">
-            من منشور{" "}
+            من منشور
             <Link href={url} className="font-medium">
               {post.author.name}
             </Link>

@@ -1,0 +1,69 @@
+"use client";
+import { GetDirectConversationAction } from "@/actions/Conversation/GetDirectConversation.action";
+import { useToast } from "@/providers/ToastProvider";
+import { useUser } from "@/providers/UserProvider";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { TbLoader4 } from "react-icons/tb";
+import Message from "./Message/Message";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import useIsUserBlocked from "@/hooks/useIsUserBlocked";
+import { UpdateMessagesStatus } from "@/actions/Message/UpdateMessagesStatus";
+
+// =================================================================
+function Messages({ receiverId }: { receiverId: string }) {
+  const userSession = useUser();
+  const { setToast } = useToast();
+  const queryClient = useQueryClient();
+  const { data: conversation, isPending } = useQuery({
+    queryFn: async () => {
+      const result = await GetDirectConversationAction(receiverId);
+      if (!result.success)
+        return setToast({
+          open: true,
+          message: result.message || "حدث خطأ غير متوقع أثناء تحميل المحادثه.",
+          type: "error",
+        });
+      return result.conversation;
+    },
+    queryKey: ["conversations", userSession.id, receiverId],
+  });
+  useEffect(() => {
+    if (conversation?.id) {
+      const update_messages = async () => {
+        await UpdateMessagesStatus(receiverId);
+      };
+      invalidateUserCaches(queryClient, userSession, receiverId);
+      update_messages();
+    }
+  }, [conversation?.id]);
+  const isReceiverBlocked = useIsUserBlocked(receiverId);
+  return (
+    <div className="w-full sm:p-7 p-2 flex-1 flex flex-col gap-2 overflow-y-auto relative">
+      {isPending ? (
+        <div className="w-full h-full flex items-center  justify-center ">
+          <TbLoader4 className="size-12 animate-[spin_1.5s_linear_infinite]" strokeWidth={1}/>
+        </div>
+      ) : (
+        <>
+          {conversation &&
+            conversation.messages.map((message) => (
+              <Message
+                key={message.id}
+                message={message}
+                receiverId={receiverId}
+              />
+            ))}
+          {isReceiverBlocked && (
+            <p className="w-fit mx-auto mt-5 flex items-center gap-2 justify-center py-1 px-5 rounded-full text-white/70 sm:text-[15px] text-xs flex-wrap">
+              لقد حظرت هذا المستخدم. لفك الحظر إضغط على
+              <span className="font-medium text-white/90">فك الحظر</span>
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+export default Messages;

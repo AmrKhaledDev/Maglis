@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SelectedMediaPreviewPropsType from "../../../app/(feeds)/messages/[userId]/_types/SelectedMediaPreviewProps.type";
+import SelectedMediaPreviewPropsType from "../../../app/(feeds)/conversations/_types/SelectedMediaPreviewProps.type";
 import DiscardMediaModal from "./DiscardMediaModal";
 import CloseModal from "./CloseModal";
 import ButtonCreateMessage from "./ButtonCreateMessage";

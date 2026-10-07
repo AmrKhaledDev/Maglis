@@ -1,21 +1,22 @@
+import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { X } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
 // ======================================
-function Header({
-  setShowEditProfileModal,
-}: {
-  setShowEditProfileModal: Dispatch<SetStateAction<boolean>>;
-}) {
+function Header() {
+  const { setActiveModal } = useActiveModal();
   return (
-    <div className="space-y-5">
+    <header className="space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-gray-300">تعديل الملف الشخصي</h2>
-        <button onClick={()=>setShowEditProfileModal(false)} className="text-gray-400 hover:text-white mytransition cursor-pointer">
-          <X strokeWidth={1.5} className="size-5" />
+        <h2 className=" text-gray-200 flex-1 text-center text-xl">
+          تعديل الملف الشخصي
+        </h2>
+        <button
+          onClick={() => setActiveModal(null)}
+          className="text-gray-400 hover:text-white mytransition cursor-pointer"
+        >
+          <X strokeWidth={1} className="size-6" />
         </button>
       </div>
-      <hr className="border-white/3" />
-    </div>
+    </header>
   );
 }
 

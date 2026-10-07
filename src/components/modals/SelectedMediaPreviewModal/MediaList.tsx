@@ -4,7 +4,7 @@ import AddMedia from "./AddMedia";
 import DeleteField from "./DeleteField";
 import ImageMedia from "./ImageMedia";
 import VideoMedia from "./VideoMedia";
-import MediaListProps from "@/app/(feeds)/messages/[userId]/_types/MediaListProps.type";
+import MediaListProps from "@/app/(feeds)/conversations/_types/MediaListProps.type";
 // ======================================================================
 function MediaList({
   fields,

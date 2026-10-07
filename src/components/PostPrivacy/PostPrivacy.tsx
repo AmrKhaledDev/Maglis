@@ -11,13 +11,13 @@ function PostPrivacy({ privacy }: { privacy: Privacy }) {
     <Tooltip>
       <TooltipTrigger>
         {privacy == "PUBLIC" && (
-          <Globe className="size-3.5 text-gray-300" strokeWidth={1.5} />
+          <Globe className="size-3.5 opacity-80" strokeWidth={1} />
         )}
         {privacy == "PRIVATE" && (
-          <Lock className="size-3.5 text-gray-300"strokeWidth={1.5} />
+          <Lock className="size-3.5 opacity-80"strokeWidth={1} />
         )}
         {privacy == "FRIENDS" && (
-          <Users className="size-3.5 text-gray-300" strokeWidth={1.5}/>
+          <Users className="size-3.5 opacity-80" strokeWidth={1}/>
         )}
       </TooltipTrigger>
       <TooltipContent side="top">

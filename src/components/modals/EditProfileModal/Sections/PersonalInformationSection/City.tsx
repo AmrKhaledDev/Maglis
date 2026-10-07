@@ -1,18 +1,15 @@
+import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import { useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";
+import z from "zod";
+import SelectCityModal from "../../../SelectedCityModal/SelectCityModal";
 import EditProfileLable from "../../EditProfileLable";
-import { Control, UseFormSetValue, useWatch } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { FormHookValues } from "@/components/UserProfile/_types/FormHookValues.type";
-import SelectCityModal from "./SelectCityModal";
+import { MapPin } from "lucide-react";
 // ======================================================
-function City({
-  control,
-  setValue,
-}: {
-  control: Control<FormHookValues>;
-  setValue: UseFormSetValue<FormHookValues>;
-}) {
-  const [showSelectCity, setShowSelectCity] = useState(false);
+function City() {
+  const { control } = useFormContext<z.infer<typeof EditProfileSchema>>();
+  const [showSelectCityModal, setShowSelectCityModal] = useState(false);
   const city = useWatch({
     control,
     name: "city",
@@ -22,17 +19,19 @@ function City({
       <EditProfileLable label="الدولة" />
       <div className="w-60">
         <button
-          onClick={() => setShowSelectCity(true)}
+          onClick={() => setShowSelectCityModal(true)}
           type="button"
-          className="flex button hover:bg-slate-950 mytransition w-full items-center gap-5 justify-between rounded-lg p-2 bg-slate-900 shadow cursor-pointer"
+          className="buttonShowSelectGender flex button mytransition w-full items-center gap-5 justify-between rounded-lg p-4 bg-[#252628] hover:bg-[#313235] shadow cursor-pointer font-medium"
         >
-          {city ? city : "  إختر محافظتك"}
+          <span className="flex items-center gap-2">
+            <MapPin strokeWidth={1} className="size-5"/>
+            {city ? city : "إختر محافظتك"}
+          </span>
           <IoMdArrowDropdown />
         </button>
-        {showSelectCity && (
+        {showSelectCityModal && (
           <SelectCityModal
-            setShowSelectCity={setShowSelectCity}
-            setValue={setValue}
+            setShowSelectCityModal={setShowSelectCityModal}
             currentCity={city}
           />
         )}
