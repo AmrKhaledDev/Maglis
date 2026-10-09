@@ -7,7 +7,7 @@ function ConversationUser({ user }: { user: User }) {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-3">
-        <UserImage imageUrl={user.image} size="size-11" />
+        <UserImage src={user.image} size="size-11" />
         <div>
           <Link
             href={`/u/${user.id}`}

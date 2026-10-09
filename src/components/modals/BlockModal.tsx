@@ -20,7 +20,7 @@ function BlockModal({
             متأكد من الحظر؟
           </p>
         </div>
-        <div className="p-5 flex items-center gap-5 bg-black/5 w-full justify-center rounded-lg">
+        <div className="p-5 flex items-center gap-5 w-full justify-center rounded-lg">
           <button
             onClick={() => {
               handleUserBlock();

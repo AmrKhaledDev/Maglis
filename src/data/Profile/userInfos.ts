@@ -1,27 +1,31 @@
 import { User } from "@prisma/client";
+import { Briefcase } from "lucide-react";
+import { FcGraduationCap } from "react-icons/fc";
+import { MdLocationPin } from "react-icons/md";
 import { genderMap } from "../genderMap";
-import { Briefcase, Globe, GraduationCap } from "lucide-react";
+import { HiMiniBriefcase } from "react-icons/hi2";
+
 // =====================================================
-export const infos = (user:User) => {
+export const infos = (user: User) => {
   const gender = user.gender && genderMap[user.gender];
   return [
     {
       id: "location",
       label: "يقيم في",
       value: user.city,
-      icon: Globe,
+      icon: MdLocationPin,
     },
     {
       id: "jobTitle",
       label: "يعمل",
       value: user.jobTitle,
-      icon: Briefcase,
+      icon: HiMiniBriefcase,
     },
     {
       id: "education",
       label: "التعليم",
       value: user.education,
-      icon: GraduationCap,
+      icon: FcGraduationCap,
     },
     {
       id: "gender",

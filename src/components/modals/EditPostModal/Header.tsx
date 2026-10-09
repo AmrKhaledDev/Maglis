@@ -52,7 +52,7 @@ function Header({
         onClick={() => setActiveModal(null)}
         className="cursor-pointer button text-gray-400 hover:text-white"
       >
-        <X className="size-5" strokeWidth={1.5} />
+        <X className="size-6" strokeWidth={1} />
       </button>
     </header>
   );

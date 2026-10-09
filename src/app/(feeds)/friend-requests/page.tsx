@@ -1,5 +1,6 @@
-import Header from "./Header";
-import FriendRequestsList from "./FriendRequestsList";
+import FriendRequestsList from "./_components/FriendRequestsList";
+import Header from "./_components/Header";
+
 // =====================================
 function FriendRequests() {
   return (

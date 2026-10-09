@@ -35,7 +35,7 @@ function EditPostModalAuthor({
   }, []);
   return (
     <div className="flex items-center gap-2 my-5">
-      <UserImage imageUrl={post.author.image} size="size-10" />
+      <UserImage src={post.author.image} size="size-10" />
       <div className="flex flex-col gap-1">
         <h2 className="font-semibold text-gray-100">{post.author.name}</h2>
         <div className="relative">
@@ -43,7 +43,7 @@ function EditPostModalAuthor({
             disabled={loading}
             onClick={() => setShowPrivacyOptions(!showPrivacyOptions)}
             type="button"
-            className="flex buttonShowPrivacyOptions hover:bg-gray-400 mytransition items-center not-disabled:cursor-pointer text-black font-semibold gap-3 bg-gray-300 p-1 rounded-full shadow text-xs"
+            className="flex buttonShowPrivacyOptions hover:bg-gray-400 mytransition items-center not-disabled:cursor-pointer text-black font-semibold gap-4 bg-gray-300 p-1 rounded-full shadow text-xs"
           >
             <span className="flex items-center gap-1">
               <privacy.icon className="size-4" strokeWidth={1.5} />

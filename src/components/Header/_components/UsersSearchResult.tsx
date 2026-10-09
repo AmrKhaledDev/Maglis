@@ -15,7 +15,7 @@ function UsersSearchResult({
   return (
     <div
       className={clsx(
-        "p-3 absolute ring ring-gray-50/2 bg-gray-800 w-full rounded-2xl mt-1 shadow-2xl flex flex-col gap-3",
+        "p-3 absolute ring ring-gray-50/2 modalBgColor w-full rounded-2xl mt-1 shadow-2xl flex flex-col gap-3",
         (!searchValue.trim() || !data) && "hidden",
       )}
     >

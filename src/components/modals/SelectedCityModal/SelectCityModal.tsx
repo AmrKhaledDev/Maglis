@@ -17,7 +17,7 @@ function SelectCityModal({
   const [selectedCity, setSelectedCity] = useState(currentCity ?? "");
   return (
     <div className="fixed bg-black/70 inset-0 flex items-center justify-center">
-      <div className="bg-[#14161B] p-4 w-130 rounded-2xl shadow-2xl flex flex-col gap-5 overflow-hidden ring ring-white/10">
+      <div className="modalBgColor p-4 w-130 rounded-2xl shadow-2xl flex flex-col gap-5 overflow-hidden ring ring-white/10">
         <Header setShowSelectCityModal={setShowSelectCityModal} />
         <div className="flex flex-col gap-10 h-full">
           <Search

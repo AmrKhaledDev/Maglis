@@ -18,7 +18,7 @@ function PostOptionsMenu({
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bgOptionsBox boxMenu"
+          className="bgMenuBox boxMenu"
         >
           <PostOwnerOptions post={post} />
           <PostViewerOptions post={post} />

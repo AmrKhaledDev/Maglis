@@ -1,6 +1,6 @@
 import PageContent from "./_components/PageContent";
 // =================================================================================
-function Messages() {
+function Conversations() {
   return (
     <main className="min-h-[86vh] pb-4">
       <PageContent />
@@ -8,4 +8,4 @@ function Messages() {
   );
 }
 
-export default Messages;
+export default Conversations;

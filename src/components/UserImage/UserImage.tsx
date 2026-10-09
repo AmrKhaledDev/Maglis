@@ -2,10 +2,10 @@ import clsx from "clsx";
 import Image from "next/image";
 // ============================================
 function UserImage({
-  imageUrl,
+  src,
   size,
 }: {
-  imageUrl: string | null;
+  src: string | null;
   size: string;
 }) {
   return (
@@ -13,7 +13,7 @@ function UserImage({
       className={clsx("relative rounded-full overflow-hidden shrink-0", size)}
     >
       <Image
-        src={imageUrl || "/user_default.jpeg"}
+        src={src || "/user_default.jpeg"}
         alt="صورة المستخدم"
         className="object-cover"
         priority

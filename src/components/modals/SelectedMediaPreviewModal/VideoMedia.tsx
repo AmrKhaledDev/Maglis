@@ -1,4 +1,4 @@
-import MediaFieldType from "../../../_types/MediaFileld.type";
+import MediaFieldType from "@/app/(feeds)/conversations/_types/MediaFileld.type";
 import ReactPlayer from "react-player";
 // ========================================================
 function VideoMedia({ field }: { field: MediaFieldType }) {

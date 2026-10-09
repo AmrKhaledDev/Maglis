@@ -37,7 +37,7 @@ function CommentOptions({
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bgOptionsBox boxMenu rounded-lg w-30"
+          className="bgMenuBox boxMenu rounded-lg w-30"
         >
           <EditCommentButton
             comment={comment}

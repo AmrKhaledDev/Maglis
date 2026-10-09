@@ -71,7 +71,7 @@ function EditProfileModal({ user }: { user: UserWithSocialLinkType }) {
           onSubmit={handleSubmit(onSubmit)}
           className="overflow-hidden rounded-2xl editProfileModal"
         >
-          <div className="w-220 flex flex-col gap-10 bg-[#14161B] max-h-170 overflow-y-auto shadow-2xl rounded-2xl p-5">
+          <div className="w-220 flex flex-col gap-10 modalBgColor max-h-170 overflow-y-auto shadow-2xl rounded-2xl p-5">
             <Header />
             <div className="flex flex-col gap-10">
               <BasicInfoSection />

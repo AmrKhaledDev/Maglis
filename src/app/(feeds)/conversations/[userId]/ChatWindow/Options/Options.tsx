@@ -34,7 +34,7 @@ function Options({ receiver }: { receiver: User }) {
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bgOptionsBox min-w-40! boxMenu"
+          className="bgMenuBox min-w-40! boxMenu"
         >
           <h2 className="text-[11px] text-gray-400 mb-1.5 font-light">
             خصائص الدردشة

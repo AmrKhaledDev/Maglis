@@ -17,8 +17,8 @@ function AuthFormFiled<T extends FieldValues>({
   disabled,
 }: AuthFormFieldType<T>) {
   return (
-    <div className="flex flex-col gap-1 w-full">
-      <label htmlFor={id} className="font-semibold text-sm w-fit">
+    <div className="flex flex-col gap-1.5 w-full">
+      <label htmlFor={id} className="text-sm w-fit">
         {label}
       </label>
       <div className="w-full flex flex-col gap-1.5">
@@ -37,7 +37,7 @@ function AuthFormFiled<T extends FieldValues>({
         />
         <AlertMessage message={error} type="error" />
         {isPasswordFiled == true && setShowPassword && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mt-1">
             <input
               disabled={disabled}
               onChange={() => setShowPassword(!showPassword)}
@@ -52,7 +52,7 @@ function AuthFormFiled<T extends FieldValues>({
                       checked:after:-translate-y-1/2
                       "
             />
-            <label className="font-semibold text-[13px]" htmlFor="showPassword">
+            <label className="text-[13px]" htmlFor="showPassword">
               إظهار كلمة المرور
             </label>
           </div>

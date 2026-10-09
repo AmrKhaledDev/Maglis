@@ -21,7 +21,7 @@ function PostCard({
   return (
     <div
       key={post.id}
-      className="p-3 bg-black/20 relative ring ring-white/1 shadow rounded-lg w-full"
+      className="p-3 bg-black/40 relative shadow rounded-lg w-full"
     >
       {variant === "profile" && post.isPinnedToProfile && (
         <p className="mb-4 text-xs text-gray-500 flex items-center gap-0.5">
@@ -34,11 +34,10 @@ function PostCard({
       </div>
       <PostContent post={post} />
       {variant !== "videos" && (
-        <>
-          <span className="w-full h-px rounded-full bg-white opacity-1.5 block my-2" />
+        <div className="mt-3">
           <PostActions setShowComments={setShowComments} post={post} />
           {showComments == post.id && <Comments post={post} />}
-        </>
+        </div>
       )}
     </div>
   );

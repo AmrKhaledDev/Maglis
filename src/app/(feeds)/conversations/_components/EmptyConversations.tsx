@@ -1,12 +1,8 @@
 import StartConversationModal from "@/components/modals/StartConversationModal/StartConversationModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import {
-    CornerDownLeft,
-    CornerDownRight,
-    MessageCircleDashed
-} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { AiFillMessage } from "react-icons/ai";
 // =====================================
 function EmptyConversations() {
   const { activeModal, setActiveModal } = useActiveModal();
@@ -23,7 +19,7 @@ function EmptyConversations() {
           />
         </div>
         <div className="flex flex-col gap-4 items-center">
-          <div className="flex flex-col gap-2 items-center">
+          <div className="flex flex-col gap-2.5 items-center">
             <h2 className="text-3xl">تبدو الصفحة فارغة</h2>
             <p className="text-gray-200">
               لا توجد محادثات بعد لماذا لا تبدأ واحدة جديدة؟
@@ -31,23 +27,15 @@ function EmptyConversations() {
           </div>
           <button
             onClick={() => setActiveModal("new_conversation")}
-            className="py-1.5 px-6 font-medium hover:bg-gray-200 bg-gray-100 text-black/80 rounded-full flex items-center gap-2 text-sm shadow cursor-pointer"
+            className="py-1 px-6 font-medium hover:bg-gray-200 bg-gray-100 flex items-center gap-1.5 text-sm shadow cursor-pointer text-blue-800"
           >
-            <MessageCircleDashed strokeWidth={2} className="size-4" />
+            <AiFillMessage className="size-5 text-blue-700"/>
             بدء محادثة جديدة
           </button>
-          <Link href={""} className="text-sm flex items-center gap-2 group ">
-            <CornerDownLeft
-              strokeWidth={0.5}
-              className="mb-1 group-hover:-translate-x-0.5 mytransition"
-            />
-            <span className="text-gray-300"> تصفح أصدقائك</span>
-            <CornerDownRight
-              strokeWidth={0.5}
-              className="mb-1 group-hover:translate-x-0.5 mytransition"
-            />
-          </Link>
-          <Link href={"/"} className="text-sm">
+          <Link
+            href={"/"}
+            className="text-sm text-gray-400 hover:underline underline-offset-1"
+          >
             الرجوع للصفحة الرئيسية
           </Link>
         </div>

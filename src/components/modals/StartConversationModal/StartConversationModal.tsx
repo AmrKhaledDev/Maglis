@@ -57,7 +57,7 @@ function StartConversationModal() {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-130 shadow-2xl shadow-black h-fit bg-[#2A333A] rounded-2xl overflow-hidden"
+        className="w-130 shadow-2xl shadow-black h-fit modalBgColor rounded-2xl overflow-hidden"
       >
         <Header />
         <div className="p-5 flex flex-col gap-6">

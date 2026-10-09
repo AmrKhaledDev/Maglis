@@ -32,5 +32,10 @@ export const tabsButtons = (activeTab: ActiveTab): TabButton[] => {
       value: "USER_VIDEOS",
       active: activeTab == "USER_VIDEOS",
     },
+    {
+      label: "الأصدقاء",
+      value: "USER_FRIENDS",
+      active: activeTab == "USER_FRIENDS",
+    },
   ];
 };

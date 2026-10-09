@@ -19,7 +19,7 @@ function CreatePostComposer() {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-7 w-full">
+        <div className="flex items-center gap-5 w-full">
           <CreatePostTrigger />
           <MediaPicker setMedia={setMedia} setMediaFile={setMediaFile} />
         </div>

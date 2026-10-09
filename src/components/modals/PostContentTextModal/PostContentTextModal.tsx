@@ -12,7 +12,7 @@ function PostContentTextModal({ post }: { post: PostType }) {
     userSession.id === post.authorId ? "/u/profile" : `/u/${post.authorId}`;
   return createPortal(
     <div className="fixed backdrop-blur-[3px] flex items-center justify-center inset-0 bg-black/40  z-100">
-      <div className="bg-slate-900 backdrop-blur-3xl max-w-200 min-w-70 p-5 rounded-xl shadow-2xl flex flex-col gap-8">
+      <div className="modalBgColor backdrop-blur-3xl max-w-200 min-w-70 p-5 rounded-xl shadow-2xl flex flex-col gap-8">
         <Header />
         <div className="flex flex-col gap-3">
           <h2 className="flex items-center gap-2 text-xs text-gray-200">

@@ -1,13 +1,15 @@
-import { Mars, Venus } from "lucide-react";
+import { FaVenus } from "react-icons/fa6";
+import { PiGenderMaleBold } from "react-icons/pi";
+
 // =======================================
 export const genderMap = {
   MALE: {
-    icon: Mars,
+    icon: PiGenderMaleBold,
     label: "ذكر",
     value: "MALE",
   },
   FEMALE: {
-    icon: Venus,
+    icon: FaVenus ,
     label: "أنثى",
     value: "FEMALE",
   },

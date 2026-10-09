@@ -25,7 +25,7 @@ function ReplyOptions({ reply }: { reply: CommentType }) {
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bgOptionsBox rounded-lg w-28 boxMenu"
+          className="bgMenuBox rounded-lg w-28 boxMenu"
         >
           <EditReplayButton reply={reply} />
           <CopyReplyContentButton reply={reply} />

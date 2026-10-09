@@ -1,19 +1,12 @@
+import UserImage from "@/components/UserImage/UserImage";
 import { User } from "@prisma/client";
-import Image from "next/image";
 import Link from "next/link";
 import Options from "./Options/Options";
 // ================================================
 function Header({ receiver }: { receiver: User }) {
   return (
     <header className="flex items-center gap-3 p-2 bg-[#161717]">
-      <div className="relative sm:size-11 size-9 shrink-0 rounded-full overflow-hidden">
-        <Image
-          src={receiver.image || "/user.jpg"}
-          alt="صورة المستخدم"
-          className="object-cover"
-          fill
-        />
-      </div>
+      <UserImage src={receiver.image} size="size-15" />
       <div className="flex items-center justify-between w-full sm:gap-10 gap-5">
         <div>
           <Link

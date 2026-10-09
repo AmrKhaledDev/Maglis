@@ -99,12 +99,11 @@ function CreatePostModal() {
       >
         <form
           onSubmit={handleSubmit(handleCreatePost)}
-          className="bg-slate-800 ring ring-gray-50/5 text-white shadow-2xl p-3 rounded-xl w-200 max-h-170 overflow-y-auto space-y-3"
+          className="modalBgColor ring ring-gray-50/5 text-white shadow-2xl p-3 rounded-xl w-200 max-h-170 overflow-y-auto space-y-4"
         >
           <CreatePostModalHeader loading={loading} />
           {error && <AlertMessage type="error" message={error.message} />}
           <CreatePostModalAuthor />
-          <span className="w-full bg-white opacity-2 h-px rounded-full block mt-2 mb-5" />
           <CreatePostModalCenter
             control={control}
             setValue={setValue}

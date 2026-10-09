@@ -11,7 +11,12 @@ function SuggestedGroups() {
   if (pathname === "/videos") return null;
   return (
     <div className="bg-white/2 p-4 shadow rounded-2xl overflow-hidden flex flex-col gap-5">
-      <SectionHeader title="مجموعات مقترحة" linkUrl="/" />
+      <SectionHeader
+        title="مجموعات مقترحة"
+        linkUrl="/"
+        isPending={false}
+        dataLength={0}
+      />
       <div className="flex flex-col gap-4">
         {Array(3)
           .fill(0)
@@ -26,9 +31,14 @@ function SuggestedGroups() {
                     className="object-cover"
                   />
                 </div>
-                <NameDescription userId="" name="مطورين ويب العرب" description="20 عضو" />
+                <NameDescription
+                  userId=""
+                  name="مطورين ويب العرب"
+                  description="20 عضو"
+                />
               </div>
               <ButtonAction
+                id=""
                 icon={UserPlus}
                 name="إنضمام"
                 textStyle="text-white"

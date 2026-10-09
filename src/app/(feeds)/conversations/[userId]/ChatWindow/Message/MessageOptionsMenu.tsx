@@ -13,7 +13,7 @@ function MessageOptionsMenu({ message }: { message: Message }) {
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bgOptionsBox -left-15 boxMenu"
+          className="bgMenuBox -left-15 boxMenu"
         >
           <button
             onClick={() => setActiveModal("edit_message" + message.id)}

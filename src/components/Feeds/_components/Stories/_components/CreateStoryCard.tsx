@@ -13,7 +13,7 @@ function CreateStoryCard() {
           onClick={() => setActiveModal("create_story_modal")}
           className="relative cursor-pointer"
         >
-          <UserImage imageUrl={userSession.image} size="size-16" />
+          <UserImage src={userSession.image} size="size-16" />
           <Plus
             className="absolute -bottom-1.5 left-0.5 bg-black text-white rounded-full p-1 size-6"
             strokeWidth={1.5}

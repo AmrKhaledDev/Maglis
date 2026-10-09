@@ -69,7 +69,7 @@ function CreateStoryModal() {
       transition={{ duration: 0.3 }}
       className="fixed inset-0 backdrop-blur-xl bg-black/5 z-50 flex items-center justify-center"
     >
-      <div className="overflow-y-auto w-200 max-h-180 rounded-2xl bg-slate-800 flex flex-col gap-7 p-3">
+      <div className="overflow-y-auto w-200 max-h-180 rounded-2xl modalBgColor flex flex-col gap-7 p-3">
         <CreateStoryModalHeader />
         <div className="flex flex-col gap-5">
           <CreateStoryModalUploadMedia

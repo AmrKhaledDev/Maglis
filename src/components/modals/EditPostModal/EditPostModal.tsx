@@ -112,7 +112,7 @@ function EditPostModal({ post }: { post: PostType }) {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.1 }}
         onSubmit={handleSubmit(handleEditPost)}
-        className="boxEditPostModal w-200 p-3 max-h-150 overflow-y-auto ring ring-gray-50/10 bg-slate-800 rounded-2xl shadow-2xl text-white"
+        className="boxEditPostModal w-200 p-3 max-h-150 overflow-y-auto ring ring-gray-50/10 modalBgColor rounded-2xl shadow-2xl text-white"
       >
         <Header
           setValue={setValue}
@@ -120,7 +120,6 @@ function EditPostModal({ post }: { post: PostType }) {
           loading={loading}
           isPinnedToProfile={isPinnedToProfile}
         />
-        <hr className="border-white opacity-3 my-2" />
         {error && <AlertMessage type="error" message={error.message} />}
         <EditPostModalAuthor
           post={post}

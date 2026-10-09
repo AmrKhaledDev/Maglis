@@ -30,28 +30,29 @@ function SelectPrivacy({
     <DropdownMenu>
       <DropdownMenuTrigger
         disabled={disabled}
-        className="flex rounded-full items-center w-fit space-x-2.5 justify-between not-disabled:cursor-pointer bg-gray-600/30 ring ring-gray-50/10 py-1.5 px-3 shadow"
+        className="flex rounded-full items-center w-fit space-x-5 justify-between not-disabled:cursor-pointer bg-gray-600/30 ring ring-gray-50/10 py-1.5 px-3 shadow"
       >
-        <div className="flex items-center gap-1 text-xs">
+        <div className="flex items-center gap-1.5 text-xs">
           <selectPrivacy.icon className="size-4" /> {selectPrivacy.label}
         </div>
         <IoMdArrowDropdown />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="bg-[#14161B]! text-white! shadow-lg! ring! ring-white/5">
         <DropdownMenuLabel>خصوصية المنشور</DropdownMenuLabel>
         <DropdownMenuGroup className="flex flex-col gap-1">
           {privacyOptions.map((option) => (
             <DropdownMenuItem
-              className={clsx(
-                "text-xs!",
-                selectPrivacy.value === option.value &&
-                  "bg-white hover:bg-white!",
-              )}
+              className="text-xs! flex items-center justify-between "
               onClick={() => setValue("privacy", option)}
               key={option.value}
             >
-              <option.icon />
-              {option.label}
+              <span className="flex items-center gap-2">
+                <option.icon />
+                {option.label}
+              </span>
+              {selectPrivacy.value === option.value && (
+                <span className="size-2 bg-sky-500 rounded-full block animate-pulse" />
+              )}
             </DropdownMenuItem>
           ))}
         </DropdownMenuGroup>

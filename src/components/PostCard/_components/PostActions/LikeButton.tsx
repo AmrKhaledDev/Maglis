@@ -4,10 +4,10 @@ import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import clsx from "clsx";
+import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
-// ===========================================
+// =========================================================================
 function LikeButton({ post }: { post: PostType }) {
   const { setToast } = useToast();
   const userSession = useUser();
@@ -43,10 +43,17 @@ function LikeButton({ post }: { post: PostType }) {
       disabled={loading}
       className="not-disabled:cursor-pointer flex items-center gap-1 text-gray-100"
     >
-      <Heart
-        strokeWidth={1}
-        className={clsx("size-5", isLiker && "fill-red-500 text-red-500")}
-      />
+      {isLiker ? (
+        <motion.img
+          initial={{ scale: 1.1 }}
+          whileInView={{ scale: 1 }}
+          src="/heart.png"
+          alt="heart"
+          className="size-5.5"
+        />
+      ) : (
+        <Heart strokeWidth={1} className="size-5.5" />
+      )}
     </button>
   );
 }

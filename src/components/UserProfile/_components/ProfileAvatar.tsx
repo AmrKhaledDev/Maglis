@@ -29,7 +29,7 @@ function ProfileAvatar({ user }: { user: User }) {
         }}
         className="relative shrink-0 shadow -mt-12 cursor-pointer rounded-full bg-black/20 backdrop-blur-2xl"
       >
-        <UserImage imageUrl={user.image} size="size-25" />
+        <UserImage src={user.image} size="size-25" />
       </button>
       {activeModal == "edit_avatar_modal" && user.id === userSession.id && (
         <EditProfileImageModal

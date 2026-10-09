@@ -80,7 +80,7 @@ function EditProfileImageModal({
     >
       <div
         className={clsx(
-          "bg-slate-800 flex modalEditAvatar flex-col rounded-xl shadow",
+          "modalBgColor flex modalEditAvatar flex-col rounded-xl shadow",
           typeImage === "AVATAR" && "w-200",
           typeImage === "COVER" && "w-270",
         )}

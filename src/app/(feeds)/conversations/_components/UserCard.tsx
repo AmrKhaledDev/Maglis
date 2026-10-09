@@ -6,7 +6,7 @@ import UserInfo from "./UserInfo";
 // =====================================================================
 function UserCard({ user }: { user: UserMemberType }) {
   return (
-    <div className="sm:p-3 p-2 shadow-lg rounded sm:bg-white/3 bg-white/5 flex flex-col items-center justify-center gap-2">
+    <div className="sm:p-3 p-2 shadow-lg rounded sm:bg-white/1 bg-white/3 flex flex-col items-center justify-center gap-2">
       <div className="relative md:size-14 sm:size-12 size-10 rounded-full overflow-hidden">
         <Image
           src={user.image || "/user.jpg"}

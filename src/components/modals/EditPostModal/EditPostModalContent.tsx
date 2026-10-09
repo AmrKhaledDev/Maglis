@@ -14,7 +14,7 @@ function EditPostModalContent({
     <div className="w-full mb-4">
       <TextareaAutosize
         placeholder="بماذا تفكر اليوم يا عمرو غفر الله له ؟"
-        className=" w-full resize-none font-normal p-3 rounded-xl text-sm outline-none focus:border-white/5 border border-transparent mytransition"
+        className=" w-full resize-none font-normal p-3 rounded-xl text-sm outline-none focus:border-white/10 border border-white/5 mytransition"
         minRows={8}
         maxRows={10}
         {...register("content")}

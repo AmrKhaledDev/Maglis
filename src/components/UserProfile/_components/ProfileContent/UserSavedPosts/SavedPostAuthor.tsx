@@ -8,7 +8,7 @@ dayjs.locale("ar");
 function SavedPostAuthor({ saveItem }: { saveItem: SavePostType }) {
   return (
     <div className="flex items-center gap-2">
-      <UserImage imageUrl={saveItem.post.author.image} size="size-9" />
+      <UserImage src={saveItem.post.author.image} size="size-9" />
       <div>
         <div className="flex items-center gap-1.5">
           <h2 className="font-semibold text-sm text-gray-100 line-clamp-1 [word-break:break-word]">

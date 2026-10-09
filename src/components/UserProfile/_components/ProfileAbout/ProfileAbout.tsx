@@ -32,11 +32,11 @@ function ProfileAbout({ user }: { user: UserWithSocialLinkType }) {
               info.value && (
                 <div
                   key={info.id}
-                  className="flex items-center gap-1.5 text-gray-300 text-xs"
+                  className="flex items-center gap-2 text-gray-300 text-xs"
                 >
-                  <info.icon className="size-5 p-1 bg-gray-200 text-slate-800 rounded-full" />
+                  <info.icon className="size-6 p-1 bg-gray-200 text-slate-800 rounded-full" />
                   <div className="flex items-center gap-1.5">
-                    <p className="text-gray-400">{info.label}</p>
+                    <p className="text-gray-300">{info.label}</p>
                     <span className="text-gray-100 font-semibold">
                       {info.value}
                     </span>

@@ -13,7 +13,7 @@ function AuthToggle({
   icon?: LucideIcon;
 }) {
   return (
-    <p className="flex items-center gap-1.5 justify-center text-sm font-normal text-gray-200">
+    <p className="flex items-center gap-2 justify-center text-sm font-normal text-gray-200">
       {text}
       <Link
         className="font-semibold flex items-center gap-1.5 text-xs hover:bg-white/10 mytransition py-1.5 px-4 text-white bg-white/5 ring ring-gray-50/10 rounded-full"

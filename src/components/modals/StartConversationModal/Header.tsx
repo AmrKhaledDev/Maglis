@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 function Header() {
   const { setActiveModal } = useActiveModal();
   return (
-    <header className="flex items-center p-3 bg-black/40">
+    <header className="flex items-center p-5 bg-black/20">
       <button
         onClick={() => setActiveModal(null)}
         className="cursor-pointer text-gray-400 hover:text-white"

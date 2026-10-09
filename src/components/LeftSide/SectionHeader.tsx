@@ -21,7 +21,7 @@ function SectionHeader({
       ) : (
         dataLength > 0 && (
           <div className="flex items-center justify-between">
-            <h1 className="font-medium text-sm text-gray-300">{title}</h1>
+            <h1 className="text-sm text-gray-200">{title}</h1>
             <Link href={linkUrl} className="text-xs text-blue-500">
               عرض الكل
             </Link>

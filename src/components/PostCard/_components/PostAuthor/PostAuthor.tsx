@@ -17,7 +17,7 @@ function PostAuthor({ post }: { post: PostType }) {
         href={useUrlUserProfile(post.authorId)}
         className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
       >
-        <UserImage imageUrl={post.author.image} size="size-10" />
+        <UserImage src={post.author.image} size="size-10" />
       </Link>
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-4">

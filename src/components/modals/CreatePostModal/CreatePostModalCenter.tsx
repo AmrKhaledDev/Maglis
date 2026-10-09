@@ -23,7 +23,7 @@ function CreatePostModalCenter({
         minRows={7}
         maxRows={15}
         placeholder="بماذا تفكر اليوم يا عمرو غفر الله له ؟"
-        className="w-full p-2 leading-6 rounded resize-none outline-none border border-gray-50/5 focus:border-gray-50/15 transition"
+        className="w-full p-3 leading-6 rounded-xl resize-none outline-none border border-gray-50/3 focus:border-gray-50/6 transition"
       />
       <div className="flex items-center justify-between text-gray-300">
         <p className="text-sm flex items-center gap-1">

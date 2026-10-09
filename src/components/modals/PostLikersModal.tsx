@@ -27,7 +27,7 @@ function PostLikersModal({ post }: { post: PostType }) {
   }, []);
   return (
     <div className="fixed inset-0 backdrop-blur-[5px] z-100 flex items-center justify-center">
-      <div className="w-110 max-h-100 bg-slate-800 rounded-2xl p-3 shadow-lg flex flex-col gap-10 likersMenu">
+      <div className="w-110 max-h-100 modalBgColor rounded-2xl p-3 shadow-lg flex flex-col gap-10 likersMenu">
         <div className="flex items-center justify-between">
           <h1 className="flex-1 text-center">
             تسجيلات الإعجاب ({likers.length})

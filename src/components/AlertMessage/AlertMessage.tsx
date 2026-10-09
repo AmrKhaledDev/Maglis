@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import { CircleAlert } from "lucide-react";
 import { FaRegCircleCheck } from "react-icons/fa6";
 // ================================================
@@ -14,7 +15,9 @@ function AlertMessage({
   return (
     <>
       {message !== undefined && (
-        <p
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           className={clsx("text-xs font-semibold p-2 flex items-center gap-2", {
             "text-green-200 bg-green-900": type === "success",
             "text-red-200 bg-red-900": type === "error",
@@ -25,7 +28,7 @@ function AlertMessage({
           {type === "error" && <CircleAlert className="size-4" />}
           {type === "success" && <FaRegCircleCheck />}
           {message}
-        </p>
+        </motion.p>
       )}
     </>
   );

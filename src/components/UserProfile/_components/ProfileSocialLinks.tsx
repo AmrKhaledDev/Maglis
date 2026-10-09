@@ -22,10 +22,10 @@ function ProfileSocialLinks({ user }: { user: UserWithSocialLinkType }) {
               target="_blank"
                 href={platform.link}
                 key={platform.id}
-                className="p-3 hover:bg-white/30 hover:scale-102 mytransition flex flex-col gap-2 items-center ring-1 ring-gray-50/15 bg-white/10 rounded-2xl shadow"
+                className="p-3 hover:bg-white/15 hover:scale-102 mytransition flex flex-col gap-3 items-center ring-1 ring-gray-50/10 bg-white/5 rounded-2xl shadow"
               >
-                <PLATFORM.icon className="text-2xl" />
-                <p className="font-bold text-shadow-2xs">{PLATFORM.label}</p>
+                <PLATFORM.icon className="text-3xl" />
+                <p className="text-shadow-2xs">{PLATFORM.label}</p>
               </Link>
             );
           })

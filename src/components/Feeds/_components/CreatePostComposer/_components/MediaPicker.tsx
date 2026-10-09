@@ -1,7 +1,5 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { ImagePlay, Upload } from "lucide-react";
 import Image from "next/image";
-import { IoMdPhotos } from "react-icons/io";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 // ================================================================
 function MediaPicker({
   setMedia,
@@ -20,20 +18,34 @@ function MediaPicker({
     }
   };
   return (
-    <div>
+    <div className="flex items-center gap-3">
       <label
-        htmlFor="upload_media"
-        className="text-2xl shadow block text-gray-200 mytransition cursor-pointer p-2.5 hover:bg-white/6 bg-white/4 rounded-full"
+        htmlFor="image"
+        className="text-3xl shadow block mytransition cursor-pointer rounded-full relative size-6.5 hover:scale-105 active:scale-95"
       >
-        <IoMdPhotos />
+        <Image src="/image.png" alt="image icon" fill className="object-contain" />
       </label>
       <input
         onChange={handleChange}
         type="file"
-        id="upload_media"
+        id="image"
         className="hidden"
         hidden
-        accept="image/*, video/*"
+        accept="image/*"
+      />
+      <label
+        htmlFor="video"
+        className="text-3xl shadow block mytransition cursor-pointer rounded-full relative size-6.5 hover:scale-105 active:scale-95"
+      >
+        <Image src="/video.png" alt="video icon" fill className="object-contain" />
+      </label>
+      <input
+        onChange={handleChange}
+        type="file"
+        id="video"
+        className="hidden"
+        hidden
+        accept="video/*"
       />
     </div>
   );

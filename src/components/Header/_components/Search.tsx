@@ -42,7 +42,7 @@ function Search() {
     });
   return (
     <div className="relative">
-      <div className="w-190 searchBox shadow h-12 bg-black/10 rounded-full overflow-hidden border border-gray-50/10 flex items-center justify-between">
+      <div className="w-190 searchBox shadow h-12 bg-black/10 rounded-full overflow-hidden border border-gray-50/6 flex items-center justify-between">
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
