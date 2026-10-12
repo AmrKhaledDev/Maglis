@@ -1,6 +1,6 @@
 "use server";
 
-import { registerSendVerificationToken } from "@/lib/email/registerSendVerificationToken";
+import { registerSendVerificationToken } from "@/lib/email/AuthSendVerificationToken";
 import { generateVerificationToken } from "@/lib/generateVerificationToken";
 import { prisma } from "@/lib/prisma";
 import { RegisterSchema } from "@/ZodSchemas/Auth/Register.schema";

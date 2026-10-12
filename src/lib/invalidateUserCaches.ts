@@ -19,6 +19,9 @@ export const invalidateUserCaches = (
     queryKey: ["comments", userSession.id],
   });
   queryClient.invalidateQueries({
+    queryKey: ["friends", userSession, ...args],
+  });
+  queryClient.invalidateQueries({
     queryKey: ["replies"],
   });
   queryClient.invalidateQueries({

@@ -1,7 +1,7 @@
 "use server";
 
 import { signIn } from "@/lib/auth";
-import { registerSendVerificationToken } from "@/lib/email/registerSendVerificationToken";
+import { AuthSendVerificationToken } from "@/lib/email/AuthSendVerificationToken";
 import { generateVerificationToken } from "@/lib/generateVerificationToken";
 import { prisma } from "@/lib/prisma";
 import { LoginSchema } from "@/ZodSchemas/Auth/Login.schema";
@@ -40,7 +40,7 @@ export const LoginAction = async (
       );
       if ("error" in verificationToken)
         return { success: false, message: verificationToken.error };
-      const result = await registerSendVerificationToken(
+      const result = await AuthSendVerificationToken(
         validation.data.email,
         existingUser.name,
         verificationToken.token,
@@ -53,7 +53,7 @@ export const LoginAction = async (
       password: validation.data.password,
       redirect: false,
     });
-    return { success: true};
+    return { success: true };
   } catch (error) {
     console.log(error);
     return {

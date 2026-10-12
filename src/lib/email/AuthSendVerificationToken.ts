@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-export const registerSendVerificationToken = async (
+export const AuthSendVerificationToken = async (
   email: string,
   verificationToken: string,
   name: string,
