@@ -22,7 +22,6 @@ function Form() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     setValue,
   } = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),

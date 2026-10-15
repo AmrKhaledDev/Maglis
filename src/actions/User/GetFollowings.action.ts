@@ -1,23 +1,23 @@
 "use server";
 
-import FollowingType from "@/components/UserProfile/_types/Following.type";
 import { prisma } from "@/lib/prisma";
+import UserConnectionType from "@/types/UserConnection.type";
 // ===============================================================================
-export const GetFollowings = async (
+export const GetFollowingsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;
   message?: string;
-  followings: FollowingType[];
+  data: UserConnectionType[];
 }> => {
   try {
     if (!userId)
       return {
         success: false,
         message: "حدث خطأ غير متوقع أثناء جلب المتابعات.",
-        followings: [],
+        data: [],
       };
-    const followings = await prisma.follow.findMany({
+    const data = await prisma.follow.findMany({
       where: {
         followerId: userId,
       },
@@ -32,16 +32,22 @@ export const GetFollowings = async (
         },
       },
     });
+    const users = data.map((following) => ({
+      id: following.following.id,
+      image: following.following.image,
+      name: following.following.name,
+      professionalMode: following.following.professionalMode,
+    }));
     return {
-      success: false,
-      followings,
+      success: true,
+      data: users,
     };
   } catch (error) {
     console.error(error);
     return {
       success: false,
       message: "حدث خطأ أثناء جلب المتابعات.",
-      followings: [],
+      data: [],
     };
   }
 };

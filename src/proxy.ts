@@ -1,7 +1,7 @@
 import { auth as proxy } from "@/lib/auth";
 import { NextResponse } from "next/server";
 // ===========================================
-const authPages = ["/login", "/register", "/credential-login"];
+const authPages = ["/login", "/register"];
 export default proxy(async (req) => {
   const session = req.auth;
   const pathname = req.nextUrl.pathname;
@@ -11,5 +11,5 @@ export default proxy(async (req) => {
     return NextResponse.redirect(new URL("/login", req.nextUrl.origin));
 });
 export const config = {
-  mathcer: ["/login", "/register", "/credential-login", "/"],
+  mathcer: ["/login", "/register", "/"],
 };

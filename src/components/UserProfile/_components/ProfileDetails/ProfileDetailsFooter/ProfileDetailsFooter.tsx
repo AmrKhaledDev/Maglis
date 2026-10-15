@@ -20,13 +20,13 @@ function ProfileDetailsFooter({ user }: { user: User }) {
           followingId={user.id}
           followColor="hover:outline-blue-600 outline-offset-2 hover:outline bg-blue-800"
           unfollowColor="bg-white/10 hover:bg-white/15"
-          textColor="flex text-xs items-center  gap-2 cursor-pointer text-gray-200  shadow py-2 px-3 rounded-full text-nowrap"
+          publicStyle="flex text-xs items-center  gap-2 cursor-pointer text-gray-200  shadow py-2 px-3 rounded-full text-nowrap"
         />
       ) : isFriend ? (
         <DeleteFriendButton userId={user.id} setIsFriend={setIsFriend} />
       ) : (
         <AddFriendButton
-          textStyle="flex text-xs items-center  gap-2 cursor-pointer text-gray-200 shadow py-2 px-3 rounded-full text-nowrap"
+          publicStyle="flex text-xs items-center  gap-2 cursor-pointer text-gray-200 shadow py-2 px-3 rounded-full text-nowrap"
           sentStyle="bg-blue-800 hover:outline outline-offset-2 hover:outline-blue-600"
           unsentStyle="bg-black/50 hover:bg-black/60"
           userId={user.id}

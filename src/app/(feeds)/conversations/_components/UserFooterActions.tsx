@@ -24,16 +24,16 @@ function UserFooterActions({ user }: { user: UserMemberType }) {
       </Link>
       {!isFriend && !user.professionalMode && (
         <AddFriendButton
-          iconSize="lg:size-5 size-4"
+          iconStyle="lg:size-5 size-4"
           userId={user.id}
-          textStyle="py-1.5 lg:text-sm text-xs bg-blue-900 w-full flex items-center gap-2 justify-center cursor-pointer hover:bg-blue-800 mytransition rounded-full"
+          publicStyle="py-1.5 lg:text-sm text-xs bg-blue-900 w-full flex items-center gap-2 justify-center cursor-pointer hover:bg-blue-800 mytransition rounded-full"
         />
       )}
       {!isFollow && user.professionalMode && (
         <FollowButton
-          iconSize="lg:size-5 size-4"
+          iconStyle="lg:size-5 size-4"
           followingId={user.id}
-          textColor="py-1.5 lg:text-sm text-xs w-full flex items-center gap-2 justify-center cursor-pointer  mytransition hover:bg-blue-800 bg-blue-900 rounded-full"
+          publicStyle="py-1.5 lg:text-sm text-xs w-full flex items-center gap-2 justify-center cursor-pointer  mytransition hover:bg-blue-800 bg-blue-900 rounded-full"
         />
       )}
     </div>

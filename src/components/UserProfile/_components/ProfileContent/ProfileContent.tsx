@@ -3,7 +3,7 @@ import { useUser } from "@/providers/UserProvider";
 import { useState } from "react";
 import { ActiveTab } from "../../_types/ActiveTab.type";
 import TabsButtons from "./TabsButtons";
-import UserFriends from "./UserFriends/UserFriends";
+import UserFriends from "./UserConnections/UserConnections";
 import UserImages from "./UserImages";
 import UserPosts from "./UserPosts";
 import UserSavedPosts from "./UserSavedPosts/UserSavedPosts";

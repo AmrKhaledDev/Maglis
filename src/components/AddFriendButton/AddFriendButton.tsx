@@ -11,14 +11,14 @@ function AddFriendButton({
   userId,
   sentStyle,
   unsentStyle,
-  textStyle,
-  iconSize,
+  publicStyle,
+  iconStyle,
 }: {
   userId: string;
   sentStyle?: string;
   unsentStyle?: string;
-  textStyle?: string;
-  iconSize?: string;
+  publicStyle?: string;
+  iconStyle?: string;
 }) {
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -56,18 +56,18 @@ function AddFriendButton({
       disabled={loading}
       className={clsx(
         "cursor-pointer",
-        textStyle,
+        publicStyle,
         isSent ? unsentStyle : sentStyle,
       )}
     >
       {isSent ? (
         <>
-          <Check className={clsx(iconSize ?? "size-4")} strokeWidth={1} />
+          <Check className={iconStyle} strokeWidth={1} />
           تم إرسال الطلب
         </>
       ) : (
         <>
-          <UserPlus className={clsx(iconSize ?? "size-4")} strokeWidth={1} />
+          <UserPlus className={clsx(iconStyle ?? "size-4")} strokeWidth={1} />
           إضافة صديق
         </>
       )}

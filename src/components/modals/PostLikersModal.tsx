@@ -72,7 +72,7 @@ function PostLikersModal({ post }: { post: PostType }) {
               {userSession.id !== liker.userId &&
                 liker.user.professionalMode && (
                   <FollowButton
-                    textColor="flex text-nowrap items-center gap-2 py-1.5 px-3 shadow mytransition rounded-xl  text-xs"
+                    publicStyle="flex text-nowrap items-center gap-2 py-1.5 px-3 shadow mytransition rounded-xl  text-xs"
                     unfollowColor="bg-gray-600 hover:bg-gray-700"
                     followColor="hover:bg-blue-700 bg-blue-600"
                     followingId={liker.userId}

@@ -51,7 +51,7 @@ function VideoAuthor({ video }: { video: PostType }) {
                 followingId={video.authorId}
                 followColor="bg-blue-900/30 text-blue-400 border-blue-500/10 border shadow"
                 unfollowColor="hover:text-gray-400"
-                textColor="text-[10px] active:scale-95 flex font-semibold items-center gap-2 cursor-pointer py-1 px-3 rounded-md "
+                publicStyle="text-[10px] active:scale-95 flex font-semibold items-center gap-2 cursor-pointer py-1 px-3 rounded-md "
               />
             </>
           )}

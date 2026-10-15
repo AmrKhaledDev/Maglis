@@ -1,12 +1,12 @@
 "use server";
 
-import { registerSendVerificationToken } from "@/lib/email/AuthSendVerificationToken";
+import { AuthSendVerificationToken } from "@/lib/email/AuthSendVerificationToken";
 import { generateVerificationToken } from "@/lib/generateVerificationToken";
 import { prisma } from "@/lib/prisma";
 import { RegisterSchema } from "@/ZodSchemas/Auth/Register.schema";
 import bcrypt from "bcryptjs";
 import z from "zod";
-// =====================================================
+// =====================================================================================
 export const RegisterAction = async (
   data: z.infer<typeof RegisterSchema>,
 ): Promise<{ success: boolean; message: string }> => {
@@ -29,7 +29,7 @@ export const RegisterAction = async (
       return { success: false, message: verificationToken.error };
     try {
       await prisma.$transaction(async (tx) => {
-        const result = await registerSendVerificationToken(
+        const result = await AuthSendVerificationToken(
           validation.data.email,
           verificationToken.token,
           validation.data.name,

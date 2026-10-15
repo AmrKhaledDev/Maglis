@@ -22,7 +22,7 @@ function PostViewerOptions({ post }: { post: PostType }) {
           {post.author.professionalMode && (
             <FollowButton
               followingId={post.authorId}
-              textColor="btnOptBox"
+              publicStyle="btnOptBox"
               followColor=""
               unfollowColor="text-red-500!"
             />
