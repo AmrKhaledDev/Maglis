@@ -13,6 +13,7 @@ import { PostType } from "@/types/Post.type";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { CreateAction } from "@/actions/Comment/Create.action";
 import { EditAction } from "@/actions/Comment/Edit.action";
+import UserImage from "@/components/UserImage/UserImage";
 // =====================================================
 function CommentComposer({
   post,
@@ -78,13 +79,7 @@ function CommentComposer({
         <div className="flex flex-col gap-4">
           {error && <AlertMessage message={error.message} type="error" />}
           <div className="flex gap-2">
-            <Image
-              src={userSession.image ?? "/user.jpg"}
-              alt="صورتك"
-              width={60}
-              height={60}
-              className="object-cover size-7 rounded-full shrink-0"
-            />
+            <UserImage src={userSession.image} size="size-10"/>
             <div className="border border-white/10 w-full focus-within:border-white/25 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
               <CommentTextarea
                 content={content}

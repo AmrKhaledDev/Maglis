@@ -1,5 +1,5 @@
 import { useUser } from "@/providers/UserProvider";
-import { UserSearchResult } from "@/types/UserSearchResult.type";
+import { UserSearchResultType } from "@/types/UserSearchResult.type";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,13 +9,13 @@ function UsersSearchResult({
   data,
 }: {
   searchValue: string;
-  data: UserSearchResult[];
+  data: UserSearchResultType[];
 }) {
   const userSession = useUser();
   return (
     <div
       className={clsx(
-        "p-3 absolute ring ring-gray-50/2 modalBgColor w-full rounded-2xl mt-1 shadow-2xl flex flex-col gap-3",
+        "p-3 absolute modalBgColor w-full rounded-2xl mt-1 shadow-2xl flex flex-col gap-3",
         (!searchValue.trim() || !data) && "hidden",
       )}
     >

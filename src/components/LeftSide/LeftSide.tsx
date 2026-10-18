@@ -3,7 +3,7 @@ import SuggestedPeople from "./SuggestedPeople/SuggestedPeople";
 import SuggestedGroups from "./SuggestedGroups/SuggestedGroups";
 import RecentContacts from "./RecentContacts/RecentContacts";
 import { usePathname } from "next/navigation";
-// ===================================
+// ================================================================
 function LeftSide() {
   
   const pathname = usePathname();

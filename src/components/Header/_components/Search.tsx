@@ -1,31 +1,22 @@
 "use client";
 import { SearchUsersAction } from "@/actions/Search/SearchUsers.action";
-import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { UserSearchResult } from "@/types/UserSearchResult.type";
+import { useQuery } from "@tanstack/react-query";
 import { Search as SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import UsersSearchResult from "./UsersSearchResult";
-// ============================================
+// =================================================================================
 function Search() {
   const userSession = useUser();
   const [searchValue, setSearchValue] = useState("");
-  const [data, setData] = useState<UserSearchResult[]>([]);
-  const { setToast } = useToast();
-  useEffect(() => {
-    const FETCH_DATA = async () => {
-      if (!searchValue.trim()) return;
+  const { data = [] } = useQuery({
+    queryFn: async () => {
       const result = await SearchUsersAction(searchValue);
-      if (!result.success && result.messaage)
-        return setToast({
-          open: true,
-          message: result.messaage,
-          type: "error",
-        });
-      setData(result.users || []);
-    };
-    FETCH_DATA();
-  }, [searchValue]);
+      return result.users;
+    },
+    queryKey: ["search_users", userSession.id, searchValue],
+    enabled: searchValue.trim().length > 0,
+  });
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (e.target instanceof Element)
@@ -34,12 +25,11 @@ function Search() {
     document.addEventListener("click", handle);
     return () => document.removeEventListener("click", handle);
   }, []);
-  data &&
-    data.sort((a, b) => {
-      if (a.id === userSession.id) return -1;
-      if (b.id === userSession.id) return 1;
-      return 0;
-    });
+  const sorting_data = data.sort((a, b) => {
+    if (a.id === userSession.id) return -1;
+    if (b.id === userSession.id) return 1;
+    return 0;
+  });
   return (
     <div className="relative">
       <div className="w-190 searchBox shadow h-12 bg-black/10 rounded-full overflow-hidden border border-gray-50/6 flex items-center justify-between">
@@ -56,7 +46,7 @@ function Search() {
         </button>
       </div>
       {data.length > 0 && (
-        <UsersSearchResult data={data} searchValue={searchValue} />
+        <UsersSearchResult data={sorting_data} searchValue={searchValue} />
       )}
     </div>
   );

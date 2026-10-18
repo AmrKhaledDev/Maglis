@@ -2,6 +2,7 @@
 import { navLinks } from "@/data/Menu/NavLinks";
 import { useUser } from "@/providers/UserProvider";
 import clsx from "clsx";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // ==========================================================
@@ -25,10 +26,13 @@ function Menu() {
               : "active:scale-95 hover:bg-white/2",
           )}
         >
-          <img
+          <Image
             src={link.icon}
             alt="icon"
+            width={100}
+            height={100}
             className={clsx("size-10", link.style)}
+            priority
           />
           {link.title}
         </Link>

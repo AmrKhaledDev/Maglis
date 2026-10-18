@@ -62,12 +62,12 @@ function AddFriendButton({
     >
       {isSent ? (
         <>
-          <Check className={iconStyle} strokeWidth={1} />
+          <Check className={iconStyle} />
           تم إرسال الطلب
         </>
       ) : (
         <>
-          <UserPlus className={clsx(iconStyle ?? "size-4")} strokeWidth={1} />
+          <UserPlus className={clsx(iconStyle ?? "size-4")} />
           إضافة صديق
         </>
       )}

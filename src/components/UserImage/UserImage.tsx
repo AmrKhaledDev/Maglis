@@ -4,9 +4,11 @@ import Image from "next/image";
 function UserImage({
   src,
   size,
+  alt,
 }: {
   src: string | null;
   size: string;
+  alt?: string;
 }) {
   return (
     <div
@@ -14,7 +16,7 @@ function UserImage({
     >
       <Image
         src={src || "/user_default.jpeg"}
-        alt="صورة المستخدم"
+        alt={alt ?? "profile_image"}
         className="object-cover"
         priority
         fill

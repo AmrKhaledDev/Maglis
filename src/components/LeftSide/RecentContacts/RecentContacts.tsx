@@ -20,7 +20,7 @@ function RecentContacts() {
     queryKey: ["user_recent_contacts", userSession.id],
   });
   return (
-    <div className="p-4 shadow flex flex-col gap-5">
+    <div className="p-4 flex flex-col gap-5">
       <SectionHeader
         title="آخر التواصل"
         linkUrl="/"

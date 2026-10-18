@@ -1,16 +1,18 @@
 "use server";
 
+import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import { UserSearchResult } from "@/types/UserSearchResult.type";
+import { UserSearchResultType } from "@/types/UserSearchResult.type";
 // ==================================================================
 export const SearchUsersAction = async (
   searchValue: string,
 ): Promise<{
   success: boolean;
-  messaage?: string;
-  users?: UserSearchResult[];
+  users?: UserSearchResultType[];
 }> => {
   try {
+    const userSession = await GetSession();
+    if (!userSession) return { success: false };
     const query = searchValue.trim();
     if (query.length < 1) return { success: false };
     const searchableFields = [
@@ -21,13 +23,25 @@ export const SearchUsersAction = async (
     ] as const;
     const users = await prisma.user.findMany({
       where: {
+        id: {
+          not: userSession.id,
+        },
+        blocked: {
+          none: {
+            blockedId: userSession.id,
+          },
+        },
+        blocks: {
+          none: {
+            blockerId: userSession.id,
+          },
+        },
         OR: searchableFields.map((field) => ({
           [field]: {
             contains: query,
             mode: "insensitive",
           },
         })),
-        emailVerified: true,
         isPermanentlyBanned: false,
         role: "USER",
       },
@@ -41,6 +55,14 @@ export const SearchUsersAction = async (
         bio: true,
         followersCount: true,
         cover: true,
+        role: true,
+        isPermanentlyBanned: true,
+        professionalMode: true,
+        education: true,
+        jobTitle: true,
+        city: true,
+        gender: true,
+        nickname: true,
       },
     });
     return { success: true, users };

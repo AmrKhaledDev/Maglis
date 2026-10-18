@@ -9,7 +9,7 @@ export const navLinks = [
   {
     id: "search",
     icon: "/search.png",
-    href: "",
+    href: "/search",
     title: "البحث",
   },
 

@@ -1,12 +1,12 @@
 import { User } from "@prisma/client";
-import { Briefcase } from "lucide-react";
 import { FcGraduationCap } from "react-icons/fc";
-import { MdLocationPin } from "react-icons/md";
-import { genderMap } from "../genderMap";
 import { HiMiniBriefcase } from "react-icons/hi2";
+import { MdLocationPin } from "react-icons/md";
+import { genderMap } from "./genderMap";
+import { UserSearchResultType } from "@/types/UserSearchResult.type";
 
 // =====================================================
-export const infos = (user: User) => {
+export const infos = (user: User | UserSearchResultType) => {
   const gender = user.gender && genderMap[user.gender];
   return [
     {

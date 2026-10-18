@@ -1,20 +1,21 @@
 "use server";
 
+import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import { PostSearchResult } from "@/types/PostSearchResult.type";
-import { UserSearchResult } from "@/types/UserSearchResult.type";
+import { PostType } from "@/types/Post.type";
+import { UserSearchResultType } from "@/types/UserSearchResult.type";
 // =============================================================
 export const SearchAction = async (
   searchValue: string,
 ): Promise<{
   success: boolean;
-  messaage?: string;
-  data?: { posts: PostSearchResult[]; users: UserSearchResult[] };
+  data: { posts: PostType[]; users: UserSearchResultType[] };
 }> => {
   try {
+    const userSession = await GetSession();
+    if (!userSession) return { success: false, data: { users: [], posts: [] } };
     const query = searchValue.trim();
-    if (query.length < 2) return { success: false };
-    const searchableFields = [
+    const usersSearchableFields = [
       "name",
       "username",
       "bio",
@@ -26,18 +27,28 @@ export const SearchAction = async (
     const [users, posts] = await Promise.all([
       prisma.user.findMany({
         where: {
-          OR: searchableFields.map((field) => ({
+          id: {
+            not: userSession.id,
+          },
+          blocked: {
+            none: {
+              blockedId: userSession.id,
+            },
+          },
+          blocks: {
+            none: {
+              blockerId: userSession.id,
+            },
+          },
+          OR: usersSearchableFields.map((field) => ({
             [field]: {
               contains: query,
               mode: "insensitive",
             },
           })),
-          emailVerified: true,
-          isPermanentlyBanned: false,
-          role: "USER",
         },
-        take: 6,
-        orderBy: [{ followersCount: "desc" }],
+        take: 10,
+        orderBy: { followersCount: "desc" },
         select: {
           id: true,
           username: true,
@@ -46,6 +57,14 @@ export const SearchAction = async (
           bio: true,
           followersCount: true,
           cover: true,
+          role: true,
+          isPermanentlyBanned: true,
+          professionalMode: true,
+          education: true,
+          jobTitle: true,
+          city: true,
+          gender: true,
+          nickname:true
         },
       }),
       prisma.post.findMany({
@@ -54,9 +73,12 @@ export const SearchAction = async (
             contains: query,
             mode: "insensitive",
           },
+          authorId: {
+            not: userSession.id,
+          },
           privacy: "PUBLIC",
         },
-        take: 6,
+        take: 10,
         orderBy: [
           {
             likes: {
@@ -72,15 +94,28 @@ export const SearchAction = async (
             select: {
               id: true,
               name: true,
+              professionalMode: true,
               image: true,
               username: true,
             },
           },
           medias: true,
+          likes: {
+            select: {
+              userId: true,
+              user: {
+                select: {
+                  image: true,
+                  name: true,
+                  professionalMode: true,
+                  bio: true,
+                },
+              },
+            },
+          },
           _count: {
             select: {
               comments: true,
-              likes: true,
             },
           },
         },
@@ -93,6 +128,6 @@ export const SearchAction = async (
     return { success: true, data };
   } catch (error) {
     console.error(error);
-    return { success: false };
+    return { success: false, data: { users: [], posts: [] } };
   }
 };

@@ -1,3 +1,4 @@
+import { UpdateImageAction } from "@/actions/User/UpdateImage.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
@@ -12,9 +13,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DeleteImageButton from "./DeleteImageButton";
-import ReplaceImageButton from "./ReplaceImageButton";
 import Header from "./Header";
-import { UpdateImageAction } from "@/actions/User/UpdateImage.action";
+import ReplaceImageButton from "./ReplaceImageButton";
 // ==============================================================
 function EditProfileImageModal({
   typeImage,
@@ -25,7 +25,6 @@ function EditProfileImageModal({
   image: string | null;
   user: User;
 }) {
-  if (!typeImage) return null;
   const userSession = useUser();
   const { setToast } = useToast();
   const [imagePreview, setImagePreview] = useState("");
@@ -69,8 +68,9 @@ function EditProfileImageModal({
       invalidateUserCaches(queryClient, userSession);
     },
   });
+  if (!typeImage) return null;
   const defaultImage =
-    typeImage == "AVATAR" ? "/user.jpg" : "/cover_default.jpg";
+    typeImage == "AVATAR" ? "/user_default.jpeg" : "/cover_default.jpg";
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -94,7 +94,7 @@ function EditProfileImageModal({
           )}
         >
           <div
-            className={clsx("relative shrink-0 ", {
+            className={clsx("relative shrink-0", {
               "size-60": typeImage == "AVATAR",
               "w-full h-110": typeImage == "COVER",
             })}

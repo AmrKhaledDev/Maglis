@@ -1,5 +1,5 @@
 "use client";
-import { infos } from "@/data/Profile/userInfos";
+import { infos } from "@/data/userInfos";
 import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
 import Linkify from "linkify-react";
 // ======================================================================

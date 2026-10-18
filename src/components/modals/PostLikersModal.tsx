@@ -24,7 +24,7 @@ function PostLikersModal({ post }: { post: PostType }) {
     };
     document.addEventListener("click", handle);
     return () => document.removeEventListener("click", handle);
-  }, []);
+  }, [setActiveModal]);
   return (
     <div className="fixed inset-0 backdrop-blur-[5px] z-100 flex items-center justify-center">
       <div className="w-110 max-h-100 modalBgColor rounded-2xl p-3 shadow-lg flex flex-col gap-10 likersMenu">
@@ -34,9 +34,9 @@ function PostLikersModal({ post }: { post: PostType }) {
           </h1>
           <button
             onClick={() => setActiveModal(null)}
-            className="cursor-pointer text-gray-200 hover:text-white"
+            className="cursor-pointer text-gray-400 hover:text-white"
           >
-            <X strokeWidth={1.5} className="size-5" />
+            <X strokeWidth={1} className="size-5" />
           </button>
         </div>
         <div className="flex flex-col gap-3 flex-1 overflow-y-auto pl-2 ">
@@ -56,6 +56,7 @@ function PostLikersModal({ post }: { post: PostType }) {
                 </div>
                 <div>
                   <Link
+                    className="hover:underline decoration-1"
                     href={
                       userSession.id === liker.userId
                         ? "/u/profile"

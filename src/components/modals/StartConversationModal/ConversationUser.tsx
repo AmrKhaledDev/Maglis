@@ -1,9 +1,9 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { User } from "@prisma/client";
+import { UserSearchResultType } from "@/types/UserSearchResult.type";
 import { MessageCircleMore } from "lucide-react";
 import Link from "next/link";
 // ========================================================
-function ConversationUser({ user }: { user: User }) {
+function ConversationUser({ user }: { user: UserSearchResultType }) {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-3">

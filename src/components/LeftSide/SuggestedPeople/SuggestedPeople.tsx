@@ -10,7 +10,6 @@ import UserDetails from "./UserDetails";
 // =======================================================================================
 function SuggestedPeople() {
   const pathname = usePathname();
-  if (pathname === "/videos") return null;
   const userSession = useUser();
   const { data = [], isPending } = useQuery({
     queryFn: async () => {
@@ -20,15 +19,16 @@ function SuggestedPeople() {
     },
     queryKey: ["suggestedPeople", userSession.id],
   });
+  if (pathname === "/videos") return null;
   return (
-    <div className=" p-4 shadow rounded-2xl overflow-hidden flex flex-col gap-5">
+    <div className="p-4 rounded-2xl overflow-hidden flex flex-col gap-5">
       <SectionHeader
         title="أشخاص مقترحون"
         linkUrl="/"
         isPending={isPending}
         dataLength={data.length}
       />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {isPending ? (
           <Skeleton />
         ) : (
@@ -40,7 +40,8 @@ function SuggestedPeople() {
                 followingId={user.id}
                 followColor="hover:bg-white/10"
                 unfollowColor="text-red-500!"
-                publicStyle="text-[11px] py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5"
+                iconStyle="size-5"
+                publicStyle="text-sm py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5"
               />
             </div>
           ))
