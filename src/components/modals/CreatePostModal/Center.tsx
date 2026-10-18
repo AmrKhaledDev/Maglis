@@ -1,28 +1,26 @@
+import clsx from "clsx";
+import { useFormContext, useWatch } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import SelectPrivacy from "./SelectPrivacy";
-import { useWatch } from "react-hook-form";
-import { CreatePost_Modal_CenterPropsType } from "../../Feeds/_components/CreatePostComposer/_types/CreatePost_Modal_CenterProps.type";
-import clsx from "clsx";
-// ==========================================================
-function CreatePostModalCenter({
-  register,
-  setValue,
-  control,
-  disabled,
-}: CreatePost_Modal_CenterPropsType) {
+import { useUser } from "@/providers/UserProvider";
+import { FormType } from "./_types/Form.type";
+// =====================================================================================
+function Center({ disabled }: { disabled: boolean }) {
+  const { control, register } = useFormContext<FormType>();
   const content = useWatch({
     control,
     name: "content",
     defaultValue: "",
   });
+  const userSession = useUser();
   return (
-    <div className="space-y-1">
+    <div className="space-y-4">
       <TextareaAutosize
         disabled={disabled}
         {...register("content")}
         minRows={7}
         maxRows={15}
-        placeholder="بماذا تفكر اليوم يا عمرو غفر الله له ؟"
+        placeholder={`بماذا تفكر اليوم يا ${userSession.name} ؟`}
         className="w-full p-3 leading-6 rounded-xl resize-none outline-none border border-gray-50/3 focus:border-gray-50/6 transition"
       />
       <div className="flex items-center justify-between text-gray-300">
@@ -36,14 +34,10 @@ function CreatePostModalCenter({
             {content.length}
           </span>
         </p>
-        <SelectPrivacy
-          disabled={disabled}
-          setValue={setValue}
-          control={control}
-        />
+        <SelectPrivacy disabled={disabled} />
       </div>
     </div>
   );
 }
 
-export default CreatePostModalCenter;
+export default Center;

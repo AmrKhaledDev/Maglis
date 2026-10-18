@@ -3,6 +3,7 @@ const allowedFileTypes = [
   "image/png",
   "image/webp",
   "video/mp4",
+  "video/mkv",
   "video/webm",
   "application/pdf",
 ];

@@ -1,11 +1,11 @@
 import { UseFieldArrayAppend } from "react-hook-form";
-import { CreatePost_ModalFormType } from "./CreatePost_ModalForm.type";
+import { FormType } from "./Form.type";
 // ======================================================
 export type AddMediaPropsType = {
-  append: UseFieldArrayAppend<CreatePost_ModalFormType, "media">;
+  append: UseFieldArrayAppend<FormType, "media">;
   fields: ({
     preview: string;
-    file: File;
+    file: File | null;
   } & Record<"id", string> & {
       disabled?: boolean;
     })[];

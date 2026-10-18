@@ -1,6 +1,6 @@
 "use client";
 import { FaRegImages } from "react-icons/fa6";
-import { AddMediaPropsType } from "../../Feeds/_components/CreatePostComposer/_types/AddMediaProps.type";
+import { AddMediaPropsType } from "./_types/AddMediaProps.type";
 import clsx from "clsx";
 import handleFileUploadCreatePost from "@/lib/helpers/handleFileUploadCreatePost";
 // ======================================================================================

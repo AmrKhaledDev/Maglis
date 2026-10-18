@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useEffect, useState } from "react";
 import MediaPicker from "./_components/MediaPicker";
@@ -5,13 +6,14 @@ import MediaPreview from "./_components/MediaPreview/MediaPreview";
 import CreatePostTrigger from "./_components/CreatePostTrigger";
 import CreatePostModal from "../../../modals/CreatePostModal/CreatePostModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-// ==============================================
+// ===================================================================
 function CreatePostComposer() {
   const { activeModal } = useActiveModal();
   const [media, setMedia] = useState("");
   const [mediaFile, setMediaFile] = useState<File | null>(null);
   useEffect(() => {
     if (activeModal == "create_post_modal") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMedia("");
       setMediaFile(null);
     }

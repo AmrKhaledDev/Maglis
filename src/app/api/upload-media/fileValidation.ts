@@ -5,7 +5,7 @@ const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
 const MAX_PDF_SIZE = 10 * 1024 * 1024;
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024;
 const fileValidation = (
-  file: File | any,
+  file: File | null | FormDataEntryValue,
 ): {
   success: boolean;
   message?: string;

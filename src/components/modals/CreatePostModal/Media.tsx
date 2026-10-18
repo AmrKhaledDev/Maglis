@@ -4,17 +4,14 @@ import Image from "next/image";
 import { UseFieldArrayRemove } from "react-hook-form";
 import { useState } from "react";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
+import FieldType from "./_types/Field.type";
 // ========================================================
-function CreatePostModalMedia({
-  media,
+function Media({
+  fields,
   remove,
   disabled,
 }: {
-  media: {
-    preview: string;
-    file: File;
-    type: "video" | "image" | "pdf" | null;
-  }[];
+  fields: FieldType[];
   remove: UseFieldArrayRemove;
   disabled: boolean;
 }) {
@@ -24,9 +21,9 @@ function CreatePostModalMedia({
   });
   return (
     <>
-      {media.length > 0 && (
+      {fields.length > 0 && (
         <div className="flex items-center gap-2">
-          {media.map((item, i) => (
+          {fields.map((item, i) => (
             <div key={i} className="relative size-20 ">
               {item.type == "image" && (
                 <Image
@@ -53,7 +50,7 @@ function CreatePostModalMedia({
                   URL.revokeObjectURL(item.preview);
                   remove(i);
                 }}
-                className="absolute top-1 left-1 disabled:hdden"
+                className="absolute top-1 left-1 disabled:hdden menuKeepOpen"
               >
                 <X className="size-4 cursor-pointer text-white" />
               </button>
@@ -71,4 +68,4 @@ function CreatePostModalMedia({
   );
 }
 
-export default CreatePostModalMedia;
+export default Media;

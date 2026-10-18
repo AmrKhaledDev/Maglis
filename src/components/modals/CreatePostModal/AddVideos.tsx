@@ -1,6 +1,6 @@
 "use client";
 import { GoVideo } from "react-icons/go";
-import { AddMediaPropsType } from "../../Feeds/_components/CreatePostComposer/_types/AddMediaProps.type";
+import { AddMediaPropsType } from "./_types/AddMediaProps.type";
 import clsx from "clsx";
 import handleFileUploadCreatePost from "@/lib/helpers/handleFileUploadCreatePost";
 // =============================================================

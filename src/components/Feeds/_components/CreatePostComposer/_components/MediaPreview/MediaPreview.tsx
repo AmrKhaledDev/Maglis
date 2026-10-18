@@ -14,7 +14,7 @@ function MediaPreview({
       : "image"
     : "unknown";
   return (
-    <div>
+    <>
       {media && mediaFile && (
         <div className="flex flex-col gap-3">
           <div className="w-full flex items-center justify-center max-h-125 overflow-hidden">
@@ -37,7 +37,7 @@ function MediaPreview({
           />
         </div>
       )}
-    </div>
+    </>
   );
 }
 

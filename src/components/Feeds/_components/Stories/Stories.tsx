@@ -23,7 +23,7 @@ function Stories() {
       <Swiper
         slidesPerView={"auto"}
         spaceBetween={6}
-        className="w-full h-30 rounded shadow"
+        className="w-full h-30 rounded"
       >
         <SwiperSlide className="h-full! w-20!">
           <CreateStoryCard />

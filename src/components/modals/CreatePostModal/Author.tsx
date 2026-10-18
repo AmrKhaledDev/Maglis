@@ -1,7 +1,7 @@
 import UserImage from "@/components/UserImage/UserImage";
 import { useUser } from "@/providers/UserProvider";
 // ================================================
-function CreatePostModalAuthor() {
+function Author() {
   const userSession = useUser();
   return (
     <div className="flex justify-between">
@@ -16,4 +16,4 @@ function CreatePostModalAuthor() {
   );
 }
 
-export default CreatePostModalAuthor;
+export default Author;

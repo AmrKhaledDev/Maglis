@@ -6,15 +6,15 @@ import { MediaType, Privacy } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 // =======================================================
 export const EditAction = async (
-  postId: string,
   privacy: Privacy = "PUBLIC",
   commentsDisabled: boolean = false,
   isPinnedToProfile: boolean = false,
-  content?: string,
-  media?: {
+  content: string,
+  media: {
     url: string;
     type: MediaType;
   }[],
+  postId: string,
 ): Promise<{ success: boolean; message?: string }> => {
   try {
     const validatingSession = await validateSession();

@@ -1,56 +1,68 @@
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { motion } from "framer-motion";
-import { Globe, Images } from "lucide-react";
-import { CreatePost_ModalFormType } from "../../Feeds/_components/CreatePostComposer/_types/CreatePost_ModalForm.type";
-import axios from "axios";
-import { Privacy } from "@prisma/client";
-import CreatePostModalAuthor from "./CreatePostModalAuthor";
-import CreatePostModalCenter from "./CreatePostModalCenter";
-import CreatePostModalMedia from "./CreatePostModalMedia";
-import CreatePostModalFooter from "./CreatePostModalFooter";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CreateAction } from "@/actions/Post/Create.action";
+import { EditAction } from "@/actions/Post/Edit.action";
+import privacyMap from "@/data/privacyMap";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
-import AlertMessage from "@/components/AlertMessage/AlertMessage";
-import CreatePostModalHeader from "./CreatePostModalHeader";
-import { CreateAction } from "@/actions/Post/Create.action";
-// ===========================================================
-function CreatePostModal() {
+import { PostType } from "@/types/Post.type";
+import { Privacy } from "@prisma/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { createPortal } from "react-dom";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { FormType } from "./_types/Form.type";
+import Form from "./Form";
+import FieldType from "./_types/Field.type";
+// ==========================================================================
+function CreatePostModal({ currentPost }: { currentPost?: PostType }) {
   const userSession = useUser();
+  const defaultPrivacy = privacyMap[currentPost?.privacy ?? "FRIENDS"];
   const { setActiveModal } = useActiveModal();
-  const methods = useForm<CreatePost_ModalFormType>({
+  const currentMedia: FieldType[] = currentPost
+    ? currentPost.medias.map((media) => ({
+        file: null,
+        type: media.type.toLowerCase() as "video" | "image" | "pdf" | null,
+        preview: media.url,
+      }))
+    : [];
+  const methods = useForm<FormType>({
     defaultValues: {
       privacy: {
-        label: "عام",
-        value: "PUBLIC",
-        icon: Globe,
+        label: defaultPrivacy.label,
+        value: defaultPrivacy.value,
+        icon: defaultPrivacy.icon,
       },
-      commentsDisabled: false,
-      isPinnedToProfile: false,
-      media: [],
-      content: "",
+      commentsDisabled: currentPost?.commentsDisabled ?? false,
+      isPinnedToProfile: currentPost?.isPinnedToProfile ?? false,
+      media: currentMedia,
+      content: currentPost?.content ?? "",
     },
   });
-  const { control, register, handleSubmit, watch, setValue } = methods;
+  const { control } = methods;
   const { fields, append, remove } = useFieldArray({
     control,
     name: "media",
   });
-  const content = watch("content", "");
   const queryClient = useQueryClient();
   const {
     mutate,
     isPending: loading,
     error,
   } = useMutation({
-    mutationFn: async (data: CreatePost_ModalFormType) => {
+    mutationFn: async (data: FormType) => {
       if (!data.content.trim() && data.media.length < 1)
         throw new Error("لا يمكنك إرسال منشور فارغ.");
-      let media: { url: string; type: "IMAGE" | "VIDEO" }[] = [];
+      const media: { url: string; type: "IMAGE" | "VIDEO" }[] = data.media
+        .filter((field) => !field.file && field.preview)
+        .map((field) => ({
+          url: field.preview,
+          type: field.type!.toUpperCase() as "IMAGE" | "VIDEO",
+        }));
       if (data.media.length > 0) {
         try {
           for (const field of data.media) {
+            if (!field.file) continue;
             const formData = new FormData();
             formData.append("file", field.file);
             const { data: uploadResult } = await axios.post(
@@ -69,12 +81,14 @@ function CreatePostModal() {
           throw new Error("حدث خطأ أثناء إنشاء منشورك.");
         }
       }
-      const result = await CreateAction(
+      const action = currentPost ? EditAction : CreateAction;
+      const result = await action(
         data.privacy.value as Privacy,
         data.commentsDisabled,
         data.isPinnedToProfile,
         data.content,
         media,
+        currentPost ? currentPost.id : "",
       );
       if (!result.success)
         throw new Error(
@@ -86,56 +100,26 @@ function CreatePostModal() {
       setActiveModal(null);
     },
   });
-  const handleCreatePost = (data: CreatePost_ModalFormType) => {
-    mutate(data);
-  };
-  return (
+
+  return createPortal(
     <FormProvider {...methods}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur z-40 flex items-center justify-center text-slate-800"
+        className="fixed inset-0 bg-black/50 backdrop-blur z-40 flex items-center justify-center text-slate-800 menuKeepOpen"
       >
-        <form
-          onSubmit={handleSubmit(handleCreatePost)}
-          className="modalBgColor ring ring-gray-50/5 text-white shadow-2xl p-3 rounded-xl w-200 max-h-170 overflow-y-auto space-y-4"
-        >
-          <CreatePostModalHeader loading={loading} />
-          {error && <AlertMessage type="error" message={error.message} />}
-          <CreatePostModalAuthor />
-          <CreatePostModalCenter
-            control={control}
-            setValue={setValue}
-            register={register}
-            disabled={loading}
-          />
-          <CreatePostModalMedia
-            disabled={loading}
-            media={fields}
-            remove={remove}
-          />
-          {fields.length > 0 && (
-            <div className="text-gray-300 mt-4 flex flex-col items-center w-fit gap-0.5">
-              <Images className="size-4" strokeWidth={2} />
-              <p className="font-normal text-xs">{fields.length} / 4</p>
-            </div>
-          )}
-          <CreatePostModalFooter
-            content={content}
-            fields={fields}
-            append={append}
-            loading={loading}
-          />
-          <p className="mt-8 text-xs font-normal text-yellow-500">
-            يرجى الالتزام بآداب الحوار واحترام الآخرين. يُمنع نشر أي محتوى يتضمن
-            سبًا أو قذفًا أو إساءة أو تقليلًا من الآخرين. في حال مخالفة هذه
-            السياسة، قد يتم حذف المنشور، وقد يؤدي تكرار المخالفات أو شدتها إلى
-            إيقاف الحساب بشكل دائم.
-          </p>
-        </form>
+        <Form
+          mutate={mutate}
+          loading={loading}
+          error={error}
+          fields={fields}
+          append={append}
+          remove={remove}
+        />
       </motion.div>
-    </FormProvider>
+    </FormProvider>,
+    document.body,
   );
 }
 

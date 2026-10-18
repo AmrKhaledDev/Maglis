@@ -11,6 +11,7 @@ import Header from "./Header";
 import NoUsersFound from "./NoUsersFound";
 import Search from "./Search";
 import { SearchUsersAction } from "@/actions/Search/SearchUsers.action";
+import WarningMessage from "@/components/WarningMessage/WarningMessage";
 // ===============================================================
 function StartConversationModal() {
   const { setToast } = useToast();
@@ -65,12 +66,7 @@ function StartConversationModal() {
                 <NoUsersFound />
               )}
             </div>
-            <p className="text-xs text-yellow-500">
-              يرجى الالتزام بآداب الحوار واحترام الآخرين. يُمنع نشر أي محتوى
-              يتضمن سبًا أو قذفًا أو إساءة أو تقليلًا من الآخرين. في حال مخالفة
-              هذه السياسة، قد يتم حذف المنشور، وقد يؤدي تكرار المخالفات أو شدتها
-              إلى إيقاف الحساب بشكل دائم.
-            </p>
+            <WarningMessage />
           </div>
         </div>
       </motion.div>

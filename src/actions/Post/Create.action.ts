@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use server";
 import { prisma } from "@/lib/prisma";
 import { CreatePostSchema } from "@/ZodSchemas/Post/CreatePost.schema";
@@ -14,6 +15,7 @@ export const CreateAction = async (
     url: string;
     type: MediaType;
   }[],
+  postId?: string,
 ): Promise<{ success: boolean; message?: string }> => {
   try {
     const validatingSession = await validateSession();

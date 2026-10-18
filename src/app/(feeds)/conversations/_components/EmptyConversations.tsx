@@ -2,14 +2,13 @@ import StartConversationModal from "@/components/modals/StartConversationModal/S
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import Image from "next/image";
 import Link from "next/link";
-import { AiFillMessage } from "react-icons/ai";
 // =====================================
 function EmptyConversations() {
   const { activeModal, setActiveModal } = useActiveModal();
   return (
     <>
-      <div className="flex flex-col items-center">
-        <div className="relative size-85">
+      <div className="flex flex-col items-center justify-center h-[78vh]">
+        <div className="relative size-70">
           <Image
             src="/no_data_image.png"
             alt="no data image"
@@ -20,16 +19,15 @@ function EmptyConversations() {
         </div>
         <div className="flex flex-col gap-4 items-center">
           <div className="flex flex-col gap-2.5 items-center">
-            <h2 className="text-3xl">تبدو الصفحة فارغة</h2>
-            <p className="text-gray-200">
+            <h2 className="text-2xl font-normal">تبدو الصفحة فارغة</h2>
+            <p className="text-gray-200 text-sm">
               لا توجد محادثات بعد لماذا لا تبدأ واحدة جديدة؟
             </p>
           </div>
           <button
             onClick={() => setActiveModal("new_conversation")}
-            className="py-1 px-6 font-medium hover:bg-gray-200 bg-gray-100 flex items-center gap-1.5 text-sm shadow cursor-pointer text-blue-800"
+            className="py-2 px-6 font-medium hover:bg-gray-200 bg-gray-100 text-sm shadow cursor-pointer text-blue-800 rounded-full"
           >
-            <AiFillMessage className="size-5 text-blue-700"/>
             بدء محادثة جديدة
           </button>
           <Link

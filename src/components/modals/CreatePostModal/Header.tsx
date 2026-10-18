@@ -3,10 +3,10 @@ import { X } from "lucide-react";
 import CommentsDisabled from "./CommentsDisabled";
 import TogglePinButton from "./TogglePinButton";
 // ========================================================
-function CreatePostModalHeader({ loading }: { loading: boolean }) {
+function Header({ loading }: { loading: boolean }) {
   const { setActiveModal } = useActiveModal();
   return (
-    <div className="flex justify-between">
+    <header className="flex justify-between">
       <div className="flex items-center gap-2">
         <TogglePinButton disabled={loading} />
         <CommentsDisabled disabled={loading} />
@@ -17,8 +17,8 @@ function CreatePostModalHeader({ loading }: { loading: boolean }) {
       >
         <X className="size-6" strokeWidth={1}/>
       </button>
-    </div>
+    </header>
   );
 }
 
-export default CreatePostModalHeader;
+export default Header;

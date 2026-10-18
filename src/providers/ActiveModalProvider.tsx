@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { usePathname } from "next/navigation";
 import {
@@ -26,6 +27,7 @@ function ActiveModalProvider({ children }: { children: ReactNode }) {
   }, [activeModal]);
   useEffect(() => {
     if (activeModal) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveModal(null);
     }
   }, [pathname]);

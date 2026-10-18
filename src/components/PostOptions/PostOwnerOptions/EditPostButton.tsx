@@ -1,7 +1,7 @@
 import { Pencil } from "lucide-react";
 import { PostType } from "@/types/Post.type";
-import EditPostModal from "../../modals/EditPostModal/EditPostModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
+import CreatePostModal from "@/components/modals/CreatePostModal/CreatePostModal";
 // ================================================================
 function EditPostButton({ post }: { post: PostType }) {
   const { activeModal, setActiveModal } = useActiveModal();
@@ -9,13 +9,15 @@ function EditPostButton({ post }: { post: PostType }) {
     <div className="w-full">
       <button
         onClick={() => {
-          setActiveModal("edit_post_modal");
+          setActiveModal(`edit_post_${post.id}`);
         }}
         className="btnOptBox"
       >
         <Pencil className="btnOptIcon" /> تعديل
       </button>
-      {activeModal == "edit_post_modal" && <EditPostModal post={post} />}
+      {activeModal === `edit_post_${post.id}` && (
+        <CreatePostModal currentPost={post} />
+      )}
     </div>
   );
 }
