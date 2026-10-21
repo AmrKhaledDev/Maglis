@@ -5,7 +5,6 @@ import RecentContacts from "./RecentContacts/RecentContacts";
 import { usePathname } from "next/navigation";
 // ================================================================
 function LeftSide() {
-  
   const pathname = usePathname();
   if (pathname.startsWith("/conversations")) return null;
   return (

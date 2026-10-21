@@ -24,7 +24,7 @@ function ProfileAvatar({ user }: { user: User }) {
           }
           setShowAvatar({
             open: true,
-            url: user.image || "/user.jpg",
+            url: user.image || "/user_default.jpeg",
           });
         }}
         className="relative shrink-0 shadow -mt-12 cursor-pointer rounded-full bg-black/20 backdrop-blur-2xl"

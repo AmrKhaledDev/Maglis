@@ -44,7 +44,6 @@ function Replies({
         parentId={comment.id}
         userOwnerCommentName={userOwnerCommentName}
         setShowRepliesList={setShowRepliesList}
-        topLevelComment={topLevelComment}
       />
       <ButtonShowReplies
         handleShowReplies={handleShowReplies}

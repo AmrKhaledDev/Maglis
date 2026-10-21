@@ -24,7 +24,6 @@ function VideoActions({ video }: { video: PostType }) {
       </button>
       <SavePostButton
         post={video}
-        isCommentsModalOpen={false}
         buttonStyle="videoBtnActionStyle"
         iconSize="size-7"
       />

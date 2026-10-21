@@ -1,29 +1,27 @@
-import Image from "next/image";
-import TextareaAutoResize from "react-textarea-autosize";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { useUser } from "@/providers/UserProvider";
-import AlertMessage from "@/components/AlertMessage/AlertMessage";
-import axios from "axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRepliesState } from "@/providers/RepliesStateProvider";
-import { motion } from "framer-motion";
-import ReplyComposerActions from "./ReplyComposerActions";
-import { X } from "lucide-react";
-import { Comment } from "@prisma/client";
-import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
-import { CreateAction } from "@/actions/Reply/Create.action";
 import { EditAction } from "@/actions/Comment/Edit.action";
+import { CreateAction } from "@/actions/Reply/Create.action";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import UserImage from "@/components/UserImage/UserImage";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useRepliesState } from "@/providers/RepliesStateProvider";
+import { useUser } from "@/providers/UserProvider";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { X } from "lucide-react";
+import Image from "next/image";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import TextareaAutoResize from "react-textarea-autosize";
+import ReplyComposerActions from "./ReplyComposerActions";
 // ===================================================================================
 function ReplyComposer({
   userOwnerCommentName,
   parentId,
   setShowRepliesList,
-  topLevelComment,
 }: {
   userOwnerCommentName: string;
   parentId: string;
   setShowRepliesList: Dispatch<SetStateAction<boolean>>;
-  topLevelComment: Comment;
 }) {
   const {
     showReplyComposer,
@@ -39,6 +37,7 @@ function ReplyComposer({
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setContent(currentReply?.content || "");
     setImagePreview(currentReply?.image || "");
   }, [currentReply]);
@@ -106,13 +105,7 @@ function ReplyComposer({
         >
           {error && <AlertMessage message={error} type="error" />}
           <div className="flex gap-1.5 w-full">
-            <Image
-              src={userSession.image || "/user.jpg"}
-              alt="صورتك"
-              width={50}
-              height={50}
-              className="size-6 rounded-full object-cover shrink-0"
-            />
+            <UserImage src={userSession.image} size="size-6" alt="صورتك" />
             <div className="border border-white/10 w-1/2 focus-within:border-white/20 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
               <div>
                 <TextareaAutoResize

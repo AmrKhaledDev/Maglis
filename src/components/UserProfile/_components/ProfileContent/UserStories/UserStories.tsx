@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import NoDataMessage from "../NoDataMessage";
-import StoryOptions from "@/components/Feeds/_components/Stories/_components/StoryViewer/StoryOptions";
+import StoryOptions from "@/components/StoryOptions/StoryOptions";
 import StoryImage from "./StoryImage";
 import Storyvideo from "./Storyvideo";
 import { GetStoriesAction } from "@/actions/User/GetStories.action";

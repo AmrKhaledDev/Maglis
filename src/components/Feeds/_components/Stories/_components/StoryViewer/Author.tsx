@@ -1,24 +1,18 @@
+import UserImage from "@/components/UserImage/UserImage";
 import { UserStoryType } from "@/types/UserStoryType";
 import { Story } from "@prisma/client";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
-import Image from "next/image";
 import Link from "next/link";
 // ====================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function StoryAuthor({ user, story }: { user: UserStoryType; story: Story }) {
+function Author({ user, story }: { user: UserStoryType; story: Story }) {
   return (
     <div className="absolute top-5 right-8 z-5 flex items-center gap-2.5">
       <Link href={`/u/${story.userId}`}>
-        <Image
-          src={user.image || "/user.jpg"}
-          width={70}
-          height={70}
-          alt={user.name}
-          className="rounded-full object-cover shrink-0 size-9"
-        />
+        <UserImage src={user.image} alt={user.name} size="size-9" />
       </Link>
       <div>
         <div className="flex items-center gap-1.5">
@@ -36,4 +30,4 @@ function StoryAuthor({ user, story }: { user: UserStoryType; story: Story }) {
   );
 }
 
-export default StoryAuthor;
+export default Author;

@@ -2,7 +2,7 @@ import { Story } from "@prisma/client";
 import clsx from "clsx";
 import { Eye } from "lucide-react";
 // =====================================
-function StoryViewers({ story }: { story: Story }) {
+function Viewers({ story }: { story: Story }) {
   return (
     <button
       className={clsx(
@@ -15,4 +15,4 @@ function StoryViewers({ story }: { story: Story }) {
   );
 }
 
-export default StoryViewers;
+export default Viewers;

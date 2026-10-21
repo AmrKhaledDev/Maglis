@@ -5,9 +5,9 @@ import { formatLikes } from "@/formats/formatLikes";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { PostType } from "@/types/Post.type";
 import { MessageCircle } from "lucide-react";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import LikeButton from "./LikeButton";
+import { Dispatch, SetStateAction } from "react";
 import SavePostButton from "../../../SavePostButton/SavePostButton";
+import LikeButton from "./LikeButton";
 // =============================================
 function PostActions({
   post,
@@ -17,7 +17,6 @@ function PostActions({
   setShowComments: Dispatch<SetStateAction<string>>;
 }) {
   const { activeModal, setActiveModal } = useActiveModal();
-
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">

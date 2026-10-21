@@ -32,7 +32,7 @@ function ConfirmRequestButton({ request }: { request: FriendRequestType }) {
     <button
       onClick={() => handleConfirmRequest()}
       disabled={isPending}
-      className="text-xs py-2 px-4 bg-white/3 not-disabled:cursor-pointer not-disabled:hover:bg-white/5 mytransition"
+      className="text-sm rounded-full py-2 px-4 bg-white/3 not-disabled:cursor-pointer not-disabled:hover:bg-white/5 mytransition"
     >
       تأكيد الطلب
     </button>

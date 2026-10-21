@@ -40,8 +40,8 @@ function SuggestedPeople() {
                 followingId={user.id}
                 followColor="hover:bg-white/10"
                 unfollowColor="text-red-500!"
-                iconStyle="size-5"
-                publicStyle="text-sm py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5"
+                iconStyle="size-4"
+                publicStyle="text-xs py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5"
               />
             </div>
           ))

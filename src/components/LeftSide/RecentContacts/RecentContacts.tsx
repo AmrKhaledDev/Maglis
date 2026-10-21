@@ -1,13 +1,13 @@
 "use client";
 import { GetRecentContactsAction } from "@/actions/User/GetRecentContacts.action";
+import Skeleton from "@/components/Skeletons/SuggestedPeople/Skeleton";
+import UserImage from "@/components/UserImage/UserImage";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
 import { MessageCircle } from "lucide-react";
-import Image from "next/image";
 import ButtonAction from "../ButtonAction";
 import NameDescription from "../NameDescription";
 import SectionHeader from "../SectionHeader";
-import Skeleton from "@/components/Skeletons/SuggestedPeople/Skeleton";
 // =================================================================================
 function RecentContacts() {
   const userSession = useUser();
@@ -38,14 +38,7 @@ function RecentContacts() {
                 className="flex items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="relative size-11 shrink-0 rounded-full overflow-hidden">
-                    <Image
-                      src={member.user.image || "/user.jpg"}
-                      alt="صورة المستخدم"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <UserImage src={member.user.image} size="size-11" />
                   <NameDescription
                     userId={member.user.id}
                     name={member.user.name}
@@ -55,7 +48,8 @@ function RecentContacts() {
                 <ButtonAction
                   icon={MessageCircle}
                   name="تواصل"
-                  textStyle="text-green-600"
+                  style="text-green-600 text-xs"
+                  iconStyle="size-4"
                   id={member.user.id}
                 />
               </div>

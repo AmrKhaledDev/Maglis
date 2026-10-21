@@ -2,7 +2,7 @@ import { Story } from "@prisma/client";
 import clsx from "clsx";
 import { useState } from "react";
 // =======================================================
-function StoryContentOverlay({ currentStory }: { currentStory: Story }) {
+function ContentOverlay({ currentStory }: { currentStory: Story }) {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <>
@@ -34,4 +34,4 @@ function StoryContentOverlay({ currentStory }: { currentStory: Story }) {
   );
 }
 
-export default StoryContentOverlay;
+export default ContentOverlay;

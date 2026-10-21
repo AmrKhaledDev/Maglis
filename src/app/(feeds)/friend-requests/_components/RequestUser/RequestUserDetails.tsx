@@ -1,20 +1,23 @@
+import UserImage from "@/components/UserImage/UserImage";
 import FriendRequestType from "@/types/FriendRequest.type";
-import Image from "next/image";
+import Link from "next/link";
 // ==============================================================
 function RequestUserDetails({ request }: { request: FriendRequestType }) {
   return (
     <div className="flex items-center gap-2">
-      <div className="size-13 shrink-0 rounded-full relative overflow-hidden">
-        <Image
-          src={request.sender.image || "/user.jpg"}
-          alt="صورة المستخدم"
-          className="object-cover"
-          fill
-        />
-      </div>
+      <UserImage
+        src={request.sender.image}
+        alt="صورة المستخدم"
+        size="size-13"
+      />
       <div>
-        <h2 className="text-[17px] font-medium">{request.sender.name}</h2>
-        <p className="text-sm text-gray-300 max-w-130 line-clamp-2">
+        <Link
+          href={`/u/${request.senderId}`}
+          className="text-[19px] font-medium hover:underline decoration-1 [word-break:break-word] line-clamp-1"
+        >
+          {request.sender.name}
+        </Link>
+        <p className="text-sm text-gray-300 [word-break:break-word] max-w-130 line-clamp-2">
           {request.sender.bio}
         </p>
       </div>

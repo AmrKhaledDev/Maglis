@@ -1,10 +1,11 @@
-import Stories from "react-insta-stories";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import StoriesDesign from "react-insta-stories";
 import StoryViewerTextStory from "./StoryViewerTextStory";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { Dispatch, SetStateAction } from "react";
 import { Story } from "@prisma/client";
 // =======================================
-function StoryViewerStories({
+function Stories({
   stories,
   setCurrentIndex,
 }: {
@@ -44,7 +45,7 @@ function StoryViewerStories({
   const { setActiveModal } = useActiveModal();
   return (
     <div className="absolute inset-0 flex items-center justify-center z-1 bg-black">
-      <Stories
+      <StoriesDesign
         stories={storyItems}
         width="100%"
         height="100%"
@@ -66,4 +67,4 @@ function StoryViewerStories({
   );
 }
 
-export default StoryViewerStories;
+export default Stories;

@@ -1,9 +1,9 @@
+import UserImage from "@/components/UserImage/UserImage";
 import { PostType } from "@/types/Post.type";
 import { Comment, Prisma } from "@prisma/client";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
-import Image from "next/image";
 import Link from "next/link";
 // =========================================================================
 dayjs.locale("ar");
@@ -26,13 +26,7 @@ function CommentAuthor({
 }) {
   return (
     <div className="flex items-center gap-2">
-      <Image
-        src={user.image ?? "/user.jpg"}
-        alt="صورة المستخدم"
-        width={60}
-        height={60}
-        className="object-cover shrink-0 size-8 rounded-full"
-      />
+      <UserImage src={user.image} alt={user.name} size="size-8" />
       <div className="w-full">
         <div className="flex items-center gap-1">
           <Link

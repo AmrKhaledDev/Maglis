@@ -41,7 +41,7 @@ function SuggestedGroups() {
                 id=""
                 icon={UserPlus}
                 name="إنضمام"
-                textStyle="text-white"
+                style="text-white"
               />
             </div>
           ))}

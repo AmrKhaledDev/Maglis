@@ -28,9 +28,10 @@ function ProfileDetailsFooter({ user }: { user: User }) {
       ) : (
         <AddFriendButton
           publicStyle="flex text-sm items-center gap-2 cursor-pointer text-gray-200 shadow py-1.5 px-3 rounded-full text-nowrap"
-          sentStyle="bg-blue-800 hover:outline outline-offset-4 hover:outline-blue-600"
+          sentStyle="bg-blue-800 hover:outline outline-offset-2 hover:outline-blue-600"
           unsentStyle="bg-black/50 hover:bg-black/60"
           userId={user.id}
+          iconStyle="size-4.5"
         />
       )}
       <Link

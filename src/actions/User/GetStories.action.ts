@@ -1,5 +1,6 @@
 "use server";
 
+import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 import { StoryType } from "@/types/StoryType.type";
 // ====================================================
@@ -10,10 +11,16 @@ export const GetStoriesAction = async (
   stories?: StoryType[];
 }> => {
   try {
+    const userSession = await GetSession();
+    if (!userSession) return { success: false };
     if (!userId) return { success: false };
     const stories: StoryType[] = await prisma.story.findMany({
       where: {
         userId,
+        OR: [
+          { isPrivate: false },
+          { isPrivate: true, userId: userSession.id },
+        ],
       },
       include: {
         user: {

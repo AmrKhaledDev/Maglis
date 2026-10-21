@@ -16,8 +16,11 @@ function Feeds() {
     queryKey: ["posts", userSession.id],
   });
   return (
-    <div className="pb-4">
-      <Stories />
+    <div className="pb-4 flex flex-col gap-5">
+      <div>
+        <Stories />
+        <hr className="border-white opacity-2 rounded-full" />
+      </div>
       <div className="flex flex-col gap-5">
         <CreatePostComposer />
         <Posts isPending={isPending} posts={posts} variant="default" />

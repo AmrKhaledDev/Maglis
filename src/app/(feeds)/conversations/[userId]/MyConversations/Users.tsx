@@ -1,9 +1,9 @@
 "use client";
 import Skeleton from "@/components/Skeletons/MyConversations/Skeleton";
+import UserImage from "@/components/UserImage/UserImage";
 import { useUser } from "@/providers/UserProvider";
 import { User } from "@prisma/client";
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import UserConversation from "../../_types/UserConversations.type";
 import UsersFooter from "./UsersFooter";
@@ -52,14 +52,11 @@ function Users({
                       : " hover:bg-white/10",
                 )}
               >
-                <div className="relative xl:size-10 size-8 rounded-full overflow-hidden shrink-0">
-                  <Image
-                    src={member.user.image || "/user.jpg"}
-                    alt="صورة المستخدم"
-                    className="object-cover"
-                    fill
-                  />
-                </div>
+                <UserImage
+                  src={member.user.image}
+                  size="xl:size-10 size-8"
+                  alt="صورة المستخدم"
+                />
                 <UsersFooter
                   message={message}
                   user={member.user}

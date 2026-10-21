@@ -6,11 +6,7 @@ export type UserStoriesWithFollowingsType = Prisma.UserGetPayload<{
     image: true;
     name: true;
     username: true;
-    stories: {
-      orderBy: {
-        createdAt: "desc";
-      };
-    };
+    stories: true;
     followings: {
       select: {
         following: {
@@ -19,14 +15,24 @@ export type UserStoriesWithFollowingsType = Prisma.UserGetPayload<{
             image: true;
             name: true;
             username: true;
-            stories: {
-              orderBy: {
-                createdAt: "desc";
-              };
-            };
+            stories: true;
           };
         };
       };
     };
+    myFriends: {
+      select: {
+        friend: {
+          select: {
+            id: true;
+            image: true;
+            name: true;
+            username: true;
+            stories: true;
+          };
+        };
+      };
+    };
+    
   };
 }>;

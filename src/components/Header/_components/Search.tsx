@@ -32,13 +32,13 @@ function Search() {
   });
   return (
     <div className="relative">
-      <div className="w-100 focus-within:w-130 mytransition searchBox shadow h-11 bg-white/3 rounded-full overflow-hidden flex items-center justify-between">
+      <div className="w-100 focus-within:w-130 mytransition searchBox shadow h-11 bg-white/3 rounded-full overflow-hidden flex items-center justify-between hover:bg-white/5 focus-within:bg-white/5">
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           type="text"
           placeholder="بحث سريع عن مستخدمين"
-          className="w-full h-full px-4 outline-none cursor-pointer font-light"
+          className="w-full h-full px-4 outline-none focus:cursor-default cursor-pointer font-light"
         />
         {searchValue.trim().length > 0 && (
           <button

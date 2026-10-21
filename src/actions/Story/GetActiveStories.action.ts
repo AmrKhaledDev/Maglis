@@ -42,6 +42,30 @@ export const GetActiveStoriesAction = async (userId: string) => {
                       expiresAt: {
                         gte: new Date(),
                       },
+                     isPrivate:false
+                    },
+                    orderBy: {
+                      createdAt: "desc",
+                    },
+                  },
+                },
+              },
+            },
+          },
+          myFriends: {
+            select: {
+              friend: {
+                select: {
+                  id: true,
+                  image: true,
+                  name: true,
+                  username: true,
+                  stories: {
+                    where: {
+                      expiresAt: {
+                        gte: new Date(),
+                      },
+                      isPrivate: false,
                     },
                     orderBy: {
                       createdAt: "desc",

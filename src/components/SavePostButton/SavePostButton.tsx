@@ -11,12 +11,10 @@ import { useRouter } from "next/navigation";
 // ================================================
 function SavePostButton({
   post,
-  isCommentsModalOpen,
   buttonStyle,
   iconSize,
 }: {
   post: PostType;
-  isCommentsModalOpen?: boolean;
   buttonStyle?: string;
   iconSize?: string;
   

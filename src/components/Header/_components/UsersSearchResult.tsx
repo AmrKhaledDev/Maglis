@@ -1,6 +1,6 @@
+import UserImage from "@/components/UserImage/UserImage";
 import { UserSearchResultType } from "@/types/UserSearchResult.type";
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 // ==============================================================================
 function UsersSearchResult({
@@ -23,15 +23,12 @@ function UsersSearchResult({
           key={user.id}
           className="flex items-center gap-2 hover:bg-slate-800"
         >
-          <Image
-            src={user.image || "/user.jpg"}
-            alt={user.name}
-            width={50}
-            height={50}
-            className="rounded-full object-cover size-9 shrink-0"
-          />
+          <UserImage src={user.image} alt={user.name} size="size-9" />
           <div className="flex items-center gap-1.5">
-            <h2 dir="auto" className="text-sm font-semibold text-gray-200 line-clamp-1 [word-break:break-word]">
+            <h2
+              dir="auto"
+              className="text-sm font-semibold text-gray-200 line-clamp-1 [word-break:break-word]"
+            >
               {user.name}
             </h2>
             {user.bio && (

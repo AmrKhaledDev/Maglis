@@ -1,11 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import FollowButton from "../FollowButton/FollowButton";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { PostType } from "@/types/Post.type";
 import { useUser } from "@/providers/UserProvider";
+import { PostType } from "@/types/Post.type";
 import { X } from "lucide-react";
+import Link from "next/link";
 import { useEffect } from "react";
+import FollowButton from "../FollowButton/FollowButton";
+import UserImage from "../UserImage/UserImage";
 // ====================================================================
 function PostLikersModal({ post }: { post: PostType }) {
   const { setActiveModal } = useActiveModal();
@@ -46,14 +46,7 @@ function PostLikersModal({ post }: { post: PostType }) {
               className="flex items-center justify-between gap-3"
             >
               <div className="flex items-center gap-3">
-                <div className="relative size-9 shrink-0">
-                  <Image
-                    src={liker.user.image || "/user.jpg"}
-                    alt={liker.user.name}
-                    className="object-cover rounded-full"
-                    fill
-                  />
-                </div>
+                <UserImage src={liker.user.image} size="size-9" />
                 <div>
                   <Link
                     className="hover:underline decoration-1"
@@ -69,10 +62,11 @@ function PostLikersModal({ post }: { post: PostType }) {
               {userSession.id !== liker.userId &&
                 liker.user.professionalMode && (
                   <FollowButton
-                    publicStyle="flex text-nowrap items-center gap-2 py-1.5 px-3 shadow mytransition rounded-xl  text-xs"
+                    publicStyle="flex text-nowrap items-center gap-2 py-1.5 px-3 shadow mytransition rounded-md  text-xs"
                     unfollowColor="bg-gray-600 hover:bg-gray-700"
                     followColor="hover:bg-blue-700 bg-blue-600"
                     followingId={liker.userId}
+                    iconStyle="size-4"
                   />
                 )}
             </div>

@@ -1,5 +1,6 @@
 import FollowButton from "@/components/FollowButton/FollowButton";
 import PostLikersModal from "@/components/modals/PostLikersModal";
+import UserImage from "@/components/UserImage/UserImage";
 import { formatComments } from "@/formats/formatComments";
 import { formatLikes } from "@/formats/formatLikes";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
@@ -9,7 +10,6 @@ import dayjs from "dayjs";
 import local from "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { ClockFading } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 // ===============================================================
 dayjs.extend(relativeTime);
@@ -20,12 +20,10 @@ function Author({ video }: { video: PostType }) {
   return (
     <div className="flex items-center gap-3">
       <Link href={`/u/${video.authorId}`}>
-        <Image
-          src={video.author.image || "/user.jpg"}
-          alt="صورة المستخدم"
-          width={50}
-          height={50}
-          className="size-10 rounded-full shrink-0 object-cover"
+        <UserImage
+          src={video.author.image}
+          alt={video.author.name}
+          size="size-10"
         />
       </Link>
       <div className="space-y-0.5 w-full">

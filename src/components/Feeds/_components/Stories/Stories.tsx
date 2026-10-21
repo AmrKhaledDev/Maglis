@@ -8,7 +8,7 @@ import { useUser } from "@/providers/UserProvider";
 import { GetActiveStoriesAction } from "@/actions/Story/GetActiveStories.action";
 import CreateStoryModal from "../../../modals/CreateStoryModal/CreateStoryModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-// =============================================================
+// ==========================================================================================
 function Stories() {
   const userSession = useUser();
   const { activeModal } = useActiveModal();
@@ -22,7 +22,7 @@ function Stories() {
     <>
       <Swiper
         slidesPerView={"auto"}
-        spaceBetween={6}
+        spaceBetween={2}
         className="w-full h-30 rounded"
       >
         <SwiperSlide className="h-full! w-20!">
@@ -41,17 +41,25 @@ function Stories() {
             ))
         ) : (
           <>
+            {/* User Stories */}
             {userWithStories && (
               <SwiperSlide key={userWithStories.id} className="h-full! w-25!">
                 <StoryCard userWithStories={userWithStories} />
               </SwiperSlide>
             )}
+            {/* User Followings Stories */}
             {userWithStories?.followings.map((following) => (
               <SwiperSlide
                 key={following.following.id}
                 className="h-full! w-25!"
               >
                 <StoryCard userWithStories={following.following} />
+              </SwiperSlide>
+            ))}
+            {/* User Friends Stories */}
+            {userWithStories?.myFriends.map((friend) => (
+              <SwiperSlide key={friend.friend.id} className="h-full! w-25!">
+                <StoryCard userWithStories={friend.friend} />
               </SwiperSlide>
             ))}
           </>

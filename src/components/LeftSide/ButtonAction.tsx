@@ -6,27 +6,29 @@ import { useRouter } from "next/navigation";
 // ==============================================
 function ButtonAction({
   name,
-  textStyle,
-  icon: Icon,
+  style,
   id,
+  icon: Icon,
+  iconStyle,
 }: {
   name: string;
-  textStyle: string;
-  icon: LucideIcon;
+  style: string;
   id: string;
+  icon: LucideIcon;
+  iconStyle?: string;
 }) {
   const router = useRouter();
   return (
     <motion.button
-      whileHover={{ scale: 1.1 }}
-      onClick={()=>router.push(`/conversations/${id}`)}
+      whileHover={{ scale: 1.05 }}
+      onClick={() => router.push(`/conversations/${id}`)}
       whileTap={{ scale: 0.9 }}
       className={clsx(
-        "text-[11px] py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5",
-        textStyle,
+        "py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5",
+        style,
       )}
     >
-      <Icon strokeWidth={1.5} className="size-3.5" /> {name}
+      <Icon strokeWidth={1.5} className={iconStyle} /> {name}
     </motion.button>
   );
 }

@@ -32,7 +32,7 @@ function RejectRequestButton({ request }: { request: FriendRequestType }) {
     <button
       disabled={isPending}
       onClick={() => handleDeleteRequest()}
-      className="text-xs py-2 px-4 bg-red-700/20 not-disabled:cursor-pointer not-disabled:hover:bg-red-700/25 mytransition"
+      className="text-sm py-2 px-4 bg-red-900/20 text-red-500 not-disabled:cursor-pointer not-disabled:hover:bg-red-700/25 mytransition rounded-full"
     >
       رفض الطلب
     </button>
