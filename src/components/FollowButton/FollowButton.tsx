@@ -3,7 +3,7 @@ import { useFollow } from "@/hooks/useFollow";
 import { useToast } from "@/providers/ToastProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
-import { Plus, UserMinus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 // =============================================================
@@ -61,10 +61,7 @@ function FollowButton({
       )}
     >
       {follow ? (
-        <>
-          <UserMinus className={iconStyle} strokeWidth={1.5} />
-          إلغاء المتابعة
-        </>
+        <>إلغاء المتابعة</>
       ) : (
         <>
           <Plus className={iconStyle} strokeWidth={1.5} />

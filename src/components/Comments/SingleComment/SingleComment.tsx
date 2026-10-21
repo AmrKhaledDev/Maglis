@@ -1,5 +1,4 @@
 import CommentAuthor from "./CommentAuthor";
-import CommentIsPinned from "./CommentIsPinned";
 import CommentOptions from "./CommentOptions";
 import { Dispatch, SetStateAction } from "react";
 import { Comment } from "@prisma/client";
@@ -10,6 +9,7 @@ import Replies from "../Replies/Replies";
 import { formatReplies } from "@/formats/formatReplies";
 import { PostType } from "@/types/Post.type";
 import { CommentType } from "@/types/Comment.type";
+import { BsFillPinAngleFill } from "react-icons/bs";
 // ==================================================================
 function SingleComment({
   post,
@@ -23,7 +23,9 @@ function SingleComment({
   return (
     <div className="flex flex-col gap-2">
       <div className="bg-white/7 p-3 rounded-xl ring ring-gray-50/13 shadow w-full flex flex-col gap-3">
-        <CommentIsPinned comment={comment} />
+        {comment.isPinned && (
+          <BsFillPinAngleFill className="text-gray-500 -rotate-45" />
+        )}
         <div className="flex justify-between">
           <CommentAuthor comment={comment} user={comment.user} post={post} />
           <CommentOptions
@@ -35,7 +37,10 @@ function SingleComment({
         <CommentContent comment={comment} />
         <hr className="border-white opacity-3" />
         <div className="flex items-center justify-between">
-          <CommentActions comment={comment} commentsIsDisabled={post.commentsDisabled}/>
+          <CommentActions
+            comment={comment}
+            commentsIsDisabled={post.commentsDisabled}
+          />
           <div className="flex items-center gap-3">
             <p className="text-xs text-slate-300">
               {formatLikes(comment.likeForComments.length)}

@@ -23,15 +23,6 @@ function Form({ error }: { error?: string }) {
   } = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
   });
-  let errorMessage;
-  switch (error) {
-    case "OAuthAccountNotLinked":
-      errorMessage = "برجاء تسجيل الدخول بالإيميل وكلمة المرور";
-      break;
-    default:
-      errorMessage =
-        "حدث خطأ أثناء تسجيل الدخول برجاء التأكد من الإنترنت وإعادة المحاولة.";
-  }
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showBlur, setShowBlur] = useState(false);
@@ -60,48 +51,44 @@ function Form({ error }: { error?: string }) {
     router.refresh();
   };
   return (
-    <motion.div
+    <motion.form
       initial={{ opacity: 0, x: -40 }}
       animate={{ opacity: 1, x: 0 }}
-      className="bg-[#a28b5d] rounded shadow-2xl ring ring-[#a28b5d]/50 relative md:mb-0 mb-3 sm:w-fit w-full"
+      onSubmit={handleSubmit(handleLogin)}
+      className="p-5 relative bg-slate-800 rounded-3xl space-y-5 w-120 h-fit shadow-2xl overflow-hidden"
     >
-      <form
-        onSubmit={handleSubmit(handleLogin)}
-        className="p-5 bg-slate-800 rounded-3xl space-y-5 lg:w-110 md:w-90 sm:w-120 w-full h-fit"
-      >
-        <FormHeader loading={loading} setShowBlur={setShowBlur} />
-        <div className="flex flex-col gap-3">
-          {serverError && (
-            <AlertMessage
-              isServerError={true}
-              type="error"
-              message={serverError}
-            />
-          )}
-          {serverSuccess && (
-            <AlertMessage message={serverSuccess} type="success" />
-          )}
-          {fields.map((field) => (
-            <AuthFormFiled<z.infer<typeof LoginSchema>>
-              key={field.id}
-              register={register}
-              id={field.id as Path<z.infer<typeof LoginSchema>>}
-              placeholder={field.placeholder}
-              setShowPassword={field.setShowPassword}
-              showPassword={field.showPassword}
-              isPasswordFiled={field.isPasswordFiled}
-              label={field.label}
-              disabled={field.disabled}
-              error={field.error}
-              type={field.type as "email" | "password" | "text"}
-            />
-          ))}
-        </div>
-        <LoginSubmitButton loading={loading} />
-        <FormFooter />
-      </form>
+      <FormHeader loading={loading} setShowBlur={setShowBlur} />
+      <div className="flex flex-col gap-3">
+        {serverError && (
+          <AlertMessage
+            isServerError={true}
+            type="error"
+            message={serverError}
+          />
+        )}
+        {serverSuccess && (
+          <AlertMessage message={serverSuccess} type="success" />
+        )}
+        {fields.map((field) => (
+          <AuthFormFiled<z.infer<typeof LoginSchema>>
+            key={field.id}
+            register={register}
+            id={field.id as Path<z.infer<typeof LoginSchema>>}
+            placeholder={field.placeholder}
+            setShowPassword={field.setShowPassword}
+            showPassword={field.showPassword}
+            isPasswordFiled={field.isPasswordFiled}
+            label={field.label}
+            disabled={field.disabled}
+            error={field.error}
+            type={field.type as "email" | "password" | "text"}
+          />
+        ))}
+      </div>
+      <LoginSubmitButton loading={loading} />
+      <FormFooter />
       {showBlur && <AuthBlur />}
-    </motion.div>
+    </motion.form>
   );
 }
 

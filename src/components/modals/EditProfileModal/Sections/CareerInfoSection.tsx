@@ -1,11 +1,9 @@
 import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
-import {
-  useFormContext
-} from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import z from "zod";
-import EditProfileLable from "../EditProfileLable";
 import EditProfileTitleSection from "../EditProfileTitleSection";
 import ProfileFormField from "../ProfileFormField";
+import Label from "../Label";
 // ====================================================
 function CareerInfoSection({
   professionalMode,
@@ -38,7 +36,7 @@ function CareerInfoSection({
           error={errors.education?.message}
         />
         <div className="flex flex-col gap-2">
-          <EditProfileLable label="الوضع الإحترافي" />
+          <Label label="الوضع الإحترافي" />
           <div className="flex items-center gap-2">
             <input
               onChange={() => setValue("professionalMode", !professionalMode)}

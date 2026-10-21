@@ -4,10 +4,10 @@ import { CloudDownload } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import ReactPlayer from "react-player";
-import StoryModalMediaInfo from "./CreateStoryModalMediaInfo";
-import StoryModalMediaActions from "./CreateStoryModalMediaActions";
+import MediaActions from "./MediaActions";
+import MediaInfo from "./MediaInfo";
 // ===================================================================
-function CreateStoryModalUploadMedia({
+function UploadMedia({
   setMediaFile,
   setMediaPreview,
   mediaPreview,
@@ -34,7 +34,7 @@ function CreateStoryModalUploadMedia({
     : "UNKNOWN";
   return (
     <div className="flex flex-col gap-3">
-      <StoryModalMediaInfo />
+      <MediaInfo />
       <div
         className={clsx(
           "hover:bg-gray-900/80 mytransition rounded-lg bg-gray-900/50 border border-white/20 border-dashed relative overflow-hidden",
@@ -83,7 +83,7 @@ function CreateStoryModalUploadMedia({
         className="hidden"
         hidden
       />
-      <StoryModalMediaActions
+      <MediaActions
         mediaPreview={mediaPreview}
         setMediaFile={setMediaFile}
         setMediaPreview={setMediaPreview}
@@ -93,4 +93,4 @@ function CreateStoryModalUploadMedia({
   );
 }
 
-export default CreateStoryModalUploadMedia;
+export default UploadMedia;

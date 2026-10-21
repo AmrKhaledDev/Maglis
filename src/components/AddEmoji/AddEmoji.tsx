@@ -1,16 +1,21 @@
+import clsx from "clsx";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import { RefObject, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { BsEmojiGrin } from "react-icons/bs";
 // ======================================================================
 function AddEmoji({
-  messageInputRef,
+  textInputRef,
+  style,
+  emojiPickerStyle,
 }: {
-  messageInputRef: RefObject<HTMLInputElement | null>;
+  textInputRef: RefObject<HTMLInputElement | HTMLTextAreaElement | null>;
+  style?: string;
+  emojiPickerStyle: string;
 }) {
   const { setValue, watch } = useFormContext();
   const onEmojiClick = (emojiData: EmojiClickData) => {
-    const input = messageInputRef.current;
+    const input = textInputRef.current;
     if (!input) return null;
     const start = input.selectionStart ?? 0;
     const end = input.selectionEnd ?? 0;
@@ -36,18 +41,25 @@ function AddEmoji({
       <button
         onClick={() => setShowEmojiPicker(!showEmojiPicker)}
         type="button"
-        className="p-2 rounded-full shadow bg-white/5 text-gray-400 text-xl cursor-pointer hover:scale-102 active:bg-white/10 buttonShowEmojiPicker"
+        className={clsx(
+          showEmojiPicker && "text-white!",
+          "buttonShowEmojiPicker",
+          style
+            ? style
+            : "p-2 rounded-full shadow bg-white/5 text-gray-400 text-xl cursor-pointer hover:scale-102 active:bg-white/10 ",
+        )}
       >
-        <BsEmojiGrin className="sm:size-5 size-4"/>
+        <BsEmojiGrin className="sm:size-5 size-4" />
       </button>
       {showEmojiPicker && (
-        <div
-          className="absolute bottom-11 left-0 emojiPicker"
-        >
+        <div className={clsx("absolute emojiPicker", emojiPickerStyle)}>
           <EmojiPicker
             onEmojiClick={onEmojiClick}
             searchPlaceHolder="ابحث عن ملصقات"
-            className="bg-black/23! rounded-2xl! backdrop-blur-2xl! border-white/5! w-full!"
+            previewConfig={{ showPreview: false }}
+            searchDisabled={true}
+            skinTonesDisabled={true}
+            className="bg-black/23! rounded-2xl! backdrop-blur-2xl! border-white/5! w-full! h-full!"
           />
         </div>
       )}

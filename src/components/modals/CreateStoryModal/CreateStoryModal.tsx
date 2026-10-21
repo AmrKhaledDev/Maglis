@@ -1,18 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { MediaType } from "@prisma/client";
-import axios from "axios";
-import { useUser } from "@/providers/UserProvider";
-import CreateStoryModalHeader from "./CreateStoryModalHeader";
-import CreateStoryModalUloadText from "./CreateStoryModalUloadText";
-import CreateStoryModalSelectColor from "./CreateStoryModalSelectBgColor";
-import CreateStoryModalFooter from "./CreateStoryModalFooter";
-import CreateStoryModalUploadMedia from "./CreateStoryModalUploadMedia";
-import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { CreateAction } from "@/actions/Story/Create.action";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useUser } from "@/providers/UserProvider";
+import { MediaType } from "@prisma/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import Footer from "./Footer";
+import Header from "./Header";
+import SelectColor from "./SelectColor";
+import UloadText from "./UloadText";
+import UploadMedia from "./UploadMedia";
 // =================================================================
 function CreateStoryModal() {
   const [selectedColor, setSelectedColor] = useState("#4f46e5");
@@ -59,6 +59,7 @@ function CreateStoryModal() {
   });
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
   if (!mounted) return;
@@ -70,26 +71,26 @@ function CreateStoryModal() {
       className="fixed inset-0 backdrop-blur-xl bg-black/5 z-50 flex items-center justify-center"
     >
       <div className="overflow-y-auto w-200 max-h-180 rounded-2xl modalBgColor flex flex-col gap-7 p-3">
-        <CreateStoryModalHeader />
+        <Header />
         <div className="flex flex-col gap-5">
-          <CreateStoryModalUploadMedia
+          <UploadMedia
             setMediaFile={setMediaFile}
             setMediaPreview={setMediaPreview}
             mediaPreview={mediaPreview}
             mediaFile={mediaFile}
           />
-          <CreateStoryModalUloadText
+          <UloadText
             selectedColor={selectedColor}
             setContentText={setContentText}
             contentText={contentText}
           />
-          <CreateStoryModalSelectColor
+          <SelectColor
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
           />
         </div>
         <hr className="border-white/5" />
-        <CreateStoryModalFooter
+        <Footer
           error={error}
           handleCreateStory={handleCreateStory}
           isPending={isPending}

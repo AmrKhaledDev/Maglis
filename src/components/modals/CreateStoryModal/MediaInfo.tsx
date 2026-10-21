@@ -1,6 +1,6 @@
 import { ImageUp } from "lucide-react";
 // ==========================================
-function StoryModalMediaInfo() {
+function MediaInfo() {
   return (
     <div className="flex gap-2.5">
       <ImageUp
@@ -17,4 +17,4 @@ function StoryModalMediaInfo() {
   );
 }
 
-export default StoryModalMediaInfo;
+export default MediaInfo;

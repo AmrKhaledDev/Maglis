@@ -5,7 +5,7 @@ import { useUser } from "@/providers/UserProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 // ======================================
 function DeleteImageButton({
   setError,

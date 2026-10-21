@@ -2,7 +2,6 @@ import FollowButton from "@/components/FollowButton/FollowButton";
 import PostLikersModal from "@/components/modals/PostLikersModal";
 import { formatComments } from "@/formats/formatComments";
 import { formatLikes } from "@/formats/formatLikes";
-import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
@@ -15,12 +14,12 @@ import Link from "next/link";
 // ===============================================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
-function VideoAuthor({ video }: { video: PostType }) {
+function Author({ video }: { video: PostType }) {
   const userSession = useUser();
   const { activeModal, setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center gap-3">
-      <Link href={useUrlUserProfile(video.authorId)}>
+      <Link href={`/u/${video.authorId}`}>
         <Image
           src={video.author.image || "/user.jpg"}
           alt="صورة المستخدم"
@@ -32,11 +31,7 @@ function VideoAuthor({ video }: { video: PostType }) {
       <div className="space-y-0.5 w-full">
         <div className="flex items-center gap-1.5">
           <Link
-            href={
-              userSession.id === video.authorId
-                ? "/u/profile"
-                : `/u/${video.authorId}`
-            }
+            href={`/u/${video.authorId}`}
             className="text-sm font-semibold text-gray-200"
           >
             {video.author.name}
@@ -49,9 +44,10 @@ function VideoAuthor({ video }: { video: PostType }) {
               <span className="size-[3.5px] bg-white/5 block rounded-full" />
               <FollowButton
                 followingId={video.authorId}
-                followColor="bg-blue-900/30 text-blue-400 border-blue-500/10 border shadow"
-                unfollowColor="hover:text-gray-400"
-                publicStyle="text-[10px] active:scale-95 flex font-semibold items-center gap-2 cursor-pointer py-1 px-3 rounded-md "
+                followColor="bg-blue-900/30 text-blue-400 shadow hover:bg-blue-900/40"
+                unfollowColor="hover:text-gray-300"
+                publicStyle="text-xs active:scale-95 mytransition flex font-semibold items-center gap-2 cursor-pointer py-1.5 px-3 rounded-md"
+                iconStyle="size-4"
               />
             </>
           )}
@@ -83,4 +79,4 @@ function VideoAuthor({ video }: { video: PostType }) {
   );
 }
 
-export default VideoAuthor;
+export default Author;

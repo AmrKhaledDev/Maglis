@@ -40,6 +40,15 @@ export const GetRecentContactsAction = async () => {
             },
           },
         },
+        messages: {
+          where: {
+            deletedBySender: false,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+          take: 1,
+        },
       },
       orderBy: {
         updatedAt: "desc",

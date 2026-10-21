@@ -66,16 +66,6 @@ function PageContent() {
           )}
         </div>
       )}
-      {searchText.length > 0 &&
-        data.users.length < 1 &&
-        data.posts.length < 1 && (
-          <div className="flex flex-col justify-center items-center gap-5 text-gray-300 mt-10">
-            <p className="text-2xl font-normal">لم نعثر على نتائج لبحثك عن</p>
-            <p className="line-clamp-1 [word-break:break-word]">
-              &quot;{searchText}&quot;
-            </p>
-          </div>
-        )}
     </>
   );
 }

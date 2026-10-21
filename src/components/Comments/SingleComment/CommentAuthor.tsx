@@ -1,11 +1,10 @@
-import Image from "next/image";
+import { PostType } from "@/types/Post.type";
+import { Comment, Prisma } from "@prisma/client";
+import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
-import dayjs from "dayjs";
-import { Comment, Prisma } from "@prisma/client";
-import { PostType } from "@/types/Post.type";
+import Image from "next/image";
 import Link from "next/link";
-import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
 // =========================================================================
 dayjs.locale("ar");
 dayjs.extend(relativeTime);
@@ -38,7 +37,7 @@ function CommentAuthor({
         <div className="flex items-center gap-1">
           <Link
             target="_blank"
-            href={useUrlUserProfile(comment.userId)}
+            href={`/u/${comment.userId}`}
             className="text-sm font-semibold"
           >
             {user.name}

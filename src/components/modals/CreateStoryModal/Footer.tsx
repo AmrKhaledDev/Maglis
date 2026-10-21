@@ -3,7 +3,7 @@ import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { UseMutateFunction } from "@tanstack/react-query";
 import { SendHorizontal } from "lucide-react";
 // ========================================================================
-function CreateStoryModalFooter({
+function Footer({
   handleCreateStory,
   isPending,
   error,
@@ -41,4 +41,4 @@ function CreateStoryModalFooter({
   );
 }
 
-export default CreateStoryModalFooter;
+export default Footer;

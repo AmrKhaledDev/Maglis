@@ -16,7 +16,7 @@ function VideosList() {
     queryKey: ["posts_videos", userSession.id],
   });
   return (
-    <div className="max-w-180 mx-auto">
+    <div className="max-w-180 mx-auto mb-3">
       {isPending ? (
         <VideosSkeleton />
       ) : (

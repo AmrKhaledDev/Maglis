@@ -2,7 +2,7 @@ import { unstable_cache } from "next/cache";
 import { cache } from "react";
 // ====================================
 export const Cache = (
-  cb: (...args: any[]) => Promise<any>,
+  cb: (...args: unknown[]) => Promise<unknown>,
   keyParts: string[],
   options?: { revalidate?: number | false; tags?: string[] },
 ) => {

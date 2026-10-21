@@ -8,7 +8,7 @@ function CreatePostTrigger() {
   const { setActiveModal } = useActiveModal();
   return (
     <div className="flex items-center gap-3 w-full">
-      <Link href={"/u/profile"}>
+      <Link href="/u/profile">
         <UserImage src={userSession.image} size="size-10" />
       </Link>
       <button

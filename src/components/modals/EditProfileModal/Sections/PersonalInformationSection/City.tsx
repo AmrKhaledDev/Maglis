@@ -4,8 +4,8 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";
 import z from "zod";
 import SelectCityModal from "../../../SelectedCityModal/SelectCityModal";
-import EditProfileLable from "../../EditProfileLable";
 import { MapPin } from "lucide-react";
+import Label from "../../Label";
 // ======================================================
 function City() {
   const { control } = useFormContext<z.infer<typeof EditProfileSchema>>();
@@ -16,7 +16,7 @@ function City() {
   });
   return (
     <div className="flex flex-col gap-1">
-      <EditProfileLable label="الدولة" />
+      <Label label="الدولة" />
       <div className="w-60">
         <button
           onClick={() => setShowSelectCityModal(true)}
@@ -24,7 +24,7 @@ function City() {
           className="buttonShowSelectGender flex button mytransition w-full items-center gap-5 justify-between rounded-lg p-4 bg-[#252628] hover:bg-[#313235] shadow cursor-pointer font-medium"
         >
           <span className="flex items-center gap-2">
-            <MapPin strokeWidth={1} className="size-5"/>
+            <MapPin strokeWidth={1} className="size-5" />
             {city ? city : "إختر محافظتك"}
           </span>
           <IoMdArrowDropdown />

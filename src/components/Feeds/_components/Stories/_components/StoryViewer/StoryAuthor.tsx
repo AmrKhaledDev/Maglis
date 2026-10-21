@@ -1,23 +1,17 @@
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/ar";
-import Image from "next/image";
-import { useUser } from "@/providers/UserProvider";
-import Link from "next/link";
-import { Story } from "@prisma/client";
 import { UserStoryType } from "@/types/UserStoryType";
+import { Story } from "@prisma/client";
+import dayjs from "dayjs";
+import "dayjs/locale/ar";
+import relativeTime from "dayjs/plugin/relativeTime";
+import Image from "next/image";
+import Link from "next/link";
 // ====================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
 function StoryAuthor({ user, story }: { user: UserStoryType; story: Story }) {
-  const userSession = useUser();
   return (
     <div className="absolute top-5 right-8 z-5 flex items-center gap-2.5">
-      <Link
-        href={
-          story.userId === userSession.id ? "/u/profile" : `/u/${story.userId}`
-        }
-      >
+      <Link href={`/u/${story.userId}`}>
         <Image
           src={user.image || "/user.jpg"}
           width={70}

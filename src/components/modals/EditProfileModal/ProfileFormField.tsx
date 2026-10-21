@@ -1,6 +1,6 @@
-import { FieldValues, Path, UseFormRegister } from "react-hook-form";
-import EditProfileLable from "./EditProfileLable";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import Label from "./Label";
 // ===================================================
 function ProfileFormField<T extends FieldValues>({
   id,
@@ -20,7 +20,7 @@ function ProfileFormField<T extends FieldValues>({
   if (!typeField) return null;
   return (
     <div className="flex flex-col gap-2">
-      <EditProfileLable id={id} label={label} />
+      <Label id={id} label={label} />
       {typeField === "INPUT" ? (
         <input
           {...register(id)}

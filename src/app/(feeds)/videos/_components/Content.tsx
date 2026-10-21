@@ -3,7 +3,7 @@ import clsx from "clsx";
 import Linkify from "linkify-react";
 import { useState } from "react";
 // ======================================
-function VideoContent({ video }: { video: PostType }) {
+function Content({ video }: { video: PostType }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
@@ -28,4 +28,4 @@ function VideoContent({ video }: { video: PostType }) {
   );
 }
 
-export default VideoContent;
+export default Content;

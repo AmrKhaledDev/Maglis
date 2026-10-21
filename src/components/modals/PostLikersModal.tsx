@@ -57,11 +57,7 @@ function PostLikersModal({ post }: { post: PostType }) {
                 <div>
                   <Link
                     className="hover:underline decoration-1"
-                    href={
-                      userSession.id === liker.userId
-                        ? "/u/profile"
-                        : `/u/${liker.userId}`
-                    }
+                    href={`/u/${liker.userId}`}
                   >
                     {liker.user.name}
                   </Link>

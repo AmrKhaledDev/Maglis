@@ -1,4 +1,4 @@
-function EditProfileLable({id,label}:{id?:string,label:string}) {
+function Label({id,label}:{id?:string,label:string}) {
   return (
     <label
       htmlFor={id}
@@ -10,4 +10,4 @@ function EditProfileLable({id,label}:{id?:string,label:string}) {
   );
 }
 
-export default EditProfileLable;
+export default Label;

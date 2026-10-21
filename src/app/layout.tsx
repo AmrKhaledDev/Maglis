@@ -26,7 +26,7 @@ export default async function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", iBM_Plex_Sans_Arabic.className, "font-sans")}
     >
-      <body className="min-h-full flex flex-col  text-white font-light bg-linear-to-r from-slate-900 to-slate-800">
+      <body className="min-h-full flex flex-col text-white font-normal bg-linear-to-r from-slate-900 to-slate-800">
         <Providers>{children}</Providers>
       </body>
     </html>

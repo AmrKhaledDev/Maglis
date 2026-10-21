@@ -29,7 +29,7 @@ function ProfileCover({ user }: { user: User }) {
           fill
           className="object-cover"
         />
-        <span className="absolute inset-0 bg-black/30 group-hover:opacity-0 mytransition" />
+        <span className="absolute inset-0 bg-black/30 group-hover:opacity-60 mytransition" />
       </div>
       {user.id === userSession.id && (
         <>

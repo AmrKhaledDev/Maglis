@@ -49,7 +49,7 @@ function RecentContacts() {
                   <NameDescription
                     userId={member.user.id}
                     name={member.user.name}
-                    description={member.user.bio}
+                    description={conversation.messages[0].content}
                   />
                 </div>
                 <ButtonAction

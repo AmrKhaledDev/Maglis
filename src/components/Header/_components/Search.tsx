@@ -2,9 +2,9 @@
 import { SearchUsersAction } from "@/actions/Search/SearchUsers.action";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
-import { Search as SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import UsersSearchResult from "./UsersSearchResult";
+import { X } from "lucide-react";
 // =================================================================================
 function Search() {
   const userSession = useUser();
@@ -32,18 +32,22 @@ function Search() {
   });
   return (
     <div className="relative">
-      <div className="w-190 searchBox shadow h-12 bg-black/10 rounded-full overflow-hidden border border-gray-50/6 flex items-center justify-between">
+      <div className="w-100 focus-within:w-130 mytransition searchBox shadow h-11 bg-white/3 rounded-full overflow-hidden flex items-center justify-between">
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           type="text"
-          placeholder="بحث..."
-          className="w-full h-full px-4 outline-none cursor-pointer"
+          placeholder="بحث سريع عن مستخدمين"
+          className="w-full h-full px-4 outline-none cursor-pointer font-light"
         />
-        <span className="w-px h-[60%] bg-white/5 block" />
-        <button className="mx-2 cursor-pointer">
-          <SearchIcon className="size-8 p-2 mr-1 rounded-full ring ring-gray-50/10 bg-[#c5ab77]/10 mytransition shadow hover:scale-105" />
-        </button>
+        {searchValue.trim().length > 0 && (
+          <button
+            onClick={() => setSearchValue("")}
+            className="pl-3 text-gray-400 hover:text-white cursor-pointer"
+          >
+            <X strokeWidth={1} className="size-4" />
+          </button>
+        )}
       </div>
       {data.length > 0 && (
         <UsersSearchResult data={sorting_data} searchValue={searchValue} />

@@ -3,7 +3,7 @@ import { ALargeSmall } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import TextareaAutoSize from "react-textarea-autosize";
 // =====================================================
-function CreateStoryModalUloadText({
+function UloadText({
   selectedColor,
   setContentText,
   contentText,
@@ -44,4 +44,4 @@ function CreateStoryModalUloadText({
   );
 }
 
-export default CreateStoryModalUloadText;
+export default UloadText;

@@ -1,21 +1,20 @@
 import UserImage from "@/components/UserImage/UserImage";
 import privacyMap from "@/data/privacyMap";
-import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
 import { PostType } from "@/types/Post.type";
 import dayjs from "dayjs";
 import local from "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
-import PostAuthorActions from "./PostAuthorAction";
+import AuthorActions from "./AuthorAction";
 // ====================================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
-function PostAuthor({ post }: { post: PostType }) {
+function Author({ post }: { post: PostType }) {
   const Icon = privacyMap[post.privacy].icon;
   return (
     <div className="flex gap-2 items-center">
       <Link
-        href={useUrlUserProfile(post.authorId)}
+        href={`/u/${post.authorId}`}
         className="font-semibold  text-gray-100 line-clamp-1 [word-break:break-word]"
       >
         <UserImage src={post.author.image} size="size-10" />
@@ -24,14 +23,14 @@ function PostAuthor({ post }: { post: PostType }) {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <Link
-              href={useUrlUserProfile(post.authorId)}
+              href={`/u/${post.authorId}`}
               className="text-gray-100 line-clamp-1 [word-break:break-word] hover:underline hover:decoration-1 font-semibold"
             >
               {post.author.name}
             </Link>
-             <Icon className="size-3"/>
+            <Icon className="size-3" />
           </div>
-          <PostAuthorActions post={post} />
+          <AuthorActions post={post} />
         </div>
         <div className="flex items-center gap-1.5">
           {post.author.username && (
@@ -51,4 +50,4 @@ function PostAuthor({ post }: { post: PostType }) {
   );
 }
 
-export default PostAuthor;
+export default Author;

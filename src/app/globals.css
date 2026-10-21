@@ -17,7 +17,7 @@
   @apply size-4 shrink-0;
 }
 @utility btnOptBox {
-  @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:bg-white/5 mytransition font-light!;
+  @apply flex items-center w-full gap-2 text-sm disabled:text-gray-500 not-disabled:cursor-pointer disabled:pointer-events-none not-disabled:hover:bg-white/5 mytransition font-normal! tracking-[1]!;
 }
 @utility bgMenuBox {
   @apply mt-0.5 p-2 shadow flex flex-col ring ring-white/5 gap-2 absolute bg-black backdrop-blur-3xl rounded-xl w-fit whitespace-nowrap z-9 left-0 font-semibold;

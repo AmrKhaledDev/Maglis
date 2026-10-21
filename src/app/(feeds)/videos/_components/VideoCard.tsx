@@ -1,12 +1,12 @@
 "use client";
-import ReactPlayer from "react-player";
-import VideoActions from "./VideoActions";
-import VideoAuthor from "./VideoAuthor";
-import VideoContent from "./VideoContent";
-import { useEffect } from "react";
-import { PostType } from "@/types/Post.type";
-import { useInView } from "react-intersection-observer";
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
+import { PostType } from "@/types/Post.type";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import ReactPlayer from "react-player";
+import Author from "./Author";
+import Content from "./Content";
+import VideoActions from "./VideoActions";
 // ====================================================
 function VideoCard({ video }: { video: PostType }) {
   const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
@@ -38,8 +38,8 @@ function VideoCard({ video }: { video: PostType }) {
           />
         </div>
         <div className="flex flex-col gap-5 rounded-lg">
-          <VideoContent video={video} />
-          <VideoAuthor video={video} />
+          <Content video={video} />
+          <Author video={video} />
         </div>
       </div>
     </div>

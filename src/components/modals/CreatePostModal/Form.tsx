@@ -14,6 +14,7 @@ import Footer from "./Footer";
 import WarningMessage from "@/components/WarningMessage/WarningMessage";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import FieldType from "./_types/Field.type";
+import { useRef } from "react";
 // ======================================================================
 function Form({
   mutate,
@@ -37,6 +38,7 @@ function Form({
   const handleCreatePost = (data: FormType) => {
     mutate(data);
   };
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   return (
     <form
       onSubmit={handleSubmit(handleCreatePost)}
@@ -45,10 +47,15 @@ function Form({
       <Header loading={loading} />
       {error && <AlertMessage type="error" message={error.message} />}
       <Author />
-      <Center disabled={loading} />
+      <Center disabled={loading} textareaRef={textareaRef} />
       <Media disabled={loading} fields={fields} remove={remove} />
       <MediaLength fields={fields} />
-      <Footer fields={fields} append={append} loading={loading} />
+      <Footer
+        fields={fields}
+        append={append}
+        loading={loading}
+        textareaRef={textareaRef}
+      />
       <WarningMessage />
     </form>
   );

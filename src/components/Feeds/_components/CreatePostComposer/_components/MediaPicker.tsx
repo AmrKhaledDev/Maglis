@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 // ================================================================
@@ -17,36 +18,32 @@ function MediaPicker({
       e.target.value = "";
     }
   };
+  const uploadOptions = [
+    { icon: "/image.png", id: "image", accept: "image/*" },
+    { icon: "/video.png", id: "video", accept: "video/*" },
+  ];
   return (
     <div className="flex items-center gap-3">
-      <label
-        htmlFor="image"
-        className="text-3xl shadow block mytransition cursor-pointer rounded-full relative size-6.5 hover:scale-105 active:scale-95"
-      >
-        <Image src="/image.png" alt="image icon" fill className="object-contain" />
-      </label>
-      <input
-        onChange={handleChange}
-        type="file"
-        id="image"
-        className="hidden"
-        hidden
-        accept="image/*"
-      />
-      <label
-        htmlFor="video"
-        className="text-3xl shadow block mytransition cursor-pointer rounded-full relative size-6.5 hover:scale-105 active:scale-95"
-      >
-        <Image src="/video.png" alt="video icon" fill className="object-contain" />
-      </label>
-      <input
-        onChange={handleChange}
-        type="file"
-        id="video"
-        className="hidden"
-        hidden
-        accept="video/*"
-      />
+      {uploadOptions.map((option) => (
+        <div key={option.id}>
+          <motion.label
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            htmlFor={option.id}
+            className="text-3xl shadow block cursor-pointer rounded-full relative size-6.5"
+          >
+            <Image src={option.icon} alt="" className="object-contain" fill />
+          </motion.label>
+          <input
+            onChange={handleChange}
+            type="file"
+            id={option.id}
+            className="hidden"
+            hidden
+            accept={option.accept}
+          />
+        </div>
+      ))}
     </div>
   );
 }

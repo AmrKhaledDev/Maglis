@@ -14,8 +14,10 @@ function Header() {
   return (
     <header className="sticky top-0 bg-[#0c0c0c] z-30 py-3 mb-5 px-25 backdrop-blur-3xl">
       <div className="mycontainer flex items-center justify-between gap-7">
-        <Logo />
-        <Search />
+        <div className="flex items-center gap-5">
+          <Logo />
+          <Search />
+        </div>
         <div className="flex items-center gap-5">
           <Link href={"/videos"} className="flex flex-col gap-1.5 items-center">
             <SiGoogleanalytics className="size-6" />

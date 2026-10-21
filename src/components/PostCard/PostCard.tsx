@@ -3,10 +3,10 @@ import { PostType } from "@/types/Post.type";
 import { Pin } from "lucide-react";
 import { useState } from "react";
 import Comments from "../Comments/Comments";
-import PostOptions from "../PostOptions/PostOptions";
+import Author from "./_components/Author/Author";
 import PostActions from "./_components/PostActions/PostActions";
-import PostAuthor from "./_components/PostAuthor/PostAuthor";
 import PostContent from "./_components/PostContent/PostContent";
+import PostOptions from "../PostOptions/PostOptions";
 // ========================================================
 function PostCard({
   post,
@@ -29,7 +29,7 @@ function PostCard({
         </p>
       )}
       <div className="flex justify-between">
-        <PostAuthor post={post} />
+        <Author post={post} />
         <PostOptions post={post} />
       </div>
       <PostContent post={post} />

@@ -1,4 +1,3 @@
-import { useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 // ===========================
 function NameDescription({
@@ -7,14 +6,13 @@ function NameDescription({
   userId,
 }: {
   name: string;
-  description: string | null;
+  description?: string | null;
   userId: string;
 }) {
-  const userSession = useUser();
   return (
     <div>
       <Link
-        href={userSession.id === userId ? "u/profile" : `/u/${userId}`}
+        href={`/u/${userId}`}
         className="text-sm"
       >
         {name}

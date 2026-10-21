@@ -4,8 +4,15 @@ import TextareaAutosize from "react-textarea-autosize";
 import SelectPrivacy from "./SelectPrivacy";
 import { useUser } from "@/providers/UserProvider";
 import { FormType } from "./_types/Form.type";
+import { RefObject } from "react";
 // =====================================================================================
-function Center({ disabled }: { disabled: boolean }) {
+function Center({
+  disabled,
+  textareaRef,
+}: {
+  disabled: boolean;
+  textareaRef: RefObject<HTMLTextAreaElement | null>;
+}) {
   const { control, register } = useFormContext<FormType>();
   const content = useWatch({
     control,
@@ -13,11 +20,16 @@ function Center({ disabled }: { disabled: boolean }) {
     defaultValue: "",
   });
   const userSession = useUser();
+  const { ref, ...currentRegister } = register("content");
   return (
     <div className="space-y-4">
       <TextareaAutosize
         disabled={disabled}
-        {...register("content")}
+        {...currentRegister}
+        ref={(element) => {
+          ref(element);
+          textareaRef.current = element;
+        }}
         minRows={7}
         maxRows={15}
         placeholder={`بماذا تفكر اليوم يا ${userSession.name} ؟`}

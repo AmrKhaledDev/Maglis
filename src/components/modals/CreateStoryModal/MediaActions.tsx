@@ -3,7 +3,7 @@ import { MediaType } from "@prisma/client";
 import { Fullscreen, Trash2 } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 // ====================================================================
-function StoryModalMediaActions({
+function MediaActions({
   setMediaFile,
   setMediaPreview,
   mediaPreview,
@@ -48,4 +48,4 @@ function StoryModalMediaActions({
   );
 }
 
-export default StoryModalMediaActions;
+export default MediaActions;

@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";
 import z from "zod";
-import EditProfileLable from "../../EditProfileLable";
 import SelectGender from "./SelectGender";
+import Label from "../../Label";
 // =======================================================
 function Gender() {
   const { control } = useFormContext<z.infer<typeof EditProfileSchema>>();
@@ -30,7 +30,7 @@ function Gender() {
   const genderPreview = gender && genderMap[gender];
   return (
     <div className="flex flex-col gap-1">
-      <EditProfileLable label="الجنس" />
+      <Label label="الجنس" />
       <div className="relative w-60 ">
         <button
           type="button"

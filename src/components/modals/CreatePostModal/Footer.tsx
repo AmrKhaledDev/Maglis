@@ -3,8 +3,9 @@ import AddImages from "./AddImages";
 import AddVideos from "./AddVideos";
 import { FooterPropsType } from "./_types/FooterProps.type";
 import { FormType } from "./_types/Form.type";
+import AddEmoji from "@/components/AddEmoji/AddEmoji";
 // =============================================================================================
-function Footer({ fields, append, loading, }: FooterPropsType) {
+function Footer({ fields, append, loading, textareaRef }: FooterPropsType) {
   const { control } = useFormContext<FormType>();
   const content = useWatch({
     control,
@@ -13,9 +14,14 @@ function Footer({ fields, append, loading, }: FooterPropsType) {
   const disabled = content.length < 1 && fields.length < 1 ? true : false;
   return (
     <div className="flex items-center justify-between mt-5">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2.5">
         <AddImages disabled={loading} fields={fields} append={append} />
         <AddVideos disabled={loading} fields={fields} append={append} />
+        <AddEmoji
+          textInputRef={textareaRef}
+          style="text-gray-400 mt-1.5 hover:text-white cursor-pointer mytransition"
+          emojiPickerStyle="right-2 bottom-5 h-90!"
+        />
       </div>
       <button
         disabled={disabled || loading}

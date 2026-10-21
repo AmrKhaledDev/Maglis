@@ -5,7 +5,6 @@ import { UserRound } from "lucide-react";
 import Link from "next/link";
 import BlockButton from "../../BlockButton/BlockButton";
 import HiddenPostButton from "./HiddenPostButton";
-import { useUrlUserProfile } from "@/hooks/useUrlUserProfile";
 import useIsUserBlocked from "@/hooks/useIsUserBlocked";
 // ========================================================
 function PostViewerOptions({ post }: { post: PostType }) {
@@ -15,7 +14,7 @@ function PostViewerOptions({ post }: { post: PostType }) {
     <>
       {userSession.id !== post.authorId && (
         <>
-          <Link href={useUrlUserProfile(post.authorId)} className="btnOptBox">
+          <Link href={`/u/${post.authorId}`} className="btnOptBox">
             <UserRound className="btnOptIcon" /> عرض الملف الشخصي
           </Link>
           <HiddenPostButton post={post} />
@@ -25,6 +24,7 @@ function PostViewerOptions({ post }: { post: PostType }) {
               publicStyle="btnOptBox"
               followColor=""
               unfollowColor="text-red-500!"
+              iconStyle="btnOptIcon"
             />
           )}
           <BlockButton

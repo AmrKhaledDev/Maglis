@@ -1,4 +1,3 @@
-import { useUser } from "@/providers/UserProvider";
 import { UserSearchResultType } from "@/types/UserSearchResult.type";
 import clsx from "clsx";
 import Image from "next/image";
@@ -11,7 +10,6 @@ function UsersSearchResult({
   searchValue: string;
   data: UserSearchResultType[];
 }) {
-  const userSession = useUser();
   return (
     <div
       className={clsx(
@@ -21,9 +19,9 @@ function UsersSearchResult({
     >
       {data.map((user) => (
         <Link
-          href={userSession.id === user.id ? "/u/profile" : `/u/${user.id}`}
+          href={`/u/${user.id}`}
           key={user.id}
-          className="flex items-center gap-3 hover:bg-slate-900 mytransition"
+          className="flex items-center gap-2 hover:bg-slate-800"
         >
           <Image
             src={user.image || "/user.jpg"}
@@ -33,15 +31,9 @@ function UsersSearchResult({
             className="rounded-full object-cover size-9 shrink-0"
           />
           <div className="flex items-center gap-1.5">
-            <h2 className="text-nowrap text-sm font-semibold text-gray-200">
+            <h2 dir="auto" className="text-sm font-semibold text-gray-200 line-clamp-1 [word-break:break-word]">
               {user.name}
             </h2>
-            {user.id === userSession.id && (
-              <>
-                <span className="size-0.75 shadow rounded-full bg-gray-500 shrink-0" />
-                <h3 className="font-semibold text-xs text-green-600">أنت</h3>
-              </>
-            )}
             {user.bio && (
               <>
                 <span className="size-0.75 shadow rounded-full bg-gray-500 shrink-0" />

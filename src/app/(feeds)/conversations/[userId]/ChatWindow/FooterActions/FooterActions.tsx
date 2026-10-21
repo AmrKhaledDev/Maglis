@@ -2,9 +2,9 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { FiPlus } from "react-icons/fi";
 import FooterActionPropsType from "../../../_types/FooterActionsProps.type";
-import AddEmoji from "./AddEmoji";
 import SelectedMediaPreviewModal from "../../../../../../components/modals/SelectedMediaPreviewModal/SelectedMediaPreviewModal";
 import UploadFiles from "./UploadFiles";
+import AddEmoji from "@/components/AddEmoji/AddEmoji";
 // =================================================================
 function FooterActions({
   fields,
@@ -16,7 +16,10 @@ function FooterActions({
   const { setActiveMenu } = useActiveMenu();
   return (
     <div className="flex items-center sm:gap-2.5 gap-1">
-      <AddEmoji messageInputRef={messageInputRef} />
+      <AddEmoji
+        textInputRef={messageInputRef}
+        emojiPickerStyle="left-0! bottom-10 h-100"
+      />
       <div className="relative">
         <button
           type="button"

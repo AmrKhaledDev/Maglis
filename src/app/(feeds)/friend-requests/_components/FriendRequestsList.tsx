@@ -6,6 +6,7 @@ import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
 import RequestUser from "./RequestUser/RequestUser";
 import Skeleton from "@/components/Skeletons/FriendRequests/Skeleton";
+import Image from "next/image";
 // ======================================================================================
 function FriendRequestsList() {
   const userSession = useUser();
@@ -35,15 +36,15 @@ function FriendRequestsList() {
           <RequestUser key={request.id} request={request} />
         ))
       ) : (
-        <div className="flex flex-col gap-4 items-center justify-center">
-          <img src="/no-results.png" className="size-25" />
-          <div className="flex flex-col items-center gap-1">
-            <h2 className="font-medium text-xl">لا يوجد طلبات صداقة حالياً</h2>
-            <p className="text-[#9ca1ab]">صندوق الطلبات فارغ.</p>
-            <p className="text-[#9ca1ab]">
-              عندما يتم إرسال إليك طلب صداقة سيتم عرضه هنا فوراً.
-            </p>
-          </div>
+        <div className="flex flex-col gap-4 items-center justify-center mb-2">
+          <Image
+            src="/no-results.png"
+            className="size-20"
+            alt="icon"
+            width={100}
+            height={100}
+          />
+          <h2 className="font-light text-xl text-gray-100">لا يوجد طلبات صداقة حالياً</h2>
         </div>
       )}
     </div>
