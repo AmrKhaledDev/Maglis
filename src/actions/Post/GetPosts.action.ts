@@ -8,6 +8,21 @@ export const GetPostsAction = async (
 ): Promise<{ posts?: PostType[] }> => {
   const posts: PostType[] = await prisma.post.findMany({
     where: {
+      OR: [
+        { privacy: "PUBLIC" },
+        { privacy: "PRIVATE", authorId: userSessionId },
+        {
+          privacy: "FRIENDS",
+          author: {
+            myFriends: {
+              some: {
+                friendId: userSessionId,
+              },
+            },
+          },
+        },
+        { privacy: "FRIENDS", authorId: userSessionId },
+      ],
       hiddenPosts: {
         none: {
           userId: userSessionId,
