@@ -55,8 +55,9 @@ function Form({ error }: { error?: string }) {
       initial={{ opacity: 0, x: -40 }}
       animate={{ opacity: 1, x: 0 }}
       onSubmit={handleSubmit(handleLogin)}
-      className="p-5 relative bg-slate-800 rounded-3xl space-y-5 w-120 h-fit shadow-2xl overflow-hidden"
+      className="p-4 relative bg-slate-800 rounded-3xl space-y-3 w-110 h-fit shadow-2xl overflow-hidden"
     >
+      {showBlur && <AuthBlur />}
       <FormHeader loading={loading} setShowBlur={setShowBlur} />
       <div className="flex flex-col gap-3">
         {serverError && (
@@ -87,7 +88,6 @@ function Form({ error }: { error?: string }) {
       </div>
       <LoginSubmitButton loading={loading} />
       <FormFooter />
-      {showBlur && <AuthBlur />}
     </motion.form>
   );
 }

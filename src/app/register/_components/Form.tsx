@@ -1,6 +1,5 @@
 "use client";
 import AuthToggle from "@/components/AuthToggle/AuthToggle";
-import OAuthWithGoogleBtn from "@/components/OAuthWithGoogleButton/OAuthWithGoogleButton";
 import AuthDivider from "@/components/AuthDivider/AuthDivider";
 import AuthFormFiled from "@/components/AuthFormFiled/AuthFormFiled";
 import { Path, useForm } from "react-hook-form";
@@ -16,6 +15,7 @@ import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import RegisterSubmitButton from "./RegisterSubmitButton";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import OAuth from "@/components/OAuth/OAuth";
 // ====================================================================
 function Form() {
   const {
@@ -64,11 +64,7 @@ function Form() {
         <div className="relative h-17 w-20 mx-auto mb-6">
           <Image src={"/logo.png"} alt="logo" priority fill />
         </div>
-        <OAuthWithGoogleBtn
-          disabled={loading}
-          setShowBlur={setShowBlur}
-          text="أنشئ حسابك بواسطة Google"
-        />
+        <OAuth disabled={loading} setShowBlur={setShowBlur} />
         <AuthDivider />
         {serverError && (
           <AlertMessage

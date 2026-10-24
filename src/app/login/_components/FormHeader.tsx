@@ -1,5 +1,5 @@
 import AuthDivider from "@/components/AuthDivider/AuthDivider";
-import OAuthWithGoogleButton from "@/components/OAuthWithGoogleButton/OAuthWithGoogleButton";
+import OAuth from "@/components/OAuth/OAuth";
 import { Dispatch, SetStateAction } from "react";
 // =============================================================
 function FormHeader({
@@ -20,7 +20,7 @@ function FormHeader({
           مرحباً بعودتك! يرجى تسجيل الدخول للمتابعة.
         </p>
       </div>
-      <OAuthWithGoogleButton disabled={loading} setShowBlur={setShowBlur} />
+      <OAuth disabled={loading} setShowBlur={setShowBlur} />
       <AuthDivider />
     </div>
   );

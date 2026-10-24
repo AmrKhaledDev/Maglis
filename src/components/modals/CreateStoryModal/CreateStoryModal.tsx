@@ -75,7 +75,7 @@ function CreateStoryModal() {
       >
         <form
           onSubmit={handleSubmit(handleCreateStory)}
-          className="overflow-y-auto w-200 max-h-180 rounded-2xl modalBgColor flex flex-col gap-7 p-3"
+          className="overflow-y-auto w-180 max-h-160 rounded-2xl modalBgColor flex flex-col gap-7 p-3"
         >
           <Header />
           <div className="flex flex-col gap-5">

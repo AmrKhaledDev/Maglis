@@ -5,6 +5,7 @@ import Credentials from "next-auth/providers/credentials";
 import { LoginSchema } from "@/ZodSchemas/Auth/Login.schema";
 import bcrypt from "bcryptjs";
 import Google from "next-auth/providers/google";
+import Facebook from "next-auth/providers/facebook";
 // ===============================================
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -53,6 +54,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    Facebook({
+      clientId: "2886040245108427",
+      clientSecret: "493b29c7dd535a44549cfde46a4b14ce",
     }),
   ],
   pages: {

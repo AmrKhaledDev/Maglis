@@ -5,7 +5,6 @@ import Link from "next/link";
 function FormFooter() {
   return (
     <div className="flex flex-col gap-3">
-      <span className="w-full h-px bg-gray-50/7 block rounded-full" />
       <Link
         href={"/forgot-password"}
         className="block w-fit mx-auto text-center text-sm text-blue-400 hover:underline"
