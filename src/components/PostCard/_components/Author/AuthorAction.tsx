@@ -14,9 +14,8 @@ function AuthorActions({ post }: { post: PostType }) {
         (post.author.professionalMode ? (
           <FollowButton
             followingId={post.authorId}
-            followColor="bg-gray-200 hover:bg-gray-300 text-blue-700 font-semibold"
+            followStyle="bg-gray-200 hover:bg-gray-300 text-blue-700 font-semibold"
             publicStyle="shadow flex items-center gap-2 active:scale-98 cursor-pointer text-xs disabled:cursor-default py-1.5 px-3 rounded text-nowrap"
-            unfollowColor=""
             iconStyle="size-4"
           />
         ) : isFriend ? (

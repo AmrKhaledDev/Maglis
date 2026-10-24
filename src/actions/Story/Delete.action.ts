@@ -15,7 +15,6 @@ export const DeleteAction = async (
         success: false,
         message: "حدث خطأ غير متوقع أثناء حذف الحالة الخاصة بك.",
       };
-
     const story = await prisma.story.findUnique({
       where: {
         id: storyId,

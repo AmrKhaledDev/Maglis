@@ -49,10 +49,10 @@ function LikeButton({ post }: { post: PostType }) {
           whileInView={{ scale: 1 }}
           src="/heart.png"
           alt="heart"
-          className="size-5.5"
+          className="size-5"
         />
       ) : (
-        <Heart strokeWidth={1} className="size-5.5" />
+        <Heart strokeWidth={1.5} className="size-5" />
       )}
     </button>
   );

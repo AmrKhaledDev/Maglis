@@ -1,14 +1,10 @@
 import { bg_colors } from "@/data/StoryModal/bg_colors";
 import { Check, Palette } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { useFormContext } from "react-hook-form";
+import CreateStoryFormValues from "./_types/CreateStoryFormValues.type";
 // ================================================================
-function SelectColor({
-  selectedColor,
-  setSelectedColor,
-}: {
-  selectedColor: string;
-  setSelectedColor: Dispatch<SetStateAction<string>>;
-}) {
+function SelectColor({ selectedColor }: { selectedColor: string }) {
+  const { setValue } = useFormContext<CreateStoryFormValues>();
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-2.5">
@@ -22,7 +18,7 @@ function SelectColor({
         {bg_colors.map((color) => (
           <button
             disabled={selectedColor === color}
-            onClick={() => setSelectedColor(color)}
+            onClick={() => setValue("color", color)}
             key={color}
             style={{ backgroundColor: color }}
             className="size-6.5 rounded flex items-center justify-center not-disabled:cursor-pointer shadow not-disabled:hover:scale-105 mytransition not-disabled:active:scale-95"

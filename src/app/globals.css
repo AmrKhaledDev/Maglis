@@ -4,7 +4,7 @@
 /* ========================= */
 @custom-variant dark (&:is(.dark *));
 @utility mycontainer {
-  @apply mx-auto max-w-400 px-3;
+  @apply mx-auto max-w-350 px-3;
 }
 @utility mytransition {
   @apply transition-all duration-300;
@@ -28,9 +28,7 @@
 @utility profileSectionFieldsStyle {
   @apply flex flex-col gap-4;
 }
-@utility storyBtnOptionStyle {
-  @apply flex items-center rounded w-full disabled:text-gray-500 gap-1.5 font-semibold text-sm not-disabled:cursor-pointer not-disabled:hover:bg-black/10 mytransition py-1 px-2;
-}
+
 @utility videoBtnActionStyle {
   @apply not-disabled:cursor-pointer size-fit flex bg-linear-to-t from-white/8
   via-black/7 ring ring-white/3 to-white/5 shadow rounded-full p-2.5 items-center gap-1;

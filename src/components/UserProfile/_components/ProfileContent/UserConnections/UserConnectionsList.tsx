@@ -40,7 +40,11 @@ function UserConnectionsList({
       ) : data.length > 0 ? (
         <div className="grid grid-cols-2 gap-3">
           {data.map((user) => (
-            <UserConnectionCard key={user.id} user={user} />
+            <UserConnectionCard
+              userSession={userSession}
+              key={user.id}
+              user={user}
+            />
           ))}
         </div>
       ) : (

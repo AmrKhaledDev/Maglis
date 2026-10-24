@@ -12,7 +12,7 @@ export const bg_colors = [
   "#9333ea",
   "#b91c1c",
   "#14b8a6",
-  "#facc15",
+  "#243640",
   "#f43f5e",
   "#c5ab77",
   "#6366f1",

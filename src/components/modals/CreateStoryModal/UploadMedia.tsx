@@ -2,28 +2,25 @@ import { MediaType } from "@prisma/client";
 import clsx from "clsx";
 import { CloudDownload } from "lucide-react";
 import Image from "next/image";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import ReactPlayer from "react-player";
+import CreateStoryFormValues from "./_types/CreateStoryFormValues.type";
 import MediaActions from "./MediaActions";
 import MediaInfo from "./MediaInfo";
 // ===================================================================
-function UploadMedia({
-  setMediaFile,
-  setMediaPreview,
-  mediaPreview,
-  mediaFile,
-}: {
-  setMediaFile: Dispatch<SetStateAction<File | null>>;
-  setMediaPreview: Dispatch<SetStateAction<string>>;
-  mediaPreview: string;
-  mediaFile: File | null;
-}) {
+function UploadMedia() {
+  const { setValue, control } = useFormContext<CreateStoryFormValues>();
+  const [mediaFile, mediaPreview] = useWatch({
+    control,
+    name: ["file", "preview"],
+  });
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const url = URL.createObjectURL(file);
-      setMediaFile(file);
-      setMediaPreview(url);
+      setValue("file", file);
+      setValue("preview", url);
       e.target.value = "";
     }
   };
@@ -83,12 +80,7 @@ function UploadMedia({
         className="hidden"
         hidden
       />
-      <MediaActions
-        mediaPreview={mediaPreview}
-        setMediaFile={setMediaFile}
-        setMediaPreview={setMediaPreview}
-        mediaType={mediaType}
-      />
+      <MediaActions mediaPreview={mediaPreview} mediaType={mediaType} />
     </div>
   );
 }

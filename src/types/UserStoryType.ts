@@ -10,6 +10,13 @@ export type UserStoryType = Prisma.UserGetPayload<{
       orderBy: {
         createdAt: "desc";
       };
+      include: {
+        _count: {
+          select: {
+            storyViews: true;
+          };
+        };
+      };
     };
   };
 }>;

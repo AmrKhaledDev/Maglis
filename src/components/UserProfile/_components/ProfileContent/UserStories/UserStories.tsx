@@ -1,9 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import NoDataMessage from "../NoDataMessage";
+import { GetStoriesAction } from "@/actions/User/GetStories.action";
 import StoryOptions from "@/components/StoryOptions/StoryOptions";
+import { useQuery } from "@tanstack/react-query";
 import StoryImage from "./StoryImage";
 import Storyvideo from "./Storyvideo";
-import { GetStoriesAction } from "@/actions/User/GetStories.action";
 // ==============================================================
 function UserStories({ userId }: { userId: string }) {
   const { data = [], isPending } = useQuery({
@@ -17,7 +16,7 @@ function UserStories({ userId }: { userId: string }) {
   return (
     <div className="w-full flex items-center justify-center">
       {isPending ? (
-        <div className="grid grid-cols-3 gap-3 w-full">
+        <div className="grid grid-cols-2 gap-3 w-full">
           {Array(6)
             .fill(0)
             .map((_, i) => (
@@ -27,23 +26,23 @@ function UserStories({ userId }: { userId: string }) {
               />
             ))}
         </div>
-      ) : data.length > 0 ? (
-        <div className="grid grid-cols-3 gap-3 w-full">
-          {data.map((story) => (
-            <div
-              key={story.id}
-              className="relative h-120 group rounded-xl overflow-hidden shadow"
-            >
-              <StoryImage story={story} />
-              <Storyvideo story={story} />
-              <div className="absolute left-1 top-1 z-3">
-                <StoryOptions story={story} />
-              </div>
-            </div>
-          ))}
-        </div>
       ) : (
-        <NoDataMessage message="حالياً لا يوجد أي قصص." />
+        data.length > 0 && (
+          <div className="grid grid-cols-2 gap-3 w-full">
+            {data.map((story) => (
+              <div
+                key={story.id}
+                className="relative h-120 group rounded-md overflow-hidden shadow"
+              >
+                <StoryImage story={story} />
+                <Storyvideo story={story} />
+                <div className="absolute left-1 top-1 z-3">
+                  <StoryOptions story={story} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )
       )}
     </div>
   );

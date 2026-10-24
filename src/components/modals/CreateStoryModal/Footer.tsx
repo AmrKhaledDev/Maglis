@@ -1,14 +1,11 @@
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { UseMutateFunction } from "@tanstack/react-query";
 import { SendHorizontal } from "lucide-react";
 // ========================================================================
 function Footer({
-  handleCreateStory,
   isPending,
   error,
 }: {
-  handleCreateStory: UseMutateFunction<void, Error, void, unknown>;
   isPending: boolean;
   error: Error | null;
 }) {
@@ -18,7 +15,7 @@ function Footer({
       {error && <AlertMessage message={error.message} type="error" />}
       <div className="flex items-center justify-between">
         <button
-          onClick={() => handleCreateStory()}
+          type="submit"
           disabled={isPending}
           className="flex text-sm items-center disabled:bg-gray-400 disabled:text-gray-600 font-semibold gap-3 py-2.5 bg-sky-700 px-8 not-disabled:cursor-pointer shadow rounded-lg not-disabled:hover:outline outline-sky-600 outline-offset-2"
         >

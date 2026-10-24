@@ -1,18 +1,15 @@
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
-import { StoryType } from "@/types/StoryType.type";
+import { Story } from "@prisma/client";
 import clsx from "clsx";
 import { Pause, Play } from "lucide-react";
 import ReactPlayer from "react-player";
 // =======================================================
-function Storyvideo({ story }: { story: StoryType }) {
+function Storyvideo({ story }: { story: Story }) {
   const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
   return (
     <>
       {story.media && story.mediaType === "VIDEO" && (
-        <div
-          onClick={() => {}}
-          className="w-full h-full relative bg-gray-950 group"
-        >
+        <div className="w-full h-full relative bg-black group">
           <ReactPlayer
             playing={playingVideoId == story.id}
             src={story.media}
@@ -36,7 +33,9 @@ function Storyvideo({ story }: { story: StoryType }) {
               <Play className="size-5" strokeWidth={1.5} />
             )}
           </button>
-          <span className="absolute inset-0 z-1 bg-black/24 group-hover:opacity-0 mytransition" />
+          {playingVideoId !== story.id && (
+            <span className="absolute inset-0 z-1 bg-black/10 group-hover:opacity-0 mytransition" />
+          )}
         </div>
       )}
     </>

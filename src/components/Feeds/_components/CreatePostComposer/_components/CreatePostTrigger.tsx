@@ -13,7 +13,7 @@ function CreatePostTrigger() {
       </Link>
       <button
         onClick={() => setActiveModal("create_post_modal")}
-        className="px-5 py-3 flex-1 bg-white/1 hover:bg-white/2 rounded-full text-gray-300 hover:text-white cursor-pointer text-start"
+        className="px-5 py-3 flex-1 bg-white/1 hover:bg-white/2 rounded-full text-gray-400 hover:text-white cursor-pointer text-start text-sm shadow"
       >
         {`أهلًا ${userSession.name}، بماذا تفكر اليوم؟`}
       </button>

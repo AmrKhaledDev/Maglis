@@ -20,19 +20,32 @@ export const CreateAction = async (
         success: false,
         message: validatingSession.message || "حدث خطأ أثناء التحقق من حسابك.",
       };
-    const session = validatingSession.session;
-    if (receiverId === session.id)
+    const userSession = validatingSession.session;
+    if (receiverId === userSession.id)
       return { success: false, message: "لا يمكنك إرسال طلب صداقة لنفسك." };
-    const alreadyFriend = await prisma.friendRequest.findFirst({
+    const friend = await prisma.friendship.findFirst({
       where: {
-        senderId: session.id,
+        OR: [
+          { userId: userSession.id, friendId: receiverId },
+          { userId: receiverId, friendId: userSession.id },
+        ],
+      },
+    });
+    if (friend)
+      return {
+        success: false,
+        message: "لا يمكنك إرسال طلب صداقة. أنتم أصدقاء بالفعل.",
+      };
+    const request = await prisma.friendRequest.findFirst({
+      where: {
+        senderId: userSession.id,
         receiverId,
       },
     });
-    if (alreadyFriend) {
+    if (request) {
       await prisma.friendRequest.deleteMany({
         where: {
-          senderId: session.id,
+          senderId: userSession.id,
           receiverId,
         },
       });
@@ -40,7 +53,7 @@ export const CreateAction = async (
     } else {
       await prisma.friendRequest.create({
         data: {
-          senderId: session.id,
+          senderId: userSession.id,
           receiverId,
         },
       });

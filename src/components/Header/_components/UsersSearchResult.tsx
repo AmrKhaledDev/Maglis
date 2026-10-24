@@ -13,7 +13,7 @@ function UsersSearchResult({
   return (
     <div
       className={clsx(
-        "p-3 absolute modalBgColor w-full rounded-2xl mt-1 shadow-2xl flex flex-col gap-3",
+        "p-3 absolute modalBgColor w-full rounded-lg mt-1 shadow-2xl flex flex-col gap-3",
         (!searchValue.trim() || !data) && "hidden",
       )}
     >

@@ -1,8 +1,8 @@
 import { Prisma } from "@prisma/client";
-// ==========================================
-export type StoryType = Prisma.StoryGetPayload<{
+// =======================================
+type StoryViewerType = Prisma.StoryViewerGetPayload<{
   include: {
-    user: {
+    viewer: {
       select: {
         id: true;
         image: true;
@@ -12,3 +12,4 @@ export type StoryType = Prisma.StoryGetPayload<{
     };
   };
 }>;
+export default StoryViewerType;

@@ -13,11 +13,6 @@ export const tabsButtons = (activeTab: ActiveTab): TabButton[] => {
       active: activeTab == "USER_POSTS",
     },
     {
-      label: "المحفوظات",
-      value: "USER_SAVED_POSTS",
-      active: activeTab == "USER_POSTS",
-    },
-    {
       label: "القصص",
       value: "USER_STORIES",
       active: activeTab == "USER_STORIES",

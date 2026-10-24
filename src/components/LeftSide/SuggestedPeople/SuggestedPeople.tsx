@@ -21,7 +21,7 @@ function SuggestedPeople() {
   });
   if (pathname === "/videos") return null;
   return (
-    <div className="p-4 rounded-2xl overflow-hidden flex flex-col gap-5">
+    <div className="flex flex-col gap-5">
       <SectionHeader
         title="أشخاص مقترحون"
         linkUrl="/"
@@ -38,8 +38,8 @@ function SuggestedPeople() {
               <UserDetails user={user} />
               <FollowButton
                 followingId={user.id}
-                followColor="hover:bg-white/10"
-                unfollowColor="text-red-500!"
+                followStyle="hover:bg-white/10"
+                unfollowStyle="text-red-500!"
                 iconStyle="size-4"
                 publicStyle="text-xs py-2 px-4 bg-white/5 rounded-full shadow cursor-pointer font-medium flex items-center gap-1.5"
               />

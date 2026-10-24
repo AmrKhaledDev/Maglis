@@ -9,7 +9,7 @@ function FeedsLayout({ children }: { children: ReactNode }) {
     <div className="bg-[#0F0F0F] min-h-screen">
       <Header />
       <Toast />
-      <div className="flex gap-2 mycontainer items-start">
+      <div className="flex gap-10 mycontainer items-start">
         <Menu />
         <div className="flex-1">{children}</div>
         <LeftSide />

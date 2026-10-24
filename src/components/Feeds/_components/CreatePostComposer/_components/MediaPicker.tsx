@@ -23,16 +23,21 @@ function MediaPicker({
     { icon: "/video.png", id: "video", accept: "video/*" },
   ];
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2">
       {uploadOptions.map((option) => (
         <div key={option.id}>
           <motion.label
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             htmlFor={option.id}
-            className="text-3xl shadow block cursor-pointer rounded-full relative size-6.5"
+            className="block cursor-pointer rounded-full relative size-5.5"
           >
-            <Image src={option.icon} alt="" className="object-contain" fill />
+            <Image
+              src={option.icon}
+              alt={option.id}
+              className="object-contain"
+              fill
+            />
           </motion.label>
           <input
             onChange={handleChange}

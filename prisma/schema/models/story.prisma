@@ -6,7 +6,7 @@ model Story {
     mediaType   MediaType?
     contentText String?
     color       String?
-    storyViews  StoryView[]
+    storyViews  StoryViewer[]
     isPrivate   Boolean     @default(false)
     expiresAt   DateTime
 

@@ -1,19 +1,18 @@
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 import { MediaType } from "@prisma/client";
 import { Fullscreen, Trash2 } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import CreateStoryFormValues from "./_types/CreateStoryFormValues.type";
 // ====================================================================
 function MediaActions({
-  setMediaFile,
-  setMediaPreview,
   mediaPreview,
   mediaType,
 }: {
-  setMediaFile: Dispatch<SetStateAction<File | null>>;
-  setMediaPreview: Dispatch<SetStateAction<string>>;
   mediaPreview: string;
   mediaType: MediaType | "UNKNOWN";
 }) {
+  const { setValue } = useFormContext<CreateStoryFormValues>();
   const [showImage, setShowImage] = useState({
     open: false,
     url: "",
@@ -24,8 +23,8 @@ function MediaActions({
         <div className="flex items-center gap-2">
           <button
             onClick={() => {
-              setMediaPreview("");
-              setMediaFile(null);
+              setValue("preview", "");
+              setValue("file", null);
             }}
             className="flex hover:outline outline-red-700 active:scale-95 outline-offset-2 items-center gap-1 py-1.5 px-4 rounded-lg shadow bg-red-700 cursor-pointer font-semibold text-xs"
           >

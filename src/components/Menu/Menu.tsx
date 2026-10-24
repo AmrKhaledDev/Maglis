@@ -14,16 +14,16 @@ function Menu() {
   );
   if (pathname.startsWith("/conversations")) return null;
   return (
-    <nav className="sticky top-26 menu h-fit flex-col flex justify-between gap-3 p-3 w-70">
+    <nav className="sticky top-22 menu h-fit flex-col flex justify-between gap-2 p-3 w-65">
       {filteredLinks.map((link) => (
         <Link
           key={link.id}
           href={link.href}
           className={clsx(
-            "rounded-md mytransition flex items-center gap-3.5 py-1.5 pr-2 text-[18px] font-normal",
+            "rounded-full mytransition flex items-center gap-3.5 py-1.5 pr-2 text-[17px] font-normal",
             pathname === link.href
-              ? "cursor-default ring ring-white/4 bg-white/3"
-              : "active:scale-95 hover:bg-white/2",
+              ? "cursor-default bg-white/3 shadow"
+              : "active:scale-95 hover:bg-white/2 hover:shadow",
           )}
         >
           <Image
@@ -31,7 +31,7 @@ function Menu() {
             alt="icon"
             width={100}
             height={100}
-            className={clsx("size-10", link.style)}
+            className={clsx("size-9.5", link.style)}
             priority
           />
           {link.title}

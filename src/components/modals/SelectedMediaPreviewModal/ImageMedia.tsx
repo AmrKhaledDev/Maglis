@@ -5,7 +5,7 @@ function ImageMedia({ field }: { field: MediaFieldType }) {
   return (
     <>
       {field.type === "IMAGE" && (
-        <Image src={field.url} alt="" fill className="object-cover" />
+        <Image src={field.url} alt="صورة" fill className="object-cover" />
       )}
     </>
   );

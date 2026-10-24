@@ -1,13 +1,13 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import StoryCard from "./_components/StoryCard";
-import CreateStoryCard from "./_components/CreateStoryCard";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@/providers/UserProvider";
 import { GetActiveStoriesAction } from "@/actions/Story/GetActiveStories.action";
 import CreateStoryModal from "../../../modals/CreateStoryModal/CreateStoryModal";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
+import CreateStoryCard from "./CreateStoryCard";
+import StoryCard from "./StoryCard";
 // ==========================================================================================
 function Stories() {
   const userSession = useUser();
@@ -22,10 +22,10 @@ function Stories() {
     <>
       <Swiper
         slidesPerView={"auto"}
-        spaceBetween={2}
+        spaceBetween={20}
         className="w-full h-30 rounded"
       >
-        <SwiperSlide className="h-full! w-20!">
+        <SwiperSlide className="h-full! w-fit!">
           <CreateStoryCard />
         </SwiperSlide>
         {isPending ? (
@@ -43,7 +43,7 @@ function Stories() {
           <>
             {/* User Stories */}
             {userWithStories && (
-              <SwiperSlide key={userWithStories.id} className="h-full! w-25!">
+              <SwiperSlide key={userWithStories.id} className="h-full! w-fit!">
                 <StoryCard userWithStories={userWithStories} />
               </SwiperSlide>
             )}
@@ -58,7 +58,7 @@ function Stories() {
             ))}
             {/* User Friends Stories */}
             {userWithStories?.myFriends.map((friend) => (
-              <SwiperSlide key={friend.friend.id} className="h-full! w-25!">
+              <SwiperSlide key={friend.friend.id} className="h-full! w-fit!">
                 <StoryCard userWithStories={friend.friend} />
               </SwiperSlide>
             ))}

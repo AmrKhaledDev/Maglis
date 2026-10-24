@@ -6,7 +6,15 @@ export type UserStoriesWithFollowingsType = Prisma.UserGetPayload<{
     image: true;
     name: true;
     username: true;
-    stories: true;
+    stories: {
+      include: {
+        _count: {
+          select: {
+            storyViews: true;
+          };
+        };
+      };
+    };
     followings: {
       select: {
         following: {
@@ -15,7 +23,15 @@ export type UserStoriesWithFollowingsType = Prisma.UserGetPayload<{
             image: true;
             name: true;
             username: true;
-            stories: true;
+            stories: {
+              include: {
+                _count: {
+                  select: {
+                    storyViews: true;
+                  };
+                };
+              };
+            };
           };
         };
       };
@@ -28,11 +44,18 @@ export type UserStoriesWithFollowingsType = Prisma.UserGetPayload<{
             image: true;
             name: true;
             username: true;
-            stories: true;
+            stories: {
+              include: {
+                _count: {
+                  select: {
+                    storyViews: true;
+                  };
+                };
+              };
+            };
           };
         };
       };
     };
-    
   };
 }>;

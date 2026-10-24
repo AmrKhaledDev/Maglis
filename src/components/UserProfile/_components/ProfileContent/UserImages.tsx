@@ -1,21 +1,16 @@
+import { GetImagesPostsAction } from "@/actions/User/GetImagesPosts.action";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
-import NoDataMessage from "./NoDataMessage";
-import { useQuery } from "@tanstack/react-query";
 import ProfileLoader from "./ProfileLoader";
-import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
-import { GetImagesPostsAction } from "@/actions/User/GetImagesPosts.action";
 // ===================================================================
 function UserImages({ userId }: { userId: string }) {
   const [showImage, setShowImage] = useState({
     open: false,
     url: "",
   });
-  const {
-    data: media,
-    isPending,
-    error,
-  } = useQuery({
+  const { data: media = [], isPending } = useQuery({
     queryFn: async () => {
       const result = await GetImagesPostsAction(userId);
       if (!result.success || !result.media) return;
@@ -26,33 +21,29 @@ function UserImages({ userId }: { userId: string }) {
   if (isPending) return <ProfileLoader />;
   return (
     <div className="w-full flex justify-center">
-      {media && media.length > 0 ? (
-        <div className="grid grid-cols-4 gap-3 w-full ">
-          {media.map((img) => (
-            <button
-              onClick={() =>
-                setShowImage({
-                  open: true,
-                  url: img.url,
-                })
-              }
-              key={img.id}
-              className="relative rounded-xl overflow-hidden group cursor-pointer h-90"
-            >
-              <Image
-                src={img.url}
-                alt="صورة"
-                width={200}
-                height={200}
-                className="object-cover hover:scale-105 mytransition w-full h-full  p-px bg-gray-50/5"
-              />
-              <span className="absolute inset-0 bg-black/20 group-hover:hidden" />
-            </button>
-          ))}
-        </div>
-      ) : (
-        <NoDataMessage message={error?.message || "حالياً لا يوجد أي صور."} />
-      )}
+      <div className="grid grid-cols-4 gap-3 w-full ">
+        {media.map((img) => (
+          <button
+            onClick={() =>
+              setShowImage({
+                open: true,
+                url: img.url,
+              })
+            }
+            key={img.id}
+            className="relative rounded-xl overflow-hidden group cursor-pointer h-90"
+          >
+            <Image
+              src={img.url}
+              alt="صورة"
+              width={200}
+              height={200}
+              className="object-cover hover:scale-105 mytransition w-full h-full  p-px bg-gray-50/5"
+            />
+            <span className="absolute inset-0 bg-black/20 group-hover:hidden" />
+          </button>
+        ))}
+      </div>
       {showImage.open && (
         <ImagePreviewModal showImage={showImage} setShowImage={setShowImage} />
       )}

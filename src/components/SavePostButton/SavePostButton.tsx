@@ -17,7 +17,6 @@ function SavePostButton({
   post: PostType;
   buttonStyle?: string;
   iconSize?: string;
-  
 }) {
   const router = useRouter();
   const { setToast } = useToast();
@@ -48,17 +47,18 @@ function SavePostButton({
   const userSession = useUser();
   const isSaved = userSession.savedPosts.some((item) => item.postId == post.id);
   return (
-    <>
-      <button
-        disabled={loading}
-        onClick={() => handleSavePost()}
-        className={clsx(buttonStyle, "cursor-pointer")}
-      >
-        <Bookmark
-          className={clsx(isSaved && "fill-green-500 text-green-500", iconSize)}
-        />
-      </button>
-    </>
+    <button
+      disabled={loading}
+      onClick={() => handleSavePost()}
+      className={clsx(buttonStyle, "cursor-pointer")}
+    >
+      <Bookmark
+        className={clsx(
+          isSaved && "fill-green-500 text-green-500",
+          iconSize,
+        )}
+      />
+    </button>
   );
 }
 

@@ -35,8 +35,8 @@ function UsersResult({ users }: { users: UserSearchResultType[] }) {
                 {user.professionalMode ? (
                   <FollowButton
                     followingId={user.id}
-                    followColor="hover:bg-gray-200 bg-gray-50"
-                    unfollowColor="text-white"
+                    followStyle="hover:bg-gray-200 bg-gray-50"
+                    unfollowStyle="text-white"
                     publicStyle="flex items-center gap-2 text-black  font-medium py-2 px-4 rounded-lg text-sm "
                     iconStyle="size-4"
                   />
@@ -45,7 +45,6 @@ function UsersResult({ users }: { users: UserSearchResultType[] }) {
                     <AddFriendButton
                       userId={user.id}
                       sentStyle="bg-blue-600 hover:bg-blue-500"
-                      unsentStyle=""
                       publicStyle="flex items-center gap-2 text-white font-medium py-2 px-4 rounded-lg text-sm "
                       iconStyle="size-4"
                     />

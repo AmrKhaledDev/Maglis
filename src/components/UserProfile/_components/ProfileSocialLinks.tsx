@@ -2,24 +2,24 @@ import { SOCIAL_PLATFORMS_MAP } from "@/data/UserProfile/SOCIAL_PLATFORMS_MAP";
 import { UserWithSocialLinkType } from "../_types/UserWithSocialLink.type";
 import clsx from "clsx";
 import Link from "next/link";
-// =====================================================================================
+// ============================================================================
 function ProfileSocialLinks({ user }: { user: UserWithSocialLinkType }) {
   return (
     <div
       className={clsx(
         "w-full flex flex-col",
-        user.socialLinks.length < 1 && "gap-3",
+        user.socialLinks.length < 1 && "gap-2",
         user.socialLinks.length > 0 && "gap-7",
       )}
     >
-      <h2 className="font-bold text-xl text-gray-200">روابط التواصل</h2>
-      <div className="grid grid-cols-5 gap-3  w-full">
+      <h2 className="text-xl text-gray-200">روابط التواصل</h2>
+      <div className="grid grid-cols-5 gap-3 w-full">
         {user.socialLinks.length > 0 ? (
           user.socialLinks.map((platform) => {
             const PLATFORM = SOCIAL_PLATFORMS_MAP[platform.platform];
             return (
               <Link
-              target="_blank"
+                target="_blank"
                 href={platform.link}
                 key={platform.id}
                 className="p-3 hover:bg-white/15 hover:scale-102 mytransition flex flex-col gap-3 items-center ring-1 ring-gray-50/10 bg-white/5 rounded-2xl shadow"
@@ -30,7 +30,7 @@ function ProfileSocialLinks({ user }: { user: UserWithSocialLinkType }) {
             );
           })
         ) : (
-          <p className="font-semibold text-sm text-gray-400 w-full text-nowrap">
+          <p className="text-sm text-gray-400 w-full text-nowrap">
             لا يوجد روابط تواصل حالياً.
           </p>
         )}

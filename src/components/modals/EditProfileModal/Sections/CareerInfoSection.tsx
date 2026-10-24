@@ -42,9 +42,10 @@ function CareerInfoSection({
               onChange={() => setValue("professionalMode", !professionalMode)}
               checked={professionalMode}
               type="checkbox"
+              id="professionalMode"
               className="border relative appearance-none size-4 rounded cursor-pointer hover:bg-slate-500 bg-slate-400 checked:after:content-['✔']  checked:after:text-white checked:after:absolute checked:after:top-1/2  checked:after:left-1/2 checked:after:-translate-y-1/2 checked:after:-translate-x-1/2 checked:bg-green-600 checked:border-green-500"
             />
-            <label htmlFor="" className="font-bold">
+            <label htmlFor="professionalMode" className="font-bold">
               تفعيل
             </label>
           </div>

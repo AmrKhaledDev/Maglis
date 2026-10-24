@@ -10,7 +10,7 @@ function Header() {
   const pathname = usePathname();
   if (pathname.startsWith("/conversations/")) return null;
   return (
-    <header className="sticky top-0 bg-[#090909] z-30 py-3 mb-5 px-10 backdrop-blur-3xl">
+    <header className="sticky top-0 bg-[#090909] z-30 py-3 mb-5 backdrop-blur-3xl">
       <div className="mycontainer flex items-center justify-between gap-7">
         <div className="flex items-center gap-5">
           <Logo />

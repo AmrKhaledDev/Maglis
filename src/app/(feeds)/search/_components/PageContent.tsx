@@ -4,17 +4,23 @@ import Posts from "@/components/Posts/Posts";
 import Skeleton from "@/components/Skeletons/Search/Skeleton";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import UsersResult from "./UsersResult/UsersResult";
 import ActiveDataType from "../_types/ActiveData.type";
 import UsersFilterType from "../_types/UsersFilters.type";
 // =======================================================================
-function PageContent() {
+function PageContent({ q }: { q: string }) {
   const userSession = useUser();
   const [activeData, setActiveData] = useState<ActiveDataType>("ALL");
   const [userFilter, setUserFilter] = useState<UsersFilterType>("ALL");
   const [searchText, setSearchText] = useState("");
+  useEffect(() => {
+    if (q) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSearchText(q);
+    }
+  }, [q]);
   const { data = { users: [], posts: [] }, isPending } = useQuery({
     queryFn: async () => {
       const result = await SearchAction(searchText);

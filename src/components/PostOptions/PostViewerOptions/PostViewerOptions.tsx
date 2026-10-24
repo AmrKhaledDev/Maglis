@@ -22,8 +22,7 @@ function PostViewerOptions({ post }: { post: PostType }) {
             <FollowButton
               followingId={post.authorId}
               publicStyle="btnOptBox"
-              followColor=""
-              unfollowColor="text-red-500!"
+              unfollowStyle="text-red-500!"
               iconStyle="btnOptIcon"
             />
           )}

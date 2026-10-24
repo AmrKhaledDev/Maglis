@@ -53,6 +53,12 @@ export const navLinks = [
     style: "rounded-full",
   },
   {
+    id: "saved",
+    icon: "/bookmark.png",
+    href: "/saved",
+    title: "المحفوظات",
+  },
+  {
     id: "settings",
     icon: "/settings.png",
     href: "",

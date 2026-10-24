@@ -52,7 +52,7 @@ function PostContentMediaItem({
         >
           <Image
             src={item.url}
-            alt=""
+            alt="صورة"
             fill
             className="object-cover blur opacity-30 pointer-events-none"
           />

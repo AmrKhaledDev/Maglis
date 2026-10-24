@@ -5,7 +5,7 @@ import Posts from "../Posts/Posts";
 import Stories from "./_components/Stories/Stories";
 import { GetPostsAction } from "@/actions/Post/GetPosts.action";
 import { useUser } from "@/providers/UserProvider";
-// =================================================
+// ======================================================================================
 function Feeds() {
   const userSession = useUser();
   const { data: posts, isPending } = useQuery({

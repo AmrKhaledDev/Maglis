@@ -28,7 +28,7 @@ function Author({ post }: { post: PostType }) {
             >
               {post.author.name}
             </Link>
-            <Icon className="size-3" />
+            <Icon className="size-3 text-gray-400 mb-px" />
           </div>
           <AuthorActions post={post} />
         </div>

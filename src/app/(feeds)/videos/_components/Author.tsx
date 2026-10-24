@@ -42,8 +42,8 @@ function Author({ video }: { video: PostType }) {
               <span className="size-[3.5px] bg-white/5 block rounded-full" />
               <FollowButton
                 followingId={video.authorId}
-                followColor="bg-blue-900/30 text-blue-400 shadow hover:bg-blue-900/40"
-                unfollowColor="hover:text-gray-300"
+                followStyle="bg-blue-900/30 text-blue-400 shadow hover:bg-blue-900/40"
+                unfollowStyle="hover:text-gray-300"
                 publicStyle="text-xs active:scale-95 mytransition flex font-semibold items-center gap-2 cursor-pointer py-1.5 px-3 rounded-md"
                 iconStyle="size-4"
               />

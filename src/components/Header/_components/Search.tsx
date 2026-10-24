@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import UsersSearchResult from "./UsersSearchResult";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 // =================================================================================
 function Search() {
   const userSession = useUser();
@@ -30,12 +31,19 @@ function Search() {
     if (b.id === userSession.id) return 1;
     return 0;
   });
+  const router = useRouter();
   return (
     <div className="relative">
       <div className="w-100 focus-within:w-130 mytransition searchBox shadow h-11 bg-white/3 rounded-full overflow-hidden flex items-center justify-between hover:bg-white/5 focus-within:bg-white/5">
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              router.push(`/search?q=${searchValue}`);
+              setSearchValue("");
+            }
+          }}
           type="text"
           placeholder="بحث سريع عن مستخدمين"
           className="w-full h-full px-4 outline-none focus:cursor-default cursor-pointer font-light"

@@ -10,7 +10,7 @@ function SuggestedGroups() {
   const pathname = usePathname();
   if (pathname === "/videos") return null;
   return (
-    <div className="bg-white/2 p-4 shadow rounded-2xl overflow-hidden flex flex-col gap-5">
+    <div className="flex flex-col gap-5">
       <SectionHeader
         title="مجموعات مقترحة"
         linkUrl="/"

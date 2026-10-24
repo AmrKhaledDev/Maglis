@@ -6,9 +6,9 @@ import { UserStoriesWithFollowingsType } from "@/types/UserStoriesWithFollowings
 // ======================================================
 export const GetActiveStoriesAction = async (userId: string) => {
   try {
-    if (!userId) return;
+    if (!userId) return null;
     const validatingSession = await validateSession();
-    if (!validatingSession.success || !validatingSession.session) return;
+    if (!validatingSession.success || !validatingSession.session) return null;
     const user: UserStoriesWithFollowingsType | null =
       await prisma.user.findUnique({
         where: {
@@ -23,6 +23,13 @@ export const GetActiveStoriesAction = async (userId: string) => {
             where: {
               expiresAt: {
                 gte: new Date(),
+              },
+            },
+            include: {
+              _count: {
+                select: {
+                  storyViews: true,
+                },
               },
             },
             orderBy: {
@@ -42,7 +49,14 @@ export const GetActiveStoriesAction = async (userId: string) => {
                       expiresAt: {
                         gte: new Date(),
                       },
-                     isPrivate:false
+                      isPrivate: false,
+                    },
+                    include: {
+                      _count: {
+                        select: {
+                          storyViews: true,
+                        },
+                      },
                     },
                     orderBy: {
                       createdAt: "desc",
@@ -67,6 +81,13 @@ export const GetActiveStoriesAction = async (userId: string) => {
                       },
                       isPrivate: false,
                     },
+                    include: {
+                      _count: {
+                        select: {
+                          storyViews: true,
+                        },
+                      },
+                    },
                     orderBy: {
                       createdAt: "desc",
                     },
@@ -80,5 +101,6 @@ export const GetActiveStoriesAction = async (userId: string) => {
     return user;
   } catch (error) {
     console.error(error);
+    return null;
   }
 };

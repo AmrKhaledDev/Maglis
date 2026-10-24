@@ -31,7 +31,7 @@ model User {
   city                String?
   socialLinks         SocialLink[]
   stories             Story[]
-  storyViews          StoryView[]
+  storyViews          StoryViewer[]
   hiddenPosts         HiddenPost[]
   blocks              UserBlock[]          @relation("Blocker")
   blocked             UserBlock[]          @relation("Blocked")

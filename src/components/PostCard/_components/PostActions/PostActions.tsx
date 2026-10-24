@@ -25,7 +25,7 @@ function PostActions({
           onClick={() => setShowComments(post.id)}
           className="cursor-pointer flex items-center gap-1 text-gray-100"
         >
-          <MessageCircle className="btnOptIcon size-5" strokeWidth={1} />
+          <MessageCircle className="btnOptIcon size-4.5" strokeWidth={1.5} />
         </button>
       </div>
       <div className="flex items-center gap-3">
@@ -39,7 +39,7 @@ function PostActions({
         <p className="font-normal text-xs text-gray-300">
           {formatComments(post._count.comments)}
         </p>
-        <SavePostButton post={post} />
+        <SavePostButton post={post} iconSize="size-5"/>
       </div>
     </div>
   );

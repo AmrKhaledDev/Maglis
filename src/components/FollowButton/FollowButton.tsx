@@ -9,14 +9,14 @@ import { useState } from "react";
 // =============================================================
 function FollowButton({
   followingId,
-  followColor,
-  unfollowColor,
+  followStyle,
+  unfollowStyle,
   publicStyle,
   iconStyle,
 }: {
   followingId: string;
-  followColor?: string;
-  unfollowColor?: string;
+  followStyle?: string;
+  unfollowStyle?: string;
   publicStyle?: string;
   iconStyle?: string;
 }) {
@@ -57,7 +57,7 @@ function FollowButton({
       className={clsx(
         "cursor-pointer",
         publicStyle,
-        follow ? unfollowColor : followColor,
+        follow ? unfollowStyle : followStyle,
       )}
     >
       {follow ? (

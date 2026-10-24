@@ -17,7 +17,7 @@ function CurrentMedia({
         <div className="relative sm:size-135 w-[95%] h-full">
           <Image
             src={currentMedia.mediaUrl}
-            alt=""
+            alt="صورة"
             fill
             className="object-contain"
           />

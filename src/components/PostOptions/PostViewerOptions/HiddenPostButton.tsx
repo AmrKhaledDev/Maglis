@@ -4,7 +4,7 @@ import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { PostType } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { EyeOff } from "lucide-react";
+import { Eye } from "lucide-react";
 // ===============================================
 function HiddenPostButton({ post }: { post: PostType }) {
   const { setToast } = useToast();
@@ -40,7 +40,7 @@ function HiddenPostButton({ post }: { post: PostType }) {
       onClick={() => handleHiddenPost()}
       className="btnOptBox"
     >
-      <EyeOff className="btnOptIcon" /> إخفاء المنشور
+      <Eye className="btnOptIcon" /> إخفاء المنشور
     </button>
   );
 }
