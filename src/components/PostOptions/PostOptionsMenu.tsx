@@ -4,14 +4,11 @@ import { motion } from "framer-motion";
 import CopyPostLinkButton from "./CopyPostLinkButton";
 import PostOwnerOptions from "./PostOwnerOptions/PostOwnerOptions";
 import PostViewerOptions from "./PostViewerOptions/PostViewerOptions";
-import SavePostButton from "./SavePostButton";
+import SavePostButton from "../SavePostButton/SavePostButton";
+import { Save } from "lucide-react";
 // ==============================================================
-function PostOptionsMenu({
-  post,
-}: {
-  post: PostType;
-}) {
-  const {activeMenu} = useActiveMenu()
+function PostOptionsMenu({ post }: { post: PostType }) {
+  const { activeMenu } = useActiveMenu();
   return (
     <>
       {activeMenu === post.id && (
@@ -23,7 +20,15 @@ function PostOptionsMenu({
           <PostOwnerOptions post={post} />
           <PostViewerOptions post={post} />
           <hr className=" border-zinc-700 opacity-5" />
-          <SavePostButton post={post} />
+          <SavePostButton
+            postId={post.id}
+            Icon={Save}
+            iconStyle="btnOptIcon"
+            withText={true}
+            saveText="حفظ"
+            unSaveText="محفوظ"
+            buttonStyle="btnOptBox"
+          />
           <CopyPostLinkButton post={post} />
         </motion.div>
       )}

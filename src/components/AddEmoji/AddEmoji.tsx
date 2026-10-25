@@ -1,17 +1,20 @@
 import clsx from "clsx";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import { FaceSlightlySmiling } from "lucide-react";
 import { RefObject, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
+import { IconType } from "react-icons/lib";
 // ======================================================================
 function AddEmoji({
   textInputRef,
   emojiPickerStyle,
   style,
+  Icon,
 }: {
   textInputRef: RefObject<HTMLInputElement | HTMLTextAreaElement | null>;
   emojiPickerStyle: string;
-  style?: string;
+  style: string;
+  Icon?: IconType;
 }) {
   const { setValue, watch } = useFormContext();
   const onEmojiClick = (emojiData: EmojiClickData) => {
@@ -41,15 +44,9 @@ function AddEmoji({
       <button
         onClick={() => setShowEmojiPicker(!showEmojiPicker)}
         type="button"
-        className={clsx(
-          showEmojiPicker && "text-white!",
-          "buttonShowEmojiPicker",
-          style
-            ? style
-            : "p-2 rounded-full shadow bg-white/5 text-gray-400 text-xl cursor-pointer hover:scale-102 active:bg-white/10 ",
-        )}
+        className={clsx("buttonShowEmojiPicker cursor-pointer", style)}
       >
-        <BsFillEmojiHeartEyesFill className="sm:size-5 size-4" />
+        {Icon ? <Icon /> : <FaceSlightlySmiling className="size-full" />}
       </button>
       {showEmojiPicker && (
         <div className={clsx("absolute emojiPicker", emojiPickerStyle)}>

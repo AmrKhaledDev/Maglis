@@ -13,7 +13,7 @@ function UploadFiles({ fields, append }: UploadMediaPropsType) {
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="boxMenu absolute -top-27 left-1 ring ring-white/10 bg-[#161717] p-1 flex flex-col rounded-xl shadow-2xl min-w-30"
+          className="boxMenu absolute -top-27 left-1 ring ring-white/10 modalBgColor p-1 flex flex-col rounded-xl shadow-2xl min-w-30"
         >
           <UploadImage fields={fields} append={append} />
           <UploadVideo fields={fields} append={append} />

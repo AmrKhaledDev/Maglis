@@ -2,7 +2,6 @@ import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action"
 import CommentComposer from "@/components/Comments/CommentComposer/CommentComposer";
 import SingleComment from "@/components/Comments/SingleComment/SingleComment";
 import PostCard from "@/components/PostCard/PostCard";
-import SavePostButton from "@/components/SavePostButton/SavePostButton";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
@@ -12,7 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useState } from "react";
-import VideoLikeButton from "../../app/(feeds)/videos/_components/ButtonsActions/VideoLikeButton";
 // ====================================================================================================================
 function VideoCommentsModal({ video }: { video: PostType }) {
   const { setActiveModal } = useActiveModal();
@@ -44,11 +42,11 @@ function VideoCommentsModal({ video }: { video: PostType }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="fixed inset-0 bg-[#0F0F0F] pt-6 flex items-center justify-center z-40"
+      className="fixed inset-0 bg-[#0F0F0F] pt-6 flex flex-col gap-5 z-40"
     >
       <button
         onClick={() => setActiveModal(null)}
-        className="cursor-pointer absolute top-2 right-2 text-gray-400 hover:text-white mytransition"
+        className="cursor-pointer w-fit  text-gray-400 hover:text-white mytransition"
       >
         <X strokeWidth={1.5} />
       </button>
@@ -80,14 +78,6 @@ function VideoCommentsModal({ video }: { video: PostType }) {
             </div>
           </div>
           <div className="w-[55%] flex items-center gap-3">
-            <div className="flex flex-col gap-3">
-              <VideoLikeButton video={video} variant="comments_modal" />
-              <SavePostButton
-                post={video}
-                buttonStyle="videoBtnActionStyle"
-                iconSize="size-5"
-              />
-            </div>
             <PostCard post={video} variant="videos" />
           </div>
         </div>

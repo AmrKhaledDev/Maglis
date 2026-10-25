@@ -93,7 +93,7 @@ function Footer({ receiverId }: { receiverId: string }) {
               ref(element);
               messageInputRef.current = element;
             }}
-            className="border border-white/3 shadow bg-[#242626] sm:py-3 py-2 rounded-full flex-1 px-5 outline-none sm:text-[15px] text-sm"
+            className="shadow-lg font-medium bg-linear-to-t from-[#1B1C1C] to-[#303232] sm:py-3 py-2 rounded-full flex-1 px-5 outline-none sm:text-[15px] text-sm cursor-pointer border border-transparent focus:border-white mytransition"
             type="text"
             placeholder="أكتب رسالتك هنا. . ."
           />

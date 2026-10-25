@@ -2,12 +2,12 @@ export const dynamic = "force-dynamic";
 import Providers from "@/app/Providers";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Tajawal } from "next/font/google";
 import "./globals.css";
 // ========================================
-const iBM_Plex_Sans_Arabic = IBM_Plex_Sans_Arabic({
+const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,12 @@ export default async function RootLayout({
     <html
       dir="rtl"
       lang="en"
-      className={cn("h-full", "antialiased", iBM_Plex_Sans_Arabic.className, "font-sans")}
+      className={cn(
+        "h-full",
+        "antialiased",
+        tajawal.className,
+        "font-sans",
+      )}
     >
       <body className="min-h-full flex flex-col text-white font-normal bg-linear-to-r from-slate-900 to-slate-800">
         <Providers>{children}</Providers>

@@ -9,7 +9,7 @@ model Post {
   authorId           String
   showMediaInProfile Boolean      @default(false)
   author             User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  medias             Media[]
+  media              Media[]
   savedPosts         SavePost[]
   likes              Like[]
   comments           Comment[]

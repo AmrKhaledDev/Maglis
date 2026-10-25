@@ -23,9 +23,10 @@ function VideoActions({ video }: { video: PostType }) {
         <MessageCircle className="size-7" />
       </button>
       <SavePostButton
-        post={video}
+        postId={video.id}
         buttonStyle="videoBtnActionStyle"
-        iconSize="size-7"
+        iconStyle="size-7"
+        isSavedStyle="text-green-500"
       />
       <VideoOptions video={video} />
       {activeModal == id && <VideoCommentsModal video={video} />}

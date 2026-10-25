@@ -19,8 +19,8 @@ function Footer({ fields, append, loading, textareaRef }: FooterPropsType) {
         <AddVideos disabled={loading} fields={fields} append={append} />
         <AddEmoji
           textInputRef={textareaRef}
-          style="text-gray-400 mt-1.5 hover:text-white cursor-pointer mytransition"
-          emojiPickerStyle="right-2 bottom-5 h-90!"
+          style="text-gray-400 mt-1.5 hover:text-white mt-2.5 cursor-pointer mytransition"
+          emojiPickerStyle="right-7 bottom-5 h-90"
         />
       </div>
       <button

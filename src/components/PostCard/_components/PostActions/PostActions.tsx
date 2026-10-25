@@ -39,7 +39,11 @@ function PostActions({
         <p className="font-normal text-xs text-gray-300">
           {formatComments(post._count.comments)}
         </p>
-        <SavePostButton post={post} iconSize="size-5"/>
+        <SavePostButton
+          postId={post.id}
+          iconStyle="size-5"
+          isSavedStyle="text-green-500"
+        />
       </div>
     </div>
   );

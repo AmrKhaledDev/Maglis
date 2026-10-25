@@ -25,7 +25,7 @@ function ProfileAbout({ user }: { user: UserWithSocialLinkType }) {
             </span>
           </Linkify>
         </p>
-        <div className="grid grid-cols-2 gap-y-5">
+        <div className="flex items-center flex-wrap gap-5">
           {infos(user).map(
             (info) =>
               info.icon &&
@@ -35,9 +35,9 @@ function ProfileAbout({ user }: { user: UserWithSocialLinkType }) {
                   className="flex items-center gap-2 text-gray-300 text-xs"
                 >
                   <info.icon className="size-6 p-1 bg-gray-200 text-slate-800 rounded-full" />
-                  <div className="flex items-center gap-1.5">
-                    <p className="text-gray-300">{info.label}</p>
-                    <span className="text-gray-100 font-semibold">
+                  <div className="flex items-center gap-1">
+                    <p className="text-gray-400">{info.label}</p>
+                    <span className="text-gray-100 font-medium [word-break:break-word] line-clamp-1">
                       {info.value}
                     </span>
                   </div>

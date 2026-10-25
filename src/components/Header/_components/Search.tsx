@@ -4,7 +4,7 @@ import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import UsersSearchResult from "./UsersSearchResult";
-import { X } from "lucide-react";
+import { SearchIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =================================================================================
 function Search() {
@@ -34,7 +34,10 @@ function Search() {
   const router = useRouter();
   return (
     <div className="relative">
-      <div className="w-100 focus-within:w-130 mytransition searchBox shadow h-11 bg-white/3 rounded-full overflow-hidden flex items-center justify-between hover:bg-white/5 focus-within:bg-white/5">
+      <div className="w-100 focus-within:w-130 mytransition searchBox shadow h-11 bg-white/3 rounded-full overflow-hidden flex items-center gap-3 justify-between hover:bg-white/5 focus-within:bg-white/5">
+        <span className="pr-4 text-gray-400 pb-1">
+          <SearchIcon className="size-4.5" strokeWidth={1.5} />
+        </span>
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -46,7 +49,7 @@ function Search() {
           }}
           type="text"
           placeholder="بحث سريع عن مستخدمين"
-          className="w-full h-full px-4 outline-none focus:cursor-default cursor-pointer font-light"
+          className="w-full h-full outline-none focus:cursor-default cursor-pointer"
         />
         {searchValue.trim().length > 0 && (
           <button

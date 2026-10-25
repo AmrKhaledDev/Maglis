@@ -37,9 +37,9 @@ function ProfileDetailsFooter({ user }: { user: User }) {
       )}
       <Link
         href={`/conversations/${user.id}`}
-        className="flex text-xs items-center hover:outline hover:outline-green-900 outline-offset-2 gap-2 cursor-pointer text-gray-200 font-semibold bg-green-900 py-1.5 px-3 rounded-full"
+        className="flex text-xs items-center hover:outline hover:outline-green-900 outline-offset-2 gap-2 cursor-pointer text-gray-200 bg-green-900 py-1.5 px-3 rounded-full"
       >
-        <MessageCircle className="size-4" />
+        <MessageCircle className="size-3.5" strokeWidth={1.5} />
         تواصل
       </Link>
     </div>

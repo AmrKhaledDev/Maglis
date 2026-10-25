@@ -41,6 +41,7 @@ function UloadText({ selectedColor }: { selectedColor: string }) {
           <AddEmoji
             textInputRef={textareaRef}
             emojiPickerStyle="h-100 bottom-10 left-20"
+            style="p-2 size-9 rounded-full active:scale-90 text-[#af9b75] bg-white/10 shadow-lg ring ring-white/15"
           />
         </div>
       </div>

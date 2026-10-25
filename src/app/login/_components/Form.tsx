@@ -55,7 +55,7 @@ function Form({ error }: { error?: string }) {
       initial={{ opacity: 0, x: -40 }}
       animate={{ opacity: 1, x: 0 }}
       onSubmit={handleSubmit(handleLogin)}
-      className="p-4 relative bg-slate-800 rounded-3xl space-y-3 w-110 h-fit shadow-2xl overflow-hidden"
+      className="p-4 relative border-b border-b-white/10 bg-slate-800 rounded-3xl space-y-3 w-110 h-fit shadow-xl overflow-hidden"
     >
       {showBlur && <AuthBlur />}
       <FormHeader loading={loading} setShowBlur={setShowBlur} />

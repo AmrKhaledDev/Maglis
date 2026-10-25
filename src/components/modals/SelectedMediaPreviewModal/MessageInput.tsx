@@ -1,6 +1,6 @@
-import { useFormContext } from "react-hook-form";
-import { useRef } from "react";
 import AddEmoji from "@/components/AddEmoji/AddEmoji";
+import { useRef } from "react";
+import { useFormContext } from "react-hook-form";
 // ================================================
 function MessageInput() {
   const { register } = useFormContext();
@@ -18,7 +18,11 @@ function MessageInput() {
         placeholder="أكتب رسالتك..."
         className="bg-zinc-800/30 md:w-180 w-[80%] py-2.5 ring ring-white/5 px-4 rounded-md shadow outline-none"
       />
-      <AddEmoji textInputRef={messageInputRef} emojiPickerStyle="bottom-10 h-100"/>
+      <AddEmoji
+        textInputRef={messageInputRef}
+        emojiPickerStyle="bottom-10 h-100"
+        style="p-2 rounded-full text-[#d6bf93] ring ring-white/8 shadow backdrop-blur-3xl bg-white/5 cursor-pointer size-9"
+      />
     </div>
   );
 }

@@ -4,23 +4,30 @@ import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
 import { SavePostType } from "@/types/SavePost.type";
 // ==========================================
-export const GetSavedPostsAction = async (
-  userId: string,
-): Promise<{
+export const GetSavedPostsAction = async (): Promise<{
   success: boolean;
   savedPosts?: SavePostType[];
+  message?: string;
+  notAuthenticated?: boolean;
 }> => {
   try {
-    if (!userId)
+    const userSession = await GetSession();
+    if (!userSession)
       return {
         success: false,
+        message: "برجاء تسجيل الدخول.",
+        notAuthenticated: true,
       };
-    const userSession = await GetSession();
-    if (!userSession) return { success: false };
-    if (userId !== userSession.id) return { success: false };
     const savedPosts: SavePostType[] = await prisma.savePost.findMany({
       where: {
-        userId,
+        userId: userSession.id,
+        post: {
+          OR: [
+            { privacy: "PUBLIC" },
+            { privacy: "FRIENDS", authorId: userSession.id },
+            { privacy: "PRIVATE", authorId: userSession.id },
+          ],
+        },
       },
       include: {
         post: {
@@ -31,6 +38,12 @@ export const GetSavedPostsAction = async (
                 username: true,
                 name: true,
                 image: true,
+              },
+            },
+            _count: {
+              select: {
+                likes: true,
+                comments: true,
               },
             },
             medias: true,

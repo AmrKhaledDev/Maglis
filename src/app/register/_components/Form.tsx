@@ -90,7 +90,6 @@ function Form() {
           />
         ))}
         <RegisterSubmitButton loading={loading} />
-        <span className="w-full h-px bg-gray-50/7 block rounded-full" />
         <AuthToggle
           href="/login"
           text="لديك حساب بالفعل؟"

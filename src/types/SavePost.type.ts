@@ -12,6 +12,12 @@ export type SavePostType = Prisma.SavePostGetPayload<{
             image: true;
           };
         };
+        _count: {
+          select: {
+            likes: true;
+            comments: true;
+          };
+        };
         medias: true;
         content: true;
         id: true;

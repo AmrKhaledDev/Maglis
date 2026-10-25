@@ -1,14 +1,14 @@
-"use client"
+"use client";
+import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 // ========================================
 function Hero() {
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
-      className="flex flex-col lg:gap-10 sm:gap-5 md:items-start items-center"
+      className="flex flex-col gap-5 items-start"
     >
       <div className="flex items-center gap-2">
         <div className="relative lg:size-35 size-25">
@@ -30,7 +30,7 @@ function Hero() {
                 />
               ))}
           </div>
-          <p className="text-sm font-medium">
+          <p className="font-bold text-sm">
             عالم من المتعة والاستكشاف يناديك!
           </p>
         </div>
