@@ -1,10 +1,10 @@
 import UserImage from "@/components/UserImage/UserImage";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { UserStoryType } from "@/types/UserStoryType";
+import { UserStory } from "@/types/UserStory.type";
 import StoryViewer from "./StoryViewer/StoryViewer";
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
 // ====================================
-function StoryCard({ userWithStories }: { userWithStories: UserStoryType }) {
+function StoryCard({ userWithStories }: { userWithStories: UserStory }) {
   const { activeModal, setActiveModal } = useActiveModal();
   const { setPlayingVideoId } = usePlayingVideoId();
   if (!userWithStories.stories || userWithStories.stories.length < 1)

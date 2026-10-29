@@ -1,4 +1,4 @@
-import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import { EditProfileSchema } from "@/zodSchemas/EditProfile/EditProfile.schema";
 import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";

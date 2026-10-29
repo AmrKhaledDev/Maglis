@@ -2,13 +2,13 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import MessageMediaType from "@/types/MessageMedia.type";
-import { CreateMessageSchema } from "@/ZodSchemas/Message/CreateMessage.schema";
+import { MessageMedia } from "@/types/MessageMedia.type";
+import { CreateMessageSchema } from "@/zodSchemas/Message/CreateMessage.schema";
 // ======================================================================
 export const CreateMessageAction = async (
   conversationId: string,
   content?: string,
-  media?: MessageMediaType[],
+  media?: MessageMedia[],
 ): Promise<{ success: boolean; message?: string }> => {
   try {
     const validatingSession = await validateSession();

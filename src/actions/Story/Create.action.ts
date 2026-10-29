@@ -2,7 +2,7 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import { CreateStorySchema } from "@/ZodSchemas/Story/CreateStory.schema";
+import { CreateStorySchema } from "@/zodSchemas/Story/CreateStory.schema";
 import { MediaType } from "@prisma/client";
 // =========================================================
 export const CreateAction = async (

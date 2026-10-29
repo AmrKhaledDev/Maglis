@@ -1,8 +1,8 @@
-import { UserSearchResultType } from "@/types/UserSearchResult.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
 import Link from "next/link";
 import { FaUserShield } from "react-icons/fa6";
 // ===========================================================================
-function UserIdentityInfo({ user }: { user: UserSearchResultType }) {
+function UserIdentityInfo({ user }: { user: UserSearchResult }) {
   return (
     <div className="flex flex-col gap-0.5">
       <div className="flex items-center gap-2">

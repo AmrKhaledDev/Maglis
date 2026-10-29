@@ -1,10 +1,10 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { Link2 } from "lucide-react";
 import { useState } from "react";
 // ====================================================
-function CopyPostLinkButton({ post }: { post: PostType }) {
+function CopyPostLinkButton({ post }: { post: Post }) {
   const [loading, setLoading] = useState(false);
   const { setActiveMenu } = useActiveMenu();
   const { setToast } = useToast();

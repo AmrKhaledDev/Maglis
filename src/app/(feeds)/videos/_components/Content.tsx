@@ -1,9 +1,9 @@
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import clsx from "clsx";
 import Linkify from "linkify-react";
 import { useState } from "react";
 // ======================================
-function Content({ video }: { video: PostType }) {
+function Content({ video }: { video: Post }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <>

@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import ActiveDataType from "../_types/ActiveData.type";
 import { Dispatch, SetStateAction } from "react";
-import { UserSearchResultType } from "@/types/UserSearchResult.type";
-import { PostType } from "@/types/Post.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
+import { Post } from "@/types/Post.type";
 // =============================
 function SearchTypeTabs({
   activeData,
@@ -12,8 +12,8 @@ function SearchTypeTabs({
   activeData: ActiveDataType;
   setActiveData: Dispatch<SetStateAction<ActiveDataType>>;
   data: {
-    users: UserSearchResultType[];
-    posts: PostType[];
+    users: UserSearchResult[];
+    posts: Post[];
   };
 }) {
   const tabs = [

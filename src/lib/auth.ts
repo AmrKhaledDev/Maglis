@@ -2,7 +2,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import { prisma } from "./prisma";
 import Credentials from "next-auth/providers/credentials";
-import { LoginSchema } from "@/ZodSchemas/Auth/Login.schema";
+import { LoginSchema } from "@/zodSchemas/Auth/Login.schema";
 import bcrypt from "bcryptjs";
 import Google from "next-auth/providers/google";
 import Facebook from "next-auth/providers/facebook";

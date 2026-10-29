@@ -1,20 +1,20 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 // =================================================
 export const GetPostsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;
-  posts?: PostType[];
+  posts?: Post[];
 }> => {
   try {
     if (!userId)
       return {
         success: false,
       };
-    const posts: PostType[] = await prisma.post.findMany({
+    const posts: Post[] = await prisma.post.findMany({
       where: {
         authorId: userId,
       },

@@ -4,7 +4,7 @@ import AuthDivider from "@/components/AuthDivider/AuthDivider";
 import AuthFormFiled from "@/components/AuthFormFiled/AuthFormFiled";
 import { Path, useForm } from "react-hook-form";
 import { RegisterFields } from "@/data/Register/RegisterFields";
-import { RegisterSchema } from "@/ZodSchemas/Auth/Register.schema";
+import { RegisterSchema } from "@/zodSchemas/Auth/Register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { RegisterAction } from "@/actions/Auth/Register.action";

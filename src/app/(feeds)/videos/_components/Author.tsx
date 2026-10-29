@@ -5,7 +5,7 @@ import { formatComments } from "@/formats/formatComments";
 import { formatLikes } from "@/formats/formatLikes";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import dayjs from "dayjs";
 import local from "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -14,7 +14,7 @@ import Link from "next/link";
 // ===============================================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
-function Author({ video }: { video: PostType }) {
+function Author({ video }: { video: Post }) {
   const userSession = useUser();
   const { activeModal, setActiveModal } = useActiveModal();
   return (

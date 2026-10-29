@@ -1,6 +1,6 @@
 "use client";
 import { GetRecentContactsAction } from "@/actions/User/GetRecentContacts.action";
-import Skeleton from "@/components/Skeletons/SuggestedPeople/Skeleton";
+import Skeleton from "@/components/Skeletons/LeftSide/Skeleton";
 import UserImage from "@/components/UserImage/UserImage";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";

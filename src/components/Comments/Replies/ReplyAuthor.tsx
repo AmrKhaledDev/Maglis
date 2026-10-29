@@ -1,12 +1,12 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { CommentType } from "@/types/Comment.type";
-import { PostType } from "@/types/Post.type";
+import { Comment } from "@/types/Comment.type";
+import { Post } from "@/types/Post.type";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 // =======================================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function ReplyAuthor({ reply, post }: { reply: CommentType; post: PostType }) {
+function ReplyAuthor({ reply, post }: { reply: Comment; post: Post }) {
   return (
     <div className="flex items-center gap-2">
       <UserImage src={reply.user.image} alt={reply.user.name} size="size-6.5" />

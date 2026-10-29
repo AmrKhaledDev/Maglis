@@ -1,7 +1,7 @@
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import Linkify from "linkify-react";
 // ===============================================
-function Text({ post }: { post: PostType }) {
+function Text({ post }: { post: Post }) {
   return (
     <Linkify
       options={{

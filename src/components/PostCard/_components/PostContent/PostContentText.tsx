@@ -1,9 +1,9 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import Linkify from "linkify-react";
 import PostContentTextModal from "../../../modals/PostContentTextModal/PostContentTextModal";
 // =======================================
-function PostContentText({ post }: { post: PostType }) {
+function PostContentText({ post }: { post: Post }) {
   const { activeModal, setActiveModal } = useActiveModal();
   return (
     <div className="space-y-3 mb-3 relative">

@@ -2,7 +2,7 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import { EditProfileSchema } from "@/zodSchemas/EditProfile/EditProfile.schema";
 import { SocialPlatform } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 import z from "zod";

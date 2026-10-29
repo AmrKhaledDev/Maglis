@@ -2,12 +2,12 @@ import { ShowMediaInProfileAction } from "@/actions/Post/ShowMediaInProfile.acti
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Images } from "lucide-react";
 // ==========================================================================================
-function ShowMediaInProfileButton({ post }: { post: PostType }) {
+function ShowMediaInProfileButton({ post }: { post: Post }) {
   const { setToast } = useToast();
   const userSession = useUser();
   const queryClient = useQueryClient();

@@ -2,7 +2,7 @@
 import { CreateDirectConversationAction } from "@/actions/Conversation/CreateDirectConversation.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { CreateMessageSchema } from "@/ZodSchemas/Message/CreateMessage.schema";
+import { CreateMessageSchema } from "@/zodSchemas/Message/CreateMessage.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";

@@ -7,12 +7,12 @@ import { IoBookmarkSharp } from "react-icons/io5";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import Actions from "./Actions";
 // ==============================================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function Card({ item }: { item: SavePostType }) {
+function Card({ item }: { item: SavePost }) {
   return (
     <div className="flex items-center gap-5">
       <Media item={item} />

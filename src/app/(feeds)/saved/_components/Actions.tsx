@@ -1,9 +1,9 @@
 import SavePostButton from "@/components/SavePostButton/SavePostButton";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { GoBookmarkSlashFill } from "react-icons/go";
 // =======================================================================
-function Actions({ item }: { item: SavePostType }) {
+function Actions({ item }: { item: SavePost }) {
   return (
     <div className="flex items-center gap-2.5 mt-2 text-xs">
       <SavePostButton

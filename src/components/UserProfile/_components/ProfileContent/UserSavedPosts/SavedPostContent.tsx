@@ -1,8 +1,8 @@
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import Linkify from "linkify-react";
 import SavedPostMedia from "./SavedPostMedia";
 // ===============================================================
-function SavedPostContent({ saveItem }: { saveItem: SavePostType }) {
+function SavedPostContent({ saveItem }: { saveItem: SavePost }) {
   return (
     <div className="flex flex-col mt-4 gap-2">
       <Linkify

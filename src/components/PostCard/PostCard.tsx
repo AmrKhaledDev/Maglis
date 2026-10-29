@@ -1,5 +1,5 @@
 "use client";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { Pin } from "lucide-react";
 import { useState } from "react";
 import Comments from "../Comments/Comments";
@@ -12,7 +12,7 @@ function PostCard({
   post,
   variant,
 }: {
-  post: PostType;
+  post: Post;
   variant: "default" | "profile" | "videos" | "single";
 }) {
   const [showComments, setShowComments] = useState(

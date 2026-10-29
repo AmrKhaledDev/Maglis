@@ -3,11 +3,11 @@ import Link from "next/link";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
 import UserImage from "@/components/UserImage/UserImage";
-import StoryViewerType from "./_types/StoryViewer.type";
+import { StoryViewer } from "./_types/StoryViewer.type";
 // ========================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function ViewerCard({ viewer }: { viewer: StoryViewerType }) {
+function ViewerCard({ viewer }: { viewer: StoryViewer }) {
   return (
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-4">

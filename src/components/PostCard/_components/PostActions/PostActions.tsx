@@ -3,7 +3,7 @@ import PostLikersModal from "@/components/modals/PostLikersModal";
 import { formatComments } from "@/formats/formatComments";
 import { formatLikes } from "@/formats/formatLikes";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { MessageCircle } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import SavePostButton from "../../../SavePostButton/SavePostButton";
@@ -13,7 +13,7 @@ function PostActions({
   post,
   setShowComments,
 }: {
-  post: PostType;
+  post: Post;
   setShowComments: Dispatch<SetStateAction<string>>;
 }) {
   const { activeModal, setActiveModal } = useActiveModal();

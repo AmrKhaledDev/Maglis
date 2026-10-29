@@ -41,13 +41,11 @@ function Stories() {
             ))
         ) : (
           <>
-            {/* User Stories */}
             {userWithStories && (
               <SwiperSlide key={userWithStories.id} className="h-full! w-fit!">
                 <StoryCard userWithStories={userWithStories} />
               </SwiperSlide>
             )}
-            {/* User Followings Stories */}
             {userWithStories?.followings.map((following) => (
               <SwiperSlide
                 key={following.following.id}
@@ -56,10 +54,12 @@ function Stories() {
                 <StoryCard userWithStories={following.following} />
               </SwiperSlide>
             ))}
-            {/* User Friends Stories */}
-            {userWithStories?.friends.map((friend) => (
-              <SwiperSlide key={friend.friend.id} className="h-full! w-fit!">
-                <StoryCard userWithStories={friend.friend} />
+            {userWithStories?.friendships.map((friendship) => (
+              <SwiperSlide
+                key={friendship.friend.id}
+                className="h-full! w-fit!"
+              >
+                <StoryCard userWithStories={friendship.friend} />
               </SwiperSlide>
             ))}
           </>

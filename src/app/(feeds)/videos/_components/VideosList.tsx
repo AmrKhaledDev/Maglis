@@ -1,10 +1,10 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import VideoCard from "./VideoCard";
-import { PostType } from "@/types/Post.type";
 import { useUser } from "@/providers/UserProvider";
 import { GetPostsVideosAction } from "@/actions/Post/GetPostsVideos.action";
 import VideosSkeleton from "../../../../components/Skeletons/Videos/Skeleton";
+import { Post } from "@/types/Post.type";
 // ======================================================
 function VideosList() {
   const userSession = useUser();
@@ -21,7 +21,7 @@ function VideosList() {
         <VideosSkeleton />
       ) : (
         <div className="flex flex-col gap-6">
-          {videos.map((video: PostType) => (
+          {videos.map((video: Post) => (
             <VideoCard key={video.id} video={video} />
           ))}
         </div>

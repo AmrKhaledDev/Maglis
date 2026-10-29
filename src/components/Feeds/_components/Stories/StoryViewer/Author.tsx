@@ -1,6 +1,6 @@
 import StoryType from "@/components/Feeds/_types/Story.type";
 import UserImage from "@/components/UserImage/UserImage";
-import { UserStoryType } from "@/types/UserStoryType";
+import { UserStory } from "@/types/UserStory.type";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -9,13 +9,7 @@ import ButtonStoryViewers from "./ButtonStoryViewers";
 // =============================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function Author({
-  user,
-  story,
-}: {
-  user: UserStoryType;
-  story: StoryType ;
-}) {
+function Author({ user, story }: { user: UserStory; story: StoryType }) {
   return (
     <div className="flex items-center gap-2.5">
       <Link href={`/u/${story.userId}`}>

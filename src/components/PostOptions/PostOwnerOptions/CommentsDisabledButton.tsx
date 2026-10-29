@@ -2,13 +2,13 @@ import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.acti
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { MessageSquareOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =================================================
-function CommentsDisabledButton({ post }: { post: PostType }) {
+function CommentsDisabledButton({ post }: { post: Post }) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const userSession = useUser();

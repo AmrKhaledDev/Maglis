@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // ==========================================
-export type UserSearchResultType = Prisma.UserGetPayload<{
+export type UserSearchResult = Prisma.UserGetPayload<{
   select: {
     id: true;
     username: true;

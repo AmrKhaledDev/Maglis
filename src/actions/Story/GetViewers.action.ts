@@ -1,14 +1,14 @@
 "use server";
 
 import GetSession from "@/auth/GetSession";
-import StoryViewerType from "@/components/modals/StoryViewersModal/_types/StoryViewer.type";
+import { StoryViewer } from "@/components/modals/StoryViewersModal/_types/StoryViewer.type";
 import { prisma } from "@/lib/prisma";
 // ========================================
 export const GetViewersAction = async (
   storyId: string,
 ): Promise<{
   success: boolean;
-  viewers: StoryViewerType[];
+  viewers: StoryViewer[];
   message?: string;
   notAuthenticated?: boolean;
 }> => {

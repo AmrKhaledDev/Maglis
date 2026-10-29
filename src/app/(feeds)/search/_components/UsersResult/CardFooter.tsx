@@ -1,7 +1,7 @@
 import { infos } from "@/data/userInfos";
-import { UserSearchResultType } from "@/types/UserSearchResult.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
 // =============================================================
-function UserCardFooter({ user }: { user: UserSearchResultType }) {
+function CardFooter({ user }: { user: UserSearchResult }) {
   return (
     <div className="flex flex-col gap-3">
       <p className="font-normal">{user.bio}</p>
@@ -20,4 +20,4 @@ function UserCardFooter({ user }: { user: UserSearchResultType }) {
   );
 }
 
-export default UserCardFooter;
+export default CardFooter;

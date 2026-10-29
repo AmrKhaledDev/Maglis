@@ -1,10 +1,10 @@
 import PostOptionsBox from "@/components/PostOptions/PostOptionsMenu";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import clsx from "clsx";
 import { Ellipsis } from "lucide-react";
 // =================================================================================================================================
-function VideoOptions({ video }: { video: PostType }) {
+function VideoOptions({ video }: { video: Post }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
   return (
     <div className="relative">

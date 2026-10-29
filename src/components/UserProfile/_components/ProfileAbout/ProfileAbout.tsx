@@ -1,9 +1,9 @@
 "use client";
 import { infos } from "@/data/userInfos";
-import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
+import { UserWithSocialLink } from "../../_types/UserWithSocialLink.type";
 import Linkify from "linkify-react";
 // ======================================================================
-function ProfileAbout({ user }: { user: UserWithSocialLinkType }) {
+function ProfileAbout({ user }: { user: UserWithSocialLink }) {
   return (
     <div className="p-2 flex flex-col gap-3 w-full">
       <div className="flex items-center justify-between">

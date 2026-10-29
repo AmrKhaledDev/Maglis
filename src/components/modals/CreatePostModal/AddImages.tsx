@@ -1,10 +1,10 @@
 "use client";
 import { FaRegImages } from "react-icons/fa6";
-import { AddMediaPropsType } from "./_types/AddMediaProps.type";
+import { AddMediaProps } from "./_types/AddMediaProps.type";
 import clsx from "clsx";
 import handleFileUploadCreatePost from "@/lib/helpers/handleFileUploadCreatePost";
 // ======================================================================================
-function AddImages({ append, fields, disabled }: AddMediaPropsType) {
+function AddImages({ append, fields, disabled }: AddMediaProps) {
   return (
     <div>
       <label

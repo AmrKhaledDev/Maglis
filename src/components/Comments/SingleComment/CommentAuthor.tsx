@@ -1,5 +1,5 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { Comment, Prisma } from "@prisma/client";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
@@ -21,7 +21,7 @@ function CommentAuthor({
       username: true;
     };
   }>;
-  post: PostType;
+  post: Post;
   comment: Comment;
 }) {
   return (

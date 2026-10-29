@@ -1,11 +1,11 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import Header from "./Header";
 import Text from "./Text";
 // ==============================================================
-function PostContentTextModal({ post }: { post: PostType }) {
+function PostContentTextModal({ post }: { post: Post }) {
   return createPortal(
     <div className="fixed flex items-center justify-center inset-0 bg-black/30  z-100 backdrop-blur-[3px]">
       <div className="modalBgColor max-w-200 min-w-90 p-5 rounded-xl shadow flex flex-col gap-8">

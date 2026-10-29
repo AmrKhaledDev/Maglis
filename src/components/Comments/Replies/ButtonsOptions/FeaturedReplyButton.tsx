@@ -2,12 +2,12 @@ import { ToggleFeaturedReplyAction } from "@/actions/Reply/ToggleFeaturedReply.a
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@/types/Comment.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Gem } from "lucide-react";
 // ======================================================
-function FeaturedReplyButton({ reply }: { reply: CommentType }) {
+function FeaturedReplyButton({ reply }: { reply: Comment }) {
   const userSession = useUser();
   const { setToast } = useToast();
   const queryClient = useQueryClient();

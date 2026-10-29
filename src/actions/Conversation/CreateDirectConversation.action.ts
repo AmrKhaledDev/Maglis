@@ -2,14 +2,14 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import MessageMediaType from "@/types/MessageMedia.type";
 import { CreateMessageAction } from "../Message/CreateMessage.action";
+import { MessageMedia } from "@/types/MessageMedia.type";
 // ==================================================
 
 export const CreateDirectConversationAction = async (
   receiverId: string,
   content?: string,
-  media?: MessageMediaType[],
+  media?: MessageMedia[],
 ): Promise<{ success: boolean; message?: string }> => {
   try {
     if (!receiverId)

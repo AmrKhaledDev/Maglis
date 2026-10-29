@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { useInView } from "react-intersection-observer";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import clsx from "clsx";
 // =========================================================
 function PostContentMediaItem({
@@ -19,7 +19,7 @@ function PostContentMediaItem({
       url: string;
     }>
   >;
-  post: PostType;
+  post: Post;
 }) {
   const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
   const { ref, inView } = useInView({

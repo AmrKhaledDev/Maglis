@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 import GetSession from "./GetSession";
-import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type";
 import "dayjs/locale/ar";
+import { SessionWithRelations } from "@/types/SessionWithRelations.type";
 // ===========================================================================
 dayjs.locale("ar");
 const validateSession = async (): Promise<{
   success: boolean;
-  session?: SessionWithoutPasswordType;
+  session?: SessionWithRelations;
   message?: string;
 }> => {
   try {

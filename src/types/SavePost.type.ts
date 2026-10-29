@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // ======================================================
-export type SavePostType = Prisma.SavePostGetPayload<{
+export type SavePost = Prisma.SavePostGetPayload<{
   include: {
     post: {
       select: {

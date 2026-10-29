@@ -2,7 +2,7 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import { CreateCommentSchema } from "@/ZodSchemas/Comment/CreateComment.schema";
+import { CreateCommentSchema } from "@/zodSchemas/Comment/CreateComment.schema";
 import { revalidateTag } from "next/cache";
 // ===========================================================================
 export const CreateAction = async (

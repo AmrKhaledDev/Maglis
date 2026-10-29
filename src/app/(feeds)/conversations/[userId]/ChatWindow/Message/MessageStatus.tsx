@@ -4,10 +4,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useUser } from "@/providers/UserProvider";
-import MessageType from "@/types/Message.type";
+import Message from "@/types/Message.type";
 import { Eye, EyeOff } from "lucide-react";
 //======================================================
-function MessageStatus({ message }: { message: MessageType }) {
+function MessageStatus({ message }: { message: Message }) {
   const userSession = useUser();
   return (
     <Tooltip>

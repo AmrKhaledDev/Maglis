@@ -2,7 +2,7 @@ import { LikeAction } from "@/actions/Like/Like.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Heart } from "lucide-react";
@@ -11,7 +11,7 @@ function VideoLikeButton({
   video,
   variant = "default",
 }: {
-  video: PostType;
+  video: Post;
   variant: "default" | "comments_modal";
 }) {
   const { setToast } = useToast();

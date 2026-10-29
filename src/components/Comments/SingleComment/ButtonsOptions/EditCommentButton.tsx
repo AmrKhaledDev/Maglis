@@ -1,6 +1,6 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useUser } from "@/providers/UserProvider";
-import { Comment } from "@prisma/client";
+import { Comment } from "@/types/Comment.type";
 import { Pencil } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 // ====================================================

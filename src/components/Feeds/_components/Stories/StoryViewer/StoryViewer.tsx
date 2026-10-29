@@ -1,7 +1,7 @@
 import { CreateStoryViewer } from "@/actions/Story/CreateStoryViewer.action";
 import StoryType from "@/components/Feeds/_types/Story.type";
 import { useUser } from "@/providers/UserProvider";
-import { UserStoryType } from "@/types/UserStoryType";
+import { UserStory } from "@/types/UserStory.type";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Author from "./Author";
@@ -15,8 +15,8 @@ function StoryViewer({
   user,
   stories,
 }: {
-  user: UserStoryType;
-  stories: StoryType[] ;
+  user: UserStory;
+  stories: StoryType[];
 }) {
   const userSession = useUser();
   const [index, setIndex] = useState(0);

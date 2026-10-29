@@ -1,4 +1,4 @@
-import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type";
+import { SessionWithRelations } from "@/types/SessionWithRelations.type";
 import { Comment } from "@prisma/client";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import TextareaAutoResize from "react-textarea-autosize";
@@ -14,7 +14,7 @@ function CommentTextarea({
   content: string;
   setContent: Dispatch<SetStateAction<string>>;
   loading: boolean;
-  user: SessionWithoutPasswordType;
+  user: SessionWithRelations;
   currentComment: Comment | null | undefined;
   setImagePreview: Dispatch<SetStateAction<string>>;
 }) {

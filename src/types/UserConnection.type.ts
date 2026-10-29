@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // =======================================
-type UserConnectionType = Prisma.UserGetPayload<{
+export type UserConnection = Prisma.UserGetPayload<{
   select: {
     id: true;
     image: true;
@@ -9,4 +9,3 @@ type UserConnectionType = Prisma.UserGetPayload<{
   };
 }>;
 
-export default UserConnectionType;

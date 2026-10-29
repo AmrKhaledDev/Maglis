@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // =======================================
-type MessageType = Prisma.MessageGetPayload<{
+type Message = Prisma.MessageGetPayload<{
   include: {
     sender: {
       select: {
@@ -12,4 +12,4 @@ type MessageType = Prisma.MessageGetPayload<{
     messageMedia: true;
   };
 }>;
-export default MessageType;
+export default Message;

@@ -1,8 +1,8 @@
 import UserImage from "@/components/UserImage/UserImage";
-import FriendRequestType from "@/types/FriendRequest.type";
+import FriendRequest from "@/types/FriendRequest.type";
 import Link from "next/link";
 // ==============================================================
-function RequestUserDetails({ request }: { request: FriendRequestType }) {
+function RequestUserDetails({ request }: { request: FriendRequest }) {
   return (
     <div className="flex items-center gap-2">
       <UserImage

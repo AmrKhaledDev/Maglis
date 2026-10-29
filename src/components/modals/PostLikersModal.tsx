@@ -1,13 +1,13 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { X } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 import FollowButton from "../FollowButton/FollowButton";
 import UserImage from "../UserImage/UserImage";
 // ====================================================================
-function PostLikersModal({ post }: { post: PostType }) {
+function PostLikersModal({ post }: { post: Post }) {
   const { setActiveModal } = useActiveModal();
   const userSession = useUser();
   const likers = post.likes.sort((a, b) => {

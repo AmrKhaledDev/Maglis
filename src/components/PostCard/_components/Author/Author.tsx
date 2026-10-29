@@ -1,6 +1,6 @@
 import UserImage from "@/components/UserImage/UserImage";
 import privacyMap from "@/data/privacyMap";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import dayjs from "dayjs";
 import local from "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -9,7 +9,7 @@ import AuthorActions from "./AuthorAction";
 // ====================================================
 dayjs.extend(relativeTime);
 dayjs.locale(local);
-function Author({ post }: { post: PostType }) {
+function Author({ post }: { post: Post }) {
   const Icon = privacyMap[post.privacy].icon;
   return (
     <div className="flex gap-2 items-center">

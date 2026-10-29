@@ -2,10 +2,10 @@ import { Dispatch, SetStateAction } from "react";
 import Search from "./Search";
 import SearchTypeTabs from "./SearchTypeTabs";
 import UsersFiltersTabs from "./UsersFiltersTabs";
-import { UserSearchResultType } from "@/types/UserSearchResult.type";
-import { PostType } from "@/types/Post.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
 import ActiveDataType from "../_types/ActiveData.type";
 import UsersFilterType from "../_types/UsersFilters.type";
+import { Post } from "@/types/Post.type";
 // =======================================================================
 function Header({
   searchText,
@@ -19,8 +19,8 @@ function Header({
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
   data: {
-    users: UserSearchResultType[];
-    posts: PostType[];
+    users: UserSearchResult[];
+    posts: Post[];
   };
   setActiveData: Dispatch<SetStateAction<ActiveDataType>>;
   activeData: ActiveDataType;

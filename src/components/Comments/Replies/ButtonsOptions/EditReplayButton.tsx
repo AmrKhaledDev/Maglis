@@ -1,9 +1,9 @@
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useUser } from "@/providers/UserProvider";
-import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@/types/Comment.type";
 import { Pencil } from "lucide-react";
 // =================================================================
-function EditReplayButton({ reply }: { reply: CommentType }) {
+function EditReplayButton({ reply }: { reply: Comment }) {
   const { setShowReplyComposer, setCurrentReply } = useRepliesState();
   const userSession = useUser();
   return (

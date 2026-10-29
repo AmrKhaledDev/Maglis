@@ -1,7 +1,7 @@
-import MessageType from "@/types/Message.type";
+import Message from "@/types/Message.type";
 import MessageMedia from "./MessageMedia/MessageMedia";
 // =======================================================
-function MessageContent({ message }: { message: MessageType }) {
+function MessageContent({ message }: { message: Message }) {
   return (
     <div className="flex flex-col gap-2">
       <p className="whitespace-pre-line text-sm [word-break:break-word] p-1">

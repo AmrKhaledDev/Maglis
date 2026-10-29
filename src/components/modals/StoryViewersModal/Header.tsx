@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
-import StoryViewerType from "./_types/StoryViewer.type";
+import { StoryViewer } from "./_types/StoryViewer.type";
 // ==============================================================
 function Header({
   isPending,
@@ -8,7 +8,7 @@ function Header({
   setShowStoryViewers,
 }: {
   isPending: boolean;
-  data: StoryViewerType[];
+  data: StoryViewer[];
   setShowStoryViewers: Dispatch<SetStateAction<string>>;
 }) {
   return (

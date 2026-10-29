@@ -3,7 +3,7 @@
 import { AuthSendVerificationToken } from "@/lib/email/AuthSendVerificationToken";
 import { generateVerificationToken } from "@/lib/generateVerificationToken";
 import { prisma } from "@/lib/prisma";
-import { RegisterSchema } from "@/ZodSchemas/Auth/Register.schema";
+import { RegisterSchema } from "@/zodSchemas/Auth/Register.schema";
 import bcrypt from "bcryptjs";
 import z from "zod";
 // =====================================================================================

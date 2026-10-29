@@ -1,14 +1,14 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@/types/Comment.type";
 // ==========================================================
 export const GetPostCommentsAction = async (
   postId: string,
 ): Promise<{
   success: boolean;
   message?: string;
-  comments?: CommentType[];
+  comments?: Comment[];
 }> => {
   try {
     if (!postId)
@@ -16,7 +16,7 @@ export const GetPostCommentsAction = async (
         success: false,
         message: "حدث خطأ غير متوقع أثناء جلب تعليقات المنشور.",
       };
-    const comments: CommentType[] = await prisma.comment.findMany({
+    const comments: Comment[] = await prisma.comment.findMany({
       where: {
         postId,
         parentId: null,

@@ -2,13 +2,13 @@ import { LikeAction } from "@/actions/Like/Like.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =========================================================================
-function LikeButton({ post }: { post: PostType }) {
+function LikeButton({ post }: { post: Post }) {
   const { setToast } = useToast();
   const userSession = useUser();
   const isLiker = post.likes.some((like) => like.userId === userSession.id);

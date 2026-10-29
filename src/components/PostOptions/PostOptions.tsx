@@ -1,11 +1,11 @@
 "use client";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { clsx } from "clsx";
 import { Ellipsis } from "lucide-react";
 import PostOptionsMenu from "./PostOptionsMenu";
 // ===========================================================
-function PostOptions({ post }: { post: PostType }) {
+function PostOptions({ post }: { post: Post }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
   return (
     <div className="h-fit relative">

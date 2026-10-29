@@ -1,5 +1,5 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { UserSearchResultType } from "@/types/UserSearchResult.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
 import clsx from "clsx";
 import Link from "next/link";
 // ==============================================================================
@@ -8,7 +8,7 @@ function UsersSearchResult({
   data,
 }: {
   searchValue: string;
-  data: UserSearchResultType[];
+  data: UserSearchResult[];
 }) {
   return (
     <div

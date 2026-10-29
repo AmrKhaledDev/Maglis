@@ -1,11 +1,11 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 // =====================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function SavedPostAuthor({ saveItem }: { saveItem: SavePostType }) {
+function SavedPostAuthor({ saveItem }: { saveItem: SavePost }) {
   return (
     <div className="flex items-center gap-2">
       <UserImage src={saveItem.post.author.image} size="size-9" />

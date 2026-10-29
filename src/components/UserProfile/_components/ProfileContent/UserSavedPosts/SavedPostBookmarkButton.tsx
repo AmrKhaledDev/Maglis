@@ -2,12 +2,12 @@ import { SavePostAction } from "@/actions/SavePost/SavePost.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
 // ========================================
-function SavedPostBookmarkButton({ saveItem }: { saveItem: SavePostType }) {
+function SavedPostBookmarkButton({ saveItem }: { saveItem: SavePost }) {
   const userSession = useUser();
   const router = useRouter();
   const { setToast } = useToast();

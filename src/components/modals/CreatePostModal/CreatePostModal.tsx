@@ -4,22 +4,22 @@ import privacyMap from "@/data/privacyMap";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { Privacy } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { FormType } from "./_types/Form.type";
+import { Form as FormType } from "./_types/Form.type";
 import Form from "./Form";
-import FieldType from "./_types/Field.type";
+import { Field } from "./_types/Field.type";
 // ==========================================================================
-function CreatePostModal({ currentPost }: { currentPost?: PostType }) {
+function CreatePostModal({ currentPost }: { currentPost?: Post }) {
   const userSession = useUser();
   const defaultPrivacy = privacyMap[currentPost?.privacy ?? "FRIENDS"];
   const { setActiveModal } = useActiveModal();
-  const currentMedia: FieldType[] = currentPost
+  const currentMedia: Field[] = currentPost
     ? currentPost.media.map((media) => ({
         file: null,
         type: media.type.toLowerCase() as "video" | "image" | "pdf" | null,

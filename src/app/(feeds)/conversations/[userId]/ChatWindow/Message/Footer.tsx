@@ -1,4 +1,4 @@
-import MessageType from "@/types/Message.type";
+import Message from "@/types/Message.type";
 import MessageStatus from "./MessageStatus";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
@@ -6,7 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 // ======================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function Footer({ message }: { message: MessageType }) {
+function Footer({ message }: { message: Message }) {
   return (
     <div className="flex items-center gap-5 w-full justify-between">
       <div className="flex items-center gap-1.5">

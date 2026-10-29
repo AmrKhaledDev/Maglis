@@ -39,12 +39,18 @@ export const ConfirmAction = async (
       });
       if (alreadyFriend)
         return { success: false, message: "أنتما بالفعل ضمن قائمة الأصدقاء." };
-      await tx.friendRequest.delete({
+      await tx.friendRequest.deleteMany({
         where: {
-          senderId_receiverId: {
-            senderId,
-            receiverId: userSession.id,
-          },
+          OR: [
+            {
+              receiverId: senderId,
+              senderId: userSession.id,
+            },
+            {
+              receiverId: userSession.id,
+              senderId: senderId,
+            },
+          ],
         },
       });
       await tx.friendship.createMany({
@@ -55,6 +61,7 @@ export const ConfirmAction = async (
           },
           { userId: senderId, friendId: userSession.id },
         ],
+        skipDuplicates: true,
       });
       await tx.user.updateMany({
         where: { OR: [{ id: userSession.id }, { id: senderId }] },

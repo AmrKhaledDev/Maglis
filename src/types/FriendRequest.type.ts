@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // =========================================
-type FriendRequestType = Prisma.FriendRequestGetPayload<{
+type FriendRequest = Prisma.FriendRequestGetPayload<{
   include: {
     sender: {
       select: {
@@ -12,4 +12,4 @@ type FriendRequestType = Prisma.FriendRequestGetPayload<{
     };
   };
 }>;
-export default FriendRequestType;
+export default FriendRequest;

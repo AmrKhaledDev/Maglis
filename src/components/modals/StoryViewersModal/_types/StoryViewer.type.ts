@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // =======================================
-type StoryViewerType = Prisma.StoryViewerGetPayload<{
+export type StoryViewer = Prisma.StoryViewerGetPayload<{
   include: {
     viewer: {
       select: {
@@ -12,4 +12,3 @@ type StoryViewerType = Prisma.StoryViewerGetPayload<{
     };
   };
 }>;
-export default StoryViewerType;

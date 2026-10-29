@@ -1,9 +1,9 @@
 import { Pencil } from "lucide-react";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import CreatePostModal from "@/components/modals/CreatePostModal/CreatePostModal";
 // ================================================================
-function EditPostButton({ post }: { post: PostType }) {
+function EditPostButton({ post }: { post: Post }) {
   const { activeModal, setActiveModal } = useActiveModal();
   return (
     <div className="w-full">

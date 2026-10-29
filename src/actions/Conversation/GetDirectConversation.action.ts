@@ -2,14 +2,14 @@
 
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import ConversationType from "@/types/Conversation.type";
+import Conversation from "@/types/Conversation.type";
 // ============================================
 export const GetDirectConversationAction = async (
   receiverId: string,
 ): Promise<{
   success: boolean;
   message?: string;
-  conversation?: ConversationType | null;
+  conversation?: Conversation | null;
 }> => {
   try {
     const userSession = await GetSession();

@@ -1,8 +1,8 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import Link from "next/link";
 // ===========================================================
-function Author({ item }: { item: SavePostType }) {
+function Author({ item }: { item: SavePost }) {
   return (
     <div className="flex items-center gap-2">
       <UserImage src={item.post.author.image} size="size-8" />

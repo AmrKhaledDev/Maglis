@@ -1,12 +1,12 @@
 import { GetCommentRepliesAction } from "@/actions/Reply/GetCommentReplies.action";
 import { useUser } from "@/providers/UserProvider";
-import { CommentType } from "@/types/Comment.type";
-import { PostType } from "@/types/Post.type";
+import { Comment } from "@/types/Comment.type";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Reply from "./Reply";
 import ReplyComposer from "./ReplyComposer";
 import ButtonShowReplies from "./ShowRepliesButton";
+import { Post } from "@/types/Post.type";
 // ============================================================
 function Replies({
   userOwnerCommentName,
@@ -16,10 +16,10 @@ function Replies({
   topLevelComment,
 }: {
   userOwnerCommentName: string;
-  comment: CommentType;
+  comment: Comment;
   initialRepliesCount: number;
-  post: PostType;
-  topLevelComment: CommentType;
+  post: Post;
+  topLevelComment: Comment;
 }) {
   const [showRepliesList, setShowRepliesList] = useState(false);
   const userSession = useUser();

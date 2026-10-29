@@ -1,12 +1,12 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 // ==========================================
 export const GetSinglePostAction = async (
   postId: string,
-): Promise<{ success: boolean; message?: string; post?: PostType | null }> => {
-  const post: PostType | null = await prisma.post.findUnique({
+): Promise<{ success: boolean; message?: string; post?: Post | null }> => {
+  const post: Post | null = await prisma.post.findUnique({
     where: {
       id: postId,
     },

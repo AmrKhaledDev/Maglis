@@ -1,4 +1,4 @@
-import { FormType } from "@/components/modals/CreatePostModal/_types/Form.type";
+import { Form } from "@/components/modals/CreatePostModal/_types/Form.type";
 import { ChangeEvent } from "react";
 import { UseFieldArrayAppend } from "react-hook-form";
 // ========================================================================
@@ -10,7 +10,7 @@ const handleFileUploadCreatePost = (
   } & Record<"id", string> & {
       disabled?: boolean;
     })[],
-  append: UseFieldArrayAppend<FormType, "media">,
+  append: UseFieldArrayAppend<Form, "media">,
 ) => {
   if (fields.length >= 4) return;
   const file = e.target.files?.[0];

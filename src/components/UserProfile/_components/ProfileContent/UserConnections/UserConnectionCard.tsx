@@ -1,15 +1,15 @@
 import FollowButton from "@/components/FollowButton/FollowButton";
 import UserImage from "@/components/UserImage/UserImage";
-import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type";
-import UserConnectionType from "@/types/UserConnection.type";
+import { SessionWithRelations } from "@/types/SessionWithRelations.type";
+import { UserConnection } from "@/types/UserConnection.type";
 import Link from "next/link";
 // =========================================================================
 function UserConnectionCard({
   user,
   userSession,
 }: {
-  user: UserConnectionType;
-  userSession: SessionWithoutPasswordType;
+  user: UserConnection;
+  userSession: SessionWithRelations;
 }) {
   return (
     <div className="flex items-center gap-2">

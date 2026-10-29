@@ -3,12 +3,12 @@ import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 // ==============================================
-function DeletePostButton({ post }: { post: PostType }) {
+function DeletePostButton({ post }: { post: Post }) {
   const userSession = useUser();
   const { setActiveMenu } = useActiveMenu();
   const router = useRouter();

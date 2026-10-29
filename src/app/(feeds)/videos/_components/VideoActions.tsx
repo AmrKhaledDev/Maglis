@@ -1,6 +1,6 @@
 import SavePostButton from "@/components/SavePostButton/SavePostButton";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -10,7 +10,7 @@ import VideoLikeButton from "./ButtonsActions/VideoLikeButton";
 import VideoOptions from "./VideoOptions";
 // ====================================================================
 dayjs.extend(relativeTime).locale("ar");
-function VideoActions({ video }: { video: PostType }) {
+function VideoActions({ video }: { video: Post }) {
   const { activeModal, setActiveModal } = useActiveModal();
   const id = [video.id, video.authorId].join("_");
   return (

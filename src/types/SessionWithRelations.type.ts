@@ -21,13 +21,9 @@ type User = Prisma.UserGetPayload<{
         receiver: true;
       };
     };
-    friends: {
+    friendships: {
       select: {
-        friend: {
-          select: {
-            id: true;
-          };
-        };
+        friendId: true;
       };
     };
     blocks: {
@@ -42,4 +38,4 @@ type User = Prisma.UserGetPayload<{
     };
   };
 }>;
-export type SessionWithoutPasswordType = Omit<User, "password">;
+export type SessionWithRelations = Omit<User, "password">;

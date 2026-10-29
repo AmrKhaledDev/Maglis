@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import PostContentMediaItem from "./PostContentMediaItem";
 import clsx from "clsx";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 // ==============================================
-function PostContentMedia({ post }: { post: PostType }) {
+function PostContentMedia({ post }: { post: Post }) {
   const [showImage, setShowImage] = useState({
     open: false,
     url: "",

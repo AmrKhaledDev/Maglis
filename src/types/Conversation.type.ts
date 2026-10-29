@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // =======================================
-type ConversationType = Prisma.ConversationGetPayload<{
+type Conversation = Prisma.ConversationGetPayload<{
   include: {
     messages: {
       include: {
@@ -16,4 +16,4 @@ type ConversationType = Prisma.ConversationGetPayload<{
     };
   };
 }>;
-export default ConversationType;
+export default Conversation;

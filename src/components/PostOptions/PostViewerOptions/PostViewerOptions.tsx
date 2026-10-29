@@ -1,13 +1,13 @@
 import FollowButton from "@/components/FollowButton/FollowButton";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { UserRound } from "lucide-react";
 import Link from "next/link";
 import BlockButton from "../../BlockButton/BlockButton";
 import HiddenPostButton from "./HiddenPostButton";
 import useIsUserBlocked from "@/hooks/useIsUserBlocked";
 // ========================================================
-function PostViewerOptions({ post }: { post: PostType }) {
+function PostViewerOptions({ post }: { post: Post }) {
   const userSession = useUser();
   const isBlocked = useIsUserBlocked(post.authorId);
   return (

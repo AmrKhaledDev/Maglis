@@ -1,14 +1,14 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import UserConnectionType from "@/types/UserConnection.type";
+import { UserConnection } from "@/types/UserConnection.type";
 // ==========================================================================
 export const GetFriendsAction = async (
   userId: string,
 ): Promise<{
   success: boolean;
   message?: string;
-  data: UserConnectionType[];
+  data: UserConnection[];
 }> => {
   try {
     if (!userId)

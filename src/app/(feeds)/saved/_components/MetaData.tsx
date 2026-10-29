@@ -1,5 +1,5 @@
 import privacyMap from "@/data/privacyMap";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import dayjs from "dayjs";
 import { FaComment, FaHeart } from "react-icons/fa6";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -7,7 +7,7 @@ import "dayjs/locale/ar";
 // ==============================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function MetaData({ item }: { item: SavePostType }) {
+function MetaData({ item }: { item: SavePost }) {
   const PrivacyIcon = privacyMap[item.post.privacy].icon;
   const privacyLabel = privacyMap[item.post.privacy].label;
   return (

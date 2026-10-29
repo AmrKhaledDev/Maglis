@@ -1,4 +1,4 @@
-import { CreateMessageSchema } from "@/ZodSchemas/Message/CreateMessage.schema";
+import { CreateMessageSchema } from "@/zodSchemas/Message/CreateMessage.schema";
 import { UseFieldArrayAppend } from "react-hook-form";
 import z from "zod";
 // ==========================================================

@@ -1,6 +1,6 @@
 "use client";
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import ReactPlayer from "react-player";
@@ -8,7 +8,7 @@ import Author from "./Author";
 import Content from "./Content";
 import VideoActions from "./VideoActions";
 // ====================================================
-function VideoCard({ video }: { video: PostType }) {
+function VideoCard({ video }: { video: Post }) {
   const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
   const { ref, inView } = useInView({
     threshold: 0.6,

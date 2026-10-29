@@ -1,23 +1,23 @@
 "use client";
-import { GetSuggestedPeopleAction } from "@/actions/User/GetSuggestedPeople.action";
+import { GetSuggestedUsersAction } from "@/actions/User/GetSuggestedUsers.action";
 import FollowButton from "@/components/FollowButton/FollowButton";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
-import Skeleton from "../../Skeletons/SuggestedPeople/Skeleton";
+import Skeleton from "../../Skeletons/LeftSide/Skeleton";
 import SectionHeader from "../SectionHeader";
 import UserDetails from "./UserDetails";
 // =======================================================================================
-function SuggestedPeople() {
+function SuggestedUsers() {
   const pathname = usePathname();
   const userSession = useUser();
   const { data = [], isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetSuggestedPeopleAction();
+      const result = await GetSuggestedUsersAction();
       if (!result.success && result.message) throw new Error(result.message);
-      return result.suggestedPeople;
+      return result.suggestedUsers;
     },
-    queryKey: ["suggestedPeople", userSession.id],
+    queryKey: ["suggestedUsers", userSession.id],
   });
   if (pathname === "/videos") return null;
   return (
@@ -51,4 +51,4 @@ function SuggestedPeople() {
   );
 }
 
-export default SuggestedPeople;
+export default SuggestedUsers;

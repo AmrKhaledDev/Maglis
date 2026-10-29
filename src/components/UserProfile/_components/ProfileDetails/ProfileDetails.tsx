@@ -3,12 +3,12 @@ import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
 import "dayjs/locale/ar";
 import EditProfileModal from "../../../modals/EditProfileModal/EditProfileModal";
-import { UserWithSocialLinkType } from "../../_types/UserWithSocialLink.type";
+import { UserWithSocialLink } from "../../_types/UserWithSocialLink.type";
 import ProfileDetailsFooter from "./ProfileDetailsFooter/ProfileDetailsFooter";
 import ProfileIdentity from "./ProfileIdentity";
 import ProfileStats from "./ProfileStats";
 // ====================================================
-function ProfileDetails({ user }: { user: UserWithSocialLinkType }) {
+function ProfileDetails({ user }: { user: UserWithSocialLink }) {
   const { setActiveModal, activeModal } = useActiveModal();
   const userSession = useUser();
   return (

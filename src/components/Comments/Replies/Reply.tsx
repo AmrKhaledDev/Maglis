@@ -3,20 +3,20 @@ import Replies from "./Replies";
 import ReplyHeader from "./ReplyHeader";
 import ReplyAuthor from "./ReplyAuthor";
 import { useState } from "react";
-import { PostType } from "@/types/Post.type";
-import { CommentType } from "@/types/Comment.type";
+import { Post } from "@/types/Post.type";
 import { Gem } from "lucide-react";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 import ReplyContent from "./ReplyContent";
+import { Comment } from "@/types/Comment.type";
 // ================================================================================
 function Reply({
   reply,
   post,
   topLevelComment,
 }: {
-  reply: CommentType;
-  post: PostType;
-  topLevelComment: CommentType;
+  reply: Comment;
+  post: Post;
+  topLevelComment: Comment;
 }) {
   const [showImage, setShowImage] = useState({
     open: false,

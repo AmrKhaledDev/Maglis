@@ -1,9 +1,9 @@
 import { useUser } from "@/providers/UserProvider";
-import MessageType from "@/types/Message.type";
 import clsx from "clsx";
 import Footer from "./Footer";
 import MessageContent from "./MessageContent";
 import MessageOptions from "./MessageOptions";
+import MessageType from "@/types/Message.type";
 // =====================================================
 function Message({
   message,

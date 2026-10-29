@@ -23,7 +23,7 @@ async function UserProfile({ userId }: { userId: string }) {
         <div className="flex flex-col gap-5">
           <div className="w-full bg-white/5 overflow-hidden rounded-2xl">
             <ProfileCover user={user} />
-            <div className="grid grid-cols-2 p-2">
+            <div className="grid grid-cols-2 p-2 gap-5">
               <div className="flex gap-4">
                 <ProfileAvatar user={user} />
                 <ProfileDetails user={user} />

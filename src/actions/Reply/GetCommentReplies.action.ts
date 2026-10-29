@@ -1,10 +1,10 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@/types/Comment.type";
 // =======================================
 export const GetCommentRepliesAction = async (
   parentId: string,
-): Promise<{ success: boolean; data?: CommentType[]; message?: string }> => {
+): Promise<{ success: boolean; data?: Comment[]; message?: string }> => {
   try {
     if (!parentId) {
       return {

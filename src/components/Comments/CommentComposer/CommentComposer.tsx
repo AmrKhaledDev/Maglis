@@ -1,26 +1,25 @@
-import { useUser } from "@/providers/UserProvider";
-import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
-import CommentUploadImage from "./CommentUploadImage";
-import CommentImageUploadedPreview from "./CommentImageUploadedPreview";
-import axios from "axios";
-import AlertMessage from "@/components/AlertMessage/AlertMessage";
-import { Comment } from "@prisma/client";
-import CommentTextarea from "./CommentTextarea";
-import CommentSubmitButton from "./CommentSubmitButton";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { PostType } from "@/types/Post.type";
-import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { CreateAction } from "@/actions/Comment/Create.action";
 import { EditAction } from "@/actions/Comment/Edit.action";
+import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import UserImage from "@/components/UserImage/UserImage";
+import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
+import { useUser } from "@/providers/UserProvider";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { Dispatch, SetStateAction, useState } from "react";
+import CommentImageUploadedPreview from "./CommentImageUploadedPreview";
+import CommentSubmitButton from "./CommentSubmitButton";
+import CommentTextarea from "./CommentTextarea";
+import CommentUploadImage from "./CommentUploadImage";
+import { Post } from "@/types/Post.type";
+import { Comment } from "@/types/Comment.type";
 // =====================================================
 function CommentComposer({
   post,
   currentComment,
   setCurrentComment,
 }: {
-  post: PostType;
+  post: Post;
   currentComment?: Comment | null;
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
 }) {

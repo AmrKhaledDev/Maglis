@@ -4,14 +4,14 @@ import Image from "next/image";
 import { UseFieldArrayRemove } from "react-hook-form";
 import { useState } from "react";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
-import FieldType from "./_types/Field.type";
+import { Field } from "./_types/Field.type";
 // ========================================================
 function Media({
   fields,
   remove,
   disabled,
 }: {
-  fields: FieldType[];
+  fields: Field[];
   remove: UseFieldArrayRemove;
   disabled: boolean;
 }) {

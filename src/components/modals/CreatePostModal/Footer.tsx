@@ -1,12 +1,12 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import AddImages from "./AddImages";
 import AddVideos from "./AddVideos";
-import { FooterPropsType } from "./_types/FooterProps.type";
-import { FormType } from "./_types/Form.type";
+import { FooterProps } from "./_types/FooterProps.type";
+import { Form } from "./_types/Form.type";
 import AddEmoji from "@/components/AddEmoji/AddEmoji";
 // =============================================================================================
-function Footer({ fields, append, loading, textareaRef }: FooterPropsType) {
-  const { control } = useFormContext<FormType>();
+function Footer({ fields, append, loading, textareaRef }: FooterProps) {
+  const { control } = useFormContext<Form>();
   const content = useWatch({
     control,
     name: "content",

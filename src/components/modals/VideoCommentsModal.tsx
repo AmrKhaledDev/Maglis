@@ -5,14 +5,14 @@ import PostCard from "@/components/PostCard/PostCard";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
-import { Comment } from "@prisma/client";
+import { Comment } from "@/types/Comment.type";
+import { Post } from "@/types/Post.type";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useState } from "react";
 // ====================================================================================================================
-function VideoCommentsModal({ video }: { video: PostType }) {
+function VideoCommentsModal({ video }: { video: Post }) {
   const { setActiveModal } = useActiveModal();
   const { setToast } = useToast();
   const [currentComment, setCurrentComment] = useState<Comment | null>(null);

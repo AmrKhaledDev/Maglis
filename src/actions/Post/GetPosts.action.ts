@@ -1,42 +1,43 @@
 "use server";
 
+import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 // ==========================================
-export const GetPostsAction = async (
-  userSessionId: string,
-): Promise<{ posts?: PostType[] }> => {
-  const posts: PostType[] = await prisma.post.findMany({
+export const GetPostsAction = async (): Promise<{ posts?: Post[] }> => {
+  const userSession = await GetSession();
+  if (!userSession) return { posts: [] };
+  const posts: Post[] = await prisma.post.findMany({
     where: {
       OR: [
         { privacy: "PUBLIC" },
-        { privacy: "PRIVATE", authorId: userSessionId },
+        { privacy: "PRIVATE", authorId: userSession.id },
         {
           privacy: "FRIENDS",
           author: {
-            friends: {
+            friendships: {
               some: {
-                friendId: userSessionId,
+                friendId: userSession.id,
               },
             },
           },
         },
-        { privacy: "FRIENDS", authorId: userSessionId },
+        { privacy: "FRIENDS", authorId: userSession.id },
       ],
       hiddenPosts: {
         none: {
-          userId: userSessionId,
+          userId: userSession.id,
         },
       },
       author: {
         blocked: {
           none: {
-            blockerId: userSessionId,
+            blockerId: userSession.id,
           },
         },
         blocks: {
           none: {
-            blockedId: userSessionId,
+            blockedId: userSession.id,
           },
         },
       },

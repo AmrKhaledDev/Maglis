@@ -1,5 +1,5 @@
 import PostCard from "@/components/PostCard/PostCard";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import Skeleton from "../Skeletons/Posts/Skeleton";
 // ===================================================================
 function Posts({
@@ -7,7 +7,7 @@ function Posts({
   isPending,
   variant = "default",
 }: {
-  posts: PostType[] | undefined;
+  posts: Post[] | undefined;
   isPending: boolean;
   variant: "default" | "profile" | "videos" | "single";
 }) {

@@ -1,5 +1,4 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { CommentType } from "@/types/Comment.type";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Ellipsis } from "lucide-react";
@@ -7,8 +6,9 @@ import CopyReplyContentButton from "./ButtonsOptions/CopyReplyContentButton";
 import DeleteReplayButton from "./ButtonsOptions/DeleteReplayButton";
 import EditReplayButton from "./ButtonsOptions/EditReplayButton";
 import FeaturedReplyButton from "./ButtonsOptions/FeaturedReplyButton";
+import { Comment } from "@/types/Comment.type";
 // ==================================================================
-function ReplyOptions({ reply }: { reply: CommentType }) {
+function ReplyOptions({ reply }: { reply: Comment }) {
   const { activeMenu, setActiveMenu } = useActiveMenu();
   return (
     <div className="relative">

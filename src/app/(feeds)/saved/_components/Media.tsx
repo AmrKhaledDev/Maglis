@@ -1,11 +1,11 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import Image from "next/image";
 import Link from "next/link";
 import { TbPlayerPlayFilled } from "react-icons/tb";
 import ReactPlayer from "react-player";
 // ================================================
-function Media({ item }: { item: SavePostType }) {
+function Media({ item }: { item: SavePost }) {
   const post = item.post;
   const media = post.media[0];
   return (

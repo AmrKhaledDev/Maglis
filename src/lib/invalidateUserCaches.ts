@@ -1,9 +1,9 @@
-import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type";
+import { SessionWithRelations } from "@/types/SessionWithRelations.type";
 import { QueryClient } from "@tanstack/react-query";
 // ====================================================================
 export const invalidateUserCaches = (
   queryClient: QueryClient,
-  userSession: SessionWithoutPasswordType,
+  userSession: SessionWithRelations,
   ...args: unknown[]
 ) => {
   queryClient.invalidateQueries({

@@ -2,11 +2,11 @@
 
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 // ==========================================
 export const GetSavedPostsAction = async (): Promise<{
   success: boolean;
-  savedPosts?: SavePostType[];
+  savedPosts?: SavePost[];
   message?: string;
   notAuthenticated?: boolean;
 }> => {
@@ -18,7 +18,7 @@ export const GetSavedPostsAction = async (): Promise<{
         message: "برجاء تسجيل الدخول.",
         notAuthenticated: true,
       };
-    const savedPosts: SavePostType[] = await prisma.savePost.findMany({
+    const savedPosts: SavePost[] = await prisma.savePost.findMany({
       where: {
         userId: userSession.id,
         post: {

@@ -3,11 +3,11 @@ import { privacyOptions } from "@/data/SelectPrivacy/PrivacyOptions";
 import { useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { FormType } from "./_types/Form.type";
+import { Form } from "./_types/Form.type";
 import clsx from "clsx";
 // =======================================================
 function SelectPrivacy({ disabled }: { disabled: boolean }) {
-  const { control, setValue } = useFormContext<FormType>();
+  const { control, setValue } = useFormContext<Form>();
   const selectPrivacy = useWatch({
     control,
     name: "privacy",

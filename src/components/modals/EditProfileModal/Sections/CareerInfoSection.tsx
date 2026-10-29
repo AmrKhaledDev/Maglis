@@ -1,4 +1,4 @@
-import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import { EditProfileSchema } from "@/zodSchemas/EditProfile/EditProfile.schema";
 import { useFormContext } from "react-hook-form";
 import z from "zod";
 import EditProfileTitleSection from "../EditProfileTitleSection";

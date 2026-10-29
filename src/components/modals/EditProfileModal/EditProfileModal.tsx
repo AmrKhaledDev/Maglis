@@ -3,13 +3,13 @@ import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import { SOCIAL_PLATFORMS } from "@/data/Profile/socialPlatforms";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useUser } from "@/providers/UserProvider";
-import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import { EditProfileSchema } from "@/zodSchemas/EditProfile/EditProfile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormHookValues } from "../../UserProfile/_types/FormHookValues.type";
-import { UserWithSocialLinkType } from "../../UserProfile/_types/UserWithSocialLink.type";
+import { UserWithSocialLink } from "../../UserProfile/_types/UserWithSocialLink.type";
 import ButtonSubmit from "./ButtonSubmit";
 import Header from "./Header";
 import BasicInfoSection from "./Sections/BasicInfoSection";
@@ -18,7 +18,7 @@ import PersonalInformationSection from "./Sections/PersonalInformationSection/Pe
 import SocialConnectionsSection from "./Sections/SocialConnectionSections";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // =================================================================================
-function EditProfileModal({ user }: { user: UserWithSocialLinkType }) {
+function EditProfileModal({ user }: { user: UserWithSocialLink }) {
   const socialLinks = Object.fromEntries(
     user.socialLinks.map((link) => [link.platform, link.link]),
   );

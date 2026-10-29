@@ -1,8 +1,8 @@
-import { SessionWithoutPasswordType } from "@/types/SessionWithoutPassword.type";
+import { SessionWithRelations } from "@/types/SessionWithRelations.type";
 import { auth } from "../lib/auth";
 import { prisma } from "../lib/prisma";
 // =====================================
-const GetSession = async (): Promise<SessionWithoutPasswordType | null> => {
+const GetSession = async (): Promise<SessionWithRelations | null> => {
   try {
     const session = await auth();
     if (!session || !session.user) return null;
@@ -32,13 +32,9 @@ const GetSession = async (): Promise<SessionWithoutPasswordType | null> => {
             receiver: true,
           },
         },
-        friends: {
+        friendships: {
           select: {
-            friend: {
-              select: {
-                id: true,
-              },
-            },
+            friendId: true,
           },
         },
         blocks: {

@@ -2,102 +2,58 @@
 
 import validateSession from "@/auth/validateSession";
 import { prisma } from "@/lib/prisma";
-import { UserStoriesWithFollowingsType } from "@/types/UserStoriesWithFollowingsType";
+import {
+  storyUserSelect,
+  UserWithStoriesFeed,
+} from "@/types/UserWithStoriesFeed.type";
 // ======================================================
 export const GetActiveStoriesAction = async (userId: string) => {
   try {
     if (!userId) return null;
     const validatingSession = await validateSession();
     if (!validatingSession.success || !validatingSession.session) return null;
-    const user: UserStoriesWithFollowingsType | null =
-      await prisma.user.findUnique({
-        where: {
-          id: userId,
+    const user: UserWithStoriesFeed | null = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        image: true,
+        name: true,
+        username: true,
+        stories: {
+          where: {
+            expiresAt: {
+              gte: new Date(),
+            },
+          },
+          include: {
+            _count: {
+              select: {
+                storyViews: true,
+              },
+            },
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
         },
-        select: {
-          id: true,
-          image: true,
-          name: true,
-          username: true,
-          stories: {
-            where: {
-              expiresAt: {
-                gte: new Date(),
-              },
-            },
-            include: {
-              _count: {
-                select: {
-                  storyViews: true,
-                },
-              },
-            },
-            orderBy: {
-              createdAt: "desc",
-            },
-          },
-          followings: {
-            select: {
-              following: {
-                select: {
-                  id: true,
-                  image: true,
-                  name: true,
-                  username: true,
-                  stories: {
-                    where: {
-                      expiresAt: {
-                        gte: new Date(),
-                      },
-                      isPrivate: false,
-                    },
-                    include: {
-                      _count: {
-                        select: {
-                          storyViews: true,
-                        },
-                      },
-                    },
-                    orderBy: {
-                      createdAt: "desc",
-                    },
-                  },
-                },
-              },
-            },
-          },
-          friends: {
-            select: {
-              friend: {
-                select: {
-                  id: true,
-                  image: true,
-                  name: true,
-                  username: true,
-                  stories: {
-                    where: {
-                      expiresAt: {
-                        gte: new Date(),
-                      },
-                      isPrivate: false,
-                    },
-                    include: {
-                      _count: {
-                        select: {
-                          storyViews: true,
-                        },
-                      },
-                    },
-                    orderBy: {
-                      createdAt: "desc",
-                    },
-                  },
-                },
-              },
+        followings: {
+          select: {
+            following: {
+              select: storyUserSelect,
             },
           },
         },
-      });
+        friendships: {
+          select: {
+            friend: {
+              select: storyUserSelect,
+            },
+          },
+        },
+      },
+    });
     return user;
   } catch (error) {
     console.error(error);

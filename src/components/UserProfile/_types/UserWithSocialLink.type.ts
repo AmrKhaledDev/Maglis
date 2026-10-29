@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 // =============================================================
-export type UserWithSocialLinkType = Prisma.UserGetPayload<{
+export type UserWithSocialLink = Prisma.UserGetPayload<{
   include: {
     socialLinks: true;
   };

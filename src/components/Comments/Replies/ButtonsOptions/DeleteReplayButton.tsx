@@ -3,11 +3,11 @@ import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@/types/Comment.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 // ======================================================
-function DeleteReplayButton({ reply }: { reply: CommentType }) {
+function DeleteReplayButton({ reply }: { reply: Comment }) {
   const { setToast } = useToast();
   const queryClient = useQueryClient();
   const { setActiveMenu } = useActiveMenu();

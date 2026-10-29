@@ -2,13 +2,13 @@ import { UpdatePostSettingsAction } from "@/actions/Post/UpdatePostSettings.acti
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Pin } from "lucide-react";
 import { useRouter } from "next/navigation";
 // =====================================================================================
-function PinnedToProfileButton({ post }: { post: PostType }) {
+function PinnedToProfileButton({ post }: { post: Post }) {
   const userSession = useUser();
   const router = useRouter();
   const { setToast } = useToast();

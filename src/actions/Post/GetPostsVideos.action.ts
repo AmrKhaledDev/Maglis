@@ -1,8 +1,8 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 // ==================================
-export const GetPostsVideosAction = async (): Promise<PostType[]> => {
+export const GetPostsVideosAction = async (): Promise<Post[]> => {
   const videos = await prisma.post.findMany({
     where: {
       media: {

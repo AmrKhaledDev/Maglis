@@ -1,10 +1,10 @@
-import { PrivacyType } from "@/types/Privacy.type";
-import FieldType from "./Field.type";
+import { Privacy } from "@/types/Privacy.type";
+import { Field } from "./Field.type";
 // =========================================================================
-export type FormType = {
-  media: FieldType[];
+export type Form = {
+  media: Field[];
   content: string;
-  privacy: PrivacyType;
+  privacy: Privacy;
   commentsDisabled: boolean;
   isPinnedToProfile: boolean;
 };

@@ -2,11 +2,11 @@ import { DeleteAction } from "@/actions/FriendRequest/Delete.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import FriendRequestType from "@/types/FriendRequest.type";
+import FriendRequest from "@/types/FriendRequest.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 // ===========================================================
-function RejectRequestButton({ request }: { request: FriendRequestType }) {
+function RejectRequestButton({ request }: { request: FriendRequest }) {
   const userSession = useUser();
   const router = useRouter();
   const { setToast } = useToast();

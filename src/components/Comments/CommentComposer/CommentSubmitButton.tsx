@@ -1,4 +1,4 @@
-import { Comment } from "@prisma/client";
+import { Comment } from "@/types/Comment.type";
 import { Edit, X } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import { FaArrowUp } from "react-icons/fa6";

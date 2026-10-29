@@ -1,4 +1,4 @@
-import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@/types/Comment.type";
 import Linkify from "linkify-react";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
@@ -7,7 +7,7 @@ function ReplyContent({
   reply,
   setShowImage,
 }: {
-  reply: CommentType;
+  reply: Comment;
   setShowImage: Dispatch<SetStateAction<{ open: boolean; url: string }>>;
 }) {
   return (

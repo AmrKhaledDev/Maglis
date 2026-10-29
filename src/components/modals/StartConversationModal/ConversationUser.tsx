@@ -1,9 +1,9 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { UserSearchResultType } from "@/types/UserSearchResult.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
 import { MessageCircleMore } from "lucide-react";
 import Link from "next/link";
 // ========================================================
-function ConversationUser({ user }: { user: UserSearchResultType }) {
+function ConversationUser({ user }: { user: UserSearchResult }) {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-3">

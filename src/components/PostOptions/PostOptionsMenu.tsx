@@ -1,5 +1,5 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { motion } from "framer-motion";
 import CopyPostLinkButton from "./CopyPostLinkButton";
 import PostOwnerOptions from "./PostOwnerOptions/PostOwnerOptions";
@@ -7,7 +7,7 @@ import PostViewerOptions from "./PostViewerOptions/PostViewerOptions";
 import SavePostButton from "../SavePostButton/SavePostButton";
 import { Save } from "lucide-react";
 // ==============================================================
-function PostOptionsMenu({ post }: { post: PostType }) {
+function PostOptionsMenu({ post }: { post: Post }) {
   const { activeMenu } = useActiveMenu();
   return (
     <>

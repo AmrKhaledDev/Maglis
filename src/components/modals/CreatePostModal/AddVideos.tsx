@@ -1,10 +1,10 @@
 "use client";
 import { GoVideo } from "react-icons/go";
-import { AddMediaPropsType } from "./_types/AddMediaProps.type";
+import { AddMediaProps } from "./_types/AddMediaProps.type";
 import clsx from "clsx";
 import handleFileUploadCreatePost from "@/lib/helpers/handleFileUploadCreatePost";
 // =============================================================
-function AddVideos({ append, fields, disabled }: AddMediaPropsType) {
+function AddVideos({ append, fields, disabled }: AddMediaProps) {
   return (
     <div>
       <label

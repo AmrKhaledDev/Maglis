@@ -1,23 +1,22 @@
 import CommentAuthor from "./CommentAuthor";
 import CommentOptions from "./CommentOptions";
 import { Dispatch, SetStateAction } from "react";
-import { Comment } from "@prisma/client";
 import CommentContent from "./CommentContent";
 import CommentActions from "./CommentActions";
 import { formatLikes } from "@/formats/formatLikes";
 import Replies from "../Replies/Replies";
 import { formatReplies } from "@/formats/formatReplies";
-import { PostType } from "@/types/Post.type";
-import { CommentType } from "@/types/Comment.type";
+import { Post } from "@/types/Post.type";
 import { BsFillPinAngleFill } from "react-icons/bs";
+import { Comment } from "@/types/Comment.type";
 // ==================================================================
 function SingleComment({
   post,
   comment,
   setCurrentComment,
 }: {
-  post: PostType;
-  comment: CommentType;
+  post: Post;
+  comment: Comment;
   setCurrentComment: Dispatch<SetStateAction<Comment | null>>;
 }) {
   return (

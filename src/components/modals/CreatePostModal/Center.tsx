@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import SelectPrivacy from "./SelectPrivacy";
 import { useUser } from "@/providers/UserProvider";
-import { FormType } from "./_types/Form.type";
+import { Form } from "./_types/Form.type";
 import { RefObject } from "react";
 // =====================================================================================
 function Center({
@@ -13,7 +13,7 @@ function Center({
   disabled: boolean;
   textareaRef: RefObject<HTMLTextAreaElement | null>;
 }) {
-  const { control, register } = useFormContext<FormType>();
+  const { control, register } = useFormContext<Form>();
   const content = useWatch({
     control,
     name: "content",

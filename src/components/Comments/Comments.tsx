@@ -1,16 +1,16 @@
 import CommentComposer from "./CommentComposer/CommentComposer";
 import { useState } from "react";
-import { Comment } from "@prisma/client";
 import "dayjs/locale/ar";
 import SingleComment from "./SingleComment/SingleComment";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useQuery } from "@tanstack/react-query";
 import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import Skeleton from "../Skeletons/Comments/Skeleton";
+import { Comment } from "@/types/Comment.type";
 // ==================================================================
-function Comments({ post }: { post: PostType }) {
+function Comments({ post }: { post: Post }) {
   const { setToast } = useToast();
   const userSession = useUser();
   const { data: comments, isPending } = useQuery({

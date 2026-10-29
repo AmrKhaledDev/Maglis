@@ -1,7 +1,7 @@
 import { Images } from "lucide-react";
-import FieldType from "./_types/Field.type";
+import { Field } from "./_types/Field.type";
 // ======================================
-function MediaLength({ fields }: { fields: FieldType[] }) {
+function MediaLength({ fields }: { fields: Field[] }) {
   return (
     <>
       {fields.length > 0 && (

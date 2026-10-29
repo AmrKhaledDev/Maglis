@@ -1,12 +1,12 @@
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import CommentsDisabledButton from "./CommentsDisabledButton";
 import DeletePostButton from "./DeletePostButton";
 import EditPostButton from "./EditPostButton";
 import PinnedToProfileButton from "./PinnedToProfileButton";
 import ShowMediaInProfileButton from "./ShowMediaInProfileButton";
 // =============================================================
-function PostOwnerOptions({ post }: { post: PostType }) {
+function PostOwnerOptions({ post }: { post: Post }) {
   const userSession = useUser();
   return (
     <>

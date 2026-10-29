@@ -1,5 +1,5 @@
 import { genderMap } from "@/data/genderMap";
-import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import { EditProfileSchema } from "@/zodSchemas/EditProfile/EditProfile.schema";
 import clsx from "clsx";
 import { User } from "lucide-react";
 import { useEffect, useState } from "react";

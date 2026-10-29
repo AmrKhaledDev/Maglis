@@ -1,10 +1,10 @@
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
-import { SavePostType } from "@/types/SavePost.type";
+import { SavePost } from "@/types/SavePost.type";
 import clsx from "clsx";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 // ===========================================================================
-function SavedPostMedia({ saveItem }: { saveItem: SavePostType }) {
+function SavedPostMedia({ saveItem }: { saveItem: SavePost }) {
   const { playingVideoId, setPlayingVideoId } = usePlayingVideoId();
   return (
     <div

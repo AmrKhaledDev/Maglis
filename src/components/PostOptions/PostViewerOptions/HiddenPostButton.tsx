@@ -2,11 +2,11 @@ import { HiddenPostAction } from "@/actions/HiddenPost/HiddenPost.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { PostType } from "@/types/Post.type";
+import { Post } from "@/types/Post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Eye } from "lucide-react";
 // ===============================================
-function HiddenPostButton({ post }: { post: PostType }) {
+function HiddenPostButton({ post }: { post: Post }) {
   const { setToast } = useToast();
   const queryClient = useQueryClient();
   const userSession = useUser();

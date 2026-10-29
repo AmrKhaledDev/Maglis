@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import EditProfileTitleSection from "../EditProfileTitleSection";
 import ProfileFormField from "../ProfileFormField";
 import z from "zod";
-import { EditProfileSchema } from "@/ZodSchemas/EditProfile/EditProfile.schema";
+import { EditProfileSchema } from "@/zodSchemas/EditProfile/EditProfile.schema";
 // ===============================================
 function BasicInfoSection() {
   const {

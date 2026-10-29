@@ -5,10 +5,10 @@ import Skeleton from "@/components/Skeletons/Search/Skeleton";
 import { useUser } from "@/providers/UserProvider";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import Header from "./Header";
-import UsersResult from "./UsersResult/UsersResult";
 import ActiveDataType from "../_types/ActiveData.type";
 import UsersFilterType from "../_types/UsersFilters.type";
+import Header from "./Header";
+import UsersResult from "./UsersResult/UsersResult";
 // =======================================================================
 function PageContent({ q }: { q: string }) {
   const userSession = useUser();
@@ -36,8 +36,8 @@ function PageContent({ q }: { q: string }) {
     if (userFilter === "PROFESSIONAL") return user.professionalMode;
     if (userFilter === "NORMAL") return !user.professionalMode;
     if (userFilter === "FRIENDS") {
-      return userSession.friends.some(
-        (friend) => friend.friend.id === user.id,
+      return userSession.friendships.some(
+        (friendship) => friendship.friendId === user.id,
       );
     }
   });

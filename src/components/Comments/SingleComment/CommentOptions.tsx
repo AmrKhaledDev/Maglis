@@ -1,5 +1,5 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { Comment, Post } from "@prisma/client";
+import { Post } from "@prisma/client";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Ellipsis } from "lucide-react";
@@ -8,6 +8,7 @@ import CopyCommentContentButton from "./ButtonsOptions/CopyCommentContentButton"
 import DeleteCommentButton from "./ButtonsOptions/DeleteCommentButton";
 import EditCommentButton from "./ButtonsOptions/EditCommentButton";
 import PinnedCommentButton from "./ButtonsOptions/PinnedCommentButton";
+import { Comment } from "@/types/Comment.type";
 // ===============================================================================
 function CommentOptions({
   comment,

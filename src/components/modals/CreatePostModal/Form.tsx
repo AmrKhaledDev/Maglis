@@ -1,6 +1,6 @@
 import { UseMutateFunction } from "@tanstack/react-query";
 import Header from "./Header";
-import { FormType } from "./_types/Form.type";
+import { Form as FormType } from "./_types/Form.type";
 import {
   UseFieldArrayAppend,
   UseFieldArrayRemove,
@@ -13,8 +13,8 @@ import MediaLength from "./MediaLength";
 import Footer from "./Footer";
 import WarningMessage from "@/components/WarningMessage/WarningMessage";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
-import FieldType from "./_types/Field.type";
 import { useRef } from "react";
+import { Field } from "./_types/Field.type";
 // ======================================================================
 function Form({
   mutate,
@@ -27,7 +27,7 @@ function Form({
   mutate: UseMutateFunction<void, Error, FormType, unknown>;
   loading: boolean;
   error: Error | null;
-  fields: (FieldType &
+  fields: (Field &
     Record<"id", string> & {
       disabled?: boolean;
     })[];

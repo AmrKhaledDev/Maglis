@@ -2,13 +2,13 @@
 
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import { UserSearchResultType } from "@/types/UserSearchResult.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
 // ==================================================================
 export const SearchUsersAction = async (
   searchValue: string,
 ): Promise<{
   success: boolean;
-  users?: UserSearchResultType[];
+  users?: UserSearchResult[];
 }> => {
   try {
     const userSession = await GetSession();

@@ -5,8 +5,7 @@ import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useRepliesState } from "@/providers/RepliesStateProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { CommentType } from "@/types/Comment.type";
-import { Comment } from "@prisma/client";
+import { Comment } from "@/types/Comment.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Heart, MessageCircleReply } from "lucide-react";
@@ -15,7 +14,7 @@ function ReplyActions({
   reply,
   commentsIsDisabled,
 }: {
-  reply: CommentType;
+  reply: Comment;
   commentsIsDisabled: boolean;
 }) {
   const { setShowReplyComposer } = useRepliesState();

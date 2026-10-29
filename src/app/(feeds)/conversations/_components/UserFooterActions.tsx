@@ -4,12 +4,11 @@ import { MessageCircle } from "lucide-react";
 import UserMemberType from "../_types/UserMember.type";
 import FollowButton from "@/components/FollowButton/FollowButton";
 import Link from "next/link";
+import useIsFriend from "@/hooks/useIsFriend";
 // ===========================================================================
 function UserFooterActions({ user }: { user: UserMemberType }) {
   const userSession = useUser();
-  const isFriend = userSession.friends.some(
-    (friend) => friend.friend.id === user.id,
-  );
+  const isFriend = useIsFriend(user.id);
   const isFollow = userSession.followings.some(
     (following) => following.followingId === user.id,
   );

@@ -1,10 +1,10 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
-import { CommentType } from "@/types/Comment.type";
+import { Comment } from "@/types/Comment.type";
 import { Copy } from "lucide-react";
 import { useState } from "react";
 // ===================================================
-function CopyReplyContentButton({ reply }: { reply: CommentType }) {
+function CopyReplyContentButton({ reply }: { reply: Comment }) {
   const { setToast } = useToast();
   const [loading, setLoading] = useState(false);
   const { setActiveMenu } = useActiveMenu();

@@ -1,13 +1,13 @@
-import { CommentType } from "@/types/Comment.type";
 import Link from "next/link";
 import ReplyOptions from "./ReplyOptions";
+import { Comment } from "@/types/Comment.type";
 // ===============================================================
 function ReplyHeader({
   reply,
   topLevelComment,
 }: {
-  reply: CommentType;
-  topLevelComment: CommentType;
+  reply: Comment;
+  topLevelComment: Comment;
 }) {
   if (!reply.parent) return null;
   return (

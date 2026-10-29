@@ -2,12 +2,12 @@
 
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import FriendRequestType from "@/types/FriendRequest.type";
+import FriendRequest from "@/types/FriendRequest.type";
 // ====================================================
 export const GetFriendRequestsAction = async (): Promise<{
   success: boolean;
   message?: string;
-  requests?: FriendRequestType[];
+  requests?: FriendRequest[];
 }> => {
   try {
     const userSession = await GetSession();

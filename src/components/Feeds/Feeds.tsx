@@ -10,7 +10,7 @@ function Feeds() {
   const userSession = useUser();
   const { data: posts, isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetPostsAction(userSession.id);
+      const result = await GetPostsAction();
       return result.posts || [];
     },
     queryKey: ["posts", userSession.id],
