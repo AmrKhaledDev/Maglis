@@ -2,12 +2,12 @@ export const dynamic = "force-dynamic";
 import Providers from "@/app/Providers";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Tajawal } from "next/font/google";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
-// ========================================
-const tajawal = Tajawal({
+// =======================================================
+const ibm_plex_sans_arabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default async function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        tajawal.className,
+        ibm_plex_sans_arabic.className,
         "font-sans",
       )}
     >
