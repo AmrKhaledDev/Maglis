@@ -99,7 +99,7 @@ export const SearchAction = async (
               username: true,
             },
           },
-          medias: true,
+          media: true,
           likes: {
             select: {
               userId: true,

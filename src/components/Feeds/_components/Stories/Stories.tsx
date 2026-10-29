@@ -57,7 +57,7 @@ function Stories() {
               </SwiperSlide>
             ))}
             {/* User Friends Stories */}
-            {userWithStories?.myFriends.map((friend) => (
+            {userWithStories?.friends.map((friend) => (
               <SwiperSlide key={friend.friend.id} className="h-full! w-fit!">
                 <StoryCard userWithStories={friend.friend} />
               </SwiperSlide>

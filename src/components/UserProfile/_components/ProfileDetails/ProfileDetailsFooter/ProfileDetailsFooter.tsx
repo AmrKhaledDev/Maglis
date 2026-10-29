@@ -10,7 +10,7 @@ import DeleteFriendButton from "./DeleteFriendButton";
 function ProfileDetailsFooter({ user }: { user: User }) {
   const userSession = useUser();
   const [isFriend, setIsFriend] = useState(
-    userSession.myFriends.some((friend) => friend.friend.id === user.id),
+    userSession.friends.some((friend) => friend.friend.id === user.id),
   );
   if (userSession.id === user.id) return null;
   return (

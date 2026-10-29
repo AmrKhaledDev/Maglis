@@ -17,7 +17,7 @@ export const CreateStoryViewer = async (
         userId: true,
         user: {
           select: {
-            myFriends: {
+            friends: {
               select: { friendId: true },
             },
             followers: {
@@ -31,7 +31,7 @@ export const CreateStoryViewer = async (
     });
     if (!story) return { success: false };
     if (story.userId === userSession.id) return { success: true };
-    const checkIsFriend = story.user.myFriends.some(
+    const checkIsFriend = story.user.friends.some(
       (friend) => friend.friendId == userSession.id,
     );
     const checkIsFollower = story.user.followers.some(

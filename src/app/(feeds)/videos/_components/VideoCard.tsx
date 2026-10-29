@@ -31,7 +31,7 @@ function VideoCard({ video }: { video: PostType }) {
           <ReactPlayer
             onPlay={() => setPlayingVideoId(video.id)}
             playing={playingVideoId === video.id}
-            src={video.medias[0].url}
+            src={video.media[0].url}
             width="100%"
             height="100%"
             controls

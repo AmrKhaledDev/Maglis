@@ -36,7 +36,7 @@ function PageContent({ q }: { q: string }) {
     if (userFilter === "PROFESSIONAL") return user.professionalMode;
     if (userFilter === "NORMAL") return !user.professionalMode;
     if (userFilter === "FRIENDS") {
-      return userSession.myFriends.some(
+      return userSession.friends.some(
         (friend) => friend.friend.id === user.id,
       );
     }

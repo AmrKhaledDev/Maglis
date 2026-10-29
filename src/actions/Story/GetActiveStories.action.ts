@@ -66,7 +66,7 @@ export const GetActiveStoriesAction = async (userId: string) => {
               },
             },
           },
-          myFriends: {
+          friends: {
             select: {
               friend: {
                 select: {

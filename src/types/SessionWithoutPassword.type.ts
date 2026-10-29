@@ -21,7 +21,7 @@ type User = Prisma.UserGetPayload<{
         receiver: true;
       };
     };
-    myFriends: {
+    friends: {
       select: {
         friend: {
           select: {

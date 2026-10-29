@@ -35,8 +35,8 @@ model User {
   hiddenPosts         HiddenPost[]
   blocks              UserBlock[]          @relation("Blocker")
   blocked             UserBlock[]          @relation("Blocked")
-  myFriends           Friendship[]         @relation("MyFriends")
-  friendsOf           Friendship[]         @relation("FriendsOfMe")
+  friendsShip         Friendship[]         @relation("MyFriends")
+  friends             Friendship[]         @relation("Friends")
   sender              FriendRequest[]      @relation("Sender")
   receiver            FriendRequest[]      @relation("Receiver")
   followers           Follow[]             @relation("Following")

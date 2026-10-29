@@ -29,7 +29,7 @@ function ShowMediaInProfileButton({ post }: { post: PostType }) {
   });
   return (
     <>
-      {post.medias.length > 0 && (
+      {post.media.length > 0 && (
         <button
           onClick={() => mutate()}
           disabled={isPending}

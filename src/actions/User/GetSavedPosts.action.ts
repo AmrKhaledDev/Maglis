@@ -46,7 +46,7 @@ export const GetSavedPostsAction = async (): Promise<{
                 comments: true,
               },
             },
-            medias: true,
+            media: true,
             content: true,
             id: true,
             privacy: true,

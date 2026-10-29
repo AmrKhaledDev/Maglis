@@ -7,7 +7,7 @@ import ReactPlayer from "react-player";
 // ================================================
 function Media({ item }: { item: SavePostType }) {
   const post = item.post;
-  const media = post.medias[0];
+  const media = post.media[0];
   return (
     <Link
       target="_blank"
@@ -18,7 +18,7 @@ function Media({ item }: { item: SavePostType }) {
         <>
           {media.type === "IMAGE" && (
             <Image
-              src={item.post.medias[0].url}
+              src={item.post.media[0].url}
               alt="صورة"
               fill
               className="object-cover"

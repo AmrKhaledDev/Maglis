@@ -14,7 +14,7 @@ export const GetImagesPostsAction = async (
     const posts = await prisma.post.findMany({
       where: {
         authorId: userId,
-        medias: {
+        media: {
           some: {
             type: "IMAGE",
           },
@@ -26,11 +26,11 @@ export const GetImagesPostsAction = async (
       },
       select: {
         id: true,
-        medias: true,
+        media: true,
       },
     });
     if (!posts) return { success: true };
-    const media = posts.map((post) => post.medias).flat();
+    const media = posts.map((post) => post.media).flat();
     return { success: true, media };
   } catch (error) {
     console.error(error);

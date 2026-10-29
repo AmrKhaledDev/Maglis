@@ -5,7 +5,7 @@ import AddFriendButton from "../../../AddFriendButton/AddFriendButton";
 // =====================================================
 function AuthorActions({ post }: { post: PostType }) {
   const userSession = useUser();
-  const isFriend = userSession.myFriends.some(
+  const isFriend = userSession.friends.some(
     (friend) => friend.friend.id === post.authorId,
   );
   return (

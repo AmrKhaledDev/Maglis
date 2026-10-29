@@ -32,7 +32,7 @@ const GetSession = async (): Promise<SessionWithoutPasswordType | null> => {
             receiver: true,
           },
         },
-        myFriends: {
+        friends: {
           select: {
             friend: {
               select: {
@@ -54,6 +54,7 @@ const GetSession = async (): Promise<SessionWithoutPasswordType | null> => {
       },
     });
     if (!existingUser) return null;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...user } = existingUser;
     return user;
   } catch (error) {

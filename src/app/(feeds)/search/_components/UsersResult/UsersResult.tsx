@@ -13,7 +13,7 @@ function UsersResult({ users }: { users: UserSearchResultType[] }) {
       <h2 className="mb-4 font-normal">الأشخاص</h2>
       <div className="flex flex-col gap-3">
         {users.map((user) => {
-          const isFriend = userSession.myFriends.some(
+          const isFriend = userSession.friends.some(
             (friend) => friend.friend.id === user.id,
           );
           return (

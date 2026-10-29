@@ -9,15 +9,15 @@ function SavedPostMedia({ saveItem }: { saveItem: SavePostType }) {
   return (
     <div
       className={clsx(
-        saveItem.post.medias.length > 1 && "grid grid-cols-2 gap-1",
+        saveItem.post.media.length > 1 && "grid grid-cols-2 gap-1",
       )}
     >
-      {saveItem.post.medias.map((item) => (
+      {saveItem.post.media.map((item) => (
         <button
           key={item.id}
           className={clsx(
             "w-full overflow-hidden bg-black rounded-lg relative",
-            saveItem.post.medias.length > 1 ? "h-30" : "h-60",
+            saveItem.post.media.length > 1 ? "h-30" : "h-60",
           )}
         >
           {item.type == "IMAGE" && (

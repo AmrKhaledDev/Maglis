@@ -11,9 +11,9 @@ function PostContentMedia({ post }: { post: PostType }) {
   });
   return (
     <div
-      className={clsx(post.medias.length > 1 ? "grid grid-cols-2 gap-1" : "")}
+      className={clsx(post.media.length > 1 ? "grid grid-cols-2 gap-1" : "")}
     >
-      {post.medias.map((item) => (
+      {post.media.map((item) => (
         <PostContentMediaItem
           key={item.id}
           item={item}

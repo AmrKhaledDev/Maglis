@@ -37,7 +37,7 @@ function PostContentMediaItem({
       ref={ref}
       className={clsx(
         "w-full overflow-hidden bg-black rounded-lg relative",
-        post.medias.length > 1 ? "h-80" : "h-110",
+        post.media.length > 1 ? "h-80" : "h-110",
       )}
     >
       {item.type == "IMAGE" && (

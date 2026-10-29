@@ -15,7 +15,7 @@ export const ShowMediaInProfileAction = async (
       where: {
         id: postId,
       },
-      select: { authorId: true, showMediaInProfile: true, medias: true },
+      select: { authorId: true, showMediaInProfile: true, media: true },
     });
     if (!post)
       return {
@@ -25,7 +25,7 @@ export const ShowMediaInProfileAction = async (
       };
     if (post.authorId !== userSession.id)
       return { success: false, message: "لا يمكنك تنفيذ هذا الإجراء." };
-    if (post.medias.length < 1)
+    if (post.media.length < 1)
       return { success: false, message: "لا يوجد وسائط لعرضها." };
     await prisma.post.update({
       where: {

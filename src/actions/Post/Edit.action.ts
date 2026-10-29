@@ -53,7 +53,7 @@ export const EditAction = async (
           commentsDisabled,
           isPinnedToProfile,
           content,
-          medias: {
+          media: {
             deleteMany: {},
           },
         },

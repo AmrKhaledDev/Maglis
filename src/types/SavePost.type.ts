@@ -18,7 +18,7 @@ export type SavePostType = Prisma.SavePostGetPayload<{
             comments: true;
           };
         };
-        medias: true;
+        media: true;
         content: true;
         id: true;
         privacy: true;

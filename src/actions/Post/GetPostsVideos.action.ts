@@ -5,7 +5,7 @@ import { PostType } from "@/types/Post.type";
 export const GetPostsVideosAction = async (): Promise<PostType[]> => {
   const videos = await prisma.post.findMany({
     where: {
-      medias: {
+      media: {
         some: {
           type: "VIDEO",
         },
@@ -16,7 +16,7 @@ export const GetPostsVideosAction = async (): Promise<PostType[]> => {
       privacy: "PUBLIC",
     },
     include: {
-      medias: true,
+      media: true,
       author: {
         select: {
           id: true,
@@ -49,6 +49,6 @@ export const GetPostsVideosAction = async (): Promise<PostType[]> => {
       createdAt: "desc",
     },
   });
-  const filteredVideos = videos.filter((video) => video.medias.length === 1);
+  const filteredVideos = videos.filter((video) => video.media.length === 1);
   return filteredVideos;
 };

@@ -28,7 +28,7 @@ export const GetPostsAction = async (
             username: true,
           },
         },
-        medias: true,
+        media: true,
         likes: {
           select: {
             userId: true,

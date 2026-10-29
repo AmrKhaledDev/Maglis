@@ -56,7 +56,7 @@ export const GetSuggestedPeopleAction = async (): Promise<{
             receiver: true,
           },
         },
-        myFriends: {
+        friends: {
           select: {
             friend: {
               select: {

@@ -36,7 +36,7 @@ export type UserStoriesWithFollowingsType = Prisma.UserGetPayload<{
         };
       };
     };
-    myFriends: {
+    friends: {
       select: {
         friend: {
           select: {

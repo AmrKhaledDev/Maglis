@@ -7,7 +7,7 @@ import Link from "next/link";
 // ===========================================================================
 function UserFooterActions({ user }: { user: UserMemberType }) {
   const userSession = useUser();
-  const isFriend = userSession.myFriends.some(
+  const isFriend = userSession.friends.some(
     (friend) => friend.friend.id === user.id,
   );
   const isFollow = userSession.followings.some(

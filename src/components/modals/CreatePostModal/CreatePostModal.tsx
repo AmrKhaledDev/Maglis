@@ -20,7 +20,7 @@ function CreatePostModal({ currentPost }: { currentPost?: PostType }) {
   const defaultPrivacy = privacyMap[currentPost?.privacy ?? "FRIENDS"];
   const { setActiveModal } = useActiveModal();
   const currentMedia: FieldType[] = currentPost
-    ? currentPost.medias.map((media) => ({
+    ? currentPost.media.map((media) => ({
         file: null,
         type: media.type.toLowerCase() as "video" | "image" | "pdf" | null,
         preview: media.url,

@@ -29,7 +29,7 @@ export const ConfirmAction = async (
     if (!request)
       return { success: false, message: "الطلب غير موجود ربما تم حذفه." };
     await prisma.$transaction(async (tx) => {
-      const alreadyFriend = await prisma.friendship.findFirst({
+      const alreadyFriend = await tx.friendship.findFirst({
         where: {
           OR: [
             { friendId: senderId, userId: userSession.id },
@@ -56,7 +56,7 @@ export const ConfirmAction = async (
           { userId: senderId, friendId: userSession.id },
         ],
       });
-      await prisma.user.updateMany({
+      await tx.user.updateMany({
         where: { OR: [{ id: userSession.id }, { id: senderId }] },
         data: {
           friendsCount: {

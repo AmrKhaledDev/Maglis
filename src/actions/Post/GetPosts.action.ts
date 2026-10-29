@@ -14,7 +14,7 @@ export const GetPostsAction = async (
         {
           privacy: "FRIENDS",
           author: {
-            myFriends: {
+            friends: {
               some: {
                 friendId: userSessionId,
               },
@@ -51,7 +51,7 @@ export const GetPostsAction = async (
           username: true,
         },
       },
-      medias: true,
+      media: true,
       likes: {
         select: {
           userId: true,

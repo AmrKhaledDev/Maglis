@@ -11,7 +11,7 @@ export type PostType = Prisma.PostGetPayload<{
         username: true;
       };
     };
-    medias: true;
+    media: true;
     likes: {
       select: {
         userId: true;

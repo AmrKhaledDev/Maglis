@@ -6,7 +6,7 @@ function PostContent({ post }: { post: PostType }) {
   return (
     <div className="flex flex-col mt-6">
       <PostContentText post={post} />
-      {post.medias.length > 0 && <PostContentMedia post={post} />}
+      {post.media.length > 0 && <PostContentMedia post={post} />}
     </div>
   );
 }
