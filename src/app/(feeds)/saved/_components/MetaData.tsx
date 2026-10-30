@@ -13,18 +13,18 @@ function MetaData({ item }: { item: SavePost }) {
   return (
     <div className="flex items-center gap-2 text-gray-400 text-xs">
       <p className="flex items-center gap-1 leading-none">
-        <PrivacyIcon className="pb-1 size-4" />
+        <PrivacyIcon className="size-4" />
         {privacyLabel}
       </p>
       <span className="size-0.5 bg-white/50 rounded-full block" />
       <p className="flex items-center gap-1.5">
         <FaHeart className="size-3" strokeWidth={1.5} />
-        <span className="leading-none pt-1.5">{item.post._count.likes}</span>
+        <span className="leading-none">{item.post._count.likes}</span>
       </p>
       <span className="size-0.5 bg-white/50 rounded-full block" />
       <p className="flex items-center gap-1.5">
         <FaComment className="size-3" strokeWidth={1.5} />
-        <span className="leading-none pt-1.5">{item.post._count.comments}</span>
+        <span className="leading-none">{item.post._count.comments}</span>
       </p>
       <span className="size-0.5 bg-white/50 rounded-full block" />
       <p className="pt-1">{dayjs(item.post.createdAt).fromNow()}</p>

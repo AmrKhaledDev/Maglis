@@ -1,19 +1,19 @@
 "use client";
-import AuthFormFiled from "@/components/AuthFormFiled/AuthFormFiled";
-import { useState } from "react";
-import { Path, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/zodSchemas/Auth/Login.schema";
-import { LoginFields } from "@/data/Login/LoginFields";
-import { LoginAction } from "@/actions/Auth/Login.action";
-import { useRouter } from "next/navigation";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
 import AuthBlur from "@/components/AuthBlur/AuthBlur";
+import AuthFormFiled from "@/components/AuthFormFiled/AuthFormFiled";
+import { LoginFields } from "@/data/Login/LoginFields";
+import { LoginSchema } from "@/zodSchemas/Auth/Login.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Path, useForm } from "react-hook-form";
 import z from "zod";
+import FormFooter from "./FormFooter";
 import FormHeader from "./FormHeader";
 import LoginSubmitButton from "./LoginSubmitButton";
-import FormFooter from "./FormFooter";
-import { motion } from "framer-motion";
+import { handleLogin } from "./handleLogin";
 // =========================================================================
 function Form({ error }: { error?: string }) {
   const {
@@ -36,25 +36,21 @@ function Form({ error }: { error?: string }) {
   const [serverSuccess, setServerSuccess] = useState("");
   const router = useRouter();
   const fields = LoginFields(loading, showPassword, setShowPassword, errors);
-  const handleLogin = async (data: z.infer<typeof LoginSchema>) => {
-    setServerError("");
-    setLoading(true);
-    setShowBlur(true);
-    const result = await LoginAction(data);
-    setLoading(false);
-    setShowBlur(false);
-    if (!result.success)
-      return setServerError(
-        result.message ?? "حدث خطأ أثناء تسجيل دخولك حاول مرة أخرى",
-      );
-    setServerSuccess(result.message ?? "");
-    router.refresh();
-  };
+  const onSubmit = (data: z.infer<typeof LoginSchema>) =>
+    handleLogin(
+      data,
+      setServerError,
+      setLoading,
+      setShowBlur,
+      setServerSuccess,
+      router,
+    );
   return (
     <motion.form
+      autoComplete="off"
       initial={{ opacity: 0, x: -40 }}
       animate={{ opacity: 1, x: 0 }}
-      onSubmit={handleSubmit(handleLogin)}
+      onSubmit={handleSubmit(onSubmit)}
       className="p-4 relative border-b border-b-white/10 bg-slate-800 rounded-3xl space-y-3 w-110 h-fit shadow-xl overflow-hidden"
     >
       {showBlur && <AuthBlur />}

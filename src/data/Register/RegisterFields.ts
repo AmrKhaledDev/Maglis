@@ -20,7 +20,6 @@ export const RegisterFields = (
       type: "email",
       id: "email",
       label: "البريد الإلكتروني",
-      isPasswordFiled: false,
       disabled: loading,
       error: errors?.email?.message,
     },
@@ -32,5 +31,13 @@ export const RegisterFields = (
       disabled: loading,
       error: errors?.password?.message,
     },
-  ];
+    {
+      placeholder: "أعد كتابة كلمة المرور الخاصة بك",
+      type: "password",
+      id: "confirmPassword",
+      label: "تأكيد كلمة المرور",
+      disabled: loading,
+      error: errors?.confirmPassword?.message,
+    },
+  ] as const;
 };

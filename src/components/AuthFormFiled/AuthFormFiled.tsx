@@ -24,8 +24,9 @@ function AuthFormFiled<T extends FieldValues>({
       <div className="w-full flex flex-col gap-1.5">
         <input
           {...register(id)}
-          type={type}
           id={id}
+          autoComplete="off"
+          type={type}
           placeholder={placeholder}
           disabled={disabled}
           className={clsx(
