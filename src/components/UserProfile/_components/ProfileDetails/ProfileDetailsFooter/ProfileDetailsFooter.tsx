@@ -1,14 +1,14 @@
 import AddFriendButton from "@/components/AddFriendButton/AddFriendButton";
 import FollowButton from "@/components/FollowButton/FollowButton";
+import { UserWithSocialLinks } from "@/components/UserProfile/_types/UserWithSocialLinks.type";
 import useIsFriend from "@/hooks/useIsFriend";
 import { useUser } from "@/providers/UserProvider";
-import { User } from "@prisma/client";
 import { MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import DeleteFriendButton from "./DeleteFriendButton";
 // ====================================================================
-function ProfileDetailsFooter({ user }: { user: User }) {
+function ProfileDetailsFooter({ user }: { user: UserWithSocialLinks }) {
   const userSession = useUser();
   const [isFriend, setIsFriend] = useState(useIsFriend(user.id));
   if (userSession.id === user.id) return null;

@@ -1,10 +1,10 @@
-import { DeleteAction } from "@/actions/Post/Delete.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 // ==============================================
@@ -16,11 +16,22 @@ function DeletePostButton({ post }: { post: Post }) {
   const queryClient = useQueryClient();
   const { mutate: handleDeletePost, isPending: loading } = useMutation({
     mutationFn: async () => {
-      const result = await DeleteAction(post.id);
-      if (!result.success)
-        throw new Error(
-          result.message ?? "حدث خطأ أثناء حذف المنشور حاول مرة أخرى.",
+      try {
+        const { data } = await axios.delete(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/posts/delete/${post.id}`,
+          { withCredentials: true },
         );
+        const { success, message } = data;
+        if (!success)
+          throw new Error(
+            message ?? "حدث خطأ أثناء حذف المنشور حاول مرة أخرى.",
+          );
+      } catch (error) {
+        console.error(error);
+        if (error instanceof axios.AxiosError)
+          throw new Error(error.response?.data.message);
+        throw new Error("حدث خطأ, تعذر حذف المنشور.");
+      }
     },
     onSuccess: () => {
       setActiveMenu("");

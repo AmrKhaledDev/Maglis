@@ -1,9 +1,9 @@
 import { formatFollowers } from "@/formats/formatFollowers";
-import { UserWithSocialLink } from "../../_types/UserWithSocialLink.type";
+import { UserWithSocialLinks } from "../../_types/UserWithSocialLinks.type";
 import { formatFollowings } from "@/formats/formatFollowings";
 import { formatFriends } from "@/formats/formatFriends";
 // ============================================================================
-function ProfileStats({ user }: { user: UserWithSocialLink }) {
+function ProfileStats({ user }: { user: UserWithSocialLinks }) {
   return (
     <div className="flex items-center gap-3 mt-1">
       {user.followersCount > 0 && (

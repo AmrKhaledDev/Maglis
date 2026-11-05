@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { usePlayingVideoId } from "@/providers/PlayingVideoIdProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import ReactPlayer from "react-player";

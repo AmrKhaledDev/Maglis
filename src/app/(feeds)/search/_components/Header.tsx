@@ -5,7 +5,7 @@ import UsersFiltersTabs from "./UsersFiltersTabs";
 import { UserSearchResult } from "@/types/UserSearchResult.type";
 import ActiveDataType from "../_types/ActiveData.type";
 import UsersFilterType from "../_types/UsersFilters.type";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 // =======================================================================
 function Header({
   searchText,

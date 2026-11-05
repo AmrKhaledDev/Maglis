@@ -1,23 +1,21 @@
-import { CreateAction } from "@/actions/Post/Create.action";
-import { EditAction } from "@/actions/Post/Edit.action";
 import privacyMap from "@/data/privacyMap";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { Post } from "@/types/Post.type";
-import { Privacy } from "@prisma/client";
+import { Post } from "@/types/post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { CreatePostBody } from "./_types/CreatePostBody.type";
+import { Field } from "./_types/Field.type";
 import { Form as FormType } from "./_types/Form.type";
 import Form from "./Form";
-import { Field } from "./_types/Field.type";
 // ==========================================================================
 function CreatePostModal({ currentPost }: { currentPost?: Post }) {
   const userSession = useUser();
-  const defaultPrivacy = privacyMap[currentPost?.privacy ?? "FRIENDS"];
+  const defaultPrivacy = privacyMap[currentPost?.privacy || "FRIENDS"];
   const { setActiveModal } = useActiveModal();
   const currentMedia: Field[] = currentPost
     ? currentPost.media.map((media) => ({
@@ -59,48 +57,59 @@ function CreatePostModal({ currentPost }: { currentPost?: Post }) {
           url: field.preview,
           type: field.type!.toUpperCase() as "IMAGE" | "VIDEO",
         }));
-      if (data.media.length > 0) {
-        try {
+      try {
+        if (data.media.length > 0) {
           for (const field of data.media) {
             if (!field.file) continue;
             const formData = new FormData();
             formData.append("file", field.file);
-            const { data: uploadResult } = await axios.post(
-              `/api/upload-media`,
+            const { data } = await axios.post(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/cloudinary/upload`,
               formData,
             );
-            media.push(uploadResult);
+            media.push(data);
           }
-        } catch (error) {
-          if (axios.isAxiosError(error)) {
-            throw new Error(
-              error.response?.data.error ?? "حدث خطأ أثناء رفع الملفات.",
-            );
-          }
-          console.error(error);
-          throw new Error("حدث خطأ أثناء إنشاء منشورك.");
         }
-      }
-      const action = currentPost ? EditAction : CreateAction;
-      const result = await action(
-        data.privacy.value as Privacy,
-        data.commentsDisabled,
-        data.isPinnedToProfile,
-        data.content,
-        media,
-        currentPost ? currentPost.id : "",
-      );
-      if (!result.success)
-        throw new Error(
-          result.message || "حدث خطأ غير متوقع أثناء إنشاء منشورك.",
+        const path = currentPost
+          ? `posts/edit/${currentPost.id}`
+          : "posts/create";
+        const method = currentPost ? "patch" : "post";
+        const body: CreatePostBody = {
+          content: data.content,
+          media,
+          privacy: data.privacy.value as "FRIENDS" | "PUBLIC" | "PRIVATE",
+          commentsDisabled: data.commentsDisabled,
+          isPinnedToProfile: data.isPinnedToProfile,
+        };
+        const { data: axiosData } = await axios[method](
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/${path}`,
+          body,
+          { withCredentials: true },
         );
+        const { success, message } = axiosData;
+        if (!success)
+          throw new Error(
+            typeof message === "string"
+              ? message
+              : "حدث خطأ غير متوقع أثناء إنشاء منشورك.",
+          );
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          throw new Error(
+            error.response?.data.message ??
+              error.response?.data.error ??
+              "حدث خطأ أثناء رفع الملفات.",
+          );
+        }
+        console.error(error);
+        throw new Error("حدث خطأ أثناء إنشاء منشورك.");
+      }
     },
     onSuccess: () => {
       invalidateUserCaches(queryClient, userSession);
       setActiveModal(null);
     },
   });
-
   return createPortal(
     <FormProvider {...methods}>
       <motion.div

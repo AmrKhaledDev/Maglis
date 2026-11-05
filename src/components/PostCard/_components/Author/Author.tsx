@@ -1,6 +1,6 @@
 import UserImage from "@/components/UserImage/UserImage";
 import privacyMap from "@/data/privacyMap";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import dayjs from "dayjs";
 import local from "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";

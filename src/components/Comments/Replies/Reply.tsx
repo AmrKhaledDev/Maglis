@@ -3,7 +3,7 @@ import Replies from "./Replies";
 import ReplyHeader from "./ReplyHeader";
 import ReplyAuthor from "./ReplyAuthor";
 import { useState } from "react";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { Gem } from "lucide-react";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
 import ReplyContent from "./ReplyContent";

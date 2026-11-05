@@ -27,7 +27,7 @@ function Footer({ fields, append, loading, textareaRef }: FooterProps) {
         disabled={disabled || loading}
         className="text-sm rounded-full not-disabled:hover:outline disabled:bg-gray-400 disabled:text-gray-700 not-disabled:active:outline active:outline-blue-600 outline-offset-2 not-disabled:hover:outline-blue-600 bg-blue-600 text-white relative block py-2 w-30 shadow font-medium not-disabled:cursor-pointer"
       >
-        {loading ? "برجاء الإنتظار.." : "نشر"}
+        {loading ? "برجاء الانتظار..." : "نشر"}
       </button>
     </div>
   );

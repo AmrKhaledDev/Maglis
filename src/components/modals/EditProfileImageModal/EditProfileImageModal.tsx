@@ -1,9 +1,9 @@
 import { UpdateImageAction } from "@/actions/User/UpdateImage.action";
 import AlertMessage from "@/components/AlertMessage/AlertMessage";
+import { UserWithSocialLinks } from "@/components/UserProfile/_types/UserWithSocialLinks.type";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { User } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import clsx from "clsx";
@@ -23,7 +23,7 @@ function EditProfileImageModal({
 }: {
   typeImage: "AVATAR" | "COVER";
   image: string | null;
-  user: User;
+  user: UserWithSocialLinks;
 }) {
   const userSession = useUser();
   const { setToast } = useToast();

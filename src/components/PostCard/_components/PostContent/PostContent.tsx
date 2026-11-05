@@ -1,4 +1,4 @@
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import PostContentMedia from "./PostContentMedia";
 import PostContentText from "./PostContentText";
 // ====================================================

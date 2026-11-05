@@ -1,5 +1,5 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { Comment, Prisma } from "@prisma/client";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";

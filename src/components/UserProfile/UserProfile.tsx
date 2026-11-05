@@ -4,18 +4,21 @@ import ProfileContent from "@/components/UserProfile/_components/ProfileContent/
 import ProfileCover from "@/components/UserProfile/_components/ProfileCover";
 import ProfileDetails from "@/components/UserProfile/_components/ProfileDetails/ProfileDetails";
 import ProfileSocialLinks from "@/components/UserProfile/_components/ProfileSocialLinks";
-import { prisma } from "@/lib/prisma";
+import axios from "axios";
+import { UserWithSocialLinks } from "./_types/UserWithSocialLinks.type";
 // ======================================================================================
 async function UserProfile({ userId }: { userId: string }) {
   if (!userId) return null;
-  const user = await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
-    include: {
-      socialLinks: true,
-    },
-  });
+  let user: UserWithSocialLinks;
+  try {
+    const { data } = await axios.get<UserWithSocialLinks>(
+      `${process.env.BACKEND_URL}/users/${userId}`,
+    );
+    user = data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
   if (!user) return null;
   return (
     <div className="min-h-screen w-full">

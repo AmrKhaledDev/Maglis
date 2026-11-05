@@ -1,6 +1,6 @@
 import PostOptionsBox from "@/components/PostOptions/PostOptionsMenu";
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import clsx from "clsx";
 import { Ellipsis } from "lucide-react";
 // =================================================================================================================================

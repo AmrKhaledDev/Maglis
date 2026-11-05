@@ -1,6 +1,6 @@
 import PostCard from "@/components/PostCard/PostCard";
-import { Post } from "@/types/Post.type";
 import Skeleton from "../Skeletons/Posts/Skeleton";
+import { Post } from "@/types/post.type";
 // ===================================================================
 function Posts({
   posts,

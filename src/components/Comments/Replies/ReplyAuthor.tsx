@@ -1,6 +1,6 @@
 import UserImage from "@/components/UserImage/UserImage";
 import { Comment } from "@/types/Comment.type";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 // =======================================================================

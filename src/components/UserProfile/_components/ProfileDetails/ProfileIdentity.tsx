@@ -1,11 +1,11 @@
 import { useUser } from "@/providers/UserProvider";
-import { User } from "@prisma/client";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { UserWithSocialLinks } from "../../_types/UserWithSocialLinks.type";
 // =================================================
 dayjs.extend(relativeTime);
 dayjs.locale("ar");
-function ProfileIdentity({ user }: { user: User }) {
+function ProfileIdentity({ user }: { user: UserWithSocialLinks }) {
   const userSession = useUser();
   return (
     <>

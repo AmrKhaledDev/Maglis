@@ -1,4 +1,4 @@
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import Linkify from "linkify-react";
 // ===============================================
 function Text({ post }: { post: Post }) {

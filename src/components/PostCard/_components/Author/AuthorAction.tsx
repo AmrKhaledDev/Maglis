@@ -1,6 +1,6 @@
 import FollowButton from "@/components/FollowButton/FollowButton";
 import { useUser } from "@/providers/UserProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import AddFriendButton from "../../../AddFriendButton/AddFriendButton";
 import useIsFriend from "@/hooks/useIsFriend";
 // =====================================================

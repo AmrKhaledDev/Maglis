@@ -1,31 +1,51 @@
 "use client";
-import { GetSavedPostsAction } from "@/actions/User/GetSavedPosts.action";
 import Skeleton from "@/components/Skeletons/Saved/Skeleton";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
+import { SavePost } from "@/types/SavePost.type";
 import { useQuery } from "@tanstack/react-query";
-import { redirect } from "next/navigation";
+import axios, { isAxiosError } from "axios";
 import Card from "./_components/Card";
 // ====================================================================
 function Saved() {
   const userSession = useUser();
   const { setToast } = useToast();
-  const { data = [], isPending } = useQuery({
+  const {
+    data = [],
+    isPending,
+    error,
+  } = useQuery({
     queryFn: async () => {
-      const result = await GetSavedPostsAction();
-      if (!result.success) {
-        setToast({
-          open: true,
-          message: result.message || "يتعذر جلب محفوظاتك.",
-          type: "error",
+      try {
+        const { data } = await axios.get<{
+          success: boolean;
+          savedPosts: SavePost[];
+          message: string;
+        }>(`${process.env.NEXT_PUBLIC_BACKEND_URL}/posts/saved`, {
+          withCredentials: true,
         });
-        return;
+        const { success, savedPosts, message } = data;
+        if (!success || !savedPosts) {
+          setToast({
+            open: true,
+            message: message || "يتعذر جلب محفوظاتك.",
+            type: "error",
+          });
+          return [];
+        }
+        return savedPosts;
+      } catch (error) {
+        console.error("Failed get saved posts", error);
+        if (isAxiosError(error)) {
+          throw new Error(
+            error.response?.data.message || "حدث خطأ أثناء جلب محفوظاتك.",
+          );
+        }
       }
-      if (result.notAuthenticated) return redirect("/login");
-      return result.savedPosts;
     },
-    queryKey: ["user_stories", userSession.id],
+    queryKey: ["user_savedPosts", userSession.id],
   });
+  if (error) setToast({ open: true, type: "error", message: error.message });
   return (
     <main className="flex flex-col gap-10 pb-4">
       <h2 className="font-bold text-xl flex items-center gap-1.5">

@@ -1,17 +1,28 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import CreatePostComposer from "./_components/CreatePostComposer/CreatePostComposer";
-import Posts from "../Posts/Posts";
-import Stories from "./_components/Stories/Stories";
-import { GetPostsAction } from "@/actions/Post/GetPosts.action";
 import { useUser } from "@/providers/UserProvider";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Posts from "../Posts/Posts";
+import CreatePostComposer from "./_components/CreatePostComposer/CreatePostComposer";
+import Stories from "./_components/Stories/Stories";
+import { Post } from "@/types/post.type";
 // ======================================================================================
 function Feeds() {
   const userSession = useUser();
   const { data: posts, isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetPostsAction();
-      return result.posts || [];
+      try {
+        const { data } = await axios.get<{ success: boolean; posts: Post[] }>(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/posts`,
+          {
+            withCredentials: true,
+          },
+        );
+        return data.posts || [];
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
     },
     queryKey: ["posts", userSession.id],
   });

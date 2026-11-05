@@ -1,6 +1,6 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { X } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";

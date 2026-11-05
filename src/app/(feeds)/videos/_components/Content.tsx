@@ -1,4 +1,4 @@
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import clsx from "clsx";
 import Linkify from "linkify-react";
 import { useState } from "react";
@@ -10,7 +10,7 @@ function Content({ video }: { video: Post }) {
       {video.content && (
         <div className="flex flex-col gap-2">
           <Linkify>
-            <p className={clsx("text-sm",expanded ? "" : "line-clamp-3")}>
+            <p className={clsx("text-sm", expanded ? "" : "line-clamp-3")}>
               {video.content}
             </p>
           </Linkify>

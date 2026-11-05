@@ -50,7 +50,7 @@ function Media({
                   URL.revokeObjectURL(item.preview);
                   remove(i);
                 }}
-                className="absolute top-1 left-1 disabled:hdden menuKeepOpen"
+                className="absolute top-1 left-1 disabled:hidden menuKeepOpen"
               >
                 <X className="size-4 cursor-pointer text-white" />
               </button>

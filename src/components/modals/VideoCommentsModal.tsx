@@ -6,7 +6,7 @@ import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { Comment } from "@/types/Comment.type";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";

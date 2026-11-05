@@ -1,5 +1,5 @@
 import { useActiveMenu } from "@/providers/ActiveMenuProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { motion } from "framer-motion";
 import CopyPostLinkButton from "./CopyPostLinkButton";
 import PostOwnerOptions from "./PostOwnerOptions/PostOwnerOptions";

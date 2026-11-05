@@ -5,7 +5,7 @@ import { formatComments } from "@/formats/formatComments";
 import { formatLikes } from "@/formats/formatLikes";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import dayjs from "dayjs";
 import local from "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -34,9 +34,11 @@ function Author({ video }: { video: Post }) {
           >
             {video.author.name}
           </Link>
-          <h3 className="text-xs text-gray-400 font-semibold">
-            {video.author.username}@
-          </h3>
+          {video.author.username && (
+            <h3 className="text-xs text-gray-400 font-semibold">
+              {video.author.username}@
+            </h3>
+          )}
           {userSession.id !== video.authorId && (
             <>
               <span className="size-[3.5px] bg-white/5 block rounded-full" />

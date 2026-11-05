@@ -1,9 +1,9 @@
 "use client";
-import { SavePostAction } from "@/actions/SavePost/SavePost.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios, { isAxiosError } from "axios";
 import clsx from "clsx";
 import { Bookmark, LucideIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -34,18 +34,33 @@ function SavePostButton({
   const queryClient = useQueryClient();
   const { mutate: handleSavePost, isPending: loading } = useMutation({
     mutationFn: async () => {
-      const result = await SavePostAction(postId);
-      if (!result.success) throw new Error(result.message);
-      return result.message;
+      try {
+        const { data } = await axios.post<{
+          success: boolean;
+          message: string;
+        }>(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/posts/${postId}/save`,
+          {},
+          { withCredentials: true },
+        );
+        const { success, message } = data;
+        if (!success) throw new Error(message);
+        return message;
+      } catch (error) {
+        console.error("Failed save post: ", error);
+        if (isAxiosError(error)) throw new Error(error.response?.data.message);
+        throw new Error("حدث خطأ, يتعذر حفظ / إلغاء حفظ المنشور.");
+      }
     },
     onSuccess: (message) => {
       invalidateUserCaches(queryClient, userSession);
       router.refresh();
-      setToast({
-        open: true,
-        message,
-        type: "success",
-      });
+      if (message)
+        setToast({
+          open: true,
+          message,
+          type: "success",
+        });
     },
     onError: (error: Error) => {
       setToast({

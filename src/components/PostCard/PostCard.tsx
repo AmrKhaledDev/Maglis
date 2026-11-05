@@ -1,5 +1,5 @@
 "use client";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { Pin } from "lucide-react";
 import { useState } from "react";
 import Comments from "../Comments/Comments";

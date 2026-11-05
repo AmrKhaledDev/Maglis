@@ -1,5 +1,6 @@
 import SavePostButton from "@/components/SavePostButton/SavePostButton";
 import { SavePost } from "@/types/SavePost.type";
+import Link from "next/link";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { GoBookmarkSlashFill } from "react-icons/go";
 // =======================================================================
@@ -15,10 +16,14 @@ function Actions({ item }: { item: SavePost }) {
         buttonStyle="w-fit hover:text-gray-200 flex items-center gap-1.5 font-medium cursor-pointer"
       />
       <span className="size-0.5 bg-white/30 rounded-full block" />
-      <button className="w-fit hover:text-blue-500 text-blue-600 flex items-center gap-1.5 font-medium cursor-pointer">
+      <Link
+        href={`/post/${item.postId}`}
+        target="_blank"
+        className="w-fit hover:text-blue-500 text-blue-600 flex items-center gap-1.5 font-medium cursor-pointer"
+      >
         <FaExternalLinkAlt className="pb-0.5 size-3.5" />
         عرض
-      </button>
+      </Link>
     </div>
   );
 }

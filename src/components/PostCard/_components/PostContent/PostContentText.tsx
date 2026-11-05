@@ -1,5 +1,5 @@
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import Linkify from "linkify-react";
 import PostContentTextModal from "../../../modals/PostContentTextModal/PostContentTextModal";
 // =======================================

@@ -2,7 +2,7 @@ import CommentComposer from "./CommentComposer/CommentComposer";
 import { useState } from "react";
 import "dayjs/locale/ar";
 import SingleComment from "./SingleComment/SingleComment";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { useQuery } from "@tanstack/react-query";
 import { GetPostCommentsAction } from "@/actions/Comment/GetPostComments.action";
 import { useToast } from "@/providers/ToastProvider";

@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormHookValues } from "../../UserProfile/_types/FormHookValues.type";
-import { UserWithSocialLink } from "../../UserProfile/_types/UserWithSocialLink.type";
+import { UserWithSocialLinks } from "../../UserProfile/_types/UserWithSocialLinks.type";
 import ButtonSubmit from "./ButtonSubmit";
 import Header from "./Header";
 import BasicInfoSection from "./Sections/BasicInfoSection";
@@ -18,7 +18,7 @@ import PersonalInformationSection from "./Sections/PersonalInformationSection/Pe
 import SocialConnectionsSection from "./Sections/SocialConnectionSections";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 // =================================================================================
-function EditProfileModal({ user }: { user: UserWithSocialLink }) {
+function EditProfileModal({ user }: { user: UserWithSocialLinks }) {
   const socialLinks = Object.fromEntries(
     user.socialLinks.map((link) => [link.platform, link.link]),
   );
@@ -44,6 +44,7 @@ function EditProfileModal({ user }: { user: UserWithSocialLink }) {
     },
   });
   const { handleSubmit, watch } = methods;
+  // eslint-disable-next-line react-hooks/incompatible-library
   const professionalMode = watch("professionalMode");
   const userSession = useUser();
   const queryClient = useQueryClient();

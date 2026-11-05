@@ -1,14 +1,14 @@
 "use client";
+import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
+import { useActiveModal } from "@/providers/ActiveModalProvider";
+import { useUser } from "@/providers/UserProvider";
 import { ImageIcon } from "lucide-react";
 import Image from "next/image";
-import EditProfileImageModal from "../../modals/EditProfileImageModal/EditProfileImageModal";
-import { User } from "@prisma/client";
-import { useUser } from "@/providers/UserProvider";
-import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useState } from "react";
-import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";
+import EditProfileImageModal from "../../modals/EditProfileImageModal/EditProfileImageModal";
+import { UserWithSocialLinks } from "../_types/UserWithSocialLinks.type";
 // ===============================================
-function ProfileCover({ user }: { user: User }) {
+function ProfileCover({ user }: { user: UserWithSocialLinks }) {
   const userSession = useUser();
   const { activeModal, setActiveModal } = useActiveModal();
   const [showCover, setShowCover] = useState({ open: false, url: "" });

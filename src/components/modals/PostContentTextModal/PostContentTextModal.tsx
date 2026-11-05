@@ -1,5 +1,5 @@
 import UserImage from "@/components/UserImage/UserImage";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import Header from "./Header";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import PostContentMediaItem from "./PostContentMediaItem";
 import clsx from "clsx";
 import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal";

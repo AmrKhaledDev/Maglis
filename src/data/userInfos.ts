@@ -1,12 +1,12 @@
-import { User } from "@prisma/client";
+import { UserWithSocialLinks } from "@/components/UserProfile/_types/UserWithSocialLinks.type";
+import { UserSearchResult } from "@/types/UserSearchResult.type";
 import { FcGraduationCap } from "react-icons/fc";
 import { HiMiniBriefcase } from "react-icons/hi2";
 import { MdLocationPin } from "react-icons/md";
 import { genderMap } from "./genderMap";
-import { UserSearchResult } from "@/types/UserSearchResult.type";
 
 // =====================================================
-export const infos = (user: User | UserSearchResult) => {
+export const infos = (user: UserWithSocialLinks | UserSearchResult) => {
   const gender = user.gender && genderMap[user.gender];
   return [
     {

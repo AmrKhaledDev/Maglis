@@ -1,6 +1,6 @@
 import FollowButton from "@/components/FollowButton/FollowButton";
 import { useUser } from "@/providers/UserProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { UserRound } from "lucide-react";
 import Link from "next/link";
 import BlockButton from "../../BlockButton/BlockButton";

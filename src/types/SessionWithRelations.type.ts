@@ -1,41 +1,5 @@
-import { Prisma } from "@prisma/client";
+import { components } from "@/types/api";
 // ===========================================
-type User = Prisma.UserGetPayload<{
-  include: {
-    savedPosts: {
-      select: { postId: true };
-    };
-    sender: {
-      select: {
-        id: true;
-        receiverId: true;
-      };
-    };
-    followings: {
-      select: {
-        followingId: true;
-      };
-    };
-    _count: {
-      select: {
-        receiver: true;
-      };
-    };
-    friendships: {
-      select: {
-        friendId: true;
-      };
-    };
-    blocks: {
-      select: {
-        blockedId: true;
-      };
-    };
-    blocked: {
-      select: {
-        blockerId: true;
-      };
-    };
-  };
-}>;
-export type SessionWithRelations = Omit<User, "password">;
+export type SessionWithRelations = Omit<components["schemas"]["GetMeResponseDto"], "image"> & {
+  image: string | null;
+};

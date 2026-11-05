@@ -2,7 +2,7 @@ import { HiddenPostAction } from "@/actions/HiddenPost/HiddenPost.action";
 import { invalidateUserCaches } from "@/lib/invalidateUserCaches";
 import { useToast } from "@/providers/ToastProvider";
 import { useUser } from "@/providers/UserProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Eye } from "lucide-react";
 // ===============================================

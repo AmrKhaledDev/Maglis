@@ -6,7 +6,7 @@ import { useState } from "react";
 import Reply from "./Reply";
 import ReplyComposer from "./ReplyComposer";
 import ButtonShowReplies from "./ShowRepliesButton";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 // ============================================================
 function Replies({
   userOwnerCommentName,

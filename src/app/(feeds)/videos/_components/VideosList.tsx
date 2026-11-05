@@ -1,17 +1,27 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import VideoCard from "./VideoCard";
 import { useUser } from "@/providers/UserProvider";
-import { GetPostsVideosAction } from "@/actions/Post/GetPostsVideos.action";
+import { Post } from "@/types/post.type";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import VideosSkeleton from "../../../../components/Skeletons/Videos/Skeleton";
-import { Post } from "@/types/Post.type";
+import VideoCard from "./VideoCard";
 // ======================================================
 function VideosList() {
   const userSession = useUser();
   const { data: videos = [], isPending } = useQuery({
     queryFn: async () => {
-      const result = await GetPostsVideosAction();
-      return result || [];
+      try {
+        const { data } = await axios.get<{ success: boolean; videos: Post[] }>(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/posts/videos`,
+          {
+            withCredentials: true,
+          },
+        );
+        return data.videos || [];
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
     },
     queryKey: ["posts_videos", userSession.id],
   });

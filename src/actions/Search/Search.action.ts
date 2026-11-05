@@ -2,7 +2,7 @@
 
 import GetSession from "@/auth/GetSession";
 import { prisma } from "@/lib/prisma";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { UserSearchResult } from "@/types/UserSearchResult.type";
 // =============================================================
 export const SearchAction = async (
@@ -64,7 +64,7 @@ export const SearchAction = async (
           jobTitle: true,
           city: true,
           gender: true,
-          nickname:true
+          nickname: true,
         },
       }),
       prisma.post.findMany({

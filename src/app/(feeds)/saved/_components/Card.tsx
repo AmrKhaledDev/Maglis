@@ -16,7 +16,7 @@ function Card({ item }: { item: SavePost }) {
   return (
     <div className="flex items-center gap-5">
       <Media item={item} />
-      <div className="flex flex-col gap-1 w-full">
+      <div className="flex flex-col gap-1.5 w-full">
         <Link
           target="_blank"
           href={`/post/${item.postId}`}

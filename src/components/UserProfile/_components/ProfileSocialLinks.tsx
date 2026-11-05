@@ -1,9 +1,9 @@
 import { SOCIAL_PLATFORMS_MAP } from "@/data/UserProfile/SOCIAL_PLATFORMS_MAP";
-import { UserWithSocialLink } from "../_types/UserWithSocialLink.type";
+import { UserWithSocialLinks } from "../_types/UserWithSocialLinks.type";
 import clsx from "clsx";
 import Link from "next/link";
 // ============================================================================
-function ProfileSocialLinks({ user }: { user: UserWithSocialLink }) {
+function ProfileSocialLinks({ user }: { user: UserWithSocialLinks }) {
   return (
     <div
       className={clsx(

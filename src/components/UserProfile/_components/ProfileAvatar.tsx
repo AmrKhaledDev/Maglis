@@ -3,11 +3,11 @@ import ImagePreviewModal from "@/components/ImagePreviewModal/ImagePreviewModal"
 import UserImage from "@/components/UserImage/UserImage";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import { useUser } from "@/providers/UserProvider";
-import { User } from "@prisma/client";
 import { useState } from "react";
 import EditProfileImageModal from "../../modals/EditProfileImageModal/EditProfileImageModal";
+import { UserWithSocialLinks } from "../_types/UserWithSocialLinks.type";
 // ===========================================
-function ProfileAvatar({ user }: { user: User }) {
+function ProfileAvatar({ user }: { user: UserWithSocialLinks }) {
   const { activeModal, setActiveModal } = useActiveModal();
   const userSession = useUser();
   const [showAvatar, setShowAvatar] = useState({

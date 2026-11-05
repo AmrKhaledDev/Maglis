@@ -2,7 +2,7 @@ import clsx from "clsx";
 import ActiveDataType from "../_types/ActiveData.type";
 import { Dispatch, SetStateAction } from "react";
 import { UserSearchResult } from "@/types/UserSearchResult.type";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 // =============================
 function SearchTypeTabs({
   activeData,

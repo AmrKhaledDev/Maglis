@@ -1,58 +1,21 @@
 import { SessionWithRelations } from "@/types/SessionWithRelations.type";
-import { auth } from "../lib/auth";
-import { prisma } from "../lib/prisma";
-// =====================================
+import axios from "axios";
+import { cookies } from "next/headers";
+// =====================================================================
 const GetSession = async (): Promise<SessionWithRelations | null> => {
   try {
-    const session = await auth();
-    if (!session || !session.user) return null;
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-      include: {
-        savedPosts: {
-          select: {
-            postId: true,
-          },
-        },
-        sender: {
-          select: {
-            id: true,
-            receiverId: true,
-          },
-        },
-        followings: {
-          select: {
-            followingId: true,
-          },
-        },
-        _count: {
-          select: {
-            receiver: true,
-          },
-        },
-        friendships: {
-          select: {
-            friendId: true,
-          },
-        },
-        blocks: {
-          select: {
-            blockedId: true,
-          },
-        },
-        blocked: {
-          select: {
-            blockerId: true,
-          },
+    const cookieStore = await cookies();
+    const token = cookieStore.get("access_token")?.value;
+    const response = await axios.get(
+      `${process.env.BACKEND_URL}/auth/me`,
+      {
+        headers: {
+          Cookie: `access_token=${token}`,
         },
       },
-    });
-    if (!existingUser) return null;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...user } = existingUser;
-    return user;
+    );
+    const data: SessionWithRelations = response.data;
+    return data;
   } catch (error) {
     console.log(error);
     return null;

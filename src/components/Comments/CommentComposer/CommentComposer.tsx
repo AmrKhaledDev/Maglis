@@ -11,7 +11,7 @@ import CommentImageUploadedPreview from "./CommentImageUploadedPreview";
 import CommentSubmitButton from "./CommentSubmitButton";
 import CommentTextarea from "./CommentTextarea";
 import CommentUploadImage from "./CommentUploadImage";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { Comment } from "@/types/Comment.type";
 // =====================================================
 function CommentComposer({
@@ -78,7 +78,7 @@ function CommentComposer({
         <div className="flex flex-col gap-4">
           {error && <AlertMessage message={error.message} type="error" />}
           <div className="flex gap-2">
-            <UserImage src={userSession.image} size="size-10"/>
+            <UserImage src={userSession.image} size="size-10" />
             <div className="border border-white/10 w-full focus-within:border-white/25 mytransition flex flex-col rounded-lg overflow-hidden gap-1">
               <CommentTextarea
                 content={content}

@@ -5,7 +5,7 @@ import Link from "next/link";
 function Author({ item }: { item: SavePost }) {
   return (
     <div className="flex items-center gap-2">
-      <UserImage src={item.post.author.image} size="size-8" />
+      <UserImage src={item.post.author.image} size="size-7" />
       <p className="text-xs text-gray-300 flex items-center gap-2">
         محفوظ من منشور
         <Link

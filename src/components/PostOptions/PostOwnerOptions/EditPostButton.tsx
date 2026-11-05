@@ -1,5 +1,5 @@
 import { Pencil } from "lucide-react";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
 import CreatePostModal from "@/components/modals/CreatePostModal/CreatePostModal";
 // ================================================================

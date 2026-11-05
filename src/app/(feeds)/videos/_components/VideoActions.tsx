@@ -1,6 +1,6 @@
 import SavePostButton from "@/components/SavePostButton/SavePostButton";
 import { useActiveModal } from "@/providers/ActiveModalProvider";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";

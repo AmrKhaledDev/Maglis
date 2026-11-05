@@ -6,7 +6,7 @@ import CommentActions from "./CommentActions";
 import { formatLikes } from "@/formats/formatLikes";
 import Replies from "../Replies/Replies";
 import { formatReplies } from "@/formats/formatReplies";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import { BsFillPinAngleFill } from "react-icons/bs";
 import { Comment } from "@/types/Comment.type";
 // ==================================================================

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { useInView } from "react-intersection-observer";
-import { Post } from "@/types/Post.type";
+import { Post } from "@/types/post.type";
 import clsx from "clsx";
 // =========================================================
 function PostContentMediaItem({
